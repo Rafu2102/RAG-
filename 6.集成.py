@@ -1,7 +1,6 @@
 import chromadb
 import uuid
 import requests
-import shutil
 
 def file_chunk_list():
 
@@ -10,7 +9,7 @@ def file_chunk_list():
 # ========================================================
 
     # 讀取整個文件
-    with open("knowledge/文件.txt" , encoding='utf-8' , mode='r') as fp:
+    with open("D:\網頁\RAG\knowledge\文件.txt" , encoding='utf-8' , mode='r') as fp:
         data=fp.read()
 
     # 根據空行分段
@@ -25,7 +24,7 @@ def ollama_embedding_by_api(text):
     res = requests.post(
         url="http://127.0.0.1:11434/api/embeddings",
         json={
-            "model": "nomic-embed-text",
+            "model": "bge-m3",
             "prompt": text
         }
     )
@@ -37,32 +36,28 @@ def ollama_embedding_by_api(text):
 # ========================================================
 
 def ollama_generate_by_api(prompt):
-    try:
-        response = requests.post(
-            url="http://127.0.0.1:11434/api/generate",
-            json={
-                "model": "deepseek-r1:7b",
-                "prompt": prompt,
-                "stream": False,
-                'temperature': 0.1
-            }
-        )
-        res_json = response.json()
-        # 用 get 避免 KeyError
-        return res_json.get('response', None)
-    except Exception as e:
-        print("生成 API 發生錯誤:", e)
-        return None
+    response=requests.post(
+        url="http://127.0.0.1:11434/api/generate",
+        json={
+            "model": "llama3.1:8b",
+            "prompt": prompt,
+            "stream":False,
+            'temperature':0.1
+        }
+    )
+
+    res = response.json()['response']
+    print(res)
 
 # ========================================================
 # Step 4: 初始化資料庫，存入向量化文件
 # ========================================================
 
 def initial():
-    
-    #創建集合
-    shutil.rmtree("db/chroma_demo", ignore_errors=True) #防止丟入同一個資料先刪除舊的集合
     client = chromadb.PersistentClient(path="db/chroma_demo")
+
+    #創建集合
+    #client.delete_collection("collection_v2") #防止丟入同一個資料先刪除舊的集合
     collection = client.get_or_create_collection(name="collection_v2")
 
     #搭建資料
@@ -84,35 +79,32 @@ def initial():
 def run():
 
     # 查詢關鍵字
-    qs = "當歸是甚麼"
+    qs = "風寒感冒"
 
     # 把關鍵字也向量化
     qs_embedding = ollama_embedding_by_api(qs)
 
-     # 連接資料庫
+    # 連接資料庫
     client = chromadb.PersistentClient(path="db/chroma_demo")
     collection = client.get_or_create_collection(name="collection_v2")
 
     # 檢索最相似的段落
-    res = collection.query(query_embeddings=[qs_embedding, ], query_texts=[qs], n_results=3)
+    res = collection.query(query_embeddings=[qs_embedding, ], query_texts=[qs], n_results=2)
     result = res["documents"][0]
     context = "\n".join(result)
 
-    #print(context)
-
-    #exit()
-
     # 提供給大語言模型的提示詞
     prompt = f"""
-
+    你是一位專業的中醫師
+    你的工作是根據參考資訊回答使用者問題
+    回答格式分層清楚，條理分明。
+    如果參考資訊不足以回答使用者問題請回答不知道，不要亂回答瞎猜。
+    用參考資訊:{context}，來回答問題:{qs},
     """
 
     # 生成回答
     result = ollama_generate_by_api(prompt)
-    if result:
-        print(result)
-    else:
-        print("生成回答失敗")
+    print(result)
 
 # ========================================================
 # Step 6: 主程式執行順序

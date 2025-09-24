@@ -197,7 +197,7 @@
     # ========================================================
 
         # 讀取整個文件
-        with open("knowledge/文件.txt" , encoding='utf-8' , mode='r') as fp:
+        with open("D:\網頁\RAG\knowledge\文件.txt" , encoding='utf-8' , mode='r') as fp:
             data=fp.read()
 
         # 根據空行分段
@@ -212,7 +212,7 @@
         res = requests.post(
             url="http://127.0.0.1:11434/api/embeddings",
             json={
-                "model": "nomic-embed-text",
+                "model": "bge-m3",
                 "prompt": text
             }
         )
@@ -227,7 +227,7 @@
         response=requests.post(
             url="http://127.0.0.1:11434/api/generate",
             json={
-                "model": "deepseek-r1:7b",
+                "model": "llama3.1:8b",
                 "prompt": prompt,
                 "stream":False,
                 'temperature':0.1
@@ -301,7 +301,3 @@
     if __name__ == '__main__':
         initial()   # 初始化資料庫 (生成向量並存入)
         run()   # 搜尋並生成回答
-
-
-
- 
