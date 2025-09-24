@@ -1,0 +1,2751 @@
+跳到主要內容區
+
+資訊工程學系
+
+Department of Computer Science
+
+and Information Engineering
+
+☰ 主選單
+
+回首頁
+回金門大學網站
+English
+關鍵字
+ 
+X
+
+首頁 教師部落格
+馮玄明
+發布日期 : 2023-04-22
+個人資料
+
+
+姓名： 馮玄明
+職稱： 教授
+電子郵件： hmfeng@nqu.edu.tw
+聯絡電話： (082)313532
+個人網站：
+學歷
+
+
+淡江大學工學院資訊工程博士
+專長
+
+
+資料庫、人工智慧 、最佳化演算法與機器人
+經歷
+
+
+重要經歷:
+永達技術學院資訊管理系助理教授 (2000-2003)
+金門技術學院資訊管理系助理教授 兼電算中心軟體系統組長 (2003-2006)
+金門技術學院副教授兼系主任 (2006/02-2010/07)
+金門大學副教授兼圖資長(2010/07-2012/12)
+金門大學副教授兼圖資長(2010/07-2011/12)
+金門大學教授兼圖資長(2012/01~2012/07)
+金門大學教授兼計網中心主任 (2012/08~2013/07)
+金門大學教授兼資工系系主任 (2013/08~2017/07)
+金門大學教授兼理工學院院長 (2017/08~2023/07)
+著作、論文:
+
+
+馮玄明 (Hsuan-Ming Feng)論文著述表
+ 
+期刊論文
+
+
+[J1]C.-C. Wong and S.-M. Feng, Switching-type fuzzy control system design, Journal of Control Systems and Technology, vol. 2, no. 4, pp. 265-269, 1994.
+[J2]C.-C. Wong and S.-M. Feng, Switching-type fuzzy controller design by genetic algorithms, Fuzzy Sets and Systems, vol. 74, pp. 175-185, 1995. (SCI, EI) (NSC-84-2213-E-032-012)
+[J3]C.-C. Wong, W.-C. Liang, Hsuan-Ming Feng, and Ding An Chiang, Grey prediction controller design, The Journal of Grey System, vol.10, no.2, pp.123-131, June 1998. (INSPEC)
+[J4]C.-C. Wong, D.-A. Chiang, and Hsuan-Ming Feng, Multituning fuzzy control systems design, Cybernetics and Systems: An International Journal, vol. 10, no. 6, pp. 713-729, Sep. 2000. (SCI, EI)
+[J5] Hsuan-Ming Feng and W.-H.. Kao, A Rule-Based Scalar Tuning Fuzzy Control System, Computing and Informatics, vol. 20, no. 4, pp. 395-409, 2001. (SCI)
+[J6]C.-C. Wong and Hsuan-Ming Feng, Design of Fuzzy Systems with Fewer Rules, Cybernetics and Systems: An International Journal, vol. 34, no. 2, pp. 139-160, Mar. 2003. (SCI, EI)
+[J7]C.-C. Wong and Hsuan-Ming Feng, Grey Prediction Fuzzy Control System Using an On-line Tuning Method, The Journal of Grey System, vol. 15, no. 2, pp. 131-142, 2003. (INSPEC)
+[J8] Hsuan-Ming Feng, Self Generation Fuzzy Modeling Systems Through Hierarchical Recursive-Based Particle Swarm Optimization, Cybernetics and Systems: An International Journal, vol. 36, no. 6, pp. 623-639, Sep. 2005. (SCI, EI)
+[J9] Hsuan-Ming Feng, Design of fuzzy rule-based systems through particle swarm optimization, 國立金門技術學院學報第一期, 2005.
+[J10]C.-Y. Chen, Hsuan-Ming Feng and F. Ye, Self Grey Particle Swarm Optimization Patterns Clustering Algorithm, The Journal of Grey System, vol. 17, no. 4, pp. 327-336, Dec. 2005. (INSPEC)
+[J11]F. Ye, C.-Y. Chen, and Hsuan-Ming Feng, Automatic Evolutional Clustering-Based Fuzzy Modeling System Design, International Journal Of Fuzzy Systems, vol. 7, no. 4, pp. 182-190, Dec. 2005. (SCI, EI)
+[J12] Hsuan-Ming Feng, C.-Y. Chen and F. Ye, Adaptive Hyper-Fuzzy Partition Particle Swarm Optimization Clustering Algorithm, Cybernetics and Systems: An International Journal, vol. 37, no. 5, pp. 463-479, Jul. 2006. (SCI, EI)
+[J13] Hsuan-Ming Feng, Hybrid Stages Particle Swarm Optimization Learning Fuzzy Modeling Systems Design, The TAMKANG JOURNAL OF SCIENCE AND ENGINEERING, vol. 9, no. 2, pp. 167-176, Jul. 2006. (EI)
+[J14] Hsuan-Ming Feng, Self-Generation RBFNs Using Evolutional PSO Learning, NEUROCOMPUTING, vol. 70, no. 1-3, pp. 241-251, 2006. (SCI, EI)
+[J15]C.-Y. Chen, Hsuan-Ming Feng, and F. Ye, Automatic Particle Swarm Optimization Clustering Algorithm, International Journal of Electrical Engineering. vol. 13, no. 4, pp.379-387, 2006. (SCI, EI)
+[J16] Hsuan-Ming Feng, C.-Y. Chen and F. Ye, Evolutionary Fuzzy Particle Swarm Optimization Vector Quantization Learning Scheme in Image Compression, Expert Systems with Applications, vol. 32, no. 1, Jan. pp. 213-222, 2007. (SCI, EI) 國科會計劃編號：NSC-93-2218-E-507-001.
+[J17]C.-Y. Chen, Hsuan-Ming Feng, and F. Ye, Hybrid Recursive Particle Swarm Optimization Learning Algorithm in the Design of Radial Basis Function Networks, Journal of Marine Science and Technology, vol. 15, no. 1, pp. 31-40, 2007. (SCI, EI)
+[J18] Hsuan-Ming Feng and C.-C. Wong, Fewer Hyper-ellipsoids fuzzy Rules Generation Using Evolutional Learning Scheme, Cybernetics and Systems: An International Journal, vol. 39, no. 1, pp. 19-44, Jan. 2008. (SCI, EI)
+[J19] Hsuan-Ming Feng, C.-Y. Chen and F. Ye, Heuristic Particle Swarm Optimization Learning Based Image Compression System, Cybernetics and Systems: An International Journal, vol. 39, no. 5, pp. 520-537, Jul. 2008. (SCI, EI) (NSC-93-2218-E-507-001)
+[J20]C.-Y. Chen and Hsuan-Ming Feng, Hybrid Intelligent Vision-Based Car-Like Vehicle Backing Systems Design, Expert Systems with Applications, vol. 36, pp. 7500-7509, 2009. (SCI, EI)
+[J21] Hsuan-Ming Feng, C.-Y. Chen and J-H Horng, Intelligent Omni-Directional Vision-Based Mobile Robot Fuzzy Systems Design and Implementation, Expert Systems with Applications, vol. 37, no. 5, pp. 4009-4119, 2010. (SCI, EI) (NSC 96-2221-E-507-004)
+[J22] Hsuan-Ming Feng and H-C Chou, Evolutional RBFNs Prediction Systems Generation in the Applications of Financial Time Series Data, Expert Systems with Applications, vol. 38, no. 7, pp. 8285-8292, 2011. (SCI, EI)
+[J23] Hsuan-Ming Feng, Autonomous Rule-Generated Fuzzy Systems Designs through Bacterial Foraging Particle Swarm Optimization Algorithm, Lecture Notes in Electrical Engineering, vol. 98, pp. 19-28, 2011. (EI)
+[J24] H.-C. Chen, Hsuan-Ming Feng and D.-h. Guo1, Evolutionary Learning Mobile Robot Fuzzy Systems Design, Lecture Notes in Electrical Engineering, vol. 98, pp. 29-37, 2011. (EI) (NSC 96-2221-E-507-004)
+[J25] Hua-Ching Chen, Hsuan-Ming Feng and D.-h. Guo1, Fuzzy embedded mobile robot systems design through the evolutionary PSO learning algorithm, WSEAS Transactions on Systems, vol. 10, no. 8, pp. 259-269, 2011. (EI) (NSC 96-2221-E-507-004 & NSC 99-2221-E-507-004.)
+[J26] Hsuan-Ming Feng and H.-C. Chou, EVOLUTIONARY FUZZY STOCK PREDICTION SYSTEM DESIGN AND ITS APPLICATION TO THE TAIWAN STOCK INDEX, The International Journal of Innovative Computing, Information and Control (IJICIC), Vol. 8, no. 6, pp. 1-18, 2012. (SCIE, EI)
+[J27] Hua-Ching Chen, Hsuan-Ming Feng, Ming-Hui Ho and Dong-hui GUO, Solutions to Vehicle Routing Problem with Time Window Based on Hybrid Adaptive PSO Algorithm, International Journal of Advancements in Computing Technology, Vol. 4, no. 14, pp. 434-446, 2012. (EI)
+[J28] Hsuan-Ming Feng, Ji-Hwei Horng and SHIANG-MIN JOU, Bacterial Foraging Particle Swarm Optimization Algorithm Based Fuzzy-VQ Compression Systems, Journal of Information Hiding and Multimedia Signal Processing, Vol. 3, No. 3, pp. 227-239, July 2012. (NSC-93-2218-E-507-001 and NSC-100-2221-E-507-004). (EI)
+[J29] Hua-Ching Chen, Hsuan-Ming Feng, Dong-hui GUO, Xiao-chao LI, Wireless Networks Evaluations Model through Adaptive Traffic Flow Regulation Algorithm, International Journal of Advancements in Computing Technology, Vol. 4, No. 23, pp. 711-720, December 2012. (EI)
+[J30] Hsuan-Ming Feng and Shiang-Min Jou, Auto-Generation Model/Control Fuzzy Image Mobile Robot Systems Design, the International Journal of Innovative Computing, Information and Control (IJICIC), Vol. 9, no. 3, pp. 1013-1030, 2013. (NSC 96-2221-E-507-004 & NSC 99-2221-E-507-004). (EI)
+[J31] Shiang-Min Jou, Chih-Yung Chen and Hsuan-Ming Feng, Fuzzy surveillance systems through image extraction learning algorithm, ICIC Express Letters, Vol. 7, no. 3(B), March, pp. 971-976, 2013. (EI)
+[32] Shiang-Min Jou, Hsuan-Ming Feng and Dong-hui GUO, Self-Tuning RBFNs Mobile Robot Systems through Bacterial Foraging Particle Swarm Optimization Learning Algorithm, Innovation for Applied Science and Technology, Vols. 284-287, pp 2128-2136, 2013. (EI)
+[J33] Hua-Ching Chen, Hsuan-Ming Feng and Dong-hui GUO, Novel MPEG-4 Video Cross-Layer Algorithm in Wireless Networks, Int. J. Computational Science and Engineering, vol. 3, no. 2, pp. 171-179, 2013. (EI).
+[J34] Hua-Ching Chen, Dong-Hui Guo and Hsuan-Ming Feng*, DYNAMIC CROSS-LAYER ADAPTIVE MAPPING ALGORITHM DESIGN FOR MPEG-4 VIDEO APPLICATIONS IN WIRELESS NETWORKS, The International Journal of Innovative Computing, Information and Control (IJICIC), vol. 10, no. 1, pp. 1-12, 2014. (EI)
+[J35] Hsuan-Ming Feng*, Kuo-Lung Liao, Hybrid Evolutionary Fuzzy Learning Scheme in the Applications of Traveling Salesman Problems, Information Sciences, vol. 270, pp. 204-225, 2014. (SCI/EI)
+[J36] Hsuan-Ming Feng* and Ching-Yi Chen, INTELLIGENT DYNAMIC ACQUISITION LEARNING FUZZY MODELING SYSTEMS DESIGN, Journal of Marine Science and Technology, Vol. 22, No. 4, pp. 430-439, 2014. (SCI/EI)
+[J37] Chang-Hua Lien, Jenq-Der Chen, Ker-Wei Yu, Chin-Tan Lee, Ruey-Shin Chen, Hsuan-Ming Feng, Robust H# switching control of uncertain discrete-time switched systems with interval time varying delay: Lmi optimization approach, ICIC Express Letters, Vol. 6, no. 4(b), April, pp. 1159-1164, 2015. (EI)
+[J38] Shiang-Min Jou, Chih-Yung Chen, Hsuan-Ming Feng*, Hua-Ching Chen, Ming-Hui Ho. Sensor-Based Recognition Fuzzy Mobile Robot Systems Designs. Sensors and Materials, vol. 27. No. 8, pp. 625-632, 2015. (SCI)
+[J39] Hua-Ching Chen, Chia-Lun Wu, Jwo-Shiun Sun, Hsuan-Ming Feng*. Carrier Current Line Systems Technologies in M2M architecture for Wireless Communication. Journal of Sensors, Vol, 2016, 2016. (SCI)
+[J40] Ching-Yi Chen, Hsuan-Ming Feng*, Hua-Ching Chen and Shiang-Min Jou, Dynamic Image Segmentation Algorithm in 3D Descriptions of Remote Sensing Images, Multimedia Tools and Applications, vol. 75, no. 16. pp. 9723-9743, 2016. (SCI)
+[J41] Yan-Min Luo, De-Tian Huang, Pei-Zhong Liu, Hsuan-Ming Feng*, An novel random forests and its application to the classification of mangroves remote sensing image, Multimedia Tools and Applications, vol. 75, no. 16, pp. 9707-9722, 2016. (SCI)
+[J42] Hua-Ching Chen, Hsuan-Ming Feng*, Te-Hui Lin, Ching-Yi Chen, Yu-Xiang Zha, Adapt DB-PSO Patterns Clustering Algorithms and Its Applications in Image Segmentation. Multimedia Tools and Applications, vol. 75, no. 23, 15327-15339, 2016. (SCI)
+[J44]Ching-Chang Wong, Yu-Ting Yang, An-Song Wang, Meng Cheng Lau and Hsuan-Ming Feng, “Simulator design of small-sized chip automatic programming equipment,” Journal of Computers (Computer Society of the Republic of China) (ISSN: 1991-1599), vol. 27, no. 4, pp. 131-148, Feb. 15 2016.
+[J45] Hua-Ching Chen, Ching-Chang Wong and Hsuan-Ming Feng*, Wireless image fuzzy recognition system for human activity, Multimedia Tools and Applications, (76), pp. 25231-25251, 2017. (SCI) (DOI 10.1007/s11042-016-4302-5) (NSC 102-2221-E-507-002). (SCI)
+[J46] Yan-Min Luo, Yi Ouyang, Ren-Cheng Zhang and Hsuan-Ming Feng*, Multi-Feature Joint Sparse Model for the Classification of Mangrove Remote Sensing Images, ISPRS Int. J. Geo-Inf. 6(6) , 177; (doi:10.3390/ijgi6060177), 2017 . (SCI)
+[J47] Hsuan-Ming Feng*, Ching-Chang Wong, Ji-Hwei Horng, Li-Yun Lai, Evolutional RBFNs image model describing-based segmentation system designs, Neurocomputing, vol. 272, pp. 374-385, 2018. (MOST 104-2221-E-507-004 and 105-2221-E-507-002). (SCI)
+[J48] Shih-An Li, Hsuan-Ming Feng*, Sheng-Po Huang and Chen-You Chu, "Fuzzy Self-Adaptive Soccer Robot Behavior Decision System Design through ROS", Journal of Imaging Science and Technology, vol.62, no.3, May 2018. (DOI: 10.2352/J.ImagingSci.Technol.2018.62.3.030401). (MOST 104-2221-E-507-004 and 105-2221-E-507-002). (SCI)
+[J49] Shih-An Li, Hsuan-Ming Feng*, Kung-Han Chen and Wen-Hung Huang, Highly Autonomous Visualization Map-Generation Mobile Robot System Design Through the Robot Operation System Platform, Journal of Imaging Science and Technology, vol.62, no.3, pp. 30403-1-30403-9(9), May 2018. (DOI: 10.2352/J.ImagingSci.Technol.2018.62.3.030403). (MOST 104-2221-E-507-004 and 105-2221-E-507-002). (SCI)
+[J50] Shih-An Li, Hsuan-Ming Feng*, Kung-Han Chen, Jian-Ming Lin and Li-Hsiang Chou, Auto-maps-generation through Self-path-generation in ROS-based Robot Navigation, Journal of Applied Science and Engineering, vol. 21, no. 2, pp. 351-360, (2018) DOI: 10.6180/jase.201809_21(3).0006. (MOST 105-2221-E-032-023, 104-2221-E-507-004 and 105-2221-E-507-002) (EI)
+[51] Fen Cai, Yan-Min Luo, Pei-Zhong Liu and Hsuan-Ming Feng*, Complex Text Location and Segmentation Approach through Region Fusion and Edge Features Extraction Method, Journal of Applied Science and Engineering, Vol. 21, No. 4, pp. 595-602 (2018), DOI: 10.6180/jase.20181221(4).00 (EI)
+[52] Ching-Chang Wong, Hsuan-Ming. Feng*, Yu-Cheng Lai and Chia-Jun Yu, Ant Colony Optimization and Image Model-Based Robot Manipulator System for Pick-and-Place Tasks, Journal of Intelligent & Fuzzy Systems, Vol. 36, pp. 1083-1098, 2019. (DOI:10.3233/JIFS-169883) (NSC 101-2221-E-032-020, MOST 102-2221-E-032-048, MOST 106-2221-E-507 -001 and 106-2221-E-032 -005) (SCI)
+[53] Ching-Chang Wong, Hua-Ching Chen, Chin-Tan Lee, Chien-Chung Wang and Hsuan-Ming. Feng*, High Interactive Sensory Robot System Design in the Indoor Autonomous Services Applications, Journal of Intelligent & Fuzzy Systems, Vol. 36, pp. 1259-1271, 2019. (DOI:10.3233/JIFS-169898) (MOST 102-2221-E-032-048; MOST 105-2221-E-507-002 and MOST 105-2221-E-032-023) (SCI)
+[54] Pei-Zhong Liu, Ze-Fan Liu, Yu-Zhao Zhang, Yong Zhang, Hsuan-Ming Feng*, Retinal Blood Vessel Segmentation Using Pareto Ensemble Prunning with Diversity, Journal of Computers Vol. 30 No. 1, pp. 197-205, 2019. (DOI:10.3966/199115992019013001019). (EI)
+
+專書及專書論文
+[B1] Hsuan-Ming Feng and C.-Y. Chen, Automatic Hybrid Particle Swarm Optimization Recursive Clustering Technique and its Applications in Radial Basis Function Networks Modeling Systems, Books Chapter 8 In Neurocomputing Research Developments, pp. 201-222, NOVA Publishers, 2007. (ISBN: 1-60021-931-4)
+研討會論文
+[C1]C.-C.g Wong and S.-M. Feng, Switching type of fuzzy controller, IEEE International Conference on fuzzy systems, pp. 30-34, 1994.
+[C2]C.-C. Wong, W.-C. Liang, Hsuan-Ming Feng, and D.A. Chiang, Dynamic grey prediction controller design, Second National Conference on Grey Theory and Applications, pp.128-133, 1997. (in Chinese).
+[C3] Hsuan-Ming Feng, Rule Adaptive Grey Prediction Fuzzy Controller Design, Chinese Automatic Control Conference, pp. 144-148, 2001.
+[C4] Hsuan-Ming Feng and W.-H.. Kao, Design of Rule Adaptive tuning Grey Prediction Fuzzy Control system, 5th World Multiconference on Systemics, Cybernetics and Informatics (SCI 2001) and the 7th International Conference on Information Systems Analysis and Synthesis (ISAS 2001).
+[C5] Hsuan-Ming Feng, A Self-Tuning Fuzzy Control System Design, 9th IFSA World Congress and 20th NAFIPS International Conference, pp. 209-214, 2001.
+[C6] Hsuan-Ming Feng, C.-C. Wong and W.-C. Liang, A Scalar Tuning Fuzzy Control System design, Ninth National Conference on Fuzzy Theory and It’s Applications, pp. 738-743, 2001.
+[C7] Hsuan-Ming Feng and C.-C. Wong, A Fuzzy System Design Through a fewer Hyperellipsoidal Rules Extraction, 2002 Automatic Control Conference, pp. 922-927, 2002.
+[C8] Hsuan-Ming Feng and C.-C. Wong, A On-line Rule Tuning Grey Prediction Fuzzy Control System Design, IEEE International Joint Conference on Neural Networks, vol. 2, pp. 1316-1321, 2002. (NSC-90-2213-E-032-004)
+[C9] Hsuan-Ming Feng and C.-C. Wong, A Self-learning Genetic Fuzzy Control System Design, IEEE International Joint Conference on Neural Networks, vol. 2, pp. 1310-1315, 2002. (NSC-89-2213-E-032-038)
+[C10] Hsuan-Ming Feng and C.-C. Wong, A self-generation fuzzy modeling system with a fewer rules, 2003 Automatic Control conference, pp. 513-1517, 2003.
+[C11] Hsuan-Ming Feng and C.-C. Wong, A multiple tuning fuzzy control system design, pp. 113-118, 2003 IEEE International Symposium on Computational Intelligence for Measurement Systems and Applications, pp. 113-118, July, 2003.
+[C12] Hsuan-Ming Feng and C.-Y. Chen, Fast PSO-Based Fuzzy Logic System Design, IEEE ICSS2005 International Conference on System & Signals, I-Shou University, Taiwan, pp. 886-890, April, 2005.
+[C13] Hsuan-Ming Feng, Particle Swarm Optimization Learning Fuzzy Systems Design, Third International Conference on Information Technology and Applications. Sydney, 363-366, July 2005. (EI) (NSC-93-2218-E-507-001)
+[C14]馮玄明、陳慶逸、呂進丁，最佳化模糊向量演算法在影像壓縮應用，第五屆離島資訊技術與應用研討會，金門，Jun. 2-3, 2006。
+[C15]馮玄明、洪集輝，演化式學習模糊影像監控系統的設計與應用，第六屆離島資訊技術與應用研討會，虎尾科大，JUN. 1，2007。(NSC94-2213-E-507-001 & NSC 95-2218-E-507-001)
+[C16] Hsuan-Ming Feng, C.-Y. Chen and C.-Y. Wu, Vision-Based Fuzzy 8051 Surveillance Systems Design, The 1st Asia-Pacific Workshop on Embedded System Education and Research (APESER 2007), DEC. 4, 2007.
+[C17]馮玄明、陳智勇、洪集輝、吳佳運、吳定宏，演化式模糊影像入侵偵測系統設計，2007年全國計算機會議，台中亞洲大學，DEC. 20-21， 2007。(NSC94-2213-E-507-001 & NSC 95-2218-E-507-001)
+[C18]馮玄明、陳慶逸、洪集輝，動態演化群集式學習模糊系統設計，第七屆離島資訊技術與應用研討會，彭湖科大，May 30-31，2008。(NSC94-2213-E-507-001 & NSC 95-2218-E-507-001)
+[C19]陳慶逸、馮玄明、洪集輝，自我生成模糊規則及其在函數逼近之應用,第七屆離島資訊技術與應用研討會，彭湖科大，May 30-31，2008。
+[C20]馮玄明、陳智勇，全方位視覺式移動機器人灰預測模糊系統設計與實現， 2008年系統雛型與電路設計創新應用研討會，台中勤益科大，OCT. 17，2008。(NSC 96-2221-E-507-004)
+[C21]馮玄明、廖國隆， 結合模擬退火之粒子群最佳化演算法解決旅行銷售員問題，第十三屆人工智慧與應用研討會，蘭陽技術學院，NOV. 22-23，2008。
+[C22]馮玄明、周祥在，結合粒子群最佳化演算法及遞迴式最小平方法於財務時間序列預測之模糊系統建構，第十三屆人工智慧與應用研討會，蘭陽技術學院，NOV.22-23，2008。
+[C23]馮玄明、吳定宏、洪集輝，全方位移動機器人模糊系統設計，第八屆離島資訊技術與應用研討會，金門技術學院與廈門大學，pp. 754-760, May 22-24, 2009。
+[C24]陳華慶、陳慶逸、馮玄明，自我生成模糊密度切割演算法及其在資料分類之應用，第八屆離島資訊技術與應用研討會，金門技術學院與廈門大學，pp. 761-767, May 22-24, 2009。
+[C25]陳慶逸、馮玄明、劉大綱，利用競爭式學習及模糊推論系統進行系統建模，第八屆離島資訊技術與應用研討會，金門技術學院與廈門大學，pp. 837-842, MAY 22-24, 2009。
+[C26]馮玄明、周祥在，結合粒子群最佳化演算法及遞迴式最小平方法之放射狀基底函數網路設計－以財務時間序列預測系統為例，2009中華民國系統科學與工程會議，淡江大學，JUN.26，2009。
+[C27]馮玄明、廖國隆，結合模糊分群與粒子群最佳化演算法求解旅行銷售員問題，台北大學，2009年全國計算機會議，NOV. 27-28，2009。
+[C28]馮玄明、吳定宏、洪集輝，自我建置模糊規則於移動機器人系統之設計，第十七屆模糊理論及其應用研討會，高雄大學，DEC. 18-19，2009。
+[C29]馮玄明、周小萍、呂謙，自動群集放射狀基底函數網路建模系統設計應用於股價預測，第九屆離島資訊技術與應用研討會，樹德科大，MAY. 28-29，2010。
+[C30]馮玄明、陳華慶、洪集輝，動態模糊密度切割演算法應用於資料分群，第九屆離島資訊技術與應用研討會，樹德科大，MAY. 28-29，2010。
+[C31]馮玄明、陳智勇，RFID模糊行動機器人系統設計，東華大學，第十八屆模糊理論及其應用研討會， DEC. 3-4，2010。(NSC 98-2221-E-507-004)
+[C32]馮玄明、吳尚澤、洪集輝，細菌進化粒子群最佳演算法模糊系統設計，第十屆離島資訊技術與應用研討會，台東大學，MAY. 13-14，2011。
+[C33]馮玄明、周小萍，細菌進化粒子群最佳演算法設計財務時間序列模糊預測系統，2011中華民國系統科與工程會議，國立暨南國際大學，JUN. 17-18，2011。
+[C34] Hsuan-Ming Feng, H.-C. Chen and D.-h. GUO, PSO-Based Fuzzy Image Mobile Robot Systems Design, Proceedings 2011 IEEE International Conference on Anti-Counterfeiting, Security and Identification, pp, 101-105, JUN. 24-26, 2011. (EI) (NSC 96-2221-E-507-004 & NSC 99-2221-E-507-004)
+[C35] Hsuan-Ming Feng and J.-H. Horng, VQ-Based Fuzzy Compression Systems Designs Through Bacterial Foraging Particle Swarm Optimization Algorithm, 2011 Fifth International Conference on Genetic and Evolutionary Computing, PP. 256-259, AUG. 29-SEP. 1, 2011. (NSC-93-2218-E-507-001)
+[C36] 馮玄明、曾偉勝zeng wei sheng、陳智勇，手勢辨識移動機器人之設計，虎尾科技大學，第十九屆模糊理論及其應用研討會，Nov. 3-4，2011。(NSC 99-2221-E-507-004) zeng wei
+[C37] 何銘輝、馮玄明、陳華慶、洪集輝、呂謙，基於演化式學習法求解帶有時間窗車輛路徑問題，第十一屆離島資訊技術與應用研討會，澎湖科技大學，MAY. 25-26，2012。
+[C38] Hsuan-Ming Feng and S-T Wu, Bacterial Foraging Particle Swarm Optimization Learning-Based Fuzzy Mobile Robot Systems Design, Proceedings of 2012 National Symposium on System Science and Engineering, National Taiwan Ocean University, Keelung, Jun. 16~17, pp. 1172-1176, 2012. (NSC99-2221-E-507-004 & 100-2221-E-507-004.)
+[C39] H.-C. Chen, Hsuan-Ming Feng, D.-h. GUO, Cross-Layer Regulation Algorithm in MPEG-4 Video Wireless Networks Applications, The 5th IET International Conference on Ubi-Media Computing, Xining China, pp. 242-247, AUG. 16-18, 2012.
+[C40] H.-C. Chen, Hsuan-Ming Feng, D.-h. GUO and Ji-Hwei Horng, Wireless Networks Designs through Advanced Regulation Machine, Proceedings 2012 IEEE International Conference on Anti-Counterfeiting, Security and Identification, pp, 101-105, Taipei, AUG. 24-26, 2012.
+[C41] 馮玄明、曾偉勝、何銘輝，進化式學習法設計立體視覺行動機器人，國立中興大學，第二十屆模糊理論及其應用研討會，pp. 220-225, Nov. 3-4，2012。(NSC 100-2221-E-507-004)
+[C42] 馮玄明, 謝孟霖, 陳華慶, 翁慶昌 ，EDCA 參數調整機制之無線網路模擬分析 , 第十二屆離島資訊技術與應用研討會, 金門大學& 華僑大學, pp. 727-733, 5月2013。
+[C43] 陳逸勤, 洪集輝, 伍添祿, 馮玄明, 以鄰域統計資訊為基礎的直方圖等化法, 第十二屆離島資訊技術與應用研討會, 金門大學& 華僑大學, pp. 727-733, pp.664-671, 5月 2013。
+[C44] 馮玄明 、 吳尚澤、李金譚, 演化式學習TSP 模糊行動機器人系統設計, Proceedings of 2013 National Symposium on System Science and Engineering, pp. 459-474, Jun. 2013.
+[C45] 馮玄明, 李金譚, 曾偉勝, 翁慶昌, Kinect 影像感測行動機器人設計 , 2013中華民國第二十一屆模糊理論及其應用研討會, pp. 120-125, Dec. 2013.
+[C46] 馮玄明、李金譚、翁慶昌與王建鈞, 服務型機器人設計與實現 Proceedings of 2014 National Symposium on System Science and Engineering, pp. 816-821, Jun. 21-23, 2014.
+[C47] Chia-Lun Wu, Hsuan-Ming Feng, Chin-Tan Lee and Ko-Wei Weng, Study of ROF Technologies in Carrier Current Line Systems for Wireless Communication Engineering, Proceedings of 2014 National Symposium on System Science and Engineering, pp. 447-452, Jun. 21-23, 2014.
+[C48] H.-C. Chen, D.-h. GUO and Hsuan-Ming Feng, A Parameters Tuning Algorithms in Wireless Networks, The Eight International Conference on software security and reliability, San Francisco, U.S.A., pp. 257-260, Jun. 30-Jul. 2, 2014.
+[C49] Hsuan-Ming Feng, Ching-Yi Chen, Yu-Xiang Zhao and Hua-Ching Chen, Self-Identified PSO Patterns Clustering Algorithm with Adapt Valid Measure, 2014 THE 8-TH CROSS-STRAIT Conference on Information Science and Technology, BEIJING, China, pp. 401-406, August 22-24, 2014.
+[C50] Yu-Xiang Zhao, Chienhsing Chou, Yieng Hsieh, Hsuan_Ming Feng, Jiasheng You and Jiazai Zheng, An Automatic Image Capturing System Applied to Identification Photo Booth, 2014 THE 8-TH CROSS-STRAIT Conference on Information Science and Technology, BEIJING, China, pp. 35-39, August 22-24, 2014.
+[C51] 馮玄明, 翁慶昌 與 何銘輝, 粒子群最佳化演算法設計無線網路流量服務模糊系統, 2014 中華民國第二十二屆模糊理論及其應用研討會,高雄國賓大飯店, pp. 83-88, Nov. 26-28, 2014. (NSC:102-2221-E-507-002)
+[C52] 王建鈞、李金譚、馮玄明, Kinect互動式觀光導覽服務型機器人之設計與實現, Proceedings of 2015 National Symposium on System Science and Engineering, Jul. 17-18, 2015.
+[C53] Ming-Hui Ho, Donghui Guo, Hsuan-Ming, Feng, and Ching-Chang Wong, Evolutional-Based Network Traffic Flow Behavior Acquisition and Fuzzy Control System Design, Proceedings 2015 IEEE International Conference on Anti-Counterfeiting, Security and Identification, pp, 119-123, SEP.. 25-27, Xiamen, China, 2015. (NSC: 102-2221-E-507-002.)
+[C54] 馮玄明、李世安、黃文鴻、林建銘、陳功瀚、翁慶昌, 基於機器人作業系統之機械手臂設計並實現於Gazebo模擬平台, NSSSE2016 系統科學與工程研討會. 南投, Jul. 8, 2016. (MOST 104-2221-E-507-004)
+[C55] 馮玄明、林志明、陳俊宇、翁慶昌, 深度神經網路學習及其在函數逼近之應用, NSSSE2016 系統科學與工程研討會. 南投, Jul. 8, 2016.
+[C56] 黃文風、馮玄明、賴麗雲, FDS建置船舶火災動態避難逃生模擬系統, NSSSE2016 系統科學與工程研討會. 南投, Jul. 8, 2016.
+[C56] Hsuan-Ming Feng, Kung-Han Chen, Jian-Ming Lin, Shih-An Li, and Ching-Chang Wong, ROS-based Software Structure, Strategy System and Simulation Platform for Robot Manipulator, 2016 International Automatic Control Conference, Caichung, Taiwan, Nov. 9-11, 2016. (MOST 104-2221-E-507-004)
+[C57] Yan-min Luo, Jun-Yang, Hsuan-Ming Feng, Li-Yun Lai, Image Segmentation-Based Web Text Location Applications, The 6th International Conference on Frontier Computing (FC 2017)-Theory, Technologies and Applications, PP. 501-507, Osaka, Japan, July 12-14, 2017.
+[C58] Li-Yun Lai, Hsuan-Ming Feng, Wei-Sheng Zeng, Yu-Xiang Zha, Ching-Chang Wong, Interactive Hand Recognition Robot System Designs, The 6th International Conference on Frontier Computing (FC 2017)-Theory, Technologies and Applications, PP. 508-516, Osaka, Japan, July 12-14, 2017. MOST 105-2221-E-507-004) (MOST 105-2221-E-032-023).
+[C59] Pei-zhong Liu, Hong-xiang Wang, Xiao-fang Liu, Ming Hong, Hsuan-Ming Feng, Pareto Ensemble Pruning With Diversity, The 6th International Conference on Frontier Computing (FC 2017)-Theory, Technologies and Applications, PP. 517-522, Osaka, Japan, July 12-14, 2017.
+[C60] Hsuan-Ming Feng, Shih-An Li, Jian-Ming Lin, Kung-Han Chen and Ching-Chang Wong, Self-Mapping and Localization in ROS Robot System Design, ICIUS2017, 13-th International Conference on Intelligent on Unmanned System, PP. 129-132, New Taipei City, Aug, 21-24, 2017. (MOST 105-2221-E-507-004) (MOST 105-2221-E-032-023).
+[C61] Hsuan-Ming Feng, Shih-An Li, Jian-Ming Lin, Kung-Han Chen and Ching-Chang Wong, Visualization on Robot Manipulator on ROS-Based Gazebo Simulator, ICIUS2017, 13-th International Conference on Intelligent on Unmanned System, PP. 174-177, New Taipei City, Aug, 21-24, 2017. (MOST 105-2221-E-507-004) (MOST 104-2221-E-507-002).
+[C62] 賴麗雲、馮玄明、陳華慶、吳世榮, 無線影像模糊辨識建模系統設計, 2017 Information Technology and Applications in Outlying Islands, pp. 372-376, Kinmen, 19~21 May, 2017. (MOST-105-2221-E-507-002).
+[C63] 陳正德、高詳晉、邱浩志、劉大綱、馮玄明、李金譚, 金屬閘極燒錄之自動檢查機制改良, Proceedings of 2017 Information Technology and Applications in Outlying Islands, pp. 867-872, Kinmen, 19~21 May, 2017.
+[C64] 魯昶甫、葉奕伸、馮玄明、翁慶昌, 基於 RGB-D影像建模之機械手臂取放任務設計, 2017 台灣智慧型機器人研討會，南港世貿展覽館，台灣台北，2017 年 9 月 6 日至 9 月 8 日. (MOST 105-2221-E-507-004) and (MOST-105-2221-E-507-002).
+[C65] 劉智誠、馮玄明、蕭聖儒、林怡仲、翁慶昌, 基於ROS 人形機器人行走模擬系統設計, 2017 台灣智慧型機器人研討會，南港世貿展覽館，台灣台北，2017 年 9 月 6 日至 9 月 8 日. (MOST 105-2221-E-507-004) and (MOST-105-2221-E-507-002).
+[C66] Hsuan-Ming Feng, Chun-Fei Hsu, Jia-Siang Lyu, Yu-Cheng Lai, and Ching-Chang Wong, Motion Control Design for 7-DOF Redundant Robot Manipulator, 2017 International Automatic Control Conference (CACS2017), Pingtung, Taiwan, Nov. 12-15, 2017. (MOST 105-2221-E-032 -023 and 105-2221-E-507 -002.)
+[C67] 馮玄明、陳華慶、翁慶昌、賴麗雲，深度學習神經網路人體影像辨識自動模型設計, 2017中華民國第二十五屆模糊理論及其應用研討會, Pingtung, Taiwan, 13-15 Nov., 2017. MOST-106-2811-E-507 -001 與MOST-106-2622-E-507-001-CC2
+[C68] 馮玄明、陳華慶、洪集輝、許心怡, 居家環境人體姿態識別系統設計，2018 Information Technology and Applications in Outlying Islands, pp. 372-376,WuHu Taiwan, 25~27 May, 2018.
+[C69] Hsuan-Ming Feng, Hua-Ching Chen and Ching-Chang Wong, Vision-Based Human Pose Recognition System Design in Indoor Environments, IEEE International Conference on System Science and Engineer, National Taipei University New Taipei City, Taiwan, 28-30 June, 2018. MOST-106-2622-E-507-001-CC2
+[C70] 馮玄明、紀虹、楊國良、馮聖博, 摺積神經網路中草藥影像辨識系統, 第23屆行動計算研討會, 桃園夢想園區, 2018 年 8 月 26 日至 8 月 27 日。
+[C71] 張宗翰、賴宥澄、鄭期元、馮玄明、翁慶昌, 機器人定位導航之虛實整合系統設計, 2018 台灣智慧型機器人研討會，南港世貿展覽館，台灣台北，2018 年 8 月 28 日至 8 月 31 日. (MOST 106-2221-E-507-001 and MOST 106-2221-E-032-005).
+[C72] Hsuan-Ming Feng, Ching-Chang Wong, Chih-Cheng Liu and Sheng-Ru Xiao, ROS-Based Humanoid Robot Pose Control System Design, IEEE International Conference on System, Man, and Cybernetic, pp. 4079-4083, 25~27 Miyazaki, Japan, 7-10 October, 2018. (DOI 10.1109/SMC.2018.00693) (MOST 106-2221-E-507 -001 and 106-2221-E-032 -005).
+[C73] L.H. Chou, W.H. Huang, Y.M. Kang, H.M. Feng, and C.C. Wong, “Robust navigation mobile robot system design with dynamic path planning,” 2018 International Automatic Control Conference (CACS 2018), 2018. (Taoyuan, Taiwan, Nov. 4-7, 2018) MOST 105-2221-E-032 -023, 105-2221-E-507 -002.
+[C74] Hsuan-Ming Feng, Hua-Ching Chen and Ching-Chang Wong, Human Image Recognition through Dynamic Mapping Generation, 2018 4th International Conference on Green Technology and Sustainable Development (GTSD 2018 ), Nov. 23-24, Ho Chi Minh City, Vietnam, pp. 749-752, 2018.
+(MOST-106-2622-E-507-001-CC2)
+[C75] Hsuan-Ming Feng, Ren-Jie Chen and Ching-Chang Wong, “Manipulator Robot System in Navigation and Action Implementation Designs,” IEEE INTERNATIONAL CONFERENCE ON SYSTEM SCIENCE AND ENGINEERING (ICSSE 2019), July 20-21, Dong Hoi City, Quang Binh, Vietnam, 2019. (MOST 107-2221-E-507 -005 & 107-2221-E-032 -048)
+
+執行計劃案:
+[T1]馮玄明，具規則調整能力之灰色預測模糊控制系統的研究，2002。 國科會專題計劃，計劃編號： NSC-90-2213-E-132-004。(主持人)
+[T2]馮玄明，多重學習模糊系統的設計及其應用，2003。國科會專題計劃，計劃編號：NSC-91-2213-E-132-002。(主持人)
+[T3]馮玄明，粒子群最佳化演算法在模糊向量影像壓縮技術的研究與應用，2005。國科會專題計劃，計劃編號：NSC-93-2218-E-507-001。(主持人)
+[T4]馮玄明，自我演化最佳化模糊影像監控系統的設計與應用，2006。國科會專題計劃，計劃編號：NSC-94-2213-E-507-001。(主持人)
+[T5]馮玄明，智慧型視訊監控系統的自由軟體建置，2007。國科會專題計劃，計劃編號：NSC 95-2218-E-507-001。(主持人)
+[T6]馮玄明，PSO建立全方位移動機器人運動模型灰預測模糊控制系統設計與製作(I)，2008。國科會專題計劃，計劃編號：NSC 96-2221-E-507-004。(主持人)
+[T7]馮玄明，導盲輔助機器人系統設計與其在購物服務應用，2009。國科會專題計劃，計劃編號：(NSC 98-2221-E-507-004)。(主持人)
+[T8]馮玄明，多模式感測手勢識別服務機器人設計與實現，2010。國科會專題計劃，計劃編號：NSC 99-2221-E-507-004。(主持人)
+[T9] 馮玄明，結合細菌優化與粒子群最佳化演算法設計雙眼立體視覺行動機器人，2011。國科會專題計劃，計劃編號：NSC 100-2221-E-507-002。(主持人)
+[T10] 馮玄明，立體視覺居家照護機器人設計與實現計畫，2012。國科會專題計劃，計劃編號：NSC 101-2218-E-507-001-。(主持人)
+[T11] 馮玄明，演化式網路流量模式攫取與模糊控制系統，2013。國科會專題計劃，計劃編號：NSC 102-2221-E-507 -002 -。(主持人)
+[T12] 馮玄明，雲端平台服務機器人之設計與應用，2014。國科會專題計劃，計劃編號：MOST 103-2221-E-507-003。(主持人)
+[T13] 馮玄明，具直覺式教導之模組化機械手臂於無紋理物件的夾取與組裝─子計畫三：基於機器人作業系統之機械手臂的軟體架構、策略系統及模擬平台，2015。計劃編號：MOST 104-2221-E-507 -002 -。(主持人)
+[T14] 具直覺式教導之模組化機械手臂於無紋理物件的夾取與組裝－總計畫暨子計畫一：機械手臂之組件模組化與直覺式教導。計劃編號：(MOST 104-2221-E-032-021-) (共同主持人)
+[T15] 倉儲自動化之視覺式智慧型貨架揀貨機器人－子計畫四：機器人定位導航與倉儲環境之虛實整合系統的設計與實現，2016。(MOST 105-2221-E-507-002-) (主持人)
+[T16] 倉儲自動化之視覺式智慧型貨架揀貨機器人－總計畫兼子計畫一：貨架揀貨機器人的設計與實現(105-2221-E-032-023-)，(共同主持人)
+
+服務與榮耀:
+主要獎項:獲得科技部工程司獎勵優秀人才補助(2010-2017)
+
+馮玄明其它學術服務列表
+1. 2005離島資訊技術與應用研討會之議程委員
+2. Invited reviewer of Third International Conference on Information Technology and Applications (2006)
+3. Invited reviewer of Journal of Computational and Applied Mathematics (2006)
+4. 國立成功大學工業設計系碩士論文學位考試委員 (2006/7/29)
+5. Invited reviewer of Pattern Recognition Letters (2007)
+6. Invited reviewer of Journal of Computational and Applied Mathematics (2007)
+7. Invited reviewer of Journal of Applied Mathematical Modeling (2007)
+8. 2008年系統雛型與電路設計創新應用研討會 評審委員
+9. 2008離島資訊技術與應用研討會之議程委員
+10. 國立高雄應用科技大學電子工程系碩士班施宗牧同學碩士學位考試委員 (2009/01/15)
+11. 2009離島資訊技術與應用研討會之大會主席
+12 Invited reviewer of Soft Computing and Automation Journal (2009)
+
+13. Invited reviewer of Information Sciences (2009)
+14 指導王宣權與方智誼同學，參加2009年“萬利達”杯海峽兩岸高等職業技術教育學生專業技能邀請賽，電子商務組獲得壹等獎。
+15. 指導 游豪州、鄭思盈、吳俊賢 等同學 在 『99學年度台灣區電腦化運動競技大賽』獲得「手臂車搬罐頭」組第三名。(2010)
+16 指導柯騰鈞、陳冠彰、朱立維等同學 在 『99學年度台灣區電腦化運動競技大賽』獲得 「自走車競速」組 佳作。(2010)
+17. Invited reviewer of Information Sciences. (2010)
+18. Invited reviewer of IEEE Transactions on Evolutionary Computation .(2010)
+19. 擔任義守大學電機工程學系博士班論文口試委員。 (2010)
+20. 擔任僑光科技大學資訊科技研究所沈訓守同學碩士論文口試委員。(2010)
+21. 擔任僑光科技大學資訊科技研究所尤昱森同學碩士論文口試委員。(2010)
+22. 擔任淡江大學電機工程學系碩士班論文口試委員。(2010)
+
+23. 通過CIW v5 Associate 國際認證。(2010)
+24. 通過CIW Professional國際認證。(2010)
+
+25. 通過國際認證獲得CIW Security Analyst資格。(2010)
+26. 通過國際認證獲得CIW Instructor資格。(2010)
+27. 通過Microsoft Certified Technology Specialist (MCTS) 國際認證。(2010)
+
+28. 通過Microsoft Windows Vista Configuration國際認證。(2010)
+29. 指導王建鈞、陳思韻、龍保全、周士弼等同學在『2011年全國智慧型機器人大賽』獲得「自走車相撲」組第一名。(2011)
+
+30. 指導 游豪州、鄭思盈、吳俊賢 等同學 在 『99學年度台灣區電腦化運動競技大賽』獲得「手臂車搬罐頭」組第三名。
+31. 指導柯騰鈞、陳冠彰、朱立維等同學 在 『99學年度台灣區電腦化運動競技大賽』獲得 「自走車競速」組 佳作。
+32. 指導林彥智、張乃龍、洪坤德與潘琊 等同學 在 『100學年度台灣區電腦化運動競技大賽』獲得 「自走車相撲」C組 第五名。
+33. 指導林偉群、文邑臣、許嬖驛與詹戾群 等同學 在 『100學年度台灣區電腦化運動競技大賽』獲得 「自走車負重致遠」C組佳作。
+
+34. 指導陳冠宇、李郁儒、曾齊與張益致等同學 在 『100學年度台灣區電腦化運動競技大賽』獲得 「自走車撞球」 A組 佳作。
+
+35. 指導吳俊賢、游豪州、陳俊仁、呂守中等同學 在 『100學年度台灣區電腦化運動競技大賽』獲得 「手臂車搬罐頭」C組佳作。
+36. 擔任2011中華民國系統科與工程會議 Section Chair。
+37. 擔任 2011 IEEE International Conference on Anti-Counterfeiting, Security and Identification- Organizing Committee Co-Chairs。
+38. 指導學生參加 2012 FIRA國際機器人競賽 獲 無動力雙足機器人第一名。
+39. 指導學生參加 2012 全國智慧型機器人大賽，自走車撞球組第四名。
+
+40. 擔任IET U-Media 2012， Publication Co-Chairs。
+41. 2013第十二屆離島資訊技術與應用研討會議程主席。
+42. 指導學生參加 2013 全國智慧型機器人大賽，手臂車搬寶特瓶大專校組c組第一名。
+43. 指導學生參加 2013 國際智慧人型機器人競賽，無動力機器人競賽一般組，第一名。
+44. 指導學生參加 2013 國際智慧人型機器人競賽，無動力機器人競賽(創意組)，佳作。
+
+45. 指導學生參加 2014 國際智慧人型機器人競賽，無動力機器人競賽(創意組)，第二名。
+
+46. 指導學生參加 2014亞洲機器人運動競技大賽大專院校組，機器人賽跑，第二名。
+47. 指導學生參加 2015年 8月在中國大陸舉辦常平杯 首屆兩岸四地智慧型機器人大賽暨學界研發成果展輪型機器人競速項目獲得一等獎.
+48. 擔任2015年9月於廈門大學舉辦的 2015 IEEE International Conference on Anti-Counterfeiting, Security and Identification 的 大會共同主席 Co-Chairs.
+49.與泉州華僑大學聯合主辦2015 海峽兩岸資訊科學與技術交流研討會 (the Cross-Strait Conference on Information Science and Technology).擔任會議主席.
+50. 擔任國際工程與科技學會中華民國分會(IEE Taipei Local Network)理事(2015-2019)
+51.主辦2017第16屆離島資訊技術與應用研討會(2017 Information Technology and Applications in Outlying Islands National Quemoy University, Kinmen, 19~21 May, 2017).擔任會議主席
+52. 擔任The 6th International Conference on Frontier Computing (FC 2017)-Theory, Technologies and Applications. (議程主席)
+53. 擔任2018 4th International Conference on Green Technology and Sustainable Development (GTSD 2018 )議程主席
+54. 擔任2018 台灣智慧型機器人研討會(議程主席)
+55. 擔任2018 International Automatic Control Conference (CACS 2018)
+56. 擔任 IEEE SMC Tinan Chapter 副主席 (2019-2020)
+
+
+學歷
+淡江大學工學院資訊工程博士
+
+專長
+資料庫、人工智慧 、最佳化演算法與機器人
+
+經歷
+重要經歷:
+
+永達技術學院資訊管理系助理教授 (2000-2003)
+金門技術學院資訊管理系助理教授 兼電算中心軟體系統組長 (2003-2006)
+金門技術學院副教授兼系主任 (2006/02-2010/07)
+金門大學副教授兼圖資長(2010/07-2012/12)
+金門大學副教授兼圖資長(2010/07-2011/12)
+金門大學教授兼圖資長(2012/01~2012/07)
+金門大學教授兼計網中心主任 (2012/08~2013/07)
+金門大學教授兼資工系系主任 (2013/08~2017/07)
+金門大學教授兼理工學院院長 (2017/08~)
+
+著作、論文:
+馮玄明 (Hsuan-Ming Feng)論文著述表
+
+期刊論文
+[J1]C.-C. Wong and S.-M. Feng, Switching-type fuzzy control system design, Journal of Control Systems and Technology, vol. 2, no. 4, pp. 265-269, 1994.
+[J2]C.-C. Wong and S.-M. Feng, Switching-type fuzzy controller design by genetic algorithms, Fuzzy Sets and Systems, vol. 74, pp. 175-185, 1995. (SCI, EI) (NSC-84-2213-E-032-012)
+[J3]C.-C. Wong, W.-C. Liang, Hsuan-Ming Feng, and Ding An Chiang, Grey prediction controller design, The Journal of Grey System, vol.10, no.2, pp.123-131, June 1998. (INSPEC)
+[J4]C.-C. Wong, D.-A. Chiang, and Hsuan-Ming Feng, Multituning fuzzy control systems design, Cybernetics and Systems: An International Journal, vol. 10, no. 6, pp. 713-729, Sep. 2000. (SCI, EI)
+[J5] Hsuan-Ming Feng and W.-H.. Kao, A Rule-Based Scalar Tuning Fuzzy Control System, Computing and Informatics, vol. 20, no. 4, pp. 395-409, 2001. (SCI)
+[J6]C.-C. Wong and Hsuan-Ming Feng, Design of Fuzzy Systems with Fewer Rules, Cybernetics and Systems: An International Journal, vol. 34, no. 2, pp. 139-160, Mar. 2003. (SCI, EI)
+[J7]C.-C. Wong and Hsuan-Ming Feng, Grey Prediction Fuzzy Control System Using an On-line Tuning Method, The Journal of Grey System, vol. 15, no. 2, pp. 131-142, 2003. (INSPEC)
+[J8] Hsuan-Ming Feng, Self Generation Fuzzy Modeling Systems Through Hierarchical Recursive-Based Particle Swarm Optimization, Cybernetics and Systems: An International Journal, vol. 36, no. 6, pp. 623-639, Sep. 2005. (SCI, EI)
+[J9] Hsuan-Ming Feng, Design of fuzzy rule-based systems through particle swarm optimization, 國立金門技術學院學報第一期, 2005.
+[J10]C.-Y. Chen, Hsuan-Ming Feng and F. Ye, Self Grey Particle Swarm Optimization Patterns Clustering Algorithm, The Journal of Grey System, vol. 17, no. 4, pp. 327-336, Dec. 2005. (INSPEC)
+[J11]F. Ye, C.-Y. Chen, and Hsuan-Ming Feng, Automatic Evolutional Clustering-Based Fuzzy Modeling System Design, International Journal Of Fuzzy Systems, vol. 7, no. 4, pp. 182-190, Dec. 2005. (SCI, EI)
+[J12] Hsuan-Ming Feng, C.-Y. Chen and F. Ye, Adaptive Hyper-Fuzzy Partition Particle Swarm Optimization Clustering Algorithm, Cybernetics and Systems: An International Journal, vol. 37, no. 5, pp. 463-479, Jul. 2006. (SCI, EI)
+[J13] Hsuan-Ming Feng, Hybrid Stages Particle Swarm Optimization Learning Fuzzy Modeling Systems Design, The TAMKANG JOURNAL OF SCIENCE AND ENGINEERING, vol. 9, no. 2, pp. 167-176, Jul. 2006. (EI)
+[J14] Hsuan-Ming Feng, Self-Generation RBFNs Using Evolutional PSO Learning, NEUROCOMPUTING, vol. 70, no. 1-3, pp. 241-251, 2006. (SCI, EI)
+[J15]C.-Y. Chen, Hsuan-Ming Feng, and F. Ye, Automatic Particle Swarm Optimization Clustering Algorithm, International Journal of Electrical Engineering. vol. 13, no. 4, pp.379-387, 2006. (SCI, EI)
+[J16] Hsuan-Ming Feng, C.-Y. Chen and F. Ye, Evolutionary Fuzzy Particle Swarm Optimization Vector Quantization Learning Scheme in Image Compression, Expert Systems with Applications, vol. 32, no. 1, Jan. pp. 213-222, 2007. (SCI, EI) 國科會計劃編號：NSC-93-2218-E-507-001.
+[J17]C.-Y. Chen, Hsuan-Ming Feng, and F. Ye, Hybrid Recursive Particle Swarm Optimization Learning Algorithm in the Design of Radial Basis Function Networks, Journal of Marine Science and Technology, vol. 15, no. 1, pp. 31-40, 2007. (SCI, EI)
+[J18] Hsuan-Ming Feng and C.-C. Wong, Fewer Hyper-ellipsoids fuzzy Rules Generation Using Evolutional Learning Scheme, Cybernetics and Systems: An International Journal, vol. 39, no. 1, pp. 19-44, Jan. 2008. (SCI, EI)
+[J19] Hsuan-Ming Feng, C.-Y. Chen and F. Ye, Heuristic Particle Swarm Optimization Learning Based Image Compression System, Cybernetics and Systems: An International Journal, vol. 39, no. 5, pp. 520-537, Jul. 2008. (SCI, EI) (NSC-93-2218-E-507-001)
+[J20]C.-Y. Chen and Hsuan-Ming Feng, Hybrid Intelligent Vision-Based Car-Like Vehicle Backing Systems Design, Expert Systems with Applications, vol. 36, pp. 7500-7509, 2009. (SCI, EI)
+[J21] Hsuan-Ming Feng, C.-Y. Chen and J-H Horng, Intelligent Omni-Directional Vision-Based Mobile Robot Fuzzy Systems Design and Implementation, Expert Systems with Applications, vol. 37, no. 5, pp. 4009-4119, 2010. (SCI, EI) (NSC 96-2221-E-507-004)
+[J22] Hsuan-Ming Feng and H-C Chou, Evolutional RBFNs Prediction Systems Generation in the Applications of Financial Time Series Data, Expert Systems with Applications, vol. 38, no. 7, pp. 8285-8292, 2011. (SCI, EI)
+[J23] Hsuan-Ming Feng, Autonomous Rule-Generated Fuzzy Systems Designs through Bacterial Foraging Particle Swarm Optimization Algorithm, Lecture Notes in Electrical Engineering, vol. 98, pp. 19-28, 2011. (EI)
+[J24] H.-C. Chen, Hsuan-Ming Feng and D.-h. Guo1, Evolutionary Learning Mobile Robot Fuzzy Systems Design, Lecture Notes in Electrical Engineering, vol. 98, pp. 29-37, 2011. (EI) (NSC 96-2221-E-507-004)
+[J25] Hua-Ching Chen, Hsuan-Ming Feng and D.-h. Guo1, Fuzzy embedded mobile robot systems design through the evolutionary PSO learning algorithm, WSEAS Transactions on Systems, vol. 10, no. 8, pp. 259-269, 2011. (EI) (NSC 96-2221-E-507-004 & NSC 99-2221-E-507-004.)
+[J26] Hsuan-Ming Feng and H.-C. Chou, EVOLUTIONARY FUZZY STOCK PREDICTION SYSTEM DESIGN AND ITS APPLICATION TO THE TAIWAN STOCK INDEX, The International Journal of Innovative Computing, Information and Control (IJICIC), Vol. 8, no. 6, pp. 1-18, 2012. (SCIE, EI)
+[J27] Hua-Ching Chen, Hsuan-Ming Feng, Ming-Hui Ho and Dong-hui GUO, Solutions to Vehicle Routing Problem with Time Window Based on Hybrid Adaptive PSO Algorithm, International Journal of Advancements in Computing Technology, Vol. 4, no. 14, pp. 434-446, 2012. (EI)
+[J28] Hsuan-Ming Feng, Ji-Hwei Horng and SHIANG-MIN JOU, Bacterial Foraging Particle Swarm Optimization Algorithm Based Fuzzy-VQ Compression Systems, Journal of Information Hiding and Multimedia Signal Processing, Vol. 3, No. 3, pp. 227-239, July 2012. (NSC-93-2218-E-507-001 and NSC-100-2221-E-507-004). (EI)
+[J29] Hua-Ching Chen, Hsuan-Ming Feng, Dong-hui GUO, Xiao-chao LI, Wireless Networks Evaluations Model through Adaptive Traffic Flow Regulation Algorithm, International Journal of Advancements in Computing Technology, Vol. 4, No. 23, pp. 711-720, December 2012. (EI)
+[J30] Hsuan-Ming Feng and Shiang-Min Jou, Auto-Generation Model/Control Fuzzy Image Mobile Robot Systems Design, the International Journal of Innovative Computing, Information and Control (IJICIC), Vol. 9, no. 3, pp. 1013-1030, 2013. (NSC 96-2221-E-507-004 & NSC 99-2221-E-507-004). (EI)
+[J31] Shiang-Min Jou, Chih-Yung Chen and Hsuan-Ming Feng, Fuzzy surveillance systems through image extraction learning algorithm, ICIC Express Letters, Vol. 7, no. 3(B), March, pp. 971-976, 2013. (EI)
+[32] Shiang-Min Jou, Hsuan-Ming Feng and Dong-hui GUO, Self-Tuning RBFNs Mobile Robot Systems through Bacterial Foraging Particle Swarm Optimization Learning Algorithm, Innovation for Applied Science and Technology, Vols. 284-287, pp 2128-2136, 2013. (EI)
+[J33] Hua-Ching Chen, Hsuan-Ming Feng and Dong-hui GUO, Novel MPEG-4 Video Cross-Layer Algorithm in Wireless Networks, Int. J. Computational Science and Engineering, vol. 3, no. 2, pp. 171-179, 2013. (EI).
+[J34] Hua-Ching Chen, Dong-Hui Guo and Hsuan-Ming Feng*, DYNAMIC CROSS-LAYER ADAPTIVE MAPPING ALGORITHM DESIGN FOR MPEG-4 VIDEO APPLICATIONS IN WIRELESS NETWORKS, The International Journal of Innovative Computing, Information and Control (IJICIC), vol. 10, no. 1, pp. 1-12, 2014. (EI)
+[J35] Hsuan-Ming Feng*, Kuo-Lung Liao, Hybrid Evolutionary Fuzzy Learning Scheme in the Applications of Traveling Salesman Problems, Information Sciences, vol. 270, pp. 204-225, 2014. (SCI/EI)
+[J36] Hsuan-Ming Feng* and Ching-Yi Chen, INTELLIGENT DYNAMIC ACQUISITION LEARNING FUZZY MODELING SYSTEMS DESIGN, Journal of Marine Science and Technology, Vol. 22, No. 4, pp. 430-439, 2014. (SCI/EI)
+[J37] Chang-Hua Lien, Jenq-Der Chen, Ker-Wei Yu, Chin-Tan Lee, Ruey-Shin Chen, Hsuan-Ming Feng, Robust H# switching control of uncertain discrete-time switched systems with interval time varying delay: Lmi optimization approach, ICIC Express Letters, Vol. 6, no. 4(b), April, pp. 1159-1164, 2015. (EI)
+[J38] Shiang-Min Jou, Chih-Yung Chen, Hsuan-Ming Feng*, Hua-Ching Chen, Ming-Hui Ho. Sensor-Based Recognition Fuzzy Mobile Robot Systems Designs. Sensors and Materials, vol. 27. No. 8, pp. 625-632, 2015. (SCI)
+[J39] Hua-Ching Chen, Chia-Lun Wu, Jwo-Shiun Sun, Hsuan-Ming Feng*. Carrier Current Line Systems Technologies in M2M architecture for Wireless Communication. Journal of Sensors, Vol, 2016, 2016. (SCI)
+[J40] Ching-Yi Chen, Hsuan-Ming Feng*, Hua-Ching Chen and Shiang-Min Jou, Dynamic Image Segmentation Algorithm in 3D Descriptions of Remote Sensing Images, Multimedia Tools and Applications, vol. 75, no. 16. pp. 9723-9743, 2016. (SCI)
+[J41] Yan-Min Luo, De-Tian Huang, Pei-Zhong Liu, Hsuan-Ming Feng*, An novel random forests and its application to the classification of mangroves remote sensing image, Multimedia Tools and Applications, vol. 75, no. 16, pp. 9707-9722, 2016. (SCI)
+[J42] Hua-Ching Chen, Hsuan-Ming Feng*, Te-Hui Lin, Ching-Yi Chen, Yu-Xiang Zha, Adapt DB-PSO Patterns Clustering Algorithms and Its Applications in Image Segmentation. Multimedia Tools and Applications, vol. 75, no. 23, 15327-15339, 2016. (SCI)
+[J44]Ching-Chang Wong, Yu-Ting Yang, An-Song Wang, Meng Cheng Lau and Hsuan-Ming Feng, “Simulator design of small-sized chip automatic programming equipment,” Journal of Computers (Computer Society of the Republic of China) (ISSN: 1991-1599), vol. 27, no. 4, pp. 131-148, Feb. 15 2016.
+[J45] Hua-Ching Chen, Ching-Chang Wong and Hsuan-Ming Feng*, Wireless image fuzzy recognition system for human activity, Multimedia Tools and Applications, (76), pp. 25231-25251, 2017. (SCI) (DOI 10.1007/s11042-016-4302-5) (NSC 102-2221-E-507-002). (SCI)
+[J46] Yan-Min Luo, Yi Ouyang, Ren-Cheng Zhang and Hsuan-Ming Feng*, Multi-Feature Joint Sparse Model for the Classification of Mangrove Remote Sensing Images, ISPRS Int. J. Geo-Inf. 6(6) , 177; (doi:10.3390/ijgi6060177), 2017 . (SCI)
+[J47] Hsuan-Ming Feng*, Ching-Chang Wong, Ji-Hwei Horng, Li-Yun Lai, Evolutional RBFNs image model describing-based segmentation system designs, Neurocomputing, vol. 272, pp. 374-385, 2018. (MOST 104-2221-E-507-004 and 105-2221-E-507-002). (SCI)
+[J48] Shih-An Li, Hsuan-Ming Feng*, Sheng-Po Huang and Chen-You Chu, "Fuzzy Self-Adaptive Soccer Robot Behavior Decision System Design through ROS", Journal of Imaging Science and Technology, vol.62, no.3, May 2018. (DOI: 10.2352/J.ImagingSci.Technol.2018.62.3.030401). (MOST 104-2221-E-507-004 and 105-2221-E-507-002). (SCI)
+[J49] Shih-An Li, Hsuan-Ming Feng*, Kung-Han Chen and Wen-Hung Huang, Highly Autonomous Visualization Map-Generation Mobile Robot System Design Through the Robot Operation System Platform, Journal of Imaging Science and Technology, vol.62, no.3, pp. 30403-1-30403-9(9), May 2018. (DOI: 10.2352/J.ImagingSci.Technol.2018.62.3.030403). (MOST 104-2221-E-507-004 and 105-2221-E-507-002). (SCI)
+[J50] Shih-An Li, Hsuan-Ming Feng*, Kung-Han Chen, Jian-Ming Lin and Li-Hsiang Chou, Auto-maps-generation through Self-path-generation in ROS-based Robot Navigation, Journal of Applied Science and Engineering, vol. 21, no. 2, pp. 351-360, (2018) DOI: 10.6180/jase.201809_21(3).0006. (MOST 105-2221-E-032-023, 104-2221-E-507-004 and 105-2221-E-507-002) (EI)
+[51] Fen Cai, Yan-Min Luo, Pei-Zhong Liu and Hsuan-Ming Feng*, Complex Text Location and Segmentation Approach through Region Fusion and Edge Features Extraction Method, Journal of Applied Science and Engineering, Vol. 21, No. 4, pp. 595-602 (2018), DOI: 10.6180/jase.20181221(4).00 (EI)
+[52] Ching-Chang Wong, Hsuan-Ming. Feng*, Yu-Cheng Lai and Chia-Jun Yu, Ant Colony Optimization and Image Model-Based Robot Manipulator System for Pick-and-Place Tasks, Journal of Intelligent & Fuzzy Systems, Vol. 36, pp. 1083-1098, 2019. (DOI:10.3233/JIFS-169883) (NSC 101-2221-E-032-020, MOST 102-2221-E-032-048, MOST 106-2221-E-507 -001 and 106-2221-E-032 -005) (SCI)
+[53] Ching-Chang Wong, Hua-Ching Chen, Chin-Tan Lee, Chien-Chung Wang and Hsuan-Ming. Feng*, High Interactive Sensory Robot System Design in the Indoor Autonomous Services Applications, Journal of Intelligent & Fuzzy Systems, Vol. 36, pp. 1259-1271, 2019. (DOI:10.3233/JIFS-169898) (MOST 102-2221-E-032-048; MOST 105-2221-E-507-002 and MOST 105-2221-E-032-023) (SCI)
+[54] Pei-Zhong Liu, Ze-Fan Liu, Yu-Zhao Zhang, Yong Zhang, Hsuan-Ming Feng*, Retinal Blood Vessel Segmentation Using Pareto Ensemble Prunning with Diversity, Journal of Computers Vol. 30 No. 1, pp. 197-205, 2019. (DOI:10.3966/199115992019013001019). (EI)
+
+專書及專書論文
+[B1] Hsuan-Ming Feng and C.-Y. Chen, Automatic Hybrid Particle Swarm Optimization Recursive Clustering Technique and its Applications in Radial Basis Function Networks Modeling Systems, Books Chapter 8 In Neurocomputing Research Developments, pp. 201-222, NOVA Publishers, 2007. (ISBN: 1-60021-931-4)
+研討會論文
+[C1]C.-C.g Wong and S.-M. Feng, Switching type of fuzzy controller, IEEE International Conference on fuzzy systems, pp. 30-34, 1994.
+[C2]C.-C. Wong, W.-C. Liang, Hsuan-Ming Feng, and D.A. Chiang, Dynamic grey prediction controller design, Second National Conference on Grey Theory and Applications, pp.128-133, 1997. (in Chinese).
+[C3] Hsuan-Ming Feng, Rule Adaptive Grey Prediction Fuzzy Controller Design, Chinese Automatic Control Conference, pp. 144-148, 2001.
+[C4] Hsuan-Ming Feng and W.-H.. Kao, Design of Rule Adaptive tuning Grey Prediction Fuzzy Control system, 5th World Multiconference on Systemics, Cybernetics and Informatics (SCI 2001) and the 7th International Conference on Information Systems Analysis and Synthesis (ISAS 2001).
+[C5] Hsuan-Ming Feng, A Self-Tuning Fuzzy Control System Design, 9th IFSA World Congress and 20th NAFIPS International Conference, pp. 209-214, 2001.
+[C6] Hsuan-Ming Feng, C.-C. Wong and W.-C. Liang, A Scalar Tuning Fuzzy Control System design, Ninth National Conference on Fuzzy Theory and It’s Applications, pp. 738-743, 2001.
+[C7] Hsuan-Ming Feng and C.-C. Wong, A Fuzzy System Design Through a fewer Hyperellipsoidal Rules Extraction, 2002 Automatic Control Conference, pp. 922-927, 2002.
+[C8] Hsuan-Ming Feng and C.-C. Wong, A On-line Rule Tuning Grey Prediction Fuzzy Control System Design, IEEE International Joint Conference on Neural Networks, vol. 2, pp. 1316-1321, 2002. (NSC-90-2213-E-032-004)
+[C9] Hsuan-Ming Feng and C.-C. Wong, A Self-learning Genetic Fuzzy Control System Design, IEEE International Joint Conference on Neural Networks, vol. 2, pp. 1310-1315, 2002. (NSC-89-2213-E-032-038)
+[C10] Hsuan-Ming Feng and C.-C. Wong, A self-generation fuzzy modeling system with a fewer rules, 2003 Automatic Control conference, pp. 513-1517, 2003.
+[C11] Hsuan-Ming Feng and C.-C. Wong, A multiple tuning fuzzy control system design, pp. 113-118, 2003 IEEE International Symposium on Computational Intelligence for Measurement Systems and Applications, pp. 113-118, July, 2003.
+[C12] Hsuan-Ming Feng and C.-Y. Chen, Fast PSO-Based Fuzzy Logic System Design, IEEE ICSS2005 International Conference on System & Signals, I-Shou University, Taiwan, pp. 886-890, April, 2005.
+[C13] Hsuan-Ming Feng, Particle Swarm Optimization Learning Fuzzy Systems Design, Third International Conference on Information Technology and Applications. Sydney, 363-366, July 2005. (EI) (NSC-93-2218-E-507-001)
+[C14]馮玄明、陳慶逸、呂進丁，最佳化模糊向量演算法在影像壓縮應用，第五屆離島資訊技術與應用研討會，金門，Jun. 2-3, 2006。
+[C15]馮玄明、洪集輝，演化式學習模糊影像監控系統的設計與應用，第六屆離島資訊技術與應用研討會，虎尾科大，JUN. 1，2007。(NSC94-2213-E-507-001 & NSC 95-2218-E-507-001)
+[C16] Hsuan-Ming Feng, C.-Y. Chen and C.-Y. Wu, Vision-Based Fuzzy 8051 Surveillance Systems Design, The 1st Asia-Pacific Workshop on Embedded System Education and Research (APESER 2007), DEC. 4, 2007.
+[C17]馮玄明、陳智勇、洪集輝、吳佳運、吳定宏，演化式模糊影像入侵偵測系統設計，2007年全國計算機會議，台中亞洲大學，DEC. 20-21， 2007。(NSC94-2213-E-507-001 & NSC 95-2218-E-507-001)
+[C18]馮玄明、陳慶逸、洪集輝，動態演化群集式學習模糊系統設計，第七屆離島資訊技術與應用研討會，彭湖科大，May 30-31，2008。(NSC94-2213-E-507-001 & NSC 95-2218-E-507-001)
+[C19]陳慶逸、馮玄明、洪集輝，自我生成模糊規則及其在函數逼近之應用,第七屆離島資訊技術與應用研討會，彭湖科大，May 30-31，2008。
+[C20]馮玄明、陳智勇，全方位視覺式移動機器人灰預測模糊系統設計與實現， 2008年系統雛型與電路設計創新應用研討會，台中勤益科大，OCT. 17，2008。(NSC 96-2221-E-507-004)
+[C21]馮玄明、廖國隆， 結合模擬退火之粒子群最佳化演算法解決旅行銷售員問題，第十三屆人工智慧與應用研討會，蘭陽技術學院，NOV. 22-23，2008。
+[C22]馮玄明、周祥在，結合粒子群最佳化演算法及遞迴式最小平方法於財務時間序列預測之模糊系統建構，第十三屆人工智慧與應用研討會，蘭陽技術學院，NOV.22-23，2008。
+[C23]馮玄明、吳定宏、洪集輝，全方位移動機器人模糊系統設計，第八屆離島資訊技術與應用研討會，金門技術學院與廈門大學，pp. 754-760, May 22-24, 2009。
+[C24]陳華慶、陳慶逸、馮玄明，自我生成模糊密度切割演算法及其在資料分類之應用，第八屆離島資訊技術與應用研討會，金門技術學院與廈門大學，pp. 761-767, May 22-24, 2009。
+[C25]陳慶逸、馮玄明、劉大綱，利用競爭式學習及模糊推論系統進行系統建模，第八屆離島資訊技術與應用研討會，金門技術學院與廈門大學，pp. 837-842, MAY 22-24, 2009。
+[C26]馮玄明、周祥在，結合粒子群最佳化演算法及遞迴式最小平方法之放射狀基底函數網路設計－以財務時間序列預測系統為例，2009中華民國系統科學與工程會議，淡江大學，JUN.26，2009。
+[C27]馮玄明、廖國隆，結合模糊分群與粒子群最佳化演算法求解旅行銷售員問題，台北大學，2009年全國計算機會議，NOV. 27-28，2009。
+[C28]馮玄明、吳定宏、洪集輝，自我建置模糊規則於移動機器人系統之設計，第十七屆模糊理論及其應用研討會，高雄大學，DEC. 18-19，2009。
+[C29]馮玄明、周小萍、呂謙，自動群集放射狀基底函數網路建模系統設計應用於股價預測，第九屆離島資訊技術與應用研討會，樹德科大，MAY. 28-29，2010。
+[C30]馮玄明、陳華慶、洪集輝，動態模糊密度切割演算法應用於資料分群，第九屆離島資訊技術與應用研討會，樹德科大，MAY. 28-29，2010。
+[C31]馮玄明、陳智勇，RFID模糊行動機器人系統設計，東華大學，第十八屆模糊理論及其應用研討會， DEC. 3-4，2010。(NSC 98-2221-E-507-004)
+[C32]馮玄明、吳尚澤、洪集輝，細菌進化粒子群最佳演算法模糊系統設計，第十屆離島資訊技術與應用研討會，台東大學，MAY. 13-14，2011。
+[C33]馮玄明、周小萍，細菌進化粒子群最佳演算法設計財務時間序列模糊預測系統，2011中華民國系統科與工程會議，國立暨南國際大學，JUN. 17-18，2011。
+[C34] Hsuan-Ming Feng, H.-C. Chen and D.-h. GUO, PSO-Based Fuzzy Image Mobile Robot Systems Design, Proceedings 2011 IEEE International Conference on Anti-Counterfeiting, Security and Identification, pp, 101-105, JUN. 24-26, 2011. (EI) (NSC 96-2221-E-507-004 & NSC 99-2221-E-507-004)
+[C35] Hsuan-Ming Feng and J.-H. Horng, VQ-Based Fuzzy Compression Systems Designs Through Bacterial Foraging Particle Swarm Optimization Algorithm, 2011 Fifth International Conference on Genetic and Evolutionary Computing, PP. 256-259, AUG. 29-SEP. 1, 2011. (NSC-93-2218-E-507-001)
+[C36] 馮玄明、曾偉勝zeng wei sheng、陳智勇，手勢辨識移動機器人之設計，虎尾科技大學，第十九屆模糊理論及其應用研討會，Nov. 3-4，2011。(NSC 99-2221-E-507-004) zeng wei
+[C37] 何銘輝、馮玄明、陳華慶、洪集輝、呂謙，基於演化式學習法求解帶有時間窗車輛路徑問題，第十一屆離島資訊技術與應用研討會，澎湖科技大學，MAY. 25-26，2012。
+[C38] Hsuan-Ming Feng and S-T Wu, Bacterial Foraging Particle Swarm Optimization Learning-Based Fuzzy Mobile Robot Systems Design, Proceedings of 2012 National Symposium on System Science and Engineering, National Taiwan Ocean University, Keelung, Jun. 16~17, pp. 1172-1176, 2012. (NSC99-2221-E-507-004 & 100-2221-E-507-004.)
+[C39] H.-C. Chen, Hsuan-Ming Feng, D.-h. GUO, Cross-Layer Regulation Algorithm in MPEG-4 Video Wireless Networks Applications, The 5th IET International Conference on Ubi-Media Computing, Xining China, pp. 242-247, AUG. 16-18, 2012.
+[C40] H.-C. Chen, Hsuan-Ming Feng, D.-h. GUO and Ji-Hwei Horng, Wireless Networks Designs through Advanced Regulation Machine, Proceedings 2012 IEEE International Conference on Anti-Counterfeiting, Security and Identification, pp, 101-105, Taipei, AUG. 24-26, 2012.
+[C41] 馮玄明、曾偉勝、何銘輝，進化式學習法設計立體視覺行動機器人，國立中興大學，第二十屆模糊理論及其應用研討會，pp. 220-225, Nov. 3-4，2012。(NSC 100-2221-E-507-004)
+[C42] 馮玄明, 謝孟霖, 陳華慶, 翁慶昌 ，EDCA 參數調整機制之無線網路模擬分析 , 第十二屆離島資訊技術與應用研討會, 金門大學& 華僑大學, pp. 727-733, 5月2013。
+[C43] 陳逸勤, 洪集輝, 伍添祿, 馮玄明, 以鄰域統計資訊為基礎的直方圖等化法, 第十二屆離島資訊技術與應用研討會, 金門大學& 華僑大學, pp. 727-733, pp.664-671, 5月 2013。
+[C44] 馮玄明 、 吳尚澤、李金譚, 演化式學習TSP 模糊行動機器人系統設計, Proceedings of 2013 National Symposium on System Science and Engineering, pp. 459-474, Jun. 2013.
+[C45] 馮玄明, 李金譚, 曾偉勝, 翁慶昌, Kinect 影像感測行動機器人設計 , 2013中華民國第二十一屆模糊理論及其應用研討會, pp. 120-125, Dec. 2013.
+[C46] 馮玄明、李金譚、翁慶昌與王建鈞, 服務型機器人設計與實現 Proceedings of 2014 National Symposium on System Science and Engineering, pp. 816-821, Jun. 21-23, 2014.
+[C47] Chia-Lun Wu, Hsuan-Ming Feng, Chin-Tan Lee and Ko-Wei Weng, Study of ROF Technologies in Carrier Current Line Systems for Wireless Communication Engineering, Proceedings of 2014 National Symposium on System Science and Engineering, pp. 447-452, Jun. 21-23, 2014.
+[C48] H.-C. Chen, D.-h. GUO and Hsuan-Ming Feng, A Parameters Tuning Algorithms in Wireless Networks, The Eight International Conference on software security and reliability, San Francisco, U.S.A., pp. 257-260, Jun. 30-Jul. 2, 2014.
+[C49] Hsuan-Ming Feng, Ching-Yi Chen, Yu-Xiang Zhao and Hua-Ching Chen, Self-Identified PSO Patterns Clustering Algorithm with Adapt Valid Measure, 2014 THE 8-TH CROSS-STRAIT Conference on Information Science and Technology, BEIJING, China, pp. 401-406, August 22-24, 2014.
+[C50] Yu-Xiang Zhao, Chienhsing Chou, Yieng Hsieh, Hsuan_Ming Feng, Jiasheng You and Jiazai Zheng, An Automatic Image Capturing System Applied to Identification Photo Booth, 2014 THE 8-TH CROSS-STRAIT Conference on Information Science and Technology, BEIJING, China, pp. 35-39, August 22-24, 2014.
+[C51] 馮玄明, 翁慶昌 與 何銘輝, 粒子群最佳化演算法設計無線網路流量服務模糊系統, 2014 中華民國第二十二屆模糊理論及其應用研討會,高雄國賓大飯店, pp. 83-88, Nov. 26-28, 2014. (NSC:102-2221-E-507-002)
+[C52] 王建鈞、李金譚、馮玄明, Kinect互動式觀光導覽服務型機器人之設計與實現, Proceedings of 2015 National Symposium on System Science and Engineering, Jul. 17-18, 2015.
+[C53] Ming-Hui Ho, Donghui Guo, Hsuan-Ming, Feng, and Ching-Chang Wong, Evolutional-Based Network Traffic Flow Behavior Acquisition and Fuzzy Control System Design, Proceedings 2015 IEEE International Conference on Anti-Counterfeiting, Security and Identification, pp, 119-123, SEP.. 25-27, Xiamen, China, 2015. (NSC: 102-2221-E-507-002.)
+[C54] 馮玄明、李世安、黃文鴻、林建銘、陳功瀚、翁慶昌, 基於機器人作業系統之機械手臂設計並實現於Gazebo模擬平台, NSSSE2016 系統科學與工程研討會. 南投, Jul. 8, 2016. (MOST 104-2221-E-507-004)
+[C55] 馮玄明、林志明、陳俊宇、翁慶昌, 深度神經網路學習及其在函數逼近之應用, NSSSE2016 系統科學與工程研討會. 南投, Jul. 8, 2016.
+[C56] 黃文風、馮玄明、賴麗雲, FDS建置船舶火災動態避難逃生模擬系統, NSSSE2016 系統科學與工程研討會. 南投, Jul. 8, 2016.
+[C56] Hsuan-Ming Feng, Kung-Han Chen, Jian-Ming Lin, Shih-An Li, and Ching-Chang Wong, ROS-based Software Structure, Strategy System and Simulation Platform for Robot Manipulator, 2016 International Automatic Control Conference, Caichung, Taiwan, Nov. 9-11, 2016. (MOST 104-2221-E-507-004)
+[C57] Yan-min Luo, Jun-Yang, Hsuan-Ming Feng, Li-Yun Lai, Image Segmentation-Based Web Text Location Applications, The 6th International Conference on Frontier Computing (FC 2017)-Theory, Technologies and Applications, PP. 501-507, Osaka, Japan, July 12-14, 2017.
+[C58] Li-Yun Lai, Hsuan-Ming Feng, Wei-Sheng Zeng, Yu-Xiang Zha, Ching-Chang Wong, Interactive Hand Recognition Robot System Designs, The 6th International Conference on Frontier Computing (FC 2017)-Theory, Technologies and Applications, PP. 508-516, Osaka, Japan, July 12-14, 2017. MOST 105-2221-E-507-004) (MOST 105-2221-E-032-023).
+[C59] Pei-zhong Liu, Hong-xiang Wang, Xiao-fang Liu, Ming Hong, Hsuan-Ming Feng, Pareto Ensemble Pruning With Diversity, The 6th International Conference on Frontier Computing (FC 2017)-Theory, Technologies and Applications, PP. 517-522, Osaka, Japan, July 12-14, 2017.
+[C60] Hsuan-Ming Feng, Shih-An Li, Jian-Ming Lin, Kung-Han Chen and Ching-Chang Wong, Self-Mapping and Localization in ROS Robot System Design, ICIUS2017, 13-th International Conference on Intelligent on Unmanned System, PP. 129-132, New Taipei City, Aug, 21-24, 2017. (MOST 105-2221-E-507-004) (MOST 105-2221-E-032-023).
+[C61] Hsuan-Ming Feng, Shih-An Li, Jian-Ming Lin, Kung-Han Chen and Ching-Chang Wong, Visualization on Robot Manipulator on ROS-Based Gazebo Simulator, ICIUS2017, 13-th International Conference on Intelligent on Unmanned System, PP. 174-177, New Taipei City, Aug, 21-24, 2017. (MOST 105-2221-E-507-004) (MOST 104-2221-E-507-002).
+[C62] 賴麗雲、馮玄明、陳華慶、吳世榮, 無線影像模糊辨識建模系統設計, 2017 Information Technology and Applications in Outlying Islands, pp. 372-376, Kinmen, 19~21 May, 2017. (MOST-105-2221-E-507-002).
+[C63] 陳正德、高詳晉、邱浩志、劉大綱、馮玄明、李金譚, 金屬閘極燒錄之自動檢查機制改良, Proceedings of 2017 Information Technology and Applications in Outlying Islands, pp. 867-872, Kinmen, 19~21 May, 2017.
+[C64] 魯昶甫、葉奕伸、馮玄明、翁慶昌, 基於 RGB-D影像建模之機械手臂取放任務設計, 2017 台灣智慧型機器人研討會，南港世貿展覽館，台灣台北，2017 年 9 月 6 日至 9 月 8 日. (MOST 105-2221-E-507-004) and (MOST-105-2221-E-507-002).
+[C65] 劉智誠、馮玄明、蕭聖儒、林怡仲、翁慶昌, 基於ROS 人形機器人行走模擬系統設計, 2017 台灣智慧型機器人研討會，南港世貿展覽館，台灣台北，2017 年 9 月 6 日至 9 月 8 日. (MOST 105-2221-E-507-004) and (MOST-105-2221-E-507-002).
+[C66] Hsuan-Ming Feng, Chun-Fei Hsu, Jia-Siang Lyu, Yu-Cheng Lai, and Ching-Chang Wong, Motion Control Design for 7-DOF Redundant Robot Manipulator, 2017 International Automatic Control Conference (CACS2017), Pingtung, Taiwan, Nov. 12-15, 2017. (MOST 105-2221-E-032 -023 and 105-2221-E-507 -002.)
+[C67] 馮玄明、陳華慶、翁慶昌、賴麗雲，深度學習神經網路人體影像辨識自動模型設計, 2017中華民國第二十五屆模糊理論及其應用研討會, Pingtung, Taiwan, 13-15 Nov., 2017. MOST-106-2811-E-507 -001 與MOST-106-2622-E-507-001-CC2
+[C68] 馮玄明、陳華慶、洪集輝、許心怡, 居家環境人體姿態識別系統設計，2018 Information Technology and Applications in Outlying Islands, pp. 372-376,WuHu Taiwan, 25~27 May, 2018.
+[C69] Hsuan-Ming Feng, Hua-Ching Chen and Ching-Chang Wong, Vision-Based Human Pose Recognition System Design in Indoor Environments, IEEE International Conference on System Science and Engineer, National Taipei University New Taipei City, Taiwan, 28-30 June, 2018. MOST-106-2622-E-507-001-CC2
+[C70] 馮玄明、紀虹、楊國良、馮聖博, 摺積神經網路中草藥影像辨識系統, 第23屆行動計算研討會, 桃園夢想園區, 2018 年 8 月 26 日至 8 月 27 日。
+[C71] 張宗翰、賴宥澄、鄭期元、馮玄明、翁慶昌, 機器人定位導航之虛實整合系統設計, 2018 台灣智慧型機器人研討會，南港世貿展覽館，台灣台北，2018 年 8 月 28 日至 8 月 31 日. (MOST 106-2221-E-507-001 and MOST 106-2221-E-032-005).
+[C72] Hsuan-Ming Feng, Ching-Chang Wong, Chih-Cheng Liu and Sheng-Ru Xiao, ROS-Based Humanoid Robot Pose Control System Design, IEEE International Conference on System, Man, and Cybernetic, pp. 4079-4083, 25~27 Miyazaki, Japan, 7-10 October, 2018. (DOI 10.1109/SMC.2018.00693) (MOST 106-2221-E-507 -001 and 106-2221-E-032 -005).
+[C73] L.H. Chou, W.H. Huang, Y.M. Kang, H.M. Feng, and C.C. Wong, “Robust navigation mobile robot system design with dynamic path planning,” 2018 International Automatic Control Conference (CACS 2018), 2018. (Taoyuan, Taiwan, Nov. 4-7, 2018) MOST 105-2221-E-032 -023, 105-2221-E-507 -002.
+[C74] Hsuan-Ming Feng, Hua-Ching Chen and Ching-Chang Wong, Human Image Recognition through Dynamic Mapping Generation, 2018 4th International Conference on Green Technology and Sustainable Development (GTSD 2018 ), Nov. 23-24, Ho Chi Minh City, Vietnam, pp. 749-752, 2018.
+(MOST-106-2622-E-507-001-CC2)
+[C75] Hsuan-Ming Feng, Ren-Jie Chen and Ching-Chang Wong, “Manipulator Robot System in Navigation and Action Implementation Designs,” IEEE INTERNATIONAL CONFERENCE ON SYSTEM SCIENCE AND ENGINEERING (ICSSE 2019), July 20-21, Dong Hoi City, Quang Binh, Vietnam, 2019. (MOST 107-2221-E-507 -005 & 107-2221-E-032 -048)
+
+執行計劃案:
+[T1]馮玄明，具規則調整能力之灰色預測模糊控制系統的研究，2002。 國科會專題計劃，計劃編號： NSC-90-2213-E-132-004。(主持人)
+[T2]馮玄明，多重學習模糊系統的設計及其應用，2003。國科會專題計劃，計劃編號：NSC-91-2213-E-132-002。(主持人)
+[T3]馮玄明，粒子群最佳化演算法在模糊向量影像壓縮技術的研究與應用，2005。國科會專題計劃，計劃編號：NSC-93-2218-E-507-001。(主持人)
+[T4]馮玄明，自我演化最佳化模糊影像監控系統的設計與應用，2006。國科會專題計劃，計劃編號：NSC-94-2213-E-507-001。(主持人)
+[T5]馮玄明，智慧型視訊監控系統的自由軟體建置，2007。國科會專題計劃，計劃編號：NSC 95-2218-E-507-001。(主持人)
+[T6]馮玄明，PSO建立全方位移動機器人運動模型灰預測模糊控制系統設計與製作(I)，2008。國科會專題計劃，計劃編號：NSC 96-2221-E-507-004。(主持人)
+[T7]馮玄明，導盲輔助機器人系統設計與其在購物服務應用，2009。國科會專題計劃，計劃編號：(NSC 98-2221-E-507-004)。(主持人)
+[T8]馮玄明，多模式感測手勢識別服務機器人設計與實現，2010。國科會專題計劃，計劃編號：NSC 99-2221-E-507-004。(主持人)
+[T9] 馮玄明，結合細菌優化與粒子群最佳化演算法設計雙眼立體視覺行動機器人，2011。國科會專題計劃，計劃編號：NSC 100-2221-E-507-002。(主持人)
+[T10] 馮玄明，立體視覺居家照護機器人設計與實現計畫，2012。國科會專題計劃，計劃編號：NSC 101-2218-E-507-001-。(主持人)
+[T11] 馮玄明，演化式網路流量模式攫取與模糊控制系統，2013。國科會專題計劃，計劃編號：NSC 102-2221-E-507 -002 -。(主持人)
+[T12] 馮玄明，雲端平台服務機器人之設計與應用，2014。國科會專題計劃，計劃編號：MOST 103-2221-E-507-003。(主持人)
+[T13] 馮玄明，具直覺式教導之模組化機械手臂於無紋理物件的夾取與組裝─子計畫三：基於機器人作業系統之機械手臂的軟體架構、策略系統及模擬平台，2015。計劃編號：MOST 104-2221-E-507 -002 -。(主持人)
+[T14] 具直覺式教導之模組化機械手臂於無紋理物件的夾取與組裝－總計畫暨子計畫一：機械手臂之組件模組化與直覺式教導。計劃編號：(MOST 104-2221-E-032-021-) (共同主持人)
+[T15] 倉儲自動化之視覺式智慧型貨架揀貨機器人－子計畫四：機器人定位導航與倉儲環境之虛實整合系統的設計與實現，2016。(MOST 105-2221-E-507-002-) (主持人)
+[T16] 倉儲自動化之視覺式智慧型貨架揀貨機器人－總計畫兼子計畫一：貨架揀貨機器人的設計與實現(105-2221-E-032-023-)，(共同主持人)
+
+服務與榮耀:
+主要獎項:獲得科技部工程司獎勵優秀人才補助(2010-2017)
+
+馮玄明其它學術服務列表
+1. 2005離島資訊技術與應用研討會之議程委員
+2. Invited reviewer of Third International Conference on Information Technology and Applications (2006)
+3. Invited reviewer of Journal of Computational and Applied Mathematics (2006)
+4. 國立成功大學工業設計系碩士論文學位考試委員 (2006/7/29)
+5. Invited reviewer of Pattern Recognition Letters (2007)
+6. Invited reviewer of Journal of Computational and Applied Mathematics (2007)
+7. Invited reviewer of Journal of Applied Mathematical Modeling (2007)
+8. 2008年系統雛型與電路設計創新應用研討會 評審委員
+9. 2008離島資訊技術與應用研討會之議程委員
+10. 國立高雄應用科技大學電子工程系碩士班施宗牧同學碩士學位考試委員 (2009/01/15)
+11. 2009離島資訊技術與應用研討會之大會主席
+12 Invited reviewer of Soft Computing and Automation Journal (2009)
+
+13. Invited reviewer of Information Sciences (2009)
+14 指導王宣權與方智誼同學，參加2009年“萬利達”杯海峽兩岸高等職業技術教育學生專業技能邀請賽，電子商務組獲得壹等獎。
+15. 指導 游豪州、鄭思盈、吳俊賢 等同學 在 『99學年度台灣區電腦化運動競技大賽』獲得「手臂車搬罐頭」組第三名。(2010)
+16 指導柯騰鈞、陳冠彰、朱立維等同學 在 『99學年度台灣區電腦化運動競技大賽』獲得 「自走車競速」組 佳作。(2010)
+17. Invited reviewer of Information Sciences. (2010)
+18. Invited reviewer of IEEE Transactions on Evolutionary Computation .(2010)
+19. 擔任義守大學電機工程學系博士班論文口試委員。 (2010)
+20. 擔任僑光科技大學資訊科技研究所沈訓守同學碩士論文口試委員。(2010)
+21. 擔任僑光科技大學資訊科技研究所尤昱森同學碩士論文口試委員。(2010)
+22. 擔任淡江大學電機工程學系碩士班論文口試委員。(2010)
+
+23. 通過CIW v5 Associate 國際認證。(2010)
+24. 通過CIW Professional國際認證。(2010)
+
+25. 通過國際認證獲得CIW Security Analyst資格。(2010)
+26. 通過國際認證獲得CIW Instructor資格。(2010)
+27. 通過Microsoft Certified Technology Specialist (MCTS) 國際認證。(2010)
+
+28. 通過Microsoft Windows Vista Configuration國際認證。(2010)
+29. 指導王建鈞、陳思韻、龍保全、周士弼等同學在『2011年全國智慧型機器人大賽』獲得「自走車相撲」組第一名。(2011)
+
+30. 指導 游豪州、鄭思盈、吳俊賢 等同學 在 『99學年度台灣區電腦化運動競技大賽』獲得「手臂車搬罐頭」組第三名。
+31. 指導柯騰鈞、陳冠彰、朱立維等同學 在 『99學年度台灣區電腦化運動競技大賽』獲得 「自走車競速」組 佳作。
+32. 指導林彥智、張乃龍、洪坤德與潘琊 等同學 在 『100學年度台灣區電腦化運動競技大賽』獲得 「自走車相撲」C組 第五名。
+33. 指導林偉群、文邑臣、許嬖驛與詹戾群 等同學 在 『100學年度台灣區電腦化運動競技大賽』獲得 「自走車負重致遠」C組佳作。
+
+34. 指導陳冠宇、李郁儒、曾齊與張益致等同學 在 『100學年度台灣區電腦化運動競技大賽』獲得 「自走車撞球」 A組 佳作。
+
+35. 指導吳俊賢、游豪州、陳俊仁、呂守中等同學 在 『100學年度台灣區電腦化運動競技大賽』獲得 「手臂車搬罐頭」C組佳作。
+36. 擔任2011中華民國系統科與工程會議 Section Chair。
+37. 擔任 2011 IEEE International Conference on Anti-Counterfeiting, Security and Identification- Organizing Committee Co-Chairs。
+38. 指導學生參加 2012 FIRA國際機器人競賽 獲 無動力雙足機器人第一名。
+39. 指導學生參加 2012 全國智慧型機器人大賽，自走車撞球組第四名。
+
+40. 擔任IET U-Media 2012， Publication Co-Chairs。
+41. 2013第十二屆離島資訊技術與應用研討會議程主席。
+42. 指導學生參加 2013 全國智慧型機器人大賽，手臂車搬寶特瓶大專校組c組第一名。
+43. 指導學生參加 2013 國際智慧人型機器人競賽，無動力機器人競賽一般組，第一名。
+44. 指導學生參加 2013 國際智慧人型機器人競賽，無動力機器人競賽(創意組)，佳作。
+
+45. 指導學生參加 2014 國際智慧人型機器人競賽，無動力機器人競賽(創意組)，第二名。
+
+46. 指導學生參加 2014亞洲機器人運動競技大賽大專院校組，機器人賽跑，第二名。
+47. 指導學生參加 2015年 8月在中國大陸舉辦常平杯 首屆兩岸四地智慧型機器人大賽暨學界研發成果展輪型機器人競速項目獲得一等獎.
+48. 擔任2015年9月於廈門大學舉辦的 2015 IEEE International Conference on Anti-Counterfeiting, Security and Identification 的 大會共同主席 Co-Chairs.
+49.與泉州華僑大學聯合主辦2015 海峽兩岸資訊科學與技術交流研討會 (the Cross-Strait Conference on Information Science and Technology).擔任會議主席.
+50. 擔任國際工程與科技學會中華民國分會(IEE Taipei Local Network)理事(2015-2019)
+51.主辦2017第16屆離島資訊技術與應用研討會(2017 Information Technology and Applications in Outlying Islands National Quemoy University, Kinmen, 19~21 May, 2017).擔任會議主席
+52. 擔任The 6th International Conference on Frontier Computing (FC 2017)-Theory, Technologies and Applications. (議程主席)
+53. 擔任2018 4th International Conference on Green Technology and Sustainable Development (GTSD 2018 )議程主席
+54. 擔任2018 台灣智慧型機器人研討會(議程主席)
+55. 擔任2018 International Automatic Control Conference (CACS 2018)
+56. 擔任 IEEE SMC Tinan Chapter 副主席 (2019-2020)
+瀏覽數:2834
+友善列印
+Line Facebook twitter
+
+傳真：(082)313529
+電話：(082)313531
+意見信箱：csie@email.nqu.edu.tw
+地址：金門縣金寧鄉大學路一號
+
+跳到主要內容區
+
+資訊工程學系
+
+Department of Computer Science
+
+and Information Engineering
+
+☰ 主選單
+
+回首頁
+回金門大學網站
+English
+關鍵字
+ 
+X
+
+首頁 教師部落格
+陳正德
+發布日期 : 2023-04-22
+個人資料
+
+
+姓名： 陳正德
+職稱： 教授
+電子郵件： tdchen@nqu.edu.tw
+聯絡電話： 082-313557
+專長
+
+
+非線性系統、數位系統設計、智慧控制
+瀏覽數:1336
+友善列印
+Line Facebook twitter
+
+傳真：(082)313529
+電話：(082)313531
+意見信箱：csie@email.nqu.edu.tw
+地址：金門縣金寧鄉大學路一號
+
+跳到主要內容區
+
+資訊工程學系
+
+Department of Computer Science
+
+and Information Engineering
+
+☰ 主選單
+
+回首頁
+回金門大學網站
+English
+關鍵字
+ 
+X
+
+首頁 教師部落格
+潘進儒
+發布日期 : 2023-04-23
+個人資料
+
+
+姓名： 潘進儒
+職稱： 副教授
+電子郵件： cjpan@nqu.edu.tw
+聯絡電話： (082)313538
+學歷
+
+
+國立中山大學資訊工程所博士
+國立中山大學電機工程所碩士
+私立淡江大學電子系學士
+專長
+
+
+多媒體應用、基因演算法、資訊安全技術
+經歷
+
+
+東元電機股份有限公司研發工程師
+永達技術學院電子工程系專任講師
+永達技術學院資訊管理系專任副教授
+高雄工業專科學校兼任講師
+正修技術學院兼任講師
+和春技術學院兼任講師
+金門技術學院電算中心軟體系統組組長
+金門大學資訊工程學系系主任
+金門大學計算機與網路中心主任
+著作、論文:
+
+
+1.“Effective and Tolerant Wide-Range Solutions for Ultra-Wideband Indented-Disk Monopole Antenna,” Microwave and Optial Technology Letter
+2.“Band-notched Ultra-wideband Slot Antenna,” Microwave and Optial Technology Letters,
+3.“Design of Robust State Observer for a Class of Uncertain Multiple Time-delays Systems,”CIACPA, Kaohsiung.
+4."自動化證件照拍攝演算法設計 "2012 Conference on Information Technology and Applications in Outlying Islands
+5."SDN 網路中動態路徑選擇以提升吞吐量之研究"KC2014 第十屆知識社群國際研討會
+6."快捷便利的智慧型領酒系統"
+Proceedings of 2017 Information Technology and Applications in Outlying Islands National Quemoy University, Kinmen.
+
+執行計劃案
+
+
+1.教育部資訊軟體人才培育推廣計畫,101,2-102,1,計畫主持人
+2.教育部資訊軟體人才培育推廣計畫,102,2-103,1,計畫主持人
+瀏覽數:1435
+友善列印
+Line Facebook twitter
+
+傳真：(082)313529
+電話：(082)313531
+意見信箱：csie@email.nqu.edu.tw
+地址：金門縣金寧鄉大學路一號
+
+跳到主要內容區
+
+資訊工程學系
+
+Department of Computer Science
+
+and Information Engineering
+
+☰ 主選單
+
+回首頁
+回金門大學網站
+English
+關鍵字
+ 
+X
+
+首頁 教師部落格
+李錫捷
+發布日期 : 2023-04-23
+個人資料
+
+
+姓名： 李錫捷 (Lee, Hsi-Chieh)
+職稱： 教授兼系主任(Professor and Chairman), 閩南文化與僑鄉數位典藏中心主任(Director, Digital Archive Center for Hokkien Culture and Overseas Chinese Hometowns)
+電子郵件： cjlee@email.nqu.edu.tw
+聯絡電話： (082)313978
+學歷
+
+
+Ph.D. (博士), Compute Science（電腦科學）, University of Missouri-Rolla（州立密蘇里大學Rolla校區）, USA
+Ph.D. (博士), Engineering Management（工程管理）, University of Missouri-Rolla（州立密蘇里大學Rolla校區）, USA
+M.S. (碩士), Computer Science（電腦科學）, University of Missouri-Rolla（州立密蘇里大學Rolla校區）, USA
+B.S. (學士), Mathematics（數學）, National Taiwan University（國立台灣大學）, Taiwan ROC
+研究興趣
+
+
+Artificial Intelligence, Biomedical Informatics, Renewable Energy Informatics, Digital Humanities, and High-Performance Computing
+經歷
+
+美國SIGMA XI科學研究榮譽學會會員 (Nominated Full Membership of SIGMA XI, The Scientific Research Honor Society, 2023)
+國立金門大學資訊工程學系 資訊工程學系 教授
+國立金門大學資訊工程學系 資訊工程學系 副教授
+國立金門大學資訊工程學系 資訊工程學系 副教授兼教務長 2014/08至2016/07
+國立金門大學資訊工程學系 資訊工程學系 副教授兼教務長 兼健康護理學院院長
+國立金門大學資訊工程學系 資訊工程學系 副教授兼教務長 兼人文藝術學院院長
+元智大學 資訊管理學系 副教授 2009/08至2012/07
+國立金門技術學院(借調自元智大學) 電資研究所 副教授兼教務長 2007/08至2009/07
+元智大學 資訊管理學系 副教授 2006/08至2007/07
+國立金門技術學院(借調) 資訊管理系 副教授兼系主任 2004/08至2006/07
+國立金門技術學院(借調) 電算中心 主任 2004/08至2006/07
+元智大學 資訊管理技術系 主任 2000/08至2002/01
+資訊工業策進策會 航電發展處 專案顧問 1997/09至1998/08
+經濟部 中央標準局(現智慧財產局) 專利外審委員 1997/08至1999/12
+元智大學 資訊管理系 副教授 1997/02至2004/07
+元智大學 資訊管理系(所) 資訊管理系(所) 副教授 1997/02至2006/11
+University of Missouri-Rolla 資訊系所，工管系所 系統管理員 1994/06至1996/12
+University of Missouri-Rolla 電機系所，工管系所，資訊系所，土木系所 研究/教學助理 1993/06至1996/12
+中央研究院 原子與分子科學研究所 研究助理 1991/01至1992/06
+Meditech R&D Corp. 研發部 經理 1989/07至1990/12
+ 
+
+ 
+
+著作、論文:
+
+
+001. K. C. Lin, H. C. Lee, and A. Sivaram, December 1992, “Rydberg States and Spin-Orbit Coupling of the Thallium Atom,” Physical Review A, pp. 7150-7154 (SCI)
+
+002. F. Ercal, A. Chawla, W. V. Stoecker, H. C. Lee, and R. H. Moss, September 1994, “Neural Network Diagnosis of Malignant Melanoma from Color Images,” IEEE Trans. On Biomedical Engineering, vol. 41, no. 9. (SCI,EI)
+
+003. H. C. Lee and C. H. Dagli, 1997, “A Parallel Genetic-Neuro Scheduler for Job-Shop Scheduling Problems,” International Journal of Production Economics, (51)1-2 (1997) pp. 115-122 (SCI, EI)
+
+004. F. Ercal and H. C. Lee, 1997, “Time-Efficient Maze Routing Algorithms on Reconfigurable Mesh Architectures,” Journal of Parallel and Distributed Computing, 44, pp. 133-140. (SCI, EI)
+
+005. F. Ercal, H. C. Lee, W. V. Stoecker, and R. H. Moss, 1998, “Skin Cancer Classification Using Neural Networks and Fuzzy Systems, “ International Journal of Smart Engineering Systems Design (now International Journal of General Systems), Vol. 1, pp.273-289 (SCI, EI)
+
+006. 李錫捷 and 吳富宇, 2001, “Linux PC Cluster 在 LVS 負載平衡架構下之應用 – 2001年大學聯招查榜叢集電腦系統之建置與分析”，中華民國資訊學會通訊 (Communications of IICM), Vol. 4, No. 4, pp.37-51
+
+007. C. H. Dagli and H. C. Lee, 2001, “Engineering Smart Data Mining Systems for Internet Aided Design and Manufacturing”, International Journal of Smart Systems Engineering Design (now International Journal of General Systems), Vol. 3:217-225, 2001 (SCI, EI)
+
+008. Hsi-Chieh Lee and Sy-Ming Guu, 2003, “On the optimal three-tier multimedia streaming services,”Fuzzy Optimization and Decision Making, Vol 2, No 1, March 2003 (MI)
+
+009. S-F. Tseng, H-C. Lee, T-C. Kung, S-L. Chou, and J-Y. Chen, 2005 “The Development of Global Ipv6 Products: An Exploration,“International Journal of Internet Protocol Technology, Vol. 1, No. 2, pp.61-67.
+
+010. Hsi-Chieh Lee, Szu-Wei Huang, and Eldon Y. Li, 2006“Mining Protein-Protein Interaction Information on the Internet,” special issue on Intelligent Bioinformatics Systems, Expert Systems with Applications, January 2006 (SCI,EI)
+
+011. Hsi-Chieh Lee and Chih-Hung Yao, ”The Design and Development of a P2P Packets Identification System,”Journal of National Kinmen Institute of Technology, Vol. 4, No.1, 2009
+
+012. Hsi-Chieh Lee, Shao-Hsuan Chang, “IC Assembly Product Inspection Using Image Processing Techniques,” Applied Mechanics and Materials, Vol. 145, PP. 209-213, January 2012 (EI)
+
+013. Hsi-Chieh Lee, Chang-Ru Dong, Tzu-Miao Lin (2012, Dec). Digital Watermarking Based JND Model and QR Code Features. Advances in Intelligent Systems & Applications, SIST 21, pp. 141-148.. 本人為第一作者、通訊作者.
+
+014. Hsi-Chieh Lee, Che-Yu Shih, and Tsu-Miao Lin (2012, Dec). Computer-Vision Based Hand Gesture Recognition and Its Application in iPhone. Advances in Intelligent Systems & Applications, SIST 21, pp. 487-497.. 本人為第一作者、通訊作者.
+
+015. Hsi-Chieh Lee, Chia-Ying Wu, and Tzu-Miao Lin (2012, Dec). Facial Expression Recognition Using Image Processing Techniques and Neural Networks. Advances in Intelligent Systems & Applications, SIST 21, pp. 259-267.. 本人為第一作者、通訊作者.
+
+016. Tzu-Miao Lin, Hsi-Chieh Lee, and Kuang-Hung Hsu (2017, Oct). Developing an Aging Facial Skin Quality Scoring System for Taiwanese Females: A Comparative Study. International Journal of Management, Economics and Social Sciences, Vol. 6(S1), pp.259 – 273.
+
+017. Tzu-Miao Lin, Hsi-Chieh Lee, Wen-Jia Kuo, Chih-Ching Chien, Yao-Horng Wang, and Chai-Li Chen (2018, Jan). Application of Intelligence Computing to Optimizing Enzymatic Bioprocessing in Cartilage Hydrolysis. International Journal of Management, Economics and Social Sciences, Vol. 7(S1), pp.109 – 131.
+
+018. Lee, Hsi-Chieh & Huang, Szu-Wei (2018, Apr). A Parallel and Distributed Computing System for Protein-Protein Interaction Literature Mining. CurrentProteomics, 15. 10.2174. (SCI)
+
+019. Lee, H.C., Liu, J.H., & Ho, C. S. (2021). The Medical Outcomes Distribution and the Interpretation of Clinical Data Based on C4.5 Algorithm for the RCC Patients in Taiwan. Applied Sciences, 11, 2566. https://doi.org/10.3390/app11062566 (SCI, Q2, 2021 Impact Factor: 2.838) (First Author)
+
+020. Liu, Hua-Yueh, and Hsi-Chieh Lee. 2022. "The Carbon Inventory of the Reuse Phase’s Life Cycle: The Example of the Reconstruction of a Zero-Carbon Campus on an Unused Military Camp" Sustainability 14, no. 3: 1064. https://doi.org/10.3390/su14031064 (SCI, Q2, 2021 Impact Factor: 3.889)
+
+021. Lee, Hsi-Chieh, and Ahmad F. Aqil. 2022. "Combination of Transfer Learning Methods for Kidney Glomeruli Image Classification" Applied Sciences 12, no. 3: 1040. https://doi.org/10.3390/app12031040 (SCI, Q2, 2021 Impact Factor: 2.838) (First Author and Corresponding Author)
+
+022. Hsi-Chieh Lee, Hua-Yueh Liu, Sheng-Yuan Teng,2022. “Distributed energy strategy using renewable energy transformation in Kinmen Island: Virtual power plants that take the military camps as the mainstay”Energy Strategy Reviews, Volume 44, 2022, 100993,ISSN 2211-467X, https://doi.org/10.1016/j.esr.2022.100993. (SCI, Q1, 2021 Impact Factor: 10.01) (First Author and Corresponding Author)
+
+023. Lee, Hsi-Chieh, Tsung-Chieh Lin, Chi-Chang Chang, Yen-Chiao Angel Lu, Chih-Min Lee, and Bolormaa Purevdorj. 2022. "Clinical Risk Factor Prediction for Second Primary Skin Cancer: A Hospital-Based Cancer Registry Study" Applied Sciences 12, no. 24: 12520. https://doi.org/10.3390/app122412520 (SCI, Q2, 2021 Impact Factor: 2.838) (First Author)
+
+024. Chen, Kuan-Yung, Hsi-Chieh Lee, Tsung-Chieh Lin, Chih-Ying Lee, and Zih-Ping Ho. 2023. "Deep Learning Algorithms with LIME and Similarity Distance Analysis on COVID-19 Chest X-ray Dataset" International Journal of Environmental Research and Public Health 20, no. 5: 4330. https://doi.org/10.3390/ijerph20054330 (SCI, Q1, 2021 Impact Factor: 4.614) (Corresponding Author)
+
+025. Lee, Hsi-Chieh, Hua-Yueh Liu, Tsung-Chieh Lin, and Chih-Ying Lee. 2023. "A Customized Energy Management System for Distributed PV, Energy Storage Units, and Charging Stations on Kinmen Island of Taiwan" Sensors 23, no. 11: 5286. https://doi.org/10.3390/s23115286 (SCI, Q1, 2021 Impact Factor: 3.847) (First Author and Corresponding Author)
+ 
+研討會論文
+
+
+001. F. Ercal, H. C. Lee, W. V. Stoecker, and R. H. Moss, November 1994, “Skin Cancer Diagnosis Using Hierarchical Neural Networks and Fuzzy Systems, “ Intelligent Engineering Systems Through Artificial Neural Networks, vol. 4, pp. 613-618, ASME Press, New York. (Best paper award)
+
+002. S. Sittisathanchai, C. H. Dagli, and H. C. Lee, November 1994, “A Genetic Scheduler for Job-Shops,” Intelligent Engineering Systems Through Artificial Neural Networks, vol. 4, pp. 351-356, ASME Press, New York.
+
+003. F. Ercal and H. C. Lee, April 24-29, 1995, “O(1) Maze Routing Algorithms on an RMES,” the 2nd Reconfigurable Architecture, Santa Barbara, CA, USA.
+
+004. H. C. Lee, C. H. Dagli, F. Ercal, and A. M. Ozbayoglu, August 21-22, 1995, “SimNet: A Parallel Neuro-Fuzzy Paradigm for Data Clustering,” OAI Neural Networks Symposium and Workshop (OAINN ‘95), Athens, Ohio, USA.
+
+005. H. C. Lee and C. H. Dagli, August 6-10, 1995, “An Integrated Parallel Genetic-Neuro Scheduler for Job-Shop Scheduling Problems,” the 13th International Conference on Production Research, Jerusalem, Israel.
+
+006. D. Enke, H. C. Lee, A. M. Ozbayoglu, A. Thammano, and C. H. Dagli, November 1995, “An Application to Speaker Identification Using SimNet,” Intelligent Engineering Systems Through Artificial Neural Networks, ASME Press, New York.
+
+007. H. C. Lee, F. Ercal, and R. W. Wilkerson, November 3-4, 1995, “Fast Maze Routing Algorithm on Reconfigurable Meshes,” International Conference on Parallel and Distributed Processing Techniques and Applications, Athens, Georgia, USA.
+
+008. H. C. Lee and F. Ercal, April 15-19, 1996, “Efficient Maze Routing Algorithms for RMESH Architectures, the 3rd Workshop on Reconfigurable Architectures & Algorithms (in conjunction with IPPS ‘96), Honolulu, USA.
+
+009. H. C. Lee and C. H. Dagli, April 8-12, 1996, “A Cyber-Agent on the World Wide Web,” SPIE Applications and Science of Artificial Neural Networks II, Orlando, Florida, USA.
+
+010. H. C. Lee and F. Ercal, October 27-31, 1996, “Efficient RMESH Algorithms for String Matching,” Workshop of Domain Specific Systems, the Sixth Symposium on the Frontiers of Massive Parallel Computation (Frontiers ‘96), Annapolis, Maryland, USA.
+
+011. H. C. Lee and C. H. Dagli, April 21-25, 1997, “A Smart Engineering System for Information Processing,” SPIE Applications and Science of Artificial Neural Networks III, Orlando, Florida, USA.
+
+012. C. H. Dagli and H. C. Lee, November 5-7, 1997, “Impacts of Data Mining Technology to Product Design Process Planning,” CAPE ‘97 Conference, Detroit, Michigan, USA.
+
+013. H. C. Lee and F. Ercal, December 18-20, 1997, “RMESH Algorithms for Parallel String Matching,” the 1997 International Symposium on Parallel Architectures, Algorithms and Networks (I-SPAN ‘97), Taipei, Taiwan, ROC.
+
+014. H. C. Lee and C. S. Jong, April 13-17, 1998, “A Hybrid neuro-fuzzy approach for automatic license plate recognition,” Applications and Science of Computational Intelligence, part of SPIE‘s Aerospace/Defense Sensing and Controls, Orlando, FL.
+
+015. 許加文 and 李錫捷, June 5-6, 1998, “網際網路搜尋過濾系統 ─ 一個「關鍵頁」超搜尋智慧型代理引擎”, 第九屆國際資訊管理學術研討會 (The Ninth International Conference on Information Management), Taiwan ROC (Best student paper award)
+
+016. 仲崇實and 李錫捷，January 1999, “影像處理及類神經乏晰於車輛牌照自動辨識之應用研究”, 國內資訊相關系所博碩士論文分析(1996-1998)，pp251-252, Editor 林一鵬，國立台灣大學計算機及資訊網路中心, Taiwan ROC
+
+017. 李錫捷，March 2000, “應用影像處理技術及類神經網路於車牌自動辨識系統之研發”, 88年度資訊學門研究計劃成果要覽論文專輯，pp8.18-19, Taiwan ROC
+
+018. 李錫捷 and 魏銪志, May 20-21, 2000, “自動車牌辨識系統 – 社區車道管制系統,” 第十一屆全國資管學術研討會 (The Eleventh National Conference on Information Management), Taiwan ROC
+
+019. 李錫捷 and 謝超煒, May 20-21, 2000, “網際網路資訊擷取過濾系統 – 一個中文關鍵頁超搜尋代理引擎,” 第十一屆全國資管學術研討會 (The Eleventh National Conference on Information Management), Taiwan ROC
+
+020. 李錫捷，October 19-20, 2000, “多目標動態車輛自動辨識系統之研究”, 2000年民生電子研討會(2000 Workshop on Consumer Electronics), pp303-306, Taiwan ROC
+
+021. 黃國倫 and 李錫捷，December 20-21, 2001, “網際網路學習式購物代理人之設計與建構”，中華民國九十年全國計算機會議 (NCS‘01)，Taiwan ROC
+
+022. Hsi-Chieh Lee and Sy-Ming Guu,“On the optimal three-tier multimedia streaming services,” The Ninth Bellman Continuum: International workshop on uncertain systems and soft computing, July 24-27,2002, Beijing, China
+
+023. P. W. Chen and H. C. Lee, “C2AS: An agent-based distributed and parallel processing virtual machine,” Seventh International Conference on Applications of High-Performance Computers in Engineering (HPC 2002), September 23–25, 2002,Bologna, Italy
+
+024. Hsi-Chieh Lee , Ru-Yng Chang, Cihan H. Dagli. “The Design and Development of the KeyPAgent,” The Second China-Japan Natural Language Processing, Peking University, October 30 – November 2, 2002, Beijing, China
+
+025. 蔡博偉 and 李錫捷， “網路多模組監控回報系統之研究與設計”, TANET‘2003 (台灣網際網路研討會 2003), October 29 – 31, 2003, Taipei, Taiwan ROC
+
+026. 李錫捷，姚德宜，方鶴，“嵌入式整合訊息伺服器“， 2004電子商務與數位生活研討會, March 26-27, 2004, Taipei
+
+027. 曾信池 and 李錫捷，“無線行動監理站之建構與研究”, Active Networking Workshop 2004, pp.20-29, September 2004
+
+028. 湯皓傑 and 李錫捷，“應用資料濃縮處理技術於FP-Growth演算法效能之改善”, 第九屆(TAAI 2004)人工智慧與應用研討會, FA2-2(1004), November 2004
+
+029. Shu-Fen Tseng, Hsi-Chieh Lee, Te-Ching Kung, Shou-Lien Chou, and Jing-Yi Chen, “The Development of Global Ipv6 Products: An Exploration,” The IEEE 19th International Conference on Advanced Information Networking and Applications, Vol(2)845-850, AINA, IEEE, 2004
+
+030. 劉興浚，李錫捷，盧以詮，“類神經網路在分類稅務稽核選案模式的應用研究”, 第十三屆國防管理學術暨實務研討會, June 2005, Taipei
+
+031. 李錫捷，溫存甲，“類神經網路及平行處理於印刷電路板鑽孔路徑最佳化之應用”, 第十屆(TAAI 2005)人工智慧與應用研討會, December 2-3, 2005
+
+032. 陳靜宜、李錫捷、郭文嘉、許光宏、林姿妙、葉靜如，“影像處理及類神經網路於微細胞核自動計數之研究“，第五屆離島資訊技術與應用研討會, June 2006
+
+033. 陳昇焱、郭文嘉、李錫捷、許光宏、林姿妙，“應用影像技術於姊妹染色體型態辨識之研究“，第五屆離島資訊技術與應用研討會, June 2006
+
+034. 林姿妙、許光宏、李錫捷，“以資訊技術建構台灣地區成年女性膚質老化程度之預測指標“，2006 醫療及生技產業經營管理國際研討會, July 2006
+
+035. 黃欣慧、李錫捷、郭文嘉，“ 影像處理技術應用於人臉膚質特徵之研究“，2006 醫療及生技產業經營管理國際研討會, July 2006
+
+036. 陳冠位、李錫捷，”影像處理及類神經網路於晶圓缺陷分析之應用” , 第十二屆(TAAI 2007)人工智慧與應用研討會, November 16-17, 2007
+
+037. 林姿妙、林柏寰、李錫捷,” 中醫護理學程數位學習平台之研究與建置”, 第七屆離島資訊技術與應用研討會, June 2008, P.273~P.280
+
+038. 謝依芳、李錫捷,”共同基金扣款時機、投資策略與報酬率關係之研究”,2008 全球服務科學管理理論與實務學術研討會,October 17,2008, Taiwan
+
+039. 李錫捷、陳永昇、何俊杰，”數位浮水位於即時監控系統之應用研究” ，第八屆離島資訊技術與應用研討會, May 22-23, 2009, Kinmen & Xiamen
+
+040. 李錫捷、陳建男、陳柏翰，“WiFi無線訊號圖形化呈現與定位導覽之應用研究”，第八屆離島資訊技術與應用研討會, May 22-23, 2009, Kinmen & Xiamen
+
+041. 李錫捷、石耀中、胡學恭，”類神經與平行處理於電感缺偵測之應用研究”，第八屆離島資訊技術與應用研討會, May 22-23, 2009, Kinmen & Xiamen
+
+042. 李錫捷、彭俊和、林姿妙，” 影像處理技術與模糊邏輯於人臉膚質特徵之研究”，第十屆離島資訊技術與應用研討會, May 13-14, 2011, Taitung, Taiwan
+
+043. Hsi-Chieh Lee, Shao-Hsuan Chang, “IC Assembly Product Inspection Using Image Processing Techniques,”The First International Conference on Engineering and Technology Innovation, November 11-13, 2011
+
+And twenty more unlisted conference papers ...
+ 
+執行計劃案
+
+
+無塵室監控系統研究及建置
+
+主持人
+
+2016/11/01~2017/10/31
+
+教育部資訊志工計畫
+
+主持人
+
+2016/7/1 ~ 2017/5/31
+
+金門縣農作物契作資訊系統管理維護
+
+主持人
+
+2016/02/01~2016/12/31
+
+金門縣推動十六年國民基本教育實施計畫
+
+主持人
+
+2015/8/1~2015/12/10
+
+金門縣政府「創造金門全島優質行動網路環境-可行性評估委託服務案」
+
+主持人
+
+2015/06/03~2015/11/30
+
+教育部資訊志工計畫
+
+主持人
+
+2015/6/1 ~ 2016/5/31
+
+104年金門縣農作物契作資訊系統管理維護
+
+主持人
+
+2015/01/01~2015/12/31
+
+金門縣農作物契作作業系統行動軟體建置
+
+主持人
+
+2015/06/01~2015/12/31
+
+教育部資訊志工計畫
+
+主持人
+
+2014/6/1 ~ 2015/5/31
+
+金門縣農作物契作資訊系統管理維護
+
+主持人
+
+2014/01/01~2014/12/31
+
+太陽光電即時監控資訊系統及再生能源交易平台網頁研究及建置
+
+主持人
+
+2014/03/20~2016/03/19
+
+金門縣農作物契作資訊系統管理維護
+
+主持人
+
+2013/07/01~2013/12/31
+
+教育部資訊志工計畫
+
+主持人
+
+2013/6/1 ~ 2014/5/31
+
+教育部資訊志工計畫
+
+主持人
+
+2012/6/1 ~ 2013/5/31
+
+教育部資訊志工計畫
+
+主持人
+
+2011/6/1 ~ 2012/5/31
+
+教育部資訊志工計畫
+
+主持人
+
+2010/6/1 ~ 2011/5/31
+
+專業領域之數位華語文教學/教材--中醫護理學程數位學習網站之建構與資料探勘研究(子計畫七)（NSC95-3113-S-155-001-）
+
+主持人
+
+2006/12/01 ~
+
+2007/11/30
+
+專業領域之數位華語文教學/教材--傳統醫學數位教學系統之研究與發展(總計畫)（NSC95-3113-S-255-001-）
+
+共同主持人
+
+2006/12/01 ~
+
+2007/11/30
+
+金門縣政府資訊發展整體規劃委外服務案（0961200126）
+
+主持人
+
+2007/07/20 ~ 2007/12/15
+
+數位內容隨選系統之研究與發展(3/3)－總計畫(95-2745-E-155-006-URD)
+
+共同主持人
+
+2006/08/01 ~ 2007/07/31
+
+數位內容隨選系統之研究與發展－子計畫四：生物資訊數位內容之建構與資料探勘研究(3/3)(95-2745-E-155-010-URD)
+
+主持人
+
+2006/08/01 ~ 2007/07/31
+
+數位內容隨選系統之研究與發展(2/3)－總計畫(94-2745-E-155-006-URD)
+
+共同主持人
+
+2005/08/01 ~ 2006/07/31
+
+數位內容隨選系統之研究與發展－子計畫四：生物資訊數位內容之建構與資料探勘研究(2/3)(94-2745-E-155-010-URD)
+
+主持人
+
+2005/08/01 ~ 2006/07/31
+
+數位內容隨選系統之研究與發展(1/3)－總計畫(93-2745-E-155-006-URD)
+
+共同主持人
+
+2004/08/01 ~ 2005/07/31
+
+數位內容隨選系統之研究與發展－子計畫四：生物資訊數位內容之建構與資料探勘研究(1/3)(93-2745-E-155-010-URD)
+瀏覽數:2758
+友善列印
+Line Facebook twitter
+
+傳真：(082)313529
+電話：(082)313531
+意見信箱：csie@email.nqu.edu.tw
+地址：金門縣金寧鄉大學路一號
+
+ 
+
+
+
+
+(Cappadocia Turkey, 2024/08)
+
+(Chih-Heng Ke) orcid
+
+職稱 (Position)
+
+教授 (Professor)
+
+電話 (Telephone number)
+
++886-82-313533
+
+傳真 (Fax)
+
++886-82-313529
+
+電子信箱 (Email)
+
+smallko@gmail.com smallko@nqu.edu.tw
+
+辦公室 (Office)
+
+金門大學資訊工程學系 892 金門縣金寧鄉盤山村23鄰大學路1號
+
+Department of Computer Science and Information Engineering, National Quemoy University
+
+No.1, University Rd., Jinning, Kinmen, 892 Taiwan, R.O.C.
+
+學歷 (Educations)
+
+·        國立成功大學電機博士(2000-2007)  Ph.D., National Cheng Kung University, R. O. C. (2000-2007)
+
+·        國立成功大學電機碩士(1999-)  M.S., National Cheng Kung University, R. O. C.   (1999-)
+
+·        國立成功大學電機學士(1995-1999)  B.S., National Cheng Kung University, R. O. C. (1995-1999)
+
+經歷 (Experiences)
+
+·        崑山科技大學資管系兼任講師(2001-2005)  (Educator, Kun Shan University of Technology- Department of Information Management)
+
+·        台南女子技術學院資管系兼任講師(2004-2005) (Educator, Tainan Woman’s College of Arts & Technology- Department of Information Management)
+
+·        Honorary visiting researcher in La Trobe University, Melbourne, Australia (2005.8.28-2005.10.27)
+
+·        Visiting researcher in IOWA State University, USA (2006.8.25-2006.9.23)
+
+·        金門技術學院資訊管理系助理教授(2007.2.1-2007.7.31) (Assistant Professor, National Kinmen Institute of Technology - Department of Information Management)
+
+·        金門技術學院資訊工程系助理教授(2007.8.1~2010.7.31) (Assistant Professor, National Kinmen Institute of Technology - Department of Computer Science and Information Engineering)
+
+·        金門技術學院電算中心資訊網路組組長(2007.8.1~2010.7.31) (Section Chief, Information Network Section of Computer Center, National Kinmen Institute of Technology)
+
+·        金門大學資訊工程系助理教授(2010.8.1~2012.7.31) (Assistant Professor, National Quemoy University - Department of Computer Science and Information Engineering)
+
+·        金門大學資訊工程學系副教授(2012.8.1~2021.7.31) (Associate Professor, National Quemoy University - Department of Computer Science and Information Engineering)
+
+·        金門大學計算機與網路中心軟體系統組組長(2015.9.3~2017.7.31) (Director, Software System Division of Computer and Network Center, National Quemoy University)
+
+·        金門大學資訊工程學系系主任(2017.8.1~2018.7.31) (Chairman, Department of Computer Science and Information Engineering, National Quemoy University)
+
+·        金門大學資訊工程學系教授(2021.8.1~present) (Professor, National Quemoy University - Department of Computer Science and Information Engineering)
+
+專長及研究領域 (Specialities)
+
+·        多媒體網路   (Multimedia communication)
+
+·        無線網路 (Wireless Networks)
+
+·        網路模擬與效能分析 (Network Simulation and Performance Analysis) 
+
+·        軟體所定義網路(Software Defined Network)
+
+·        強化式學習(Reinforcement Learning)
+
+著作 (Publication List)
+
+A. Selected Refereed Papers (Google Scholar)  (Scopus) (dblp) (Ranking for Scientist) (ScholarGPS)
+
+1. C. H. Ke, C. K. Shieh, W. S. Hwang, A. Ziviani, "A Two Markers System for Improved MPEG Video Delivery in a DiffServ Network", IEEE Communications Letters, vol. 9, no. 4, pp. 381-383, April 2005. (SCI)
+
+2. C. H. Ke, C. K. Shieh, W. S. Hwang, A. Ziviani, “Improving video transmission on the Internet”, IEEE Potentials Magazine, vol. 26, no. 1, pp 16-19, 2007 (EI)
+
+3. C. H. Ke, C. H. Lin, C. K. Shieh, W. S. Hwang, A. Ziviani, “Evaluation of Streaming MPEG Video over Wireless Channels”, Journal of Mobile Multimedia, vol. 3, no. 1, pp.47-64, 2007
+
+4. C. H. Ke, C. K. Shieh, W. S. Hwang, A. Ziviani, “An Evaluation Framework for More Realistic Simulations of MPEG Video Transmission”, Journal of  Information  Science and Engineering, vol. 24, no. 2, pp.425-440, March 2008 (SCI)
+
+5. C. H. Ke, N. Chilamkurti, “A New Framework for MPEG Video Delivery over Heterogeneous Networks”,  Computer Communication – special issue on End-to-end Support over Heterogeneous Wired-Wireless Networks, vol. 31, issue 11, pp.2656-2668, 15 July 2008 (SCI)
+
+6. C. H. Lin, C. K. Shieh, N. Chilamkurti, C. H. Ke*, W. S. Hwang, "A RED-FEC Mechanism for Video Transmission over WLANS”, IEEE Transaction on Broadcasting: Quality Issues in Multimedia Broadcasting, vol. 54, no. 3, pp.517-524, Sept. 2008 (SCI)
+
+7. D. J. Deng, C. H. Ke, Y. M. Huang, and H. H. Chen, "Contention Window Optimization for IEEE 802.11 DCF Access Control", IEEE Transactions on Wireless Communication, vol. 7, no. 12, pp. 5129-5135, Dec. 2008 (SCI)
+
+8. C. H. Ke, L. Bin, Y. M. Huang, J. Morris Chang, “Enhanced High Performance Distributed Coordination Function for IEEE 802.11 Multi-rate LANs”, International Journal of Communication Systems, vol. 22, no. 8, pp.1045-1061, 2009 (SCI)
+
+9. C. H. Ke, D. J. Deng, K. W. Lin, M. F. Tsai, “Concurrent Multipath Transmission with Forward Error Correction Mechanism for Video Streaming in Wireless Networks”, Journal of Internet Technology, vol. 11, no. 4, pp. 491-497, July, 2010 (SCI)
+
+10. C. H. Ke, C. C. Wei, K. W. Lin*, and J. W. Ding, “A Smart Exponential-Threshold-Linear Backoff Mechanism for IEEE 802.11 WLAN”, International Journal of Communication Systems, vol 24, no. 8, pp. 1033-1048, August, 2011 (SCI)
+
+11. C. H. Ke, " myEvalSVC: an Integrated Simulation Framework for Evaluation of H.264/SVC Transmission ", KSII Transactions on Internet and Information Systems, vol 6, no. 1, pp. 379-394, Jan. 2012  (SCI)
+
+12. C. H. Ke, C. C. Wei, K. W. Lin*, “A Dynamic and Adaptive Transmission Scheme for Both Solving Uplink/Downlink Unfairness and Performance Anomaly Problems in a Multi-Rate WLAN”, Applied Mathematics & Information Sciences, vol. 6, no.2S, pp. 531S-537S, Apr. 2012 (SCI)
+
+13. C. H. Ke, C. A. Huang, K. W. Lin, "Achieving Fair Bandwidth Sharing for Downlink and Uplink Traffic in an Infrastructure WLAN", Journal of Chung Cheng Institute of Technology, vol. 42, no. 1, pp. 31-40, May 2013 (EI)
+
+14. C. H. Ke, K.W. Lin, C. A. Huang, Y. S. Chen, S. O. Park, "Cross-Layer Quality Enhancement Scheme for Video Transmission over Multi-hop Wireless Networks", Multimedia Tools   Appl. 75(22):14849-14865(2016) (SCI)
+
+15. C. H. Ke, C. Y. Yang, J. L. Chen, "A Novel Mapping Mechanism for MPEG-4 Video Delivery over IEEE 802.11e Networks", Multimedia Tools Appl. 76(4):5937-5949(2017) (SCI)
+
+16. C. H. Ke, C. Y. Yang, J. L. Chen, K. Z. Ghafoor, J. Lloret, "Frame-based mapping mechanism for energy-efficient MPEG-4 video transmission over IEEE 802.11e networks with better quality of delivery", J. Network and Computer Applications 58:280-286(2015) (SCI)
+
+17. C. H. Ke, K. W. Lin, and C. A. Huang, “Inter-flow fairness support and enhanced video quality delivery over multi-hop wireless networks”, Computers & Electrical Engineering 56: 193-204(2016) (SCI)
+
+18. C. H. Ke, C. Y. Yang, J. L. Chen, "Hierarchical Packet Pre-dropping Approach for Improved MPEG-4 Video Transmission in Heavily Loaded Wireless Networks", MONET 22(1):30-39(2017) (SCI)  
+
+19. C. H. Ke, Y. S. Chen, Y. S. Yu, “Improving video transmission in software defined wired and wireless network using multi-path transmission”, Journal of Communications and Networks. 2017 19:587-595 (SCI)
+
+20. Y. S. Yu, C. H. Ke*, “Genetic algorithm-based routing method for enhanced video delivery over software defined networks”, International Journal of Communication Systems 31(1)(2018) DOI: 10.1002/dac.3391 (SCI)
+
+21. C. H. Ke, S. Y. Hsieh, T. C. Lin, T. H. Ho, Efficiency Network Construction of Advanced Metering Infrastructure Using Zigbee, IEE Transactions on Mobile Computing. 18(4): 801-813 (2019)
+
+22. A Malik, B Aziz, M Adda, C. H. Ke, “Smart routing: towards proactive fault handling of software-defined networks”, Computer Networks, vol. 170, no. 7, April 2020 (SCI)
+
+23. C. H. Ke*, S.J. Hsu, “Load Balancing Using P4 in Software-Defined Networks”, Journal of Internet Technology, vol. 21, no. 6, pp. 1671-1679, Nov. 2020 (SCI)
+
+24. Y. S. Chen, L. C. Ting, N. T. Hshieh, C. H. Ke*, “Enhancing Multimedia Streaming with Weighted Multiple Transmission Paths in Software Defined Networks”, Journal of Internet Technology, vol. 21, no.7, pp. 2047-2054, Dec. 2020 (SCI)
+
+25. C. H. Ke and L. Astuti, "Applying Deep Reinforcement Learning to Improve Throughput and Reduce Collision Rate in IEEE 802.11 Networks," KSII Transactions on Internet and Information Systems, vol. 16, no. 1, pp. 334-349, 2022. DOI: 10.3837/tiis.2022.01.019. (SCI) (code)
+
+26. C. H. Ke and L. Astuti, “Applying Multi-Agent Deep Reinforcement Learning for Contention Window Optimization to Enhance Wireless Network Performance”, ICT Express, vol. 9, no. 5, pp. 776-782, Oct. 2023 (SCI) (code)
+
+27. C. H. Ke, Y. W. Lo, Y.S. Chen, H. P. Chen, “An Enhanced Explicit Port Forwarding Solution for Improving Video Delivery over Software-Defined Networks”, Journal of Internet Technology (SCI), vol. 24, no. 2, pp. 313-321, Mar. 2023.
+
+28. C. H. Ke, Y. H. T, Y. W. Ma, “A Reinforcement Learning Approach for Widest Path Routing in Software-Defined Networks”, ICT Express, vol. 9, no. 5, pp. 882-889, Oct. 2023 (SCI)
+
+29. Y. H. Tu, E. C. Lin, C. H. Ke*, Y. W. Ma, “Enhanced-SETL: A Multi-Variable Deep Reinforcement Learning Approach for Contention Window Optimization in Dense Wifi Networks”, Computer Networks (SCI). vol . 253, November 2024, 110690.
+
+30. M.C. Chou, G. J. Lin, C. H. Ke*, Y. S. Chen, “Customer service quality definition and adjustment method based on deep reinforcement learning”, Advances in Technology Innovation. vol. 9, no. 4 (2024): October
+
+31. MING-CHU CHOU,CHENG-FENG HUNG,CHIN-YA HUANG,CHIH-HENG KE*, “Adaptive Throughput Optimization in Multi-Rate IEEE 802.11 WLANs via Multi-Agent Deep Reinforcement Learning”, IEEE Open Journal of the Communications Society, (Accepted)
+
+32. G. J. Lin, C. F. Hung, C. H. Ke*, “A Deep Reinforcement Learning-Based Bandwidth Demand-Oriented Routing in Software-Defined Networking”, ICT Express (SCI) (Accepted)
+
+ 
+
+B. 榮譽與獎勵 (Honor)
+
+         金門技術學院學術研究獎 (97年)
+
+ Excellent Paper Award, National Computer Symposium 2009 (NCS 2009) (全國計算機會議優良論文獎, 2009)
+
+「國科會99年度補助大專校院獎勵特殊優秀人才」獎勵
+
+「國科會100年度補助大專校院獎勵特殊優秀人才」獎勵
+
+「國科會101年度補助大專校院獎勵特殊優秀人才」獎勵
+
+ 金門大學楊忠禮教學優良獎(104年)
+
+金門大學研究傑出獎(105年)
+
+ 金門大學研究傑出獎(106年)
+
+Best Conference Paper Award, “A Genetic-Algorithm-Based Routing Scheme for Video Transmission over Software Defined Networks”, 2016 IEEE International Conference on Applied System Innovation, May 28-June 1, 2016, OKINAWA, JAPAN
+
+ Best Paper Award, “在有線與無線之軟體定義網路下運用多路徑提升影像傳輸品質之研究”, 2016創新發明應用研討會暨第二十四屆模糊理論及其應用研討會
+
+ Best Paper Award (Master piece), “A Dynamic GA-based Flow Scheduling in Fat-Tree Networks”, 2016 Hong Kong International Conference on Engineering and Applied Sciences
+
+ Best Paper Award, “在SDN/NFV網路環境中提升視訊串流影像品質之研究“, 2017台灣網際網路研討會 (TANET2017)
+
+ 金門大學楊忠禮教學優良獎(109年)
+
+           Best Paper Award, ”WLANs下透過雙重深度Q-Learning提升整體網路效能之研究”, TANET 2022臺灣網際網路研討會
+
+學術活動 (Academic Activities)
+
+A. 論文審查委員(Paper Reviewer)
+
+       Reviewer of IEEE Communications Letters
+
+Reviewer of IEEE Potentials
+
+Reviewer of IEEE System Journal
+
+Reviewer of IEEE Transaction on  Multimedia
+
+Reviewer of IEEE Network Magazine
+
+Reviewer of IEEE/ACM Transactions
+
+Reviewer of IET Communications on Networking
+
+Reviewer of International Journal of Communication Systems
+
+Reviewer of International Journal on Digital Learning  
+
+Reviewer of International Journal of Distributed Sensor Networks
+
+Reviewer of International Journal of Communication Networks and Distributed Systems (IJCNDS)
+
+Reviewer of Journal of Supercomputing
+
+Reviewer of Journal of Internet Technology (JIT)
+
+Reviewer of Journal of Information Science and Engineering (JISE)
+
+Reviewer of Journal of Computer Networks and Communications
+
+Reviewer of KSII Transactions on Internet and Information Systems
+
+Reviewer of Mobile Networks and Applications
+
+Reviewer of Mobile Information Systems
+
+Reviewer of Mathematical Problems in Engineering
+
+Reviewer of EURASIP Journal on Wireless Communications and Networking
+
+Reviewer of Frontiers of Information Technology & Electronic Engineering (former title: JZUS-C,2010-2014)
+
+Reviewer of Concurrency and Computation: Practice and Experience
+
+Reviewer of Security and Communication Networks
+
+Reviewer of Security and Communication Networks
+
+Reviewer of Sensors
+
+Reviewer of Soft Computing
+
+Reviewer of the Computer Journal
+
+Reviewer of the Scientific World Journal
+
+Reviewer of PeerJ Computer Science
+
+Reviewer of CMC-Computers, Materials & Continua
+
+Reviewer of Cluster Computing
+
+Reviewer of Wireless Communications and Mobile Computing (WCMC) 
+
+B. Technical Program Committee
+
+       Program Committee, The 3rd Workshop on Wireless, Ad Hoc, and Sensor Networks (WASN), Sep. 6~7, 2007 (TKU, Taiwan)
+
+Local Co-Chair and Program Committee,  The 4th Workshop on Wireless, Ad Hoc, and Sensor Networks (WASN), Sep. 4~5, 2008 (NCKU, Taiwan)
+
+Program Committee, The 2008 International Symposium on Computer Science and its Applications (CSA), Hobart, Australia, Oct. 13-15, 2008
+
+Program Committee, Network Applications, Protocols and Services Conference 2008 (NetApps), Malysia, Nov. 21-22, 2008
+
+Program Committee and Session Chair, International Computer Symposium (ICS), Nov. 13-15, 2008 (Tamkang University)
+
+Financial Chair and Technical Program Committee, Pacific-Rim Conference on Multimedia (PCM), Dec. 9-13, 2008 (NCKU)
+
+Program Committee and Session Chair, International Symposium on Wireless and Pervasive Computing (ISWPC), Melbourne, Australia, Feb. 11-13, 2009
+
+Program Committee, The First International e-Conference on Advanced Science and Technology, Feb. 27~ Mar. 2, 2009, in Internet Cyber Space
+
+Program Committee, 2009 Conference on Technology and Applications in Outlying Islands, Kinmen, Taiwan, May 22-23, 2009
+
+Program Committee, the First International Workshop on Vehicular Communication Technologies (VehiCom), Leipzig, Germany, Jun. 21-24, 2009
+
+Program Committee, International Workshop on Mobility and its Applications, Leipzig, Germany, Jun. 21-24, 2009
+
+Session Chair, 2009海峽兩岸信息科學與信息技術學術交流會議,宜蘭大學, Taiwan, June 24-26, 2009
+
+Program Committee, The Fourth International Conference on Communications and Networking in China, Xi’an, China, Aug. 26-28, 2009
+
+Program Committee, The 1st International Workshop on Wireless Multimedia Networking and Applications (WMNA), Wrexham, United Kingdom, Sep. 10, 2009
+
+Program Committee, The 5th Workshop on Wireless, Ad Hoc, and Sensor Networks, Sep. 10~11, 2009 (NTHU, Taiwan)
+
+Invited Session Chair of The Fifth International Conference on Intelligent Information Hiding and Multimedia Signal Processing
+
+Program Committee, IEEE Workshop on Networking Intelligent Vehicles and Infrastructures, Honolulu, Hawaii, USA
+
+Program Committee, International Conference on Next Generation Wireless Systems, Oct. 12-14, 2009, Melbourne, Australia
+
+Program Committee, Taiwan Academic Network Conference, Oct. 28-30, 2009, Changhua, Taiwan
+
+Program Committee, The 2nd International Conference on Computer Science and its Applications, Jeju, Korea, December 10-12, 2009
+
+Program Committee, International Workshop on Vehicular Communications, Networks, and Applications, Kaohsiung, Taiwan, Dec 14-16, 2009
+
+Program Committee, The 2009 IEEE Pacific-Rim Conference on Multimedia, Dec. 15-18, 2009, Bangkok, Thailand
+
+Program Committee, The 6th Workshop on Grid Technologies and Applications, Dec. 18-19, Taitung, Taiwan
+
+Program Committee, 7th Annual IEEE Consumer Communications & Networking Conference, Jan. 9-12, 2010, Las Vegas, Nevada USA
+
+Program Committee, International Conference on Information Science and Applications, January 27-29, 2010, Seoul, Korea
+
+Program Committee, The 5th Annual International Wireless Internet Conference, Singapore, March 1-3, 2010  
+
+Program Committee, The 4th International Symposium on Security and Multimodality in Pervasive Environment 2010 (SMPE 2010), Perth, Australia, April 20-23, 2010
+
+Program Committee, The 2010 International Conference on Advanced Science and Technology, June 23~25, 2010, at Sheration Grande Ocean Resort, Miyazaki, Japan
+
+Program Committee, The Fifth International Conference on Communications and Networking in China, Beijing, China, Aug. 25-27, 2010
+
+Program Committee, The 2010 Pacific-Rim Conference on Multimedia, Sep. 21-24, Shanghai, China
+
+Program Committee, The 6th Workshop on Wireless, Ad Hoc, and Sensor Networks, Sep. , 2010, Taiwan
+
+Program Committee, The 6th International Conference on Wireless and Mobile Computing, Networking, and Communications, Niagara Falls, Canada, Oct. 11-13, 2010
+
+Program Committee, The 8th Annual IEEE Consumer Communications and Networking Conference - Multimedia & Entertainment Networking and Services,  Las Vegas, Nevada USA, Jan. 8-11, 2011
+
+Program Committee, The 2011 IEEE 73rd Vehicular Technology Conference (Ad-Hoc and Sensor Networks Track), Budapest, Hungary, May 15-18, 2011.
+
+Program Committee, The 3rd International Workshop on Mobile P2P Network (co-located with 7th International Wireless Communications and Mobile Computing Conference; IWCMC 2011), Istanbul, Turkey, July 5 - 8, 2011
+
+Program Committee, The 7th International Conference on Wireless and Mobile Computing, Networking and Communications, Oct. 10-12, 2011, Shanghai, China
+
+Program Committee, Taiwan Academic Network Conference, Oct. 19-21, 2011, Ilan, Taiwan.
+
+Program Committee, IEEE Consumer Communications and Networking Conference-Multimedia & Entertainment Networking Services, Jan. 14-17, 2012.
+
+Program Committee, IEEE PerCom’12 Workshop: The Eighth International Workshop on Mobile Peer-to-Peer Computing (MP2P 2012), Lugano, Switzerland, March 19-23, 2012.
+
+Program Committee, The 26th IEEE International Conference on Advanced Information Networking and Applications (AINA-2012), Fukuoka, Japan, March 26-29, 2012.
+
+Program Committee, 2012 International Conference on Computer, Information and Telecommunication Systems, Amman, Jordan, May. 13-16, 2012.
+
+Program Committee, International Symposium on Wireless and Pervasive Computing (ISWPC), DALIAN, CHINA, 3rd-5th, 2012.
+
+Program Committee, The 2012 International Conference on Advances in Computing, Communications and Informatics ( (ICACCI-2012), Chennai, India, August 3-5, 2012.
+
+Program Committee, The 8th International Conference on Wireless and Mobile Computing, Networking and Communications,  Barcelona, Spain, October 8-10, 2012.
+
+Program Committee, 2012 Australasian Telecommunication Networks and Applications Conference (ATNAC 2012), Brisbane, Australia, Nov. 7-9, 2012
+
+Program Committee, The 10th IEEE Consumer Communications and Networking Conference (CCNC)-Multimedia Networking & Services & Applications, Las Vegas, Jan. 11-14, 2013.
+
+Program Committee, IEEE PerCom’13 Workshop: The Eighth International Workshop on Mobile Peer-to-Peer Computing (MP2P 2013), San Diego, USA, March 18-22, 2013.
+
+Program Committee, 1st International Workshop on Broadband Wireless Internet and Next Generation Networks Access (BWINA 2013), Barcelona, Spain, March 25-28, 2013.
+
+Program Committee, IEEE Wireless Communications and Networking Conference (WCNC), Shanghai, China, April 7-10, 2013.
+
+Program Committee, The 4th International Conference on Mobile, Ubiquitous, and Intelligent Computing (MUSIC-13), Gwangju, Korea, Sept. 4-6, 2013.
+
+Program Committee, The 2012 IEEE 9th International Conference on Wireless and Mobile Computing, Networking and Communications (WiMob), Lyon, France, Oct. 7-9, 2013.
+
+Technical Program Co-chair, 8th International Symposium on Wireless Pervasive Computing (ISWPC), Taipei, Taiwan, Nov. 20-22, 2013.
+
+Program Committee, CCNC 2014 – Multimedia Networking & Services & Applications, Las Vegas, Nevada, USA, Jan. 10-13, 2014.
+
+Program Committee, IEEE Wireless Communications and Networking Conference Track 2: MAC, Istanbul, Turkey, April 6-9, 2014
+
+Program Committee, IEEE International Conference on Communications IEEE ICC 2014 Mobile and Wireless Networking Symposium, Sydney, Australia, June 10-14, 2014
+
+Program Committee, HPSR 2014 – IEEE 15th International Conference on High Performance Switching and Routing, Vancouver, British Columbia, Canada, July 1-4, 2014
+
+Program Committee,臺灣網際網路研討會 (Tanet 2014), Kaohsiung, Taiwan, Oct. 22-24, 2014.
+
+Program Committee, International Computer Symposium (ICS 2014), Taichung, Taiwan, Dec. 12-14, 2014
+
+Program Committee, 11th International Conference on Heterogeneous Networking for Quality, Reliability, Security and Robustness, Taipei, Taiwan, August 19-20, 2015
+
+Program Committee, The 8th International Conference on Ubi-Media Computing, Colombo, Sri Lanka, August 24-26, 2015.
+
+Technical Program Committee member, 2016 International Conference on Computing, Networking and Communication (ICNC), Kauai, Hawaii, USA, February 15-18, 2016
+
+Program Committee, International Conference on Cyber Security and IT Governance, Ahmedabad, India, March 19, 2016
+
+Program Committee, The 5th International Conference on Computer and Applications (CCA 2016), Jeju, Korea, March 24-26,2016
+
+Reviewer, IEEE ICC 2016 Ad-hoc and Sensor networking Symposium, Kuala Lumpur, Malaysia, 23-27 May 2016
+
+Advisory Committee, International Conference on Smart Trends for Information Technology and Computer Communications, Jaipur, India, August 6-7, 2016
+
+Session Chair and Program Committee,臺灣網際網路研討會 (Tanet 2016), Hualien, Taiwan, Oct. 19-21, 2016
+
+Technical Program Committee member, 2017 International Conference on Computing, Networking and Communication (ICNC), Silicon Valley, USA, Jan. 26-29, 2017
+
+Program Committee,臺灣網際網路研討會 (Tanet 2017), Taichung, Taiwan, Oct. 25-27, 2017
+
+Program Committee,第十三屆無線、隨意及感測網路研討會(WASN2017), Kaohsiung, Taiwan, Aug. 27-28, 2017
+
+主題主編,”無線通訊網路、綠能通訊、量子通訊, 臺灣網際網路研討會(TANET2020), Taipei, Taiwan, Oct. 28-30, 2020
+
+主題主編,”無線通訊網路、綠能通訊、量子通訊, 臺灣網際網路研討會(TANET2021), Taichung, Taiwan, Dec 10-12, 2021
+
+Technical Program Committee member, EAI FoNeS-IoT 2022 – 2nd EAI International Conference on Forthcoming Networks and Sustainability in the IoT Era, Erbil, Iraq, March 1-2, 2022
+
+主題主編,”無線通訊網路、綠能通訊、量子通訊, 臺灣網際網路研討會(TANET2022), Taoyuan, Taiwan, Dec. 15-17, 2022
+
+C. Editorships
+
+    1. Guest Editor, Special issue on “Internet Resource Sharing and Discovery”, Journal of Internet Technology (co-edit with Ruay-Shiung Chang and Der-Jiunn Deng)  deadline: Feb/28/2009
+
+2. Associate Editor, International Journal of Wireless Networks and Broadcasting Technologies (IJWNBT)
+
+3. Guest Editor, Special issue on “Multi-Constraints Algorithms for Heterogeneous Networks”, International Journal of Communication Networks and Distributed Systems (IJCNDS) deadline: July/17/2011
+
+4. Editor, International Journal of Research in Wireless Systems (IJRWS)
+
+5. Editor, International Journal of Advanced Science and Technology (IJAST)
+
+6. Editor, International Journal of Software Engineering and Computer Systems (IJSECS)
+
+D. 論文口試委員
+
+    1.彰師大資工:張恆嘉,葉宇凡,張力偉 (2008/06/13)
+
+2.龍華科大電子工程系:林俊位, 鄭宇哲 (2008/06/24); 周昇毅、陳奕宏(2009/07/14)
+
+3.成功大學工程科學系:侯欣成 (2009/01/09); 許裕峰(2009/06/05)
+
+4.高雄應用科技大學資管系: 吳貫瑋、郭憶萱(2009/06/22) ;余佳玲(2010/02/08)
+
+5.淡江大學電機系:黃博昌、 楊慧玉、蔡佳良(2009/07/15)
+
+6.台北教育大學資訊科學系:丁運如(2009/07/16)
+
+7.高雄應用科技大學電機系: 鄭振華、熊俊魁、黃寶瑋、許紘銘 (2010/07/19)
+
+8.台北教育大學資訊科學系: 莊旻諺 (2011/7/19)
+
+9.龍華科大電子工程研究所:溫哲緯(2013/01/22)
+
+10.台北教育大學資訊科學系: 鄭人慈(2013/06/17)
+
+11.淡江大學電機系:吳銘智、余方翊(2013/06/20)
+
+12.中央大學通訊工程學系:王秀萍、王崇峻、楊文智(2013/07/11)
+
+13.成功大學電機系:林志勳、陳思齊(2013/07/20)
+
+14.崑山科技大學電腦與通訊系:洪偉峻、廖健智(2014/06/30)
+
+15.崑山科技大學電腦與通訊系:林家鵬,周均祐(2015/7/2)
+
+16.台北教育大學資訊科學系:吳石昌,蔡育珊(2015/7/28)
+
+17.成功大學資工系:鍾煒康,梁文宣(2016/1/18)
+
+18.成功大學電腦與通信工程研究所:翁泳聰(博士) 黃聖維(博士)(2016/7/15)
+
+19.台北教育大學資訊科學系:廖中和(2016/7/21)
+
+20.台北教育大學資訊科學系:丁律中(2017/7/17)
+
+21.崑山科技大學電腦與通訊系:陳昱翰、李哲霖、劉沛成(2018/6/29)
+
+22.台北教育大學資訊科學系:陳柏霖、邱建霖(2018/7/19)
+
+23.宜蘭大學資訊工程學系:楊峻智、劉大然(2019/01/10)
+
+24.台北教育大學資訊科學系:黃彥賓(2019/01/21)
+
+25.台北教育大學資訊科學系:陳文毅、鄧伊廷(2019/7/8)
+
+26.台灣科技大學:楊崇義(博士)(2019/7/29)
+
+27.高雄科技大學:黃志昂(博士)(2020/1/13)
+
+28.台北教育大學資訊科學系: 周炫廷、呂驊恂(2020/7/15)
+
+29.台北教育大學資訊科學系: 朱文熙(2021/1/13)
+
+30.金門大學資訊工程學系: 羅宇文(2021/7/7)
+
+31.台北教育大學資訊科學系: 鄧翔之、張睿家(2021/7/19)
+
+32.虎尾科技大學資訊科學系: 陳晉偉、余品源(2021/7/27)
+
+33.嘉義大學資訊工程學系:曾同學 (2022/5/26)
+
+34.金門大學資訊工程學系: 凃奕豪、Lia Astuti(2022/6/20)
+
+35.虎尾科技大學資訊科學系:柯同學(2022/7/7)
+
+36.台北教育大學資訊科學系:楊同學、黃同學(2022/7/13)
+
+37.中興大學資訊科學與工程學系：梁同學、蔡同學、劉同學(2022/8/1)
+
+38.中央大學通訊工程學系:林同學、張同學(2022/8/8) 周同學(2022/8/19)
+
+39.台灣科技大學電機工程研究所:鄒同學、邱同學(2023/6/21)
+
+40.台北教育大學資訊科學系:陳同學、黃同學(2023/7/12)
+
+41.台北教育大學資訊科學系:杭同學(2024/7/1)
+
+42.聯合大學電子工程學系:林同學(2025/7/28)
+
+43.台灣科技大學電機工程研究所:張同學、陳同學、翁同學(2025/7/31)
+
+主持或共同主持之研究計畫 (Projects)
+
+1.國科會計劃---適應性前向錯誤更正在無線網路的影像傳輸研究 (NSC 97-2218-E-507-001) 97/01/01~97/10/31， 計畫主持人
+
+2.國科會計劃---應用於無線網狀網路使用前向糾錯控制技術結合多路徑傳輸機制之研製(NSC 98-2221-E-507-002) 98/08/01~99/07/31，計畫主持人
+
+3.金門無線島---無線網路第三方驗證計劃(中華金廈聯網股份有限公司) 98/10/1~98/12/31，計畫主持人
+
+4.學界協助中小企業科技關懷計劃---陳金福食品股份有限公司線上購物網站建置計劃 98/11~99/04，計畫主持人
+
+5.國科會計劃---適應性前向錯誤更正在無線感知網路的影像傳輸研究(NSC 99-2221-E-507 -001) 99/8/1~100/7/31，計畫主持人
+
+6.學界協助中小企業科技關懷計劃---馬家麵線線上購物網站建置計畫 99/07~99/12，計畫主持人
+
+7.教育部:資訊軟體人才培育推動中心網路資源推廣分項計畫(子計畫2-2：自由軟體教材開發- 「程式設計」課程) 99/4/1~100/3/31，子計畫主持人  (教材下載)
+
+8.教育部:資訊軟體人才培育推動中心網路資源推廣分項計畫(子計畫2-2：自由軟體教材開發- 「網路程式設計」課程) 100/4/1~101/3/31，子計畫主持人 (教材下載)
+
+9.國科會計劃---在無線網路多重傳輸速率環境下資源分享不均問題之研究(NSC 100-2221-E-507 -004) 100/8/1~101/7/31，計畫主持人
+
+10.教育部101年度資訊軟體人才培育推廣計畫:A類,雲端計算與服務領域(101/2/1~102/1/31) ，協同主持人
+
+11.教育部102年度資訊軟體人才培育推廣計畫:A類,雲端計算與服務領域(102/2/1~103/1/31)，協同主持人
+
+12.國科會計劃---基礎架構式無線區域網路環境下之點對點視訊傳輸效能增進方法(NSC 101-2221-E-507 -005) 101/8/1~102/7/31，計畫主持人
+
+13.思銳科技股份有限公司，產學合作案---"網路效能模擬分析-實驗與教案設計"研究計劃，101/7/1~101/12/31，協同主持人
+
+14..國科會計劃—在具有遺失率的通道上針對串流影像的動態式多層級資料前向糾錯方法(NSC 102-2221-E-507-003) 102/8/1~103/7/31，計畫主持人
+
+15. 工業技術研究院計劃---物聯網品質保證技術之研究，102/1/1~102/12/31，計劃連絡人
+
+16. 國科會計劃—在無線隨意網路中以法團為基礎之適應性省電機制的研究 (NSC 102-2221-E-152-004) 102/8/1~103/7/31，共同主持人
+
+17. 工業技術研究院特聘研究 (103/3/1~103/12/31):1.協助檢視網路通訊協定之設計效能模擬程式開發及提供專業建議 2.協助中心規劃未來科專計畫及提供專業建議
+
+18. 科技部計劃—在多跳無線網路環境下運用跨層方式提升影像傳輸品質之研究(MOST 103-2221-E507-001) 103/8/1~104/7/31，計畫主持人
+
+19. 工業技術研究院特聘研究 (104/1/1~104/12/31)
+
+20. 科技部計劃—在軟體定義網路下運用非重要資料優先繞路方式提升影像傳輸品質之研究(MOST 104-2221-E-507-002-) 104/8/1-105/7/31，計畫主持人
+
+21. 工業技術研究院特聘研究 (105/1/1~105/12/31)
+
+22. 科技部計劃—在軟體定義網路下運用多路徑傳輸提升影像傳輸品質之研究(MOST 105-2221-E-507-003-) 105/8/1-106/7/31，計畫主持人
+
+23. 工業技術研究院特聘研究 (106/1/1~106/12/31)
+
+24. 科技部計劃—在有線與無線之軟體定義網路下提供端點到端點傳輸服務品質之研究(MOST 106-2221-E-507-002-) 106/8/1/~107/7/31，計畫主持人
+
+25. 科技部計劃—在P4網路中使用深度封包檢測以達到負載均衡之研究(MOST 108-2221-E-507-005-) 108/8/1-109/7/31，計畫主持人
+
+26. 工業技術研究院特聘研究 (109/1/1~109/12/31)
+
+27. 科技部計劃—在p4網路環境使用強化學習與邊緣運算以提升視訊串流品質之研究(MOST 110-2221-E-507-001 -) 110/8/1-111/7/31，計畫主持人
+
+28. 國科會計畫-使用深入強化學習最佳化wifi競爭視窗以提升系統效能和提供傳輸服務品質之研究(NSTC 112-2221-E-507-002-) 112/8/1-113/7/31，計畫主持人
+
+29. 國科會計畫-基於流量需求的深度強化學習頻寬感知SDN路由之研究(NSTC 113-2221-E-507-005-) 113/8/1-114/7/31，計畫主持人
+
+30. 國科會計畫-基於大型語言模型開發智能網路運維系統(NSTC 114-2221-E-507 -002 -MY2) 114/8/1-116/7/31，計畫主持人
+
+開授課程 (Courses)
+
+95學年度第二學期
+
+1. 數位邏輯 2.系統程式 3.物件導向程式設計 4.資料庫設計與應用
+
+96學年度第一學期
+
+1. 程式設計 2.資料結構 3.無線網路概論 4.網路規劃實務
+
+96學年度第二學期
+
+    1.物件導向程式設計 2.資訊網路 3.高等無線網路
+
+97學年度第一學期
+
+    1.程式設計 2. 無線網路概論 3.計算機網路
+
+97學年度第二學期
+
+     1. 物件導向程式設計 2.資訊網路3.網路模擬與分析
+
+98學年度第一學期
+
+     1.程式設計 2. 無線網路概論 3.計算機網路
+
+98學年度第二學期
+
+     1. 程式設計進階 2.資訊網路3.網路模擬與分析
+
+99學年度第一學期
+
+     1.程式設計 2. 無線網路概論 3.計算機網路 4.高等無線網路
+
+99學年度第二學期
+
+    1. 程式設計進階 2.資訊網路3.網路模擬與分析 4.Linux網路作業系統 5.科技論文導讀與寫作
+
+100學年度第一學期
+
+    1.程式設計 2. TCP/IP協定 3.伺服器架設 4. 無線網路概論 5.計算機網路 6.服務教育
+
+100學年度第二學期
+
+    1. 程式設計進階 2.資訊網路3.網路模擬與分析 4.Linux網路作業系統 5.服務教育
+
+101學年度第一學期
+
+  1.程式設計 2.TCP/IP協定 3.伺服器架設 4無線網路
+
+101 學年度第二學期
+
+   1. 程式設計進階 2.資訊網路3. Linux網路作業系統
+
+102 學年度第一學期
+
+   1.程式設計 2.TCP/IP協定 3.伺服器架設
+
+102學年度第二學期
+
+   1. 程式設計進階 2.資訊網路3. Linux網路作業系統
+
+103 學年度第一學期
+
+   1.程式設計 2.TCP/IP協定 3.伺服器架設 4.行動網路
+
+103學年度第二學期
+
+   1. 程式設計進階 2.資訊網路3. Linux網路作業系統
+
+104學年度第一學期:
+
+1.TCP/IP協定 2.伺服器架設 3. 無線網路
+
+104學年度第二學期
+
+   1.資訊網路3. Linux網路作業系統 3.網路模擬與分析 4.計算機網路
+
+105學年度第一學期:
+
+   1.TCP/IP協定 2.伺服器架設 3. 無線網路 4.行動網路
+
+105學年度第二學期:
+
+   1.資訊網路2.Linux網路作業系統 3.Linux系統自動化運維 4.計算機網路
+
+106學年度第一學期:
+
+   1.TCP/IP協定 2.伺服器架設 3. 無線網路
+
+106學年度第二學期:
+
+   1.資訊網路2.Linux網路作業系統 3.Linux系統自動化運維 4.網路模擬與分析
+
+107學年度第一學期:
+
+   1.TCP/IP協定 2.伺服器架設 3. 無線網路4.計算機網路
+
+107學年度第二學期:
+
+   1.資訊網路2.Linux網路作業系統 3.Linux系統自動化運維 4.網路模擬與分析
+
+108學年度第一學期: (學生筆記:林柏億 吳凱文 凃奕豪 外籍生)
+
+1.TCP/IP協定 2.伺服器架設 3. 無線網路4.計算機網路
+
+108學年度第二學期:
+
+1.資訊網路2.Linux網路作業系統 3.Linux系統自動化運維 4.網路模擬與分析 洪晟峯 學生筆記
+
+109學年度第一學期:
+
+1.TCP/IP協定 2.伺服器架設 3.雲端通訊整合實務 4.計算機網路 (Docker&K8S筆記: 凃同學,林同學, CISCO筆記:黃同學, 印尼學生筆記)
+
+109 學年第二學期: Linux筆記:印尼學生筆記,傅同學,徐同學, 資訊網路筆記:徐同學 魏同學 外籍學生:周同學 網路模擬與分析筆記:印尼學生 林同學
+
+   1.資訊網路2.Linux網路作業系統 3.Linux系統自動化運維 4.網路模擬與分析
+
+110學年度第一學期:
+
+  1.TCP/IP協定 2.伺服器架設 3.雲端通訊整合實務 (施同學筆記) 4.計算機網路 (施同學筆記)
+
+110學年度第二學期:
+
+  1.資訊網路(陳同學筆記,黃同學筆記) 2.Linux網路作業系統(蔡同學筆記,徐同學筆記) 3.Linux系統自動化運維(魏同學筆記,傅同學筆記) 4.網路模擬與分析(吳同學,劉同學)
+
+111學年度第一學期:
+
+  1.TCP/IP協定(李同學筆記 黃同學筆記) 2.伺服器架設(魏同學筆記,蔡同學筆記) 3.雲端通訊整合實務(陳同學筆記,林同學筆記) 4.計算機網路(陳同學筆記,陳同學筆記)
+
+111學年度第二學期:
+
+  1.資訊網路(范同學,王同學) 2.Linux網路作業系統(林同學,黃同學) 3.Linux系統自動化運維(蔡同學,魏同學)
+
+112學年度第一學期:
+
+  1.TCP/IP協定(胡同學) 2.伺服器架設(李同學 黃同學 侯同學) 3.雲端通訊整合實務(蔡同學 徐同學 侯同學)
+
+112學年第二學期:
+
+1.資訊網路(陳同學)  2.Linux網路作業系統(翁同學,董同學)  3.Linux系統自動化運維(林同學,黃同學)
+
+113學年度第一學期:
+
+1.TCP/IP協定(黃同學) 2.伺服器架設(劉同學 范同學 劉同學)3. 計算機網路(周同學 賴同學 林同學)
+
+113學年第二學期:
+
+1.資訊網路2.Linux網路作業系統(黃同學) 3.Linux系統自動化運維(劉同學 劉同學)
+
+114學年第一學期: (教授休假)
+
+ 
+
+指導碩士學生: 魏志成(97/09~99/01) 黃志昂(98/09~100/01) 鄭志豪(99/09~102/07) 江依柔(105/09~107/07) 蔡文祥(105/09-107/07) 陳書晨(105/09-107/07) 許世榮 (106/09-108/07) 羅宇文(108/09-110/07) 凃奕豪(109/09-111/07) Lia Astuti(109/09-111/07) 林恩成(110/09-112/07)
+
+指導大學部學生: 周名初(~2025/7)
+
+ 
+
+ 
+
+[Call For Paper]
+
+EDAS
+
+IARIA
+
+IEEE Computer Society
+
+IEEE Communications Society
+
+IEEE Vehicular Technology Society
+
+IEEE Broadcast Technology Society
+
+Network Conference Statistics (accept rate)
+
+International Association of Science and Technology for Development (IASTED)
+
+International Joint Conference on e-Business and Telecommunications (ICETE)
+
+Institution of Electronics and Telecommunication Engineers (IETE)
+
+Lecture Notes in Computer Science (LNCS)
+
+All Conferences.com
+
+WiKiCFP (CFP on Wireless)
+
+WiKiCFP (CFP on Multimedia)
+
+TWWS研討會搜尋系統
+
+ 
+
+[Journal]
+
+Computer Networks
+
+Computer Communications
+
+Journal of Communications and Networks
+
+IEICE Transactions on Communications
+
+IET Communications 
+
+IEEE Communications Letters
+
+Electronics Letters
+
+Wiley: International Journal of Communcation Systems
+
+Telecommunication Systems
+
+European Transactions on Emerging Telecommunications Technologies
+
+EURASIP Journal on Wireless Communications and Networking
+
+Journal of High Speed Networks
+
+ANNALES DES TELECOMMUNICATIONS-ANNALS OF TELECOMMUNICATIONS
+
+Computer Communication Review
+
+KSII Transactions on Internet and Information Systems (TIIS)
+
+ 
+
+Signal Processing: Image Communication 
+
+Multimedia Systems
+
+Multimedia Tools and Applications
+
+JOURNAL OF VISUAL COMMUNICATION AND IMAGE REPRESENTATION
+
+IEEE TRANSACTIONS ON MULTIMEDIA
+
+IEEE TRANSACTIONS ON BROADCASTING
+
+ACM Transactions on Multimedia Computing Communications and Applications
+
+Journal of Mobile Multimedia (JMM)
+
+ 
+
+Wireless Networks
+
+Wireless Communications and Mobile Computing
+
+Wireless Personal Communications
+
+ 
+
+Networks
+
+IEEE Potentials Magazine
+
+IEEE Internet Computing
+
+IEEE Wireless Communications
+
+IEEE Communications Magazine
+
+Computer
+
+Computer Journal
+
+Journal of Network and Computer Applications
+
+Journal of Network and Systems Management
+
+Journal of The Chinese Institute of Engineers (中國工程學刊)
+
+Journal of Information Science and Engineering
+
+Journal of Research and Practice in Information Technology
+
+Journal of Computer and System Sciences
+
+Information Sciences
+
+European Journal of Information Systems
+
+International Journal of Innovative Computing, Information and Control (IJICIC)
+
+Journal of Digital Information Management  
+
+Journal of Internet Technology (JIT)
+
+International Journal of Electrical Engineering (電機工程學刊)
+
+Global Engineering, Science, and Technology Society (GESTS)
+
+World Scientific and Engineering Academy and Society (WSEAS)
+
+The Institution of Electronics and Telecommunication Engineers (IETE)
+
+Advanced Science Letters
+
+Tamkang Journal of Science and Engineering (EI,淡江理工學刊)
+
+Chung Cheng Ling Hsueh Pao/Journal of Chung Cheng Institute of Technology  (EI,中正嶺學報)
+
+Journal of Computers (EI)
+
+ 
+
+[SCI，EI]
+
+Ei Engineering Village 2 (EI)
+
+Journal Citation Reports on Web (SCI impact factor)
+
+如何查找期刊的IF值及領域排名(Rank)?
+
+ 
+
+[Paper Search]
+
+CiteSeer
+
+ACM Portal
+
+IEEE Xplore
+
+台灣博碩士論文知識加值系統
+
+CEPS中文電子期刊服務
+
+中國科技論文在線
+
+ 
+
+[網站]
+
+1.南台知識分享平台
+
+2.Computer Security Student (CSS)
+
+3.Hacking: Exploits and Vulnerabilities
+
+ 
+
+[程式設計]
+
+1.大學程式能力檢定 (CPE)
+
+2.線上協同學習平台 (E-tutor)
+
+3.C語言經典範例100個
+
+4.C語言考題&C的解題
+
+5.高等C語言
+
+6.Dive into Python
+
+7.zetcode
+
+8.瘋狂程設
+
+ 
+
+[Linux]
+
+鳥哥的Linux私房菜-基礎學習篇(第三版)
+
+Ubuntu:Linux使用教程
+
+黑馬-Ubuntu教程
+
+嵌入式學習Linux驅動
+
+ 
+
+[My website]
+
+1.NS2
+
+2.old_NS2 (backup of NS2  Learning Guide)
+
+3.QualNet
+
+4.NCTUNS(EstiNet)
+
+5.Wireless
+
+6.Software Defined Network(SDN, openflow, mininet, mininet-wifi, Pox, Pyretic)
+
+7. My Youtube Channel
+
+8. NS3 Learning Guide 
+
+跳到主要內容區
+
+資訊工程學系
+
+Department of Computer Science
+
+and Information Engineering
+
+☰ 主選單
+
+回首頁
+回金門大學網站
+English
+關鍵字
+ 
+X
+
+首頁 教師部落格
+陳鍾誠
+發布日期 : 2023-04-23
+個人資料
+
+
+姓名： 陳鍾誠
+職稱： 助理教授
+電子郵件： ccc@nqu.edu.tw
+聯絡電話： (082)313534
+個人網站： https://ccc.programmermedia.org/
+學歷
+
+
+台灣大學資訊工程所博士 (1997.09 - 2002.07)
+台灣大學資訊工程所碩士 (1992.09 - 1994.06)
+交通大學資訊科學系學士 (1988.09 - 1992.06)
+專長
+
+
+程式設計，開放原始碼，網站設計，JavaScript / Python / C
+經歷
+
+
+程式人雜誌編輯 2013-2015
+松下(PTL)網路實驗室 研發工程師 (2002/02 - 2003/07)
+加旭科技 1998/08 - 2000/03 程式設計顧問
+江川科技 - 1992/03-1993/02 程式設計師
+著作、論文:
+
+
+文章教材
+
+新版網誌 -- https://medium.com/@ccckmit
+個人網站 -- https://ccc.programmermedia.org/
+舊版網誌 -- http://ccckmit.wikidot.com/
+
+程式部分
+授課程式 -- https://gitlab.com/ccc109/
+授課程式 -- https://github.com/ccccourse
+個人程式 -- https://github.com/ccckmit
+
+影音教材
+YouTube -- https://www.youtube.com/user/ccckmit
+
+論文部分
+
+
+[2009] 林伯陽, 陳鍾誠, 採用失敗後跳躍的策略以改良爬山演算法, 第八屆離島資訊技術與應用研討會, 2009/5/22 於金門技術學院
+[2009] Chyan Yang, Hsien-Jyh Liao, Chung-Chen Chen, Implementing digital copyright on the internet through an enhanced creative common licence protocol, (pp. 20-30), The Electronic Library, Volume 27 Issue 1, 2009
+[2009] 廖先志、陳鍾誠 CCFE:一種內嵌於檔名中的創作共用授權表達法, (未投稿論文, 上篇的中文版)
+[2006] 楊千、廖先志、陳鍾誠 論搜尋引擎以程式在網路上自動抓取資料所可能面臨的法律問題, 第十屆全國科技法律研討會, 國立交通大學法律研究所, 新竹, 2006 年 11月.
+[2006] 楊千、廖先志、陳鍾誠 從我國法制論 GPL 授權契約 – 兼論第3版草案之適用, 台灣科技法與政策論叢, 國立清華大學生物倫理與法律研究中心出版, 第三卷, 第三期, 2006年9月
+[2006] 陳鍾誠、廖先志 開放原始碼運動的過去、現在與未來, 國立金門技術學院學報, 第二期, 2006 年 2 月.
+[2003] 陳鍾誠、高成炎, 一種抽取並組織網路上基因相關資料的方法,
+[2003] Yuh-Pyng Shieh, Chung-Chen Chen, Jieh Hsiang, A Reasoning Framework for Heterogeneous XML, International Conference on Information Technology: Research and Education (ITRE2003), Newark, New Jersey, USA, October 10-13, 2003, pp. 404-411
+[2002] 陳鍾誠, 基於欄位填充機制的XML文件檢索方法, 國立台灣大學資訊工程所 2002 年博士論文, 指導教授-項潔.
+[1999] 陳鍾誠、許聞廉 A Document Similarity Measurement without Dictionaries, Proceedings of The Forth International Workshop on Information Retrieval with Asian Languages (IRAL 99) 1999/11/12 Academia Sinica, Taipei, Taiwan (中央研究院)
+[1998] 陳鍾誠、許聞廉 結合統計與規則的多層次中文斷詞系統, Proceeding of ROC Computational Linguistics Society XI, 1998, 於新竹交通大學
+[1995] 洪炯宗、陳鍾誠、高成炎 A Genetic Approach to Decrypt Cipher Text, 第五屆全國資訊安全會議論文集 , 1995/5/5, 於台灣工業技術學院
+[1994] 陳鍾誠 應用退火遺傳演算法解積體電路平面設計問題及其他應用 (An Annealing Genetic Approach to VLSI Floorplan Design Problem and Other Applications, 國立台灣大學資訊工程所 碩士論文.
+
+服務與榮譽
+
+
+96 年金門技術學院優良教師
+93 年金門技術學院資工系主任
+瀏覽數:5424
+友善列印
+Line Facebook twitter
+
+傳真：(082)313529
+電話：(082)313531
+意見信箱：csie@email.nqu.edu.tw
+地址：金門縣金寧鄉大學路一號
+
+跳到主要內容區
+
+資訊工程學系
+
+Department of Computer Science
+
+and Information Engineering
+
+☰ 主選單
+
+回首頁
+回金門大學網站
+English
+關鍵字
+ 
+X
+
+首頁 教師部落格
+趙于翔
+發布日期 : 2023-04-23
+個人資料
+
+
+姓名：趙于翔
+職稱：副教授
+電子郵件：yxzhao@nqu.edu.tw
+聯絡電話：(082)313537
+個人網站：yxzhao.azurewebsites.net
+學歷
+
+ 
+2002/09~2007/06
+Ph.D., Department of Computer Science and Information Engineering, National Central University, R.O.C.
+2000/09~2002/06
+M.S., Department of Electrical Engineering, Tamkang University, R.O.C.
+1996/09~2000/06
+B.S., Department of Electrical Engineering, Tamkang University, R.O.C.
+專長
+
+ 
+機器學習 (Machine Learning)
+深度學習 (Deep Learning)
+計算式智慧 (Computational Intelligence)
+影像處理 (Image Processing)
+擴增實境與虛擬實境應用 (Augmented Reality and Virtual Reality)
+人機互動設計 (Human-Computer Interaction)
+經歷
+
+ 
+2019/08~迄今
+主任，資訊工程學系，國立金門大學
+2017/08~迄今
+副教授，資訊工程學系，國立金門大學
+2017/08~2019/07
+組長，計算機與網路中心軟體系統組，國立金門大學
+2010/08~2017/07
+助理教授，資訊工程學系，國立金門大學
+2013/08~2014/07
+主任，計算機與網路中心，國立金門大學
+2010/08~2011/07
+組長，圖書資訊處軟體系統組，國立金門大學
+2009/06~2012/12
+助理教授級研究員，財團法人中華工商研究院
+2009/09~2010/07
+主任，人本智慧中心，大華技術學院
+2009/02~2010/07
+助理教授，資訊工程學系，大華技術學院
+研究計畫
+
+ 
+國科會-指導大專專題研究計畫
+魏仲彥，112-2813-C-507-005-E，以深度學習與智慧問診系統為基礎之AR穴位互動顯示智慧鏡設計，112/07/01~113/02/28
+科技部-專題研究計畫(一般研究計畫)
+主持人，111-2221-E-507-006-，以實例感知生成對抗網路為基礎之閩式建築風格轉換研究，111/08/01~112/07/31
+科技部-專題研究計畫(大眾科學教育計畫)
+共同主持人，111-2515-S-507-001-，科普活動：機器人快樂學--離島偏鄉機器人科技與coding程式教育(主題三)，111/08/01~112/07/31
+產學合作-金門縣政府-政府標案
+主持人，111年度金門縣公共自行車租賃系統維護管理委託服務工作，111/03/17~111/12/31
+科技部-專題研究計畫(大眾科學教育計畫)
+共同主持人，110-2515-S-507-001-，科普活動：我是創客—應用Neuron神經元電控積木以提升離島金門地區學生科學學習動機與創意設計(主題三)，110/08/01~111/07/31
+產學合作-山外一條根青草行-金門縣政府地方產業創新研發推動計畫(金門地方型SBIR)
+主持人，結合人體偵測技術之互動體驗打造一條根蒸氣足浴室及一條根教育互動室，110/07/01~111/03/31
+科技部-專題研究計畫(大眾科學教育計畫)
+共同主持人，109-2515-S-507-001-，科普活動：與AI做朋友--人工智慧機器人與Scratch 3程式設計(主題一)，109/08/01~110/07/31
+科技部-專題研究計畫(大眾科學教育計畫)
+共同主持人，108-2515-S-507-002-，科普活動：金門縣全民科學嘉年華（主題三），108/09/01~109/08/31
+科技部-專題研究計畫(一般研究計畫)
+主持人，108-2221-E-507-009-，以深度卷積生成對抗網路為基礎的金門風獅爺古蹟修復研究，108/08/01~109/07/31
+科技部-專題研究計畫(一般研究計畫)
+共同主持人，108-2221-E-507-002-，應用人工智慧技術提升二維地電阻影像解析研究，108/08/01~109/07/31
+科技部-專題研究計畫(大眾科學教育計畫)
+共同主持人，107-2515-S-507-002-，科普活動：生活中的科學－科普活動推廣（主題三），107/09/01~108/11/30
+教育部-資通訊軟體創新人才推升推廣計畫，智慧終端與人機互動-B類
+主持人，107/02/01~108/01/31
+科技部-專題研究計畫(規劃推動補助計畫)
+共同主持人，106-2634-F-038-002-，臺北醫學大學醫療體系巨量影像資料庫建立與應用(1/3)，106/11/01~107/11/30
+教育部-資通訊軟體創新人才推升推廣計畫，智慧終端與人機互動-B類
+主持人，106/02/01~107/01/31
+教育部-提升校園行動應用服務研發及內容設計人才培育計畫
+協同主持人，105/05/18~106/08/31
+國科會-指導大專專題研究計畫
+柯勝富，104-2815-C-507-007-E，互動式心肺復甦術教學輔具實作，104/07/01~105/02/28
+國科會-指導大專專題研究計畫
+李南熺，103-2815-C-507-011-E，數位化智慧型水幕設計，103/07/01~104/02/28
+國科會-能源國家型科技計畫智慧電網與讀表主軸計畫
+共同主持人，NSC 102-3113-P-006-015-，智慧家庭(建築)電能管理先導型計畫(3/3)，102/01/01~102/12/31
+國科會-能源國家型科技計畫智慧電網與讀表主軸計畫
+共同主持人，NSC 101-3113-P-006-020-，智慧家庭(建築)電能管理先導型計畫(2/3)，101/01/01~101/12/31
+國科會-專題研究計畫
+共同主持人，NSC 100-2221-E-032-069-，結合特徵排序的改良式浮動序列特徵擷取演算法，100/08/01~101/07/31
+國科會-能源國家型科技計畫智慧電網與讀表主軸計畫
+共同主持人，NSC 99-3113-P-006-004-，智慧家庭(建築)電能管理先導型計畫(1/3)，99/12/01~100/12/31
+國科會-專題研究計畫(產學合作研究計畫-應用型)
+共同主持人，NSC 99-2622-E-032-004-CC3，運用於自行車之車行記錄器之手機軟體研製，99/11/01~100/10/31
+國科會-指導大專專題研究計畫
+甘旻爵，NSC 99-2815-C-233-001-E，智慧型自行車即時資訊回饋系統，99/07/01~100/02/28
+國科會-新進人員研究計畫
+主持人，NSC 98-2218-E-233-002-，以最佳化為基礎之直方圖等化方法，98/09/01~99/07/31
+國科會-指導大專專題研究計畫
+陳永哲，NSC 98-2815-C-233-003-E，以光纖手套實作之可攜式虛擬鋼琴，98/07/01~99/02/28
+學術服務
+
+ 
+2023	Program Committee Chair, The 36th IPPR Conference on Computer Vision, Graphics, and Image Processing (CVGIP).
+2021	議程委員，2021離島資訊技術與應用研討會 (ITAOI 2021)。
+2020	議程委員，2020離島資訊技術與應用研討會 (ITAOI 2020)。
+2018	議程委員，2018臺灣網際網路研討會 (TANET 2018)。
+2017	議程主席，2017離島資訊技術與應用研討會 (ITAOI 2017)。
+2016	評審，全國大專校院軟體創作競賽，國立中央大學資訊工程學系、國立中央大學軟體研究中心、國立成功大學資訊工程學系主辦，教育部資訊及科技教育司指導。
+2015	Chair of the Conference Affairs, The 9th Cross-Strait Conference on Information Science and Technology (CSCIST 2015).
+2015	Program Committee, The 5th International Conference on Advanced Communications and Computation (INFOCOMP 2015).
+2015	Program Committee, The 39th Annual International Computers, Software & Applications Conference (COMPSAC 2015).
+2015	Program Committee, The 3rd ScienceOne International Conference on Information Technology (ICIT 2015).
+2014	Program Committee, The 8th Cross-Strait Conference on Information Science and Technology (CSCIST 2014).
+2014	Program Committee, The 4th International Conference on Advanced Communications and Computation (INFOCOMP 2014).
+2014	Program Committee, The 2014 National Symposium on System Science and Engineering (NSSSE 2014).
+2012	評審，網路通訊軟體與創意運用競賽，中央大學資工系與教育部資通訊教育改進計畫合辦。
+2011	評審，網路通訊軟體與創意運用競賽，中央大學資工系與教育部資通訊教育改進計畫合辦。
+2010	執行秘書，網路通訊軟體與創意運用競賽，中央大學資工系與教育部資通訊教育改進計畫合辦。
+2009	規劃委員，國科會工程處人性科技學門。
+2008	執行秘書，網路通訊軟體與創意運用競賽，中央大學資工系與教育部資通訊教育改進計畫合辦。
+競賽得獎
+
+ 
+2021	指導國立金門大學學生，傅于軒、陳昱瑛、張家羱、陳淳、林妍汝、魏美亞同學，以“互動式嬰幼兒心肺復甦教學輔具設計”參加2021第26屆全國大專校院資訊應用服務創新競賽並獲得PR1產學合作組第三名。
+2020	指導國立金門大學學生，吳家瑄同學，以“古蹟修復-應用於金門風獅爺”參加2020第25屆全國大專校院資訊應用服務創新競賽並獲得Open Data創意應用開發組佳作。
+2020	指導國立金門大學學生，李彥霆、張皓評、陳羿勳、林家齊同學，以“結合擴增實境與深度學習之金門觀光導覽APP設計”參加2020第25屆全國大專校院資訊應用服務創新競賽並獲得PR2產學合作組佳作。
+2020	指導國立金門大學學生，李彥霆、張皓評、陳羿勳、林家齊同學，以“結合擴增實境與深度學習之金門觀光導覽APP設計”參加2020全國大專院校產學創新實作競賽並獲得佳作。
+2020	指導國立金門大學學生，胡李駿、李智傑、郭宗翰、吳云濤、何呈頌同學，以“浴血古寧頭”參加2020全國大專院校產學創新實作競賽並獲得佳作。
+2020	指導國立金門大學學生，林家齊、傅于軒、林妍汝同學，以“以LoRa為基礎之失之老人定位系統”參加2020金門創新創業競賽並獲得季軍。
+2020	指導國立金門大學學生，蘇家禹、馮志揚、陳憲億、林家齊、傅于軒同學，以“以LoRa為基礎之失之老人定位系統”參加2020第15屆戰國策全國創新創業競賽並獲得企業指定類-金門產業組優選銀獎。
+2018	指導國立金門大學學生，吳家瑄、錢建翔同學，以“互動式節奏訓練輔助裝置”參加2018全國大專校院軟體創作競賽並獲得智慧感知與互動多媒體組銀牌。
+2018	指導國立金門大學學生，葉詳穎、趙明楷、鄭力元、張嘉鈞同學，以“虛擬實境之歷史互動學習體驗裝置”參加2018年智慧終端與人機互動軟體創作專題競賽並獲得佳作。
+2017	指導國立金門大學學生，南啟文、許世榮、陳政銘同學，以“戶外團隊運動管理裝置”參加2017創新創業團隊企劃競賽並獲得優等獎。
+2017	指導國立金門大學學生，張嘉鈞、葉詳穎、鄭力元、趙明楷、湯林緯洋同學，以“浴血古寧頭”參加2017創新創業團隊企劃競賽並獲得佳作。
+2017	指導國立金門大學學生，吳家瑄、錢建翔、林翠玲、趙仲庭同學，以“小小指揮家”參加2017創新創業團隊企劃競賽並獲得佳作。
+2017	指導國立金門大學學生，南啟文、許世榮同學，以“戶外團隊運動管理裝置”參加國立金門大學106年提升校園行動應用服務研發及內容設計人才培育計畫並獲得第一名。
+2017	指導國立金門大學學生，葉詳穎、湯林緯洋同學，以“古寧頭戰史虛擬實境體驗學習”參加國立金門大學106年提升校園行動應用服務研發及內容設計人才培育計畫並獲得第三名。
+2017	指導國立金門大學學生，張嘉鈞、鄭力元、趙明楷同學，以“AeroliteRush”參加國立金門大學106年提升校園行動應用服務研發及內容設計人才培育計畫並獲得佳作。
+2017	指導國立金門大學學生，柯勝富、陳昌暐、胡亮丞、楊詔羽同學，以“互動式心肺復甦術教學輔具”參加2017第22屆全國大專校院資訊應用服務創新競賽並獲得校園4G行動應用服務組-大專校院第二名。
+2017	指導國立金門大學學生，柯勝富、陳昌暐、胡亮丞、楊詔羽同學，以“互動式心肺復甦術教學輔具”參加2017第22屆全國大專校院資訊應用服務創新競賽並獲得PR2產學合作組二第三名。
+2017	指導國立淡江大學學生，楊濤任、陳偉安、朱永龍、陳蕙如、謝汯恩同學，以“觸覺點字學習系統”參加2017年通訊大賽並獲得聯發科技物聯網開發競賽7697應用獎。
+2017	指導國立金門大學學生，呂政憲同學，以“體適能訓練管理裝置”參加2017年通訊大賽並獲得聯發科技物聯網開發競賽佳作。
+2017	指導國立金門大學學生，南啟文、陳政銘、許世榮同學，以“戶外團隊運動管理裝置”參加2017年通訊大賽並獲得聯發科技物聯網開發競賽佳作。
+2017	指導國立金門大學學生，呂政憲同學，以“體適能訓練管理裝置”參加2017年智慧終端與人機互動軟體創作專題競賽獲得第二名。
+2016	指導國立金門大學學生，陳政銘、南啟文、李登榮、許世榮同學，以“智慧登山隊管理系統設計”參加2016年105學年度全國雲端計算與服務專題成果競賽獲得第三名。
+2016	指導國立金門大學學生，南啟文、李登榮、陳政銘、許世榮、邱奕皓同學，以“智慧登山隊管理系統設計”參加2016全國大專院校產學創新實作競賽獲得資訊與電子組傑出獎。
+2016	指導國立金門大學學生，陳昌暐、胡亮丞、楊詔羽、柯勝富同學，以“互動式心肺復甦術教學輔具實作”參加2016年通訊大賽並獲得智慧城市應用服務設計競賽企業獎。
+2016	指導國立金門大學學生，陳政銘、南啟文、李登榮、許世榮同學，以“智慧登山隊管理系統”參加2016年105年度全國微電腦應用系統設計創作競賽並獲得智慧生活類值得注目獎。
+2015	指導國立金門大學學生，陳昌暐、柯勝富、胡亮丞、楊詔羽同學，以“互動式CPR教學輔具實作”參加2015年104年度全國微電腦應用系統設計創作競賽並獲得智慧生活類第一名。
+2015	指導國立金門大學學生，陳昌暐、柯勝富、胡亮丞同學，參加2015年第39次ITSA線上程式設計競賽並獲得績優團隊。
+2014	指導國立金門大學學生，黃鈴月、段君妍、王佩玉、朱雅璿同學，參加2014亞洲智慧型機器人大賽─機器人賽跑項目並獲得第三名。
+2013	指導國立金門大學學生，黃鈴月、朱雅璿、段君妍、王佩玉同學，參加2013亞洲機器人運動競技大賽─機器人賽跑項目並獲得佳作。
+2013	指導國立金門大學學生，吳柏楓、張瑞玲、葉育萍同學，以“中國傳統節日互動式有聲電子書”參加2013海峽兩岸大學生文化與創意設計大賽並獲得優秀獎與最佳作品獎。
+2013	指導國立金門大學學生，王崇峻、王銘瑜、楊叔倫、鄭帆成、陳宥銓同學，以“OMG-功夫學貓”參加2013海峽兩岸大學生文化與創意設計大賽並獲得入圍獎與最佳作品獎。
+2013	指導國立金門大學學生，周晉安、顏祺信、鄭帆成、李錫昱、許景銘、廖柏舜同學，以“自行車行車紀錄器”參加2013海峽兩岸大學生文化與創意設計大賽並獲得入圍獎。
+2013	指導國立金門大學學生，王崇峻、王銘榆、楊叔倫、許景銘同學，參加2013年全國智慧型機器人大賽─機器人賽跑項目並獲得第二名。
+2013	指導國立金門大學學生，李錫昱、鄭帆成、陳宥銓、王銘榆同學，參加2013年全國智慧型機器人大賽─機器人賽跑項目並獲得佳作。
+2012	指導國立金門大學學生，王崇峻、鄭帆成、楊叔倫、陳宥銓同學，參加101年台灣區機器人運動競技大賽─機器人賽跑項目並獲得佳作。
+2012	指導國立金門大學學生，王建鈞、陳煜珊、游家昇、李侑儒同學，參加101年台灣區機器人運動競技大賽─機器人賽跑項目並獲得佳作。
+2012	指導淡江大學學生，簡又翔、陳奐侖、朱永龍、呂嘉仁同學，以“中華文化Q&A”參加2012海峽兩岸大學生文化與創意設計大賽並獲得優秀獎。
+2012	指導國立金門大學學生，梁凱富、陳鴻逸、楊家豪、洪子堯、張桂恬同學，以“與龍共舞”參加2012海峽兩岸大學生文化與創意設計大賽並獲得優秀獎。
+2012	指導國立金門大學學生，陳煜珊、游家昇、林家毅、鄭凱文同學，以“機器男孩的中華之魂”參加2012海峽兩岸大學生文化與創意設計大賽並獲得入圍獎。
+2012	指導國立金門大學學生，陳煜珊、游家昇、林家毅、鄭凱文同學，參加2012年全國智慧型機器人大賽─機器人賽跑項目並獲得佳作。
+2011	指導國立金門大學學生，陳煜珊、游家昇、林家毅、鄭凱文同學，參加100學年度台灣區電腦化運動競技大賽─機器人賽跑項目並獲得第四名。
+2011	指導大華技術學院學生，甘旻爵同學，榮獲國科會99年度大專學生參與專題研究計畫研究創作獎。
+2011	指導國立金門大學學生，陳哲正、朱立維、吳彥廷、周士弼同學，參加2011全國科技創意暨微電腦應用競賽─科技創意實現組項目並獲得優選。
+2011	指導國立金門大學學生，陳哲正、葉呈勇、趙昱翔、康子平同學，參加2011年全國智慧型機器人大賽─清潔機器人程式設計項目並獲得佳作。
+2011	指導國立金門大學學生，吳彥廷、周士弼、游雁褀、王建鈞同學，參加第11屆全國院校工程趣味競賽並獲得佳作。
+2011	指導大華技術學院學生，甘旻爵、張家康同學，以“自行車即時資訊回饋系統”參加2011建國百年開放軟體創作競賽並獲得產學組-行動終端應用組-金牌。
+2010	指導大華技術學院學生，張家康、姬哲遠、黃聖崴同學，以“居家安全看護系統”參加2010電信應用大賽並獲得初賽入圍。
+2010	指導大華技術學院學生，甘旻爵、賴建辰、劉韋辰同學，以“我的bicycle行車日誌系統”參加2010電信應用大賽並獲得初賽入圍。
+2010	指導大華技術學院學生，張崇文、李皓惇、甘旻爵同學，參加2010第二屆海峽論壇─海峽兩岸大學生職業技能大賽暨創新成果展並獲得程序設計大賽二等獎。
+2007	在蘇木春教授指導下，與謝易錚、林彥廷等同學，以“聲歷其境”為主題實作電子導盲輔具，獲得2007旺宏金矽獎第七屆半導體設計與應用大賽應用組評審團銅獎。
+2006	在蘇木春教授指導下，與謝易錚、唐義欣、賴世章同學，以“立體視覺實作盲人輔具系統”，獲得2006中華民國生物醫學工程學會創意設計製作競賽佳作獎。
+2004	在蘇木春教授指導下，與李重儀、蔣育承、陳建昌、林莉鳳同學，以“喉部肌電訊號為基礎的人機介面研製”，獲得台灣區醫療暨生技器材工業同業公會「2004全國大專院校生物醫學工程創意設計、製作競賽」初賽入圍。
+2003	參加2003中小企業創業創新博覽會(ACTIVE Taiwan 2003)，並展覽“手語辨識發聲系統”。
+2003	在蘇木春教授指導下，與洪兆欣、莊茗、林玉芬同學，以“台灣手語辨識發聲系統”，獲得2003第五屆TIC100科技創新競賽入選獎。
+2002	在蘇木春教授指導下，與周建興、莊鈞閔、廖家慶同學，以FPGA晶片製作“手語資訊量測系統”，獲得2001年旺宏金矽獎第二屆半導體設計與應用大賽應用組優等獎。
+2001	在蘇木春教授指導下，以校外比賽為系爭光，獲得淡江大學電機工程系獎勵獎狀。
+2001	在蘇木春教授指導下，以論文研究成果，獲得淡江大學電機工程系碩士班研究獎勵特優。
+2001	在蘇木春教授指導下，與鍾明蒼、劉逸群、黃超群、蘇軾詠同學，以“資訊家電整合系統”獲得2001第三屆TIC100科技創新競賽「技術團隊B」身心障礙輔具佳作獎。
+學術著作
+
+ 
+(A)	Journal Papers：
+[1]	M. C. Su, Y. X. Zhao, H. Huang, and H. F. Chen, June 2001, "A Fuzzy Rule-Based Approach to Recognizing 3D Arm Movements," IEEE Trans. on Neural Systems and Rehabilitation Engineering, vol.9, no. 2, pp. 191-201. (SCI, EI)
+[2]	M. C. Su, Y. X. Zhao, and Eugene Lai, Feb. 2003, "A Neural-Network-Based Approach to Recognizing 3D Arm Movements," Biomedical Engineering-Applications, Basis, & Communications, vol. 15, no. 1, pp. 17-26. (EI)
+[3]	M. C. Su, Y. H. Lee, C. H. Wu, S. Y. Su, and Y. X. Zhao, Dec. 16, 2004, "Two Low-Cost Human Computer Interfaces for People with Severe Disabilities," Biomedical Engineering-Applications, Basis, & Communications, pp.344-349. (EI)
+[4]	M. C. Su, C. Y. Chen, Y. X. Zhao, and D. Y. Huang, 2005, "A Tourist Spots Recommendation System for ATIS," International Journal of Fuzzy System, vol. 7, no. 2, pp. 94-99. (EI)
+[5]	M. C. Su, C. H. Hung, and Y. X. Zhao, 2006, "A SOMART System for Gesture Recognition," WSEAS Transactions on Computers, vol. 5, pp. 2764-2771. (EI)
+[6]	Y. X. Zhao, M. C. Su, Z. L. Chou, and Jonathan Lee, May 2007, "A Puzzle-Solver-Based Speech Descrambling Method," WSEAS Transactions on Computers, vol. 6, pp. 725-732. (EI)
+[7]	J. H. Chen, M. C. Su, Y. X. Zhao, Y. J. Hsieh, and W. H. Chen, Sep. 2008, "Application of SOMO Based Clustering in Building Renovation," International Journal of Fuzzy Systems, vol. 10, no. 3, pp. 195-201. (SCI-Expanded, EI)
+[8]	M. C. Su, S. Y. Su, and Y. X. Zhao, Nov. 2009, "A Swarm-Inspired Projection Algorithm," Pattern Recognition, vol. 42, no. 11, pp. 2764-2786. (SCI, 2008 Impact factor: 3.279)
+[9]	M. C. Su and Y. X. Zhao, Nov. 2009, "A variant of the SOM algorithm and its interpretation in the viewpoint of social influence and learning," Neural Computing & Applications, vol. 18, no. 8, pp.1043-1055. (SCI, 2008 Impact factor: 0.767)
+[10]	Y. X. Zhao, C. H. Chou, M. C. Su, Y. Z. Hsieh, July 2010, "Portable Virtual Piano Design," World Academy of Science, Engineering and Technology, issue 67, pp. 1024-1027. (EI)
+[11]	C. H. Chou, M. C. Su, Y. X. Zhao, and F. H. Hsu, 2011, "A Reinforcement-Learning Approach to Color Quantization," Tamkang Journal of Science and Engineering, vol. 14, no. 2, pp. 141-150. (EI)
+[12]	H. C. Chen, H. M. Feng, T. H. Lin, C. Y. Chen, and Y. X. Zhao, Feb. 2015, "Adapt DB-PSO patterns clustering algorithms and its applications in image segmentation," Multimedia Tools and Applications, vol. 74, no. 4, pp. 1-13. (SCI, 2014 Impact factor: 1.346) (doi:10.1007/s11042-015-2518-4)
+[13]	C. H. Chou, Y. X. Zhao, and H. P. Tai, June 2015, "Vanishing-Point Detection Based on a Fuzzy Clustering Algorithm and New Clustering Validity Measure," Journal of Applied Science and Engineering, vol. 18, no. 2, pp. 105-116. (EI)
+[14]	Y. X. Zhao and C. H. Chou, June 2016, "Feature Selection Method Based on Neighborhood Relationships: Applications in EEG Signal Identification and Chinese Character Recognition," Sensors, 16(6), 871. (SCI, 2015 Impact factor: 2.033) (doi:10.3390/s16060871)
+[15]	K. W. Weng, C. H. Hu, L. Y. Hua, C. T. Lee, Y. X. Zhao, J. Chang, S. Y. Yang, and S. Han, August 2016, "Photocatalytic activity of bipolar pulsed magnetron sputter deposited TiO2/TiWOx thin films," Nuclear Instruments and Methods in Physics Research Section B Beam Interactions with Materials and Atoms, vol. 381, pp. 6-10. (SCI, 2015 Impact factor: 1.389) (doi:10.1016/j.nimb.2016.05.017)
+[16]	Y. X. Zhao and M. C. Kan, Dec. 2016, "3D Arm Movement Recognition Using Kinect and Its Application in Interaction Design," Journal of Computers, vol. 27, no. 4, pp. 161-169. (EI) (ISSN 1991-1599)
+[17]	Y. X. Zhao, S. Han, H. L. Yi, C. H. Hu, L. Y. Hua, T. L. Chin, Y. C. Hung and K. W. Weng, June 2017, "Photocatalytic properties of TiO2 films prepared by bipolar pulsed magnetron sputtering," Surface & Coatings Technology, vol. 320, pp. 630–634. (SCI, 2015 Impact factor: 2.139) (doi: 10.1016/j.surfcoat.2016.10.034)
+[18]	Y. X. Zhao, Y. S. Su, and Y. C. Chang, August 2017, "A Real-Time Bicycle Record System of Ground Conditions Based on Internet of Things," IEEE Access, vol. 5, pp. 17525-17533. (SCI, 2017 Impact factor: 3.244) (doi: 10.1109/ACCESS.2017.2740419)
+[19]	Y. X. Zhao, Y. Z. Hsieh, S. S. Lin, C. J. Pan and C. W. Nan, December 2020, "Design of an IoT-Based Mountaineering Team Management Device Using Kalman Filter Algorithm," Journal of Internet Technology, vol. 21, no. 7, pp. 2085-2093. (SCI, 2020 Impact Factor: 0.786) (ISSN 1607-9264)
+[20]	Y. X. Zhao, Y. Z. Hsieh, and S. S. Lin, March 2021, "The Development of Identification Photo Booth System based on A Deep Learning Automatic Image Capturing Method," Journal of Imaging Science and Technology, vol. 65, no. 2, pp. 20403-1-20403-10(10). (SCI, 2020 Impact Factor: 0.379) (doi: 10.2352/J.ImagingSci.Technol.2021.65.2.020403)
+[21]	Y. X. Zhao, Z. X. Lu, Y. Z. Hsieh, S. S. Lin, and P. Y. Chiang, October 2021, "The Wearable Physical Fitness Training Device Based on Fuzzy Theory," Applied Sciences, 11(21), 9976. (SCI, 2021 Impact Factor: 2.838) (doi: 10.3390/app11219976)
+[22]	Y. C. Hung, Y. X. Zhao, and W. C. Hung, January 2022, "Development of an Underground Tunnels Detection Algorithm for Electrical Resistivity Tomography Based on Deep Learning," Applied Sciences, 12(2), 639. (SCI, 2021 Impact Factor: 2.838) (doi: 10.3390/app12020639)
+[23]	Y. X. Zhao, August 2022, "Interactive Teaching Aid Kit for Cardiopulmonary Resuscitation," Processes, 10(8), 1515. (SCI, 2021 Impact Factor: 3.352) (doi: 10.3390/pr10081515)
+ 
+(B)	Conference Papers：
+[1]	M. C. Su, H. Huang, P. S. Chiu, Y. X. Zhao, Y. Y. Chen, and H. F. Chen, 1999, "Recognition of 3D movements using neural networks," in IEEE Int. Joint Conference on Neural Networks, pp. 4259-4262, Washington, D.C. (EI)
+[2]	M. C. Su, Eugene Lai, M. T. Chung, and Y. X. Zhao, Dec. 15-16, 2001, "A Simple Software-based Voice controlled Computer Interface," in Conference on Biomedical & Technology Engineering, pp. 256-257, Taipei.
+[3]	M. C. Su, Y. X. Zhao, and C. C. Hsieh, Dec. 14-15, 2002, "A Voice-Controlled PDA-based Assistive System," in 2002 Conference on Biomedical & Technology Engineering, pp. E2-11-E2-12, Kaohsing, Taiwan.
+[4]	M. C. Su, Y. H. Lee, C. H. Wu, and Y. X. Zhao, June 25-27, 2003, "Low-Cost Human Computer Interfaces for the Disabled," in IASTED International Conference on Biomedical Engineering, pp. 208-212, Austria.
+[5]	M. C. Su, Y. X. Zhao, C. H. Hung, and M. Chunag, Dec. 2003, "A Fuzzy Rule-Based Approach to Hand Shape Recognition Systems," in The Joint Conference on AI, Fuzzy System, and Grey System, Taiwan.
+[6]	M. C. Su, Y. X. Zhao, and C. Y. Li, Dec. 2003, "Galvanic Skin Response Signal Processing and Its Application in Polygraph," in 2003 Conference on Biomedical & Technology Engineering, Taiwan.
+[7]	M. C. Su, Y. X. Zhao, and Jonathan Lee, July 25-29, 2004, "SOM-based Optimization," in 2004 IEEE International Joint Conference on Neural Networks IJCNN, pp. 781-786, Budapest, Hungary.
+[8]	M. C. Su, C. Y. Li, C. C. Chang, Y. X. Zhao, and G. D. Chen, 2004, "The Preliminary Study of Sub-vocal Signal Processing," in Biomedica Engineering Society 2004 Annual Symposium, Tainan, Taiwan.
+[9]	M. C. Su, Y. C. Chuang, and Y. X. Zhao, 2004, "Development of an Eye-Tracking System and Its application in Human-Computer Interfaces for the Disabled," in Biomedica Engineering Society 2004 Annual Symposium, Tainan, Taiwan.
+[10]	M. C. Su, C. Y. Chen, and Y. X. Zhao, 2005, "A SOMO-based Recommendation System," in 7th International Conference on Computational Intelligence and Natural Computing (CIN), pp. 491-494, Utah, USA.
+[11]	M. C. Su, L. Y. Chen, G. W. Wan, J. R. Lin, Y. X. Zhao, and D. Y. Huang, 2005, "Robot Interaction based on Video Extraction," in 2005 13th National Conference on Fuzzy Theory and Applications, Kaohsing, Taiwan.
+[12]	M. C. Su, Y. J. Hsieh, W. Y. Li, J. Y. Ye, Y. X. Zhao, and D. Y. Huang, 2005, "Design and Implement of a Image-based Assist Safety System for Back a car based on SoC," in 2005 13th National Conference on Fuzzy Theory and Applications, Kaohsing, Taiwan.
+[13]	M. C. Su, C. H. Hung, C. K. Yang, H. T. Yang, Z. J. Huang, Y. X. Zhao, and D. Y. Huang, 2005, "Design of Optical Fiber Glove and Its Application," in 2005 13th National Conference on Fuzzy Theory and Applications, Kaohsing, Taiwan.
+[14]	M. C. Su, Y. Z. Hsieh, and Y. X. Zhao, Oct. 8-11, 2006, "A Simple Approach to Stereo Matching and Its Application in Developing a Travel Aid for the Blind," in 2006 11th International Conference on Fuzzy Theory and Technology, pp.1228-1231, Kaohsing, Taiwan.
+[15]	Y. X. Zhao, M. C. Su, Z. L. Chou, and Jonathan Lee, Jan. 17-19, 2007, "A Puzzle Solver and Its Application in Speech Descrambling," in 2007 WSEAS International Conference on Computers Engineering and Applications (ICCEA), pp. 171-176, Gold Coast, Australia.
+[16]	趙于翔、陳永哲、李崇楨、田淑旻，2009年10月，"以光纖手套為基礎之可攜式虛擬鋼琴設計"，第十四屆人工智慧與應用研討會(TAAI)，400-407頁，台中，台灣。
+[17]	Y. X. Zhao, C. H. Chou, M. C. Su, and Y. Z. Hsieh, July 14-16, 2010, "Portable Virtual Piano Design," in 2010 WASET International Conference on Computer, Electrical, and Systems Science, and Engineering (ICCESSE), issue 67, pp. 437-440, Bali, Indonesia.
+[18]	H. P. Tai, Y. X. Zhao, C. H. Chou, May 20, 2011, "The Detection of Vanishing Line by Using Clustering Algorithm," in 2011 International Conference on Electronic Communication and Applications (CECA), Kaohsiung, Taiwan.
+[19]	Y. X. Zhao, Y. Z. Hsieh, H. P. Tai, and C. H. Chou, Aug. 24-26, 2011, "A Novel Feature Selection Algorithm by Using False Feature," in 2011 WASET International Conference on Electrical, Computer, Electronics and Communication Engineering (ICECECE), issue 80, pp. 926-930, Paris, France.
+[20]	Y. X. Zhao, H. P. Tai, S. J. Fang, and C. H. Chou, March 24-26, 2012, "A New Validity Measure and Fuzzy Clustering Algorithm for Vanishing-Point Detection," in 2012 International Conference on Automatic Control and Artificial Intelligence (ACAI), pp. 1682-1685, Xiamen, China.
+[21]	周建興、鄭家在、趙于翔、潘進儒、莊豐柏，2012年5月25-26日，"自動化證件照拍攝演算法設計"，第十一屆離島資訊技術與應用研討會(ITAOI)，194-197頁，澎湖，台灣。
+[22]	C. H. Chou, P. Liu, T. Y. Wu, Y. H. Chien, and Y. X. Zhao, Aug. 18-19, 2012, "Implementation of Parallel Computing FAST Algorithm on Mobile GPU," in 2012 International Conference on Electrical and Electronics Engineering (ICEEE), CE641, Shanghai, China.
+[23]	莊豐柏、趙于翔、周建興、鄭家在，2013年5月17日， "以嵌入式影像處理系統為基礎之動作感測器實作"，2013 民生電子論壇(CEF)， 113-118頁，新北，台灣。
+[24]	Y. H. Chien, Y. L. Chu, Y. X. Zhao, C. H. Chou and J. S. Chiang, June 3-6, 2013, "A Visualized Scenario Learning System for Children with High-Functioning Autism," in the 17th IEEE International Symposium on Consumer Electronics (ISCE), pp. 51-52, Hsinchu, Taiwan.
+[25]	Y. Z. Hsieh, M. C. Su, C. T. Wu, C. H. Chou, C. H. Lu, Y. X. Zhao, Y. Y. Cheng and Y. L. Chu, Dec. 2-5, 2013, "To Develop the Virtual Physics Laboratory by Integrating Kinect with Gesture Classification Algorithm," in 2013 International Conference on Signal-Image Technology & Internet-Based Systems (SITIS), pp. 1017-1019, Kyoto, Japan.
+[26]	Y. L. Chu, S. P. Chang, Y. X. Zhao, F. C. Hsu, J.S. You, C. H. Chou, April 3-5, 2014, "To Develop the Mandarin-Phonetic-Symbol Communication Aid for High-Functioning Autism Children," in 2014 IEEE Global Engineering Education Conference (EDUCON), pp. 17-19, Istanbul, Turkey.
+[27]	趙于翔、甘旻爵、李錫昱、顏祺信、周晉安 ，2014年6月21-23日，"以智慧型手機結合嵌入式系統為基礎之自行車行車記錄器"，2014 中華民國系統科學與工程研討會(NSSSE)，822-827頁，金門，台灣。
+[28]	H. M. Feng, C. Y. Chen, Y. X. Zhao, and H. C. Chen, Aug. 22-24, 2014, "Self-Identified PSO Patterns Clustering Algorithm with Adapt Valid Measure," in the 8th Cross-Strait Conference on Information Science and Technology (CSCIST), pp. 401-406, Beijing, China.
+[29]	Y. X. Zhao, C. H. Chou, Y. Z. Hsieh, H. M. Feng, J. S. You, and J. Z. Zheng, Aug. 22-24, 2014, "An Automatic Image Capturing System Applied to Identification Photo Booth," in the 8th Cross-Strait Conference on Information Science and Technology (CSCIST), pp. 35-39, Beijing, China.
+[30]	Y. Z. Hsieh, C. H. Chou, H. L. Chen, Y. X. Zhao, Y. K. Wu, and K. W. Li, Sep. 26-29, 2014, "Using Knock as Input Method for Designing the Home Security System," in the 2nd International Conference on Intelligent Systems and Image Processing (ICISIP), pp. 167-169, Kitakyushu, Japan.
+[31]	甘旻爵、趙于翔、謝易錚、李南熺、姜宗廷、樂婷婷、洪敬鑫，2015年3月25日，"以手部軌跡辨識為基礎之互動式體感水幕設計"，2015數位教學暨資訊實務研討會(EITS)，台南，台灣。
+[32]	Y. Z. Hsieh, C. H. Chou, Y. X. Zhao, C. H. Wang, A. Y. S. Su, J. C. Yu, and S. W. Lin, May 22-26, 2015, "The Gesture Reorganization System based on Self-Organization-Map in Total Physical Response English Learning Application," in the 2015 International Conference on Applied System Innovation (ICASI), Osaka, Japan.
+[33]	Y. X. Zhao, M. C. Kan, C. J. Pan, C. H. Chou, H. J. Chen, and Y. Z. Hsieh, May 22-26, 2015, "Development of an Interactive Water Screen Using Kinect Based on 3D Arm Movement Recognition," in the 2015 International Conference on Applied System Innovation (ICASI), Osaka, Japan.
+[34]	李聖復、朱永龍、胡睿、周建興、趙于翔、翁克偉，2015年11月6-8日， "閱讀障礙者之互動式有聲電子書"，2015第九屆海峽兩岸資訊科學與技術交流研討會(CSCIST)，12-14頁，金門，台灣。
+[35]	趙于翔、周建興、陳昌暐、柯勝富、胡亮丞、楊詔羽，2015年11月6-8日， "互動式心肺復甦術教學輔具設計"，2015第九屆海峽兩岸資訊科學與技術交流研討會(CSCIST)，194-197頁，金門，台灣。
+[36]	Y. X. Zhao, C. H. Chou, and W. K. Chien, May 27-31, 2016, "Design of a Bicycle-Based Real-Time Information Feedback System," in the 2016 International Conference on Applied System Innovation (ICASI), Okinawa, Japan.
+[37]	趙于翔、陳政銘、南啟文、李登榮、許世榮，2016年11月19日，"以物聯網為基礎之登山團隊管理裝置設計"，2016年民生電子研討會(WCE)，399-403頁，花蓮，台灣。
+[38]	趙于翔、呂政憲，2017年5月19-21日，"以物聯網為基礎之體適能訓練管理裝置"，第十六屆離島資訊技術與應用研討會(ITAOI)，542-546頁，金門，台灣。
+[39]	趙于翔、吳家瑄、錢建翔、林翠玲、趙仲庭，2018年5月25-26日，"互動式節奏訓練輔助裝置設計"，第十七屆離島資訊技術與應用研討會(ITAOI)，209-213頁，澎湖，台灣。
+[40]	趙于翔、張嘉鈞、葉詳穎、趙明楷、鄭力元、高浩庭、湯林緯洋，2018年5月25-26日，"以虛擬實境為基礎之金門戰史互動體驗裝置設計"，第十七屆離島資訊技術與應用研討會(ITAOI)，214-218頁，澎湖，台灣。
+[41]	Y. X. Zhao, C. W. Nan, and C. H. Wu, March 30-April 2, 2019, "Design of an IoT-Based Mountaineering Team Management Device," in the 2019 International Conference on Smart Science (ICSS), Gunma, Japan.
+[42]	趙于翔、林庭生、施旻岳、李易鴻、張仲榆，2019年5月24-26日，"以擴增實境為基礎之金門觀光導覽APP設計"，第十八屆離島資訊技術與應用研討會(ITAOI)，238-241頁，台中，台灣。
+[43]	Y. X. Zhao, M. Y. Shih and T. S. Lin, Aug. 25-27, 2019, "Design of a mobile tour guide based on augmented reality for tourism in Kinmen," in the 32th IPPR Conference on Computer Vision, Graphics, and Image Processing (CVGIP), Taitung, Taiwan.
+[44]	Y. X. Zhao and Z. X. Lu, Sep. 3-6, 2019, "Physical Fitness Training Device based on Internet of Things," in the second International Cognitive Cities Conference (IC3), Kyoto, Japan.
+[45]	趙于翔、蘇家禹、王岳駿、馮志揚、陳佳駿、陳憲億，2019年11月14-15日，"以LoRa為基礎之失智老人輔助裝置設計"，2019全國計算機會議(NCS)，金門，台灣。
+[46]	Y. X. Zhao, Y. T. Lee, H. P. Chang, C. C. Lin and Y. X. Chen, Aug. 16-18, 2020, "The Mobile Application Using Deep Learning and Augmented Reality in the Tourism Guide of Kinmen," in the 33th IPPR Conference on Computer Vision, Graphics, and Image Processing (CVGIP), Hsinchu, Taiwan.
+[47]	Y. X. Zhao and C. H. Wu, Sep. 7-9, 2020, "Interactive Device for Rhythm Training Assistance," in the 10th International Conference on Frontier Computing (FC), Singapore.
+[48]	洪瑛鈞、趙于翔、洪瑋辰，2021年5月28-29日，"人工智慧演算法應用於二維地電阻影像解析初探"，第十九屆離島資訊技術與應用研討會(ITAOI)，69-73頁，金門，台灣。
+[49]	趙于翔、李彥霆、林家齊、張皓評、陳羿勳，2021年5月28-29日，"結合擴增實境與深度學習之金門觀光導覽APP設計"，第十九屆離島資訊技術與應用研討會(ITAOI)，74-78頁，金門，台灣。
+[50]	趙于翔、陳昱瑛、張家羱、吳榮展，2021年5月28-29日，"互動式嬰幼兒心肺復甦術教學輔具設計"，第十九屆離島資訊技術與應用研討會(ITAOI)，79-85頁，金門，台灣。
+[51]	潘進儒、曾則治、趙于翔，2021年5月28-29日，"互動式雲端相片編輯與沖洗平台設計"，第十九屆離島資訊技術與應用研討會(ITAOI)，86-92頁，金門，台灣。
+[52]	C. H. Wu, Y. X. Zhao, and Y. Z. Hsieh, Aug. 22-24, 2021, "Study of Kinmen Wind Lion Face Generation Based on the Deep Convolutional Generative Adversarial Network," in the 34th IPPR Conference on Computer Vision, Graphics, and Image Processing (CVGIP), New Taipei City, Taiwan.
+[53]	Y. X. Zhao, C. Y. Chang, and Y. Y. Chen, Nov. 16-19, 2021, "Design of an Interactive Teaching Aid in Cardiopulmonary Resuscitation for Infants," in the 2021 International Symposium on Intelligent Signal Processing and Communication Systems (ISPACS), Hualien, Taiwan.
+[54]	李智傑、胡李駿、趙于翔，2022年5月27-29日，"以虛擬實境為基礎之射擊體驗互動遊戲設計"，第二十屆離島資訊技術與應用研討會(ITAOI)，968-972頁，澎湖，台灣。
+[55]	傅于軒、魏美亞、陳彥翔、林妍汝、連思凱、趙于翔，2022年5月27-29日，"基於深度學習與多人手勢辨識的金門一條根互動式種植體驗遊戲設計"，第二十屆離島資訊技術與應用研討會(ITAOI)，988-993頁，澎湖，台灣。
+[56]	陳昱瑛、張家羱、趙于翔，2022年5月27-29日，"以風格對抗式生成網路為基礎之金門風獅爺生成研究"，第二十屆離島資訊技術與應用研討會(ITAOI)，1007-1011頁，澎湖，台灣。
+[57]	Y. X. Zhao, W. N. Phandita, Y. H. Fu, Y. H. Chen, Y. R. Lin and S. K. Lien, Aug. 18-20, 2022, "Design an Interactive Game for the Introduction to Kinmen Moghania Root using Multi-Hand Gesture Recognition Based on Deep Learning," in the 35th IPPR Conference on Computer Vision, Graphics, and Image Processing (CVGIP), Nantou, Taiwan.
+[58]	陳淳、徐仁鴻、劉怡謙、趙于翔，2022年12月15-17日，"結合NB-IoT與AIoT之自行車定位與意外偵測"，2022臺灣網際網路研討會(TANET)，58-62頁，台北，台灣。
+[59]	胡李駿、李智傑、黃玉苹、趙于翔，2022年12月15-17日，"虛擬實境於護理教學互動課程之應用"，2022臺灣網際網路研討會(TANET)，1286-1291頁，台北，台灣。
+[60]	C. Y. Chang, Y. X. Zhao, and Y. Y. Chen, July 17-19, 2022, "A Study on Text Generation of Kinmen Culture Vocabulary based on GPT-2," in 2023 IEEE International Conference on Consumer Electronics - Taiwan (IEEE ICCE-TW), Pingtung, Taiwan.
+[61]	趙于翔、魏仲彥、徐伯元、莊汶娟、李偉德、鄭智陽，2023年5月25-28日，"結合擴增實境與深度學習之穴位互動顯示與智慧問診系統"，第二十一屆離島資訊技術與應用研討會(ITAOI)，宜蘭，台灣。
+[62]	C. Y. Wei, B. Y. Xu, and Y. X. Zhao, Oct. 31-Nov. 3, 2023, "Design of Interactive System for Acupoint Analysis Based on Augmented Reality," in 2023 Asia Pacific Signal and Information Processing Association (APSIPA) Annual Summit and Conference (ASC), Taipei, Taiwan.
+ 
+(C)	Books, Book Chapters and Technical Report：
+[1]	M. C. Su, Y. X. Zhao, and C. H. Chou, 2008, "A SOMO-Based Clustering Algorithm and Its Application in Object Detection," in Pattern Recognition Theory and Application, E. A. Zoeller Eds. pp. 91-107. Nova Science Publishers, New York.
+[2]	M. C. Su, Y. Z. Hsieh, D. Y. Huang, Y. X. Zhao, and C. C. Sun, 2008, "A Vision-based Travel Aid for the Blind," in Pattern Recognition Theory and Application, E. A. Zoeller Eds. pp. 73-89. Nova Science Publishers, New York.
+ 
+(D)	專利：
+[1]	林獻堂、趙于翔，中華民國新型專利，新型第M392377號，智慧型多功能感測模組，2010/11/11~2020/5/27。
+[2]	曾繁治、趙于翔，中華民國新型專利，新型第M434274號，多媒體影音客製化數位互動式拍貼機，2012/7/21~2022/3/12。
+[3]	曾繁治、趙于翔、鄭家在，中華民國新型專利，新型第M445704號，照相自動擷取輸出或輸出至申請表格之裝置，2013/1/21~2022/8/8。
+[4]	趙于翔、林獻堂，中華民國發明專利，發明第I426751號，智慧型多功能感測模組之通訊方法，2014/2/11~2030/5/27。
+[5]	曾繁治、趙于翔，中華民國發明專利，發明第I487365號，製作客製化拍貼之方法及使用該方法之客製化數位互動式拍貼系統，2015/6/1~2031/4/25。
+[6]	翁克偉、李金譚、陳建民、趙于翔，中華民國新型專利，新型第M497094號，具有抗紫外線功能之透明瓶，2015/3/11~2024/11/19。
+[7]	曾繁治、趙于翔、鄭家在，中華民國發明專利，發明第I499986號，自動擷取證件相片方法，2015/9/11~2032/8/8。
+[8]	趙于翔、莊豐柏、周建興、曾繁治，中華民國新型專利，發明第I518642號，結合紅外線及影像辨識之裝置，2016/1/21~2033/8/15。
+[9]	趙于翔、陳昌暐、胡亮丞、柯勝富、楊詔羽、翁克偉，中華民國發明專利，發明第I564851號，互動式心肺復甦術教學輔具裝置及方法，2017/1/1~2035/11/22。
+[10]	曾則治、趙于翔，中華民國新型專利，新型第M570995號，藥品販賣領藥機，2018/12/1~2028/9/4。
+[11]	曾則治、趙于翔，中華民國新型專利，新型第M591804號，公廟香油錢捐獻管理拍貼機，2020/3/11~2029/8/4。
+[12]	趙于翔、呂政憲，中華民國發明專利，發明第I704517號，以物聯網為基礎之體適能訓練管理裝置，2020/9/11~2037/9/11。
+ 
+(E)	學位論文：
+[1]	Y. X. Zhao, 2002, A Portable Speaking-Aid System for Taiwanese Sign Language, Master thesis, Department of Electrical Engineering, Tamkang University, Taiwan, R.O.C.
+[2]	Y. X. Zhao, 2007, Swarm-Intelligence-Based Optimization Algorithms and Their Applications, PhD thesis, Department of Computer Science and Information Engineering, National Central University, Taiwan, R.O.C.
+瀏覽數:2819
+友善列印
+Line Facebook twitter
+
+傳真：(082)313529
+電話：(082)313531
+意見信箱：csie@email.nqu.edu.tw
+地址：金門縣金寧鄉大學路一號
+
+
+IRSEL LAB	
+IRSEL LABChiefMember研究主題
+|實驗室主持人
+
+王建鈞 Wang Chien-Chun
+國立金門大學 助理教授 112.02 ~ 至今
+
+聯絡信箱:Patrick@email.nqu.edu.tw
+
+辦公室: E310
+
+實驗室: E304
+
+OFFICETIME: 9:00-11:00,13:00-16:00
+
+【學歷】
+
+國立中央大學 資訊工程學系 博士
+
+國立金門大學 電子工程學系 碩士
+
+國立金門大學 資訊工程學系 學士
+
+【研究領域】
+
+智慧型感測、訊號處理、控制架構與應用、機器視覺與目標追蹤、人機互動(含機器人認知)與多機器人協調與合作、嵌入式系統、人工智慧、物聯網應用設計、資通訊安全、科普教育。
+
+  【證照】
+
+Information Security Management Systems Auditor/Lead Auditor Training Course(ISO/IEC27001:2023) 
+
+Information Security Management Systems Auditor/Lead Auditor Training Course(ISO/IEC27001:2005) 
+
+Parallax Certified Professional(PCP)-BS2 
+
+Parallax Certified Professional(PCP)-Arduino BOE-BOT 
+
+
+  【專利】
+
+吊扇裝置 專利字號 M472759  
+
+具有短距通訊功能之安全帽  專利字號 M455384  
+
+寵物遠端觀看系統  專利字號 M456693  
+
+具商品辨識功能之購物  專利字號 推車 M4556643
+
+具安全氣囊之安全帽專利字號 M456711  
+
+應用可攜式電子裝置之圖形辨識技術之門禁系統 M455219  
+
+心臟用之可攜式電 擊裝置 專利字號 M456823 
+
+變色容器及其變色容器組 專利字號M454383 
+
+ 【競賽】
+
+指導學生 參加2025年第36屆AERC亞洲智慧型機器人大賽榮獲無人機智能編程挑戰賽高階高中職大專組 第四名 ，2025年06月21日
+
+指導學生 趙興華、黃湘芸、林佩吟 參加2025年第36屆AERC亞洲智慧型機器人大賽榮獲機器人循跡挑戰大專院校D組 第一名 ，2025年06月14日
+
+指導學生 顏駿葳、陳勝傑、李易、李沃原 參加2025年第36屆AERC亞洲智慧型機器人大賽榮獲機器人循跡挑戰大專院校D組 第二名 ，2025年06月14日
+
+指導學生 李沃源、歐子綺、顏駿葳、李易 參加2025年第36屆AERC亞洲智慧型機器人大賽榮獲機器人循跡挑戰大專院校D組 佳作 ，2025年06月14日
+
+指導學生 林沛欣、趙興華、黃湘芸、林佩吟 參加2025年第36屆AERC亞洲智慧型機器人大賽榮獲4.	輪型機器人軌道挑戰大專院校C組 第一名 ，2025年06月14日
+
+指導學生 趙興華、黃湘芸、林佩吟 參加2025年第36屆AERC亞洲智慧型機器人大賽榮獲輪型機器人軌道挑戰 大專院校D組 第一名 ，2025年06月14日
+
+指導學生 張富安、陳盈圳、謝承諺 參加2025年第36屆AERC亞洲智慧型機器人大賽榮獲機器人循跡挑戰大專院校D組 第三名 ，2025年06月14日
+
+指導學生 丁旭塏、謝宗廷、羅汶傑、陳彥竹 參加2025年第36屆AERC亞洲智慧型機器人大賽榮獲程控避障挑戰大專院校D組 佳作 ，2025年06月14日
+
+指導學生 丁旭塏、謝宗廷、羅汶傑、陳彥竹 參加2025年第36屆AERC亞洲智慧型機器人大賽榮獲程控避障挑戰大專院校D組 佳作 ，2025年06月14日
+
+指導學生 陳韋蓉、徐銥庭、丁妤玟、湯沁蓁 參加2025年第36屆AERC亞洲智慧型機器人大賽榮獲程控避障挑戰大專院校D組 佳作 ，2025年06月14日
+
+指導學生 王亮竣、鐘子淯 參加2025年第36屆AERC亞洲智慧型機器人大賽榮獲程控避障挑戰大專院校D組 佳作 ，2025年06月14日
+
+指導學生 洪楷鈞、朱守仁、黃培翔 參加2025年第36屆AERC亞洲智慧型機器人大賽榮獲程控避障挑戰大專院校D組 佳作 ，2025年06月14日
+
+指導學生 呂博翔、汪章貴、沈心怡 參加2024海峽兩岸大學生機器人競賽 智慧校園ROS機器人 榮獲第二名，2024年12月8日
+
+指導學生 呂博翔、沈心怡、林沛欣、吳尚樺 參加2024年第35屆AERC亞洲智慧型機器人大賽榮獲輪型機器人程控障礙挑戰大專院校A組 佳作 ，2024年11月23日
+
+指導學生 丁旭塏、謝宗廷、陳盈圳、張富安 參加2024年第35屆AERC亞洲智慧型機器人大賽榮獲程控障礙挑戰大專院校A組 佳作，2024年11月23日
+
+指導學生 張勻安、倪瑋蔓、李禹臻、羅詩喬 參加2024年第35屆AERC亞洲智慧型機器人大賽榮獲程控障礙挑戰大專院校A組 第一名，2024年11月23日
+
+指導學生 范揚玄 、呂博翔、 戴嘉豪、 吳丞恩 參加2024年第35屆AERC亞洲智慧型機器人大賽榮獲輪型機器人競速挑戰大專院校D組 第一名 ，2024年06月15日
+
+指導學生 陳翊庭、林沛欣、趙興華、林佩吟 參加2024年第35屆AERC亞洲智慧型機器人大賽榮獲輪型機器人競速挑戰大專院校D組 佳作 ，2024年06月15日
+
+
+ 【研討會】
+
+王建鈞 、謝京展，"LLM 輔助的地方活動資訊自動摘要與分類系統研究—以金門為例"，第二十三屆離島資訊與應用研討會(ITAOI2025)，2025
+
+王建鈞 、林沛欣 、趙興華 、沈心怡 、呂博翔 、黃湘芸 、林佩吟，"仿生四足機器狗自主避障與步態控制"，第二十三屆離島資訊與應用研討會(ITAOI2025)，2025
+
+李韋德、王建鈞，"基於區塊鏈的租借系統"，第二十三屆離島資訊與應用研討會(ITAOI2025)，2025
+
+王建鈞、沈心怡、呂博翔 、林沛欣 ，"Integrating Logical Thinking and Programming into Kinmen’s After-School Clubs: Challenges and Practices for Grades 4-6 Science Education  邏輯思維與程式設計融入金門課後社團：4-6年級科普教育的挑戰與實踐 ," 第二十屆台灣數位學習發展研討會(TWELF2025)，2025 
+
+王建鈞 、戴嘉豪 ，"生成式人工智慧與物聯網 "， 第二十二屆離島研討會(ITAOI2024)，2024
+
+戴嘉豪、陳翊庭、林沛欣、趙興華、王建鈞 ，"生成式人工智慧在金門觀光業的應用 "，第二十二屆離島研討會(ITAOI2024),2024
+
+黃偉祥、阮銘福、蘇子安、林羿嫻、王建鈞、趙于翔  ，"結合 VR 與 3D 重建技術之八二三虛擬戰史館設計 "， 第二十二屆離島研討會(ITAOI2024)，2024
+
+王建鈞、李金譚、林柏佑、馮玄明，”應用手持式行動裝置人臉辨識於智慧型大門防盜鎖之設計”， 2014 中華民國系統科學與工程研討會，國立金門大學，2014
+
+馮玄明、李金譚、翁慶昌、王建鈞，”服務型機器人設計與實現”， 2014 中華民國系統科學與工程研討會，國立金門大學，2014
+
+ 【期刊】
+
+1.   Ching-Han Chen ,Chien-Chun Wang * andYan-Zhen Chen (2021, Feb). Intelligent Brushing Monitoring Using a Smart Toothbrush with Recurrent Probabilistic Neural Network. Sensors. 
+
+2.   Ching-Han Chen, Mu-Che Wu*, and Chien-Chun Wang (2019, Mar). Cloud-based Dialog Navigation Agent System for Service Robots. Sensors and Materials.
+
+3.   Ching-Han Chen, Chien-Chun Wang*, Yi-Tun Wang, and Po-Tung Wang (2017, Sep). Fuzzy Logic Controller Design for Intelligent Robots. Mathematical Problems in Engineering . 
+
+4.    Ching-Han Chen & Chien-Chun Wang & Miao-Chun Yan (2016, Aug). Robust tracking of multiple persons in real-time video. Multimedia Tools and Applications, 75:16683-16697. 
+
+
+跳到主要內容區
+
+資訊工程學系
+
+Department of Computer Science
+
+and Information Engineering
+
+☰ 主選單
+
+回首頁
+回金門大學網站
+English
+關鍵字
+ 
+X
+
+首頁 教師部落格
+吳佳駿
+發布日期 : 2024-08-01
+姓名：吳佳駿
+
+職稱：副教授兼資訊網路組組長
+
+電子郵件：ccwu0918@nqu.edu.tw
+
+聯絡電話：082-313535
+
+
+
+學歷
+國立中興大學 / 資訊科學與工程學系 / 理學博士
+國立台中技術學院 / 資訊管理學系 / 管理學學士
+國立高雄應用科技大學 / 金門分部-資訊管理科 / 管理學副學士
+
+專長
+物聯網開發應用、軟體工程與應用、行動裝置程式設計、程式語言、網路程式設計、動態網頁資料庫、資訊安全管理
+
+經歷
+
+國立金門大學 / 通識教育中心 / 兼任助理教授
+國立金門大學 / 工業工程與管理學系 /助理教授級專案教師
+國立金門大學 / 工業工程與管理學系 / 專任助理教授
+國立金門大學 / 資訊網路組 / 組長
+國立金門大學 / 軟體系統組 / 組長
+擔任金門縣政府-青年政策委員會委員（任期自2015/09/07～2018/12/24止）
+擔任國立金門大學-校友會 第三屆常務理事
+擔任國立中興大學-資訊科學與工程學系暨資訊網路與多媒體研究所系友會 第四屆常務理事（任期自2017/01/01～2018/12/31止）
+擔任金門縣青年創業協會 第七屆顧問（任期自2017/01/01～2018/12/31止）
+擔任社團法人中華曙光協會 第五屆理事（任期自2018/05/01～2020/04/30止）
+擔任金門縣-金沙鎮大洋社區發展協會 第四屆理事長（任期自2017/01/14～2021/01/13止）
+擔任全國創意發明與專利種子教師
+擔任APP設計與開發種子教師
+擔任International Journal of Network Security (IJNS)國際期刊Publishing Editor。(EI indexed)http://ijns.jalaxy.com.tw(任期自2005/07/01～2021/12/31)
+擔任International Journal of Electronics and Information Engineering (IJEIE)國際期刊Publishing Editor。http://ijeie.jalaxy.com.tw(任期自2009/07/01～2019/12/31)
+擔任台灣行動商務運籌管理協會-行動電子商務種子教師暨監評人員
+擔任網路與社群行銷管理師種子教師及認證推廣專業顧問（任期自2015/02/02～2016/02/02止）[教育部證照編號50279808]
+擔任品牌管理師種子教師及認證推廣專業顧問（任期自2015/02/02～2016/02/02止）[教育部證照編號50279832]
+擔任調查與研究方法分析師種子教師及認證推廣專業顧問（任期自2014/01/01～2015/12/31止）[教育部證照編號8​282]
+擔任消費者行為分析師種子教師及認證推廣專業顧問（任期自2014/01/01～2015/12/31止）[教育部證照編號8​566]
+擔任服務業管理師種子教師及認證推廣專業顧問（任期自2014/06/01～2015/06/30止）[教育部證照編號9246]
+擔任財團法人中華民國電腦技能基金會(TQC)-DK專業領域應用類監評委員（任期自2014/01/01～2015/12/31止）
+擔任財團法人中華民國電腦技能基金會(TQC)-OA辦公室軟體應用類監評委員（任期自2015/01/01～2015/12/31止）
+擔任財團法人中華民國電腦技能基金會(TQC)-DA資料庫應用類監評委員（任期自2015/01/01～2015/12/31止）
+擔任財團法人中華民國電腦技能基金會(TQC)-OS作業系統類監評委員（任期自2015/01/01～2015/12/31止）
+擔任中華民國電腦教育發展協會CCEA電腦專業能力認證監評委員（任期自2013/09/26～2015/09/25止）
+擔任國際性德州儀器高階微控制器國際能力認證實用級監評委員（任期自2015/01/29～）
+擔任國際Microsoft Office Specialist (MOS)專家認證授權認證中心監評委員（任期自2015/03/16～2016/03/15止）
+擔任國際GLAD Business Application Professionals (BAP)認證授權認證中心監評委員（任期自2016/02/22～2022/02/22止）
+擔任國際GLAD Information and Communication Technology (ICT)認證授權認證中心監評委員（任期自2016/05/06～2022/05/06止）
+
+
+著作、論文
+一、期刊論文
+
+Song-Kong Chong, Hsien-Chu Wu, and Chia-Chun Wu, "A Scheme for Key Management on Alternate Temporal Key Hash", International Journal of Network Security (IJNS), vol. 1, no. 1, pp. 8-13, 2005.
+Chia-Chun Wu, Min-Shiang Hwang, and Shang-Juh Kao, "A New Approach to the Secret Image Sharing with Steganography and Authentication", Imaging Science Journal (ISJ), vol. 57, no. 3, pp. 140-151, June 2009. (SCI)
+Shang-Juh Kao, Chia-Chun Wu, and Chin-Fa Chen, "Computer-Assisted Evaluation System for Volleyball Referee's Executive Judgment," International Journal of Computer Science in Sport (IJCSS), vol. 8, no. 2, pp. 40-49, December 2009. (ISSN 1684-4769)
+Chia-Chun Wu, Shang-Juh Kao, and Min-Shiang Hwang, "A High Quality Image Sharing with Steganography and Adaptive Authentication Scheme," Journal of Systems and Software (JSS) , vol. 84, no. 12, December 2011, pp. 2196–2207. (SCI, EI) (DOI: 10.1016/j.jss.2011.06.021)
+Chin-Fa Chen, Chia-Chun Wu, Duc-Tai Dang, and Iuon-Chang Lin, "The Computer-Aided System for Promoting Judgments of Umpires", Advances in Computer Science and its Applications, Lecture Notes in Electrical Engineering (LNEE), vol. 279, pp. 685-693, January 2014. Springer, Berlin, Heidelberg (EI) (DOI: 10.1007/978-3-642-41674-3_98)
+Ming-Ru Xie, Chia-Chun Wu, Jau-Ji Shen, and Min-Shiang Hwang, "A Survey of Data Distortion Watermarking Relational Databases," International Journal of Network Security (IJNS), vol. 18, no. 6, November 2016, pp. 1022–1033. (EI)
+Ping-Chen Chang*, Chia-Chun Wu, and Chin-Tan Lee, "System reliability estimation for a manufacturing network with joint buffers", International Journal of Reliability, Quality and Safety Engineering, vol. 25, no. 4, 2018, 1850020 (12 pages). (EI) (DOI: 10.1142/S0218539318500201)
+Arun Malik, Babita Pandey, Chia-Chun Wu*, "Secure Model to Generate Path Map for Vehicles in Unusual Road Incidents Using Association Rule Based Mining in VANET", Journal of Electronic Science and Technology, 2018, vol. 16, no. 2, pp. 153-162. (Fully indexed by Scopus, INSPEC) (DOI: 10.11989/JEST.1674-862X.70424017)
+Hsieh-Tsen Pan, Chia-Chun Wu, Cheng-Ying Yang, and Min-Shiang Hwang*, "The Weaknesses of the Virtual Password Authentication Protocol with Cookie", IOP Conference Series Materials Science and Engineering, vol. 466:012009, December 2018, (Online ISSN: 1757-899X; Print ISSN: 1757-8981.) (DOI: 10.1088/1757-899X/466/1/012009)
+Min-Shiang Hwang*, Yung-Chen Chou, Chia-Chun Wu, and Cheng-Ying Yang, "An Improvement of Tseng-Wu Group Key Exchange Protocol", Recent Developments in Intelligent Computing, Communication and Devices, Advances in Intelligent Systems and Computing 752, 2019, pp. 693-698, Springer Nature Singapore Pte Ltd. (S. Patnaik and V. Jain eds., 2019) (Published in Advances in Intelligent Systems and Computing by Springer-Verlag. ISSN: 2194-5357.) (EI/Scopus) (DOI: 10.1007/978-981-10-8944-2_79)
+Chia-Chun Wu, Cheng-Ying Yang, Min-Shiang Hwang*, and Mei-Yu Lin, "The design and application of a web-based teacher evaluation system for STEM education", International Journal of Electrical Engineering & Education, (2019/06/01 Online First) (SCI) (DOI: 10.1177/0020720919852783)
+Chia-Chun Wu, Cheng-Ying Yang, Min-Shiang Hwang*, and Cheng-Yee Lee, "A Trustworthy Web-based System Platform for Teaching Evaluation and STEM Education", International Journal of Electrical Engineering & Education, (2019/03/11 accepted for publication) (SCI) (DOI: 10.1177/0020720919853427)
+Min-Shiang Hwang, Ming-Ru Xie, Chia-Chun Wu*, "A Reversible Hiding Technique Using LSB Matching for Relational Databases", Informatica, vol. 31, no. 3 (2020), pp. 481–497. (2020/05/06 Online First) (SCI) (DOI: 10.15388/20-INFOR411)
+二、國際研討會論文
+
+Kevin I-J Ho, Tung-Shou Chen, Hui-Fang Tsai, Mingli Hsieh, and Chia-Chun Wu, "A JPEG-LS Based Lossless/Lossy Compression Method for Two-Dimensional Electrophoresis Images", IEEE International Conference on Informatics, Cybernetics and Systems (ICICS 2003), I-Shou University, Kaohsiung, Taiwan, pp. 1109-1116, December 14-16, 2003.
+Kevin I-J Ho, Tung-Shou Chen, Chia-Chun Wu, Mingli Hsieh, Hui-Fang Tsai, and Puo-Iang Chen, "A Compression Algorithm for Two-Dimensional Electrophoresis Image", Proceedings of the Third International Conference on Information and Management Sciences (IMS2004), Dunhuang, China, pp. 433-436, June 5-10, 2004.
+Chia-Chun Wu, Shang-Juh Kao, Wen-Chung Kuo, and Min-Shiang Hwang, "A Robust-Fragile Watermarking Scheme for Image Authentication", Proceedings of The Third International Conference on Innovative Computing, Information and Control (ICICIC 2008), Dalian, China, pp. 176, June 18-20, 2008. (EI) DOI: 10.1109/ICICIC.2008.616
+Chia-Chun Wu, Shang-Juh Kao, Wen-Chung Kuo, and Min-Shiang Hwang, "Enhance the image sharing with steganography and authentication", Proceedings of The Fourth International Conference on Intelligent Information Hiding and Multimedia Signal Processing (IIHMSP 2008), Harbin, China, pp. 1177-1181, August 15-17, 2008. (EI) DOI: 10.1109/IIH-MSP.2008.317
+Chia-Chun Wu, Shang-Juh Kao, Wen-Chung Kuo, and Min-Shiang Hwang, "Reversible Secret Image Sharing Based on Shamir's Scheme", Proceedings of The Fifth International Conference on Intelligent Information Hiding and Multimedia Signal Processing (IIHMSP 2009), Kyoto, Japan, pp. 1014-1017, September 12-14, 2009. (EI) DOI: 10.1109/IIH-MSP.2009.158
+Chin-Fa Chen, Chia-Chun Wu, Ping-Kun Hsu, Chia-Chang Shoug, Cheng-Wei Ho, and Iuon-Chang Lin, "The Contest Management System for University Volleyball League in Taiwan", Proceedings of 2011 Second International Conference on Education and sports Education (ESE 2011), Guangzhou, China, pp. 131-134, April 17-18, 2011. (ISTP)
+Chin-Tan Lee, Chia-Chun Wu*, Bo-Rui Su, and Tung-Chun Shen, "A Novel Electronic Lock Using Ultrasound Morse code Based on FIR Filter", Proceedings of the IEEE International Conference on Advanced Materials for Science and Engineering, IEEE-ICAMSE 2016 - Meen, Prior & Lam (Eds), Xi'an, Shaanxi, China, pp. 227-230, November 5-10, 2016. ISBN 978-1-5090-3869-5 (First Prize Paper Award)
+Ping-Chen Chang*, and Chia-Chun Wu, "Reliability with Limited Buffer Capacity for a Multistate Manufacturing Network with Two Production Lines", Proceedings of the 17th Asia Pacific Industrial Engineering and Management Systems Conference (APIEMS 2016), Taipei, Taiwan, pp. 85, December 7-10, 2016.
+Yung-Chung Tsao, Bo-Rui Su, Chin-Tan Lee, and Chia-Chun Wu*, "An Implementation of a Distributed Sound Sensing System to Visualize the Noise Pollution", Proceedings of 2017 IEEE International Conference on Applied System Innovation (IEEE ICASI 2017), Sapporo, Japan, pp. 625-628, May 13-17, 2017. (Best Conference Paper Award) (EI) DOI: 10.1109/ICASI.2017.7988503
+Yung-Chung Tsao, Tung-Chun Shen, and Chia-Chun Wu*, "An Implementation of a Particle Detective Mobile Device to Solve the Problem of Collecting PM2.5 Data without Internet-Connection", Proceedings of 2017 IEEE International Conference on Applied System Innovation (IEEE ICASI 2017), Sapporo, Japan, pp. 1371-1374, May 13-17, 2017. (First Prize Paper Award) (EI) DOI: 10.1109/ICASI.2017.7988161
+Chin-Tan Lee, Jye-Ren Deng, Bo-Rui Su, Ko-Wei Weng, and Chia-Chun Wu, "Maximum Power Point Tracking of PV Systems Using TFPSO", Proceedings of 2017 International Conference on Information, Communication and Engineering (IEEE ICICE 2017), Xiamen, China, pp. 11-15, November 17-20, 2017. (EI) DOI: 10.1109/ICICE.2017.8478937
+三、國內研討會論文
+
+李政毅、洪正杉、吳佳駿、黃明祥，「整合無線射頻辨識與生物辨識技術之身份識別系統」，2008 RFID科技論文研討會, 台北科技大學, Feb. 1, 2008.
+吳佳駿、郭文中、黃明祥，「具安全性的多人浮水印系統」，第十九屆資訊安全會議 (CISC 2009), 台灣科技大學, pp. 89, June 3-5, 2009.
+彭泉、鄭志中、歐宗殷、吳佳駿，「建構群聚商務平台及創新商業模式-以中藥產業供應鏈為 例」, 2012產業資訊應用趨勢暨個案競賽學術研討會, 國立高雄第一科技大學, Nov. 16, 2012. 【最佳論文獎】
+彭泉、鄭志中、歐宗殷、吳佳駿，「應用EPC系統整合產品設計知識資料庫之研究」, 2012產業資訊應用趨勢暨個案競賽學術研討會, 國立高雄第一科技大學, Nov. 16, 2012.
+沈統鈞、李金譚、吳佳駿、蘇柏睿、高逢星，「基於物聯網之遠端控制系統設計」, 第九屆資訊教育與科技應用研討會(IETAC 2016), 中臺科技大學, pp. 170-175, March 25, 2016.
+吳昇峰、陶光柏、王薇婷、黃玉甄、吳佳駿、曹永忠，「實作細懸浮微粒子偵測裝置以進行中國陰霾吹入金門之數據分析」, 第二十四屆中華民國人因工程年會暨學術研討會, 國立金門大學, March 12, 2017.
+四、專利發明
+
+中華民國專利：改良式容置瓶 (新型第M460841號)，專利權人：國立金門大學、發明人：李金譚、吳佳駿、李依樺、鄭怡婷、于傳弘、張舜傳，專利權自2013年09月01日～2023年05月15日止
+中華民國專利：吊扇裝置 (新型第M472759號)，專利權人：國立金門大學、發明人：李金譚、王建鈞、吳佳駿、翁克偉、陳正德，專利權自2014年02月21日～2023年08月25日
+中華民國專利：改良棘輪 (新型第M526015號)，專利權人：國立金門大學、發明人：傅承運、吳佳駿、呂立鑫、李金譚、翁克偉，專利權自2016年07月21日～2025年10月31日
+中華民國專利：光摩斯門禁系統與其光摩斯接收/譯碼裝置 (新型第M549253號)，專利權人：國立金門大學、發明人：李金譚、沈統鈞、蘇柏睿、吳佳駿、許宗賢、李文德、翁克偉，專利權自2017年09月21日～2027年06月05日
+執行計劃案
+
+金屬工業研究發展中心「102年度學界協助中小企業科技關懷計畫專案輔導計畫」-「金門離島中小企業觀光價值鏈創新服務」整合計畫。（執行期間自2013/05/01～2013/10/31止）
+金門縣政府「地方產業創新研發推動作畫」（地方型SBIR）- 「智慧型計程車行動派遣暨觀光導覽加值服務計畫」產學計畫案。（執行期間自2013/09/01～2014/05/31止）
+碁峰資訊股份有限公司- 「微軟MOS國際專業證照技術服務」產學計畫案。（執行期間自2013/11/01～2014/01/31止）
+碁峰資訊股份有限公司- 「微軟MOS國際專業證照技術服務」產學計畫案。（執行期間自2014/03/01～2015/02/28止）
+財團法人中華民國電腦技能基金會- 「TQC專業證照技術服務計畫」產學計畫案。（執行期間自2014/01/01～2015/12/31止）
+103年度改名國立金門大學卓越計畫-「創新3D列印實驗室建置計畫」。（執行期間自2014/10/01～2014/12/31止）
+科技部104年度「關聯式資料庫數位浮水印技術之研究」專題研究計畫；計畫編號：MOST 104-2218-E-507-002-MY2；兩年期總經費：共916,000元整。（執行期間自2015/10/01～2017/07/28止）
+教育部105年年度特色大學試辦計畫，核心計畫：金大 HERO 養成計畫─子計畫1.5「創意創業團隊」，總經費：200,000元整。（執行期間自2016/01/01～2016/12/31止）
+教育部105年年度補助款─「建構全校性虛擬雲端運算與資訊安全系統升級計畫」；一年期總經費：共2,500,000元整。（執行期間自2016/12/01～2017/08/31止）
+教育部105年年度補助款─子計畫11「自造者空間基礎建構計畫」；一年期總經費：共350,000元整。（執行期間自2016/12/01～2017/08/31止）
+科技部105年度「智慧型低碳建築創新課程研發計畫(金門農工)-子計畫三：課程研發與成效評估研究(1/3)」專題研究計畫(人才培育補助計畫)，共同主持人；計畫編號：MOST 105-2514-S-507-001-；一年期總經費：共1,005,000元整。（執行期間自2016/11/01～2017/09/30止）
+科技部106年度「智慧型低碳建築創新課程研發計畫(金門農工)-子計畫三：課程研發與成效評估研究(2/3)」專題研究計畫(人才培育補助計畫)，共同主持人；計畫編號：MOST 106-2514-S-507-001-；一年期總經費：共540,000元整。（執行期間自2017/10/01～2018/08/31止）
+教育部106年度特色大學試辦計畫，核心計畫：金大 HERO 養成計畫─子計畫1.3「創意創業團隊及創客空間」；一年期總經費：共900,000元整。（執行期間自2017/01/01～2017/10/31止）
+科技部107年度「科普活動：生活中的科學－科普活動推廣（主題三）」專題研究計畫(大眾科學教育計畫)，共同主持人；計畫編號：MOST 107-2515-S-507-002-；一年期總經費：共510,000元整。（執行期間自2018/09/01～2019/08/31止）
+科技部107年度「智慧型低碳建築創新課程研發計畫(金門農工)-子計畫三：課程研發與成效評估研究(3/3)」專題研究計畫(人才培育補助計畫)，共同主持人；計畫編號：MOST 107-2514-S-507-001-；一年期總經費：共600,000元整。（執行期間自2018/09/01～2019/07/31止）
+科技部107年度「壓縮影像資訊隱藏技術之研究」專題研究計畫；計畫編號：MOST 107-2221-E-507-002-MY3；三年期總經費：共1,801,000元整。（執行期間自2018/08/01～2021/07/31止）
+科技部108年度「科普活動：金門縣全民科學嘉年華（主題三）(大眾科學教育計畫)，共同主持人；計畫編號：MOST 108-2515-S-507-002-；一年期總經費：共700,000元整。（執行期間自2019/09/01～2020/08/31止）
+服務與榮譽
+一、榮譽與獲獎
+
+2010年獲選為金門社會優秀青年。
+2013年校慶獲頒「101學年度指導學生傑出獎」（全國級比賽榮獲前三名）。
+2014年獲頒「創校有功」獎。
+2015年榮獲金門農工傑出校友。
+2015年校慶獲頒「103學年度指導學生傑出獎」（全國級比賽榮獲前三名）。
+2015年獲頒管理學院「103學年度教學優良及傑出獎」。
+2016年校慶獲頒「104學年度貢獻傑出獎」（承接產學合作計畫表現優良）。
+2016年校慶獲頒「104學年度指導學生傑出獎」（全國級比賽榮獲前三名）。
+2016年參加「2016全國計算機綜合能力及商務專業應用大賽」，榮獲全國教師邀請賽「文書處理BAP」二等獎及「計算機綜合能力ICT」三等獎。
+2016年與李金譚老師、翁克偉老師及本校電子系許宗賢同學參加「2016亞洲智慧型機器人大賽」，榮獲機器人賽跑「社會組第一名」獎項。
+2017年導師會議獲頒「105學年度校級優良導師」。
+2017年校務會議獲頒「105學年度指導學生傑出獎」（全國級比賽榮獲前三名）。
+2018年獲頒台灣學術新創學會(TAAI)「Certificate of Young Scholar Award」in the Computer Sciences。
+2019年校慶獲頒「107學年度貢獻傑出獎」（承接產學合作計畫表現優良）。
+2020年校慶獲頒「108學年度升等成功獎」。
+2020年校慶獲頒「108學年度指導學生傑出獎」（全國級比賽榮獲前三名）。
+2020年校慶獲頒「108學年度研究傑出獎」。
+二、指導學生獲獎
+
+與李金譚老師共同指導本校電子系李孟倫同學參加「2020 (第八屆)全國計算機多媒體綜合能力與人工智能素養及商務專業應用大賽」，在「Spreadsheets電子試算表」項目獲得全國賽「季軍」獎項。 (大專院校Essential核心能力組)
+與李金譚老師共同指導本校電子系李孟倫同學參加「2020 (第八屆)全國計算機多媒體綜合能力與人工智能素養及商務專業應用大賽」，在「Spreadsheets電子試算表」項目獲得南二區區賽「冠軍」獎項。 (大專院校Essential核心能力組)
+指導本校運修系沈柏宏同學參加「2020 (第八屆)全國計算機多媒體綜合能力與人工智能素養及商務專業應用大賽」，在「Presentations商業簡報」項目獲得南二區區賽「冠軍」獎項。 (大專院校Essential核心能力組)
+指導本校運修系沈柏宏同學參加「2020 (第八屆)全國計算機多媒體綜合能力與人工智能素養及商務專業應用大賽」，在「Spreadsheets電子試算表」項目獲得南二區區賽「季軍」獎項。 (大專院校Essential核心能力組)
+與李金譚老師共同指導本校電子系高逢星、許鎔麒、鍾易瑾學生，參加「2016韓國首爾國際發明展」，在「發明類社會組」中榮獲「銀牌獎」獎狀及銀牌。Silver Prize at Seoul International Invention Fair 2016, Chia-Chun Wu, Chin-Tan Li, Feng-Xing Gao, Jung-Chi Hsu, Yi-Chin Chung, Austin Wang, and Tai-Kuei Yu， The Device That Integrated of Wind for Electrolysis, Seoul, Korea , December 1-4, 2016.
+與李金譚老師共同指導食品系學生傅承運同學，以「風向整合電解裝置」作品，參加由教育部技職司、科技部高瞻計畫辦公室及高雄市政府共同指導，並由臺灣知識創新學會與國立高雄第一科技大學所共同主辦的「2016臺灣國際創新發明暨設計競賽」，在「發明類社會組」中以「The Device That Integrated of Wind for Electrolysis」作品榮獲「金牌獎」獎狀及金牌。
+與李金譚老師、翁克偉老師及本校電子系許宗賢同學，以「K-Robot」作品參加「2016亞洲智慧型機器人大賽」，榮獲輪型機器人摸黑「大專院校組第三名」獎項。
+與李金譚老師共同指導本校電子系學生許宗賢、許鎔麒、鍾易瑾及沈統鈞同學，以「III代摩斯電子鎖」作品參加「2016亞洲智慧型機器人大賽」獲得大專院校組實務專題競賽「第一名」獎項。
+與呂立鑫老師共同指導本校食品系傅承運及社工系傅承平同學參加「2016台灣中油-新能源創意競賽」，榮獲全國「第二名」，獲頒「創意獎」獎狀及獎盃。
+與呂立鑫老師共同指導本校食品系傅承運同學參加「2016全國儲能應用專題創意競賽」，獲得「佳作」獎項。
+指導本系黃苡溱、王宣、汪鈺婷及蔡培詩同學參加2017年「第二屆校園創業競賽」，獲得「佳作」獎項。
+與林政緯老師共同指導本校「陽光天使社」社團參加由科技部舉辦的「104年科學志工火車頭計畫」成果發表會，獲頒104年度社會團體組「績優團隊」獎項。
+指導本校應英系李靜茹及李佩昀同學參加「2016全國計算機綜合能力及商務專業應用大賽」，在「計算機綜合能力ICT」項目獲得北京兩岸賽「一等獎」及「二等獎」獎項。
+指導本校應英系黃鈺婷同學參加「2016全國計算機綜合能力及商務專業應用大賽」，在「電子試算表BAP」項目獲得北京兩岸賽「一等獎」獎項。
+指導本校應英系李靜茹、江品勲及李佩昀同學參加「2016全國計算機綜合能力及商務專業應用大賽」，在「計算機綜合能力ICT」項目獲得南二區區賽「第一名」、「第二名」及「第三名」獎項。(大專院校組)
+指導本校應英系黃鈺婷及王絲芳同學參加「2016全國計算機綜合能力及商務專業應用大賽」，在「電子試算表BAP」項目獲得南二區區賽「第三名」及「金腦獎」獎項。(大專院校組)
+指導本校應英系李宣融同學參加「2016全國計算機綜合能力及商務專業應用大賽」，在「文書處理BAP」項目獲得南二區區賽「金腦獎」獎項。(大專院校組)
+與江育民主任共同指導本系學生吳凱琪、許瑜珊及沈平同學參加「第六屆CEO國際電子商務盃產業創新經營策略專題競賽」，獲得「行銷類組」賣場創意獎「第二名」獎項。(大專院校組)
+指導本系學生李皇昇、戴圳鎧及企管系王威淳同學參加「第六屆CEO國際電子商務盃產業創新經營策略專題競賽」，獲得「文創類組」「佳作」獎項。(大專院校組)
+與李金譚老師共同指導本校電子系學生高逢星及沈統鈞同學，以「智慧居家保全系統」作品參加“常平杯”「2015年首屆兩岸四地智慧型機器人大賽暨學界研發成果展」獲得「銅牌」獎項。
+與李金譚老師共同指導本校電子系學生王建鈞、沈統鈞、高逢星、蘇柏睿及陳可瑾同學，以「III代宅」作品參加「2015 Open Hardware Platform雲端應用邀請賽」獲得「Arduino應用組佳作」獎項。
+指導本校企管系鄭佳豪及楊維銘同學參加「2015世界盃電腦應用技能競賽」，在「MOS 2010 Word Expert」項目獲得全國總決賽「第八名」及「優選」獎項。(大專院校組)
+指導本系倪崇瑋、王煒智、葉美婷及伍以安同學參加「2015世界盃電腦應用技能競賽」，在「MOS 2010 Word Expert」項目獲得金門區賽「第一名」、「第六名」、「第七名」及「第八名」獎項。(大專院校組)
+指導本校企管系吳岱澂、鄭佳豪、馮永璨、楊維銘、黃偉嘉及邱鴻鈞同學參加「2015世界盃電腦應用技能競賽」，在「MOS 2010 Word Expert」項目獲得金門區賽「第二名」、「第三名」、「第四名」、「第五名」、「第九名」及「第十名」獎項。(大專院校組)
+指導本校企管系林家祿、馮永璨、李若羚及鄭集仁同學參加「2015世界盃電腦應用技能競賽」，在「MOS 2010 Excel Expert」項目獲得金門區賽「第一名」、「第四名」、「第七名」及「第八名」獎項。(大專院校組)
+指導本系王煒智、陳清誠、倪崇瑋、邱景柏及吳昀同學參加「2015世界盃電腦應用技能競賽」，在「MOS 2010 Excel Expert」項目獲得金門區賽「第二名」、「第三名」、「第五名」、「第六名」及「第九名」獎項。(大專院校組)
+指導本校國際系陳立軒同學參加「2015年全民e化資訊運動會暨BAP國際技能競賽」，在「Documents Word 2010」項目獲得全國總決賽「第五名」獎項。(大專院校組)
+指導本校土木系卓易慧及電子系鍾韋泓同學參加「2015年全民e化資訊運動會暨BAP國際技能競賽」，在「Spreadsheets Excel 2010」項目獲得全國總決賽「第三名」及「第四名」獎項。 (大專院校組)
+指導本系王煒智同學參加「2015年全民e化資訊運動會暨BAP國際技能競賽」，在「Spreadsheets Excel 2010」項目獲得全國總決賽「第七名」獎項。 (大專院校組)
+指導本系陳清誠同學參加「2015年全民e化資訊運動會暨BAP國際技能競賽」，在「Presentations PowerPoint 2010」項目獲得全國總決賽「第五名」獎項。 (大專院校組)
+指導本系陳清誠同學參加「2015年全民e化資訊運動會暨BAP國際技能競賽」，在「Presentations PowerPoint 2010」項目獲得北區區賽「第一名」獎項。
+指導本校國際系陳立軒同學參加「2015年全民e化資訊運動會暨BAP國際技能競賽」，在「Documents Word 2010」項目獲得北區區賽「第一名」獎項。
+指導本系王煒智、鍾玉鳳及本校土木系卓易慧同學參加「2015年全民e化資訊運動會暨BAP國際技能競賽」，在「Spreadsheets Excel 2010」項目獲得北區區賽「第一名」、「第二名」、「第三名」獎項。
+指導本校電子系鍾韋泓、本系駱穎怡及陳冠維同學同學參加「2015年全民e化資訊運動會暨BAP國際技能競賽」，在「Spreadsheets Excel 2010」項目分別獲得北區區賽「第四名」、「第五名」及「第六名」獎項。
+與陳奇中副校長共同指導本校交換生謝嘉豪、鄧磊同學及本系方柏鈞及林允斌同學參加「第五屆CEO國際電子商務盃產業創新經營策略專題競賽」，獲得「國際組」影片創意獎「第一名」獎項。
+與歐宗殷老師共同指導本系學生邱增盛、陳清誠、王怡文、王重諭及曾凱翌同學參加「第五屆CEO國際電子商務盃產業創新經營策略專題競賽」，獲得「行銷組」影片創意獎「第一名」獎項。
+與陳奇中副校長指導本校交換生謝嘉豪、鄧磊同學及本系方柏鈞及林允斌同學參加「第五屆CEO國際電子商務盃產業創新經營策略專題競賽」，獲得「國際組」團體獎「第四名」獎項。
+與李金譚老師共同指導本校電子系學生林柏佑、鄭威遠、陳盈達及許元豪同學參加由教育部舉辦的「2015國際智慧型人形機器人競賽」獲得「第一名」獎項。(大專組-無動力競賽-創意組-畢業旅行)
+與李金譚老師共同指導本校電子系學生簡廷融、蘇柏睿、沈統鈞及高逢星同學參加由教育部舉辦的「2015國際智慧型人形機器人競賽」獲得「第二名」獎項。(大專組-無動力競賽-創意組-阿帕契隊)
+與李金譚老師共同指導本校電子系學生陳可瑾、黎彥汝、陳湘旻及蕭閔雲同學參加由教育部舉辦的「2015國際智慧型人形機器人競賽」獲得「佳作」獎項。(大專組-無動力競賽-創意組-小花隊)
+與李金譚老師共同指導本校電子系學生陳可瑾、黎彥汝、陳湘旻及蕭閔雲同學參加由教育部舉辦的「2015國際智慧型人形機器人競賽」獲得「第三名」獎項。(大專組-無動力競賽-一般組-小花隊)
+與李金譚老師共同指導本校電子系學生簡廷融、蘇柏睿、沈統鈞及高逢星同學參加由教育部舉辦的「2015國際智慧型人形機器人競賽」獲得「佳作」獎項。(大專組-無動力競賽-一般組-無重力)
+與李金譚老師共同指導本校電子系學生林柏佑、鄭威遠、陳盈達及許元豪同學參加由教育部舉辦的「2015國際智慧型人形機器人競賽」獲得「佳作」獎項。(大專組-無動力競賽-一般組-221lab)
+與李金譚老師共同指導本系學生鍾玉鳳、駱穎怡及王煒智同學參加由教育部舉辦的「2015國際智慧型人形機器人競賽」獲得「佳作」獎項。(大專組-無動力競賽-一般組-金大工管萬萬歲)
+指導本系學生葉怡青、陳鈺儒、王薏婷、黃帟凱、王婉慈、鄭日強、陳怡安、李祈昌、邱增盛、陳清誠、王怡文、方柏鈞、曾凱翌及陳彥誠同學參加「2014年行動商務網路行銷技能競賽」獲得「佳作」獎項。
+指導本校電子系鄭力元、曾浚宥、吳怡靚、李佑泰及胡德宥同學參加「2014年行動商務網路行銷技能競賽」獲得「佳作」獎項。
+指導本校應英系黃竑立同學參加「全國大專校院YouBoook電子書創作大賽」獲得「最佳評審作品獎」。
+擔任本校102學年度社團指導老師，指導「陽光天使社」榮獲本校103年社團評鑑「優等獎」
+擔任本校103學年度社團指導老師，指導「陽光天使社」榮獲本校104年學生社團及學生自治組識評鑑暨觀摩活動「績優獎」
+擔任本校104學年度社團指導老師，指導「陽光天使社」榮獲本校105年學生社團及學生自治組識評鑑暨觀摩活動「優等獎」
+與李金譚老師共同指導本校學生王建鈞及李依樺同學參加「2013年全國智慧型機器人大賽」獲得「第一名」獎項。(自走車相撲-社會組C組)
+與李金譚老師共同指導本校學生王建鈞、王奕博、張博偉及羅啟銘同學參加「2013年全國智慧型機器人大賽」獲得「第二名」獎項。(自走車相撲-社會組C組)
+與李金譚老師共同指導本校學生陳迪生、湯子觀、陳冠安及林佳慧同學參加「2013年全國智慧型機器人大賽」獲得「第三名」獎項。(大專院校C組C01-機器人賽跑)
+與李金譚老師共同指導本校學生李侑儒、林柏佑及林韋辰同學參加由教育部舉辦的「2013 國際智慧人形機器人競賽」獲得「第一名」獎項。(大專組-無動力競賽-創意組)
+與李金譚老師共同指導本校學生王建鈞及李依樺同學參加由教育部舉辦的「2013 國際智慧人形機器人競賽」獲得「第二名」獎項。(大專組-無動力競賽-一般組)
+與林政緯老師共同指導華攸博同學參加由教育部青年發展署舉辦的「102年獎勵服務學習研究計畫」學生組榮獲「優等獎」獎項。
+與林政緯老師共同指導本校「陽光天使社」社團參加由教育部青年發展署舉辦的「102 年青年志工績優團隊全國競賽」前10名入圍決選。(社區服務類： 第七屆金沙國小課後伴讀與晨光教養家園服務)
+與林政緯老師共同指導本校「陽光天使社」社團參加由國際傑人會中華民國總會舉辦的「第二十一屆傑青獎選拔」表現優異。
+指導本系杜邦、林允斌、黃譯霆、林家安同學參加「第二屆金門縣青年志工籃球比賽」，榮獲「男子組第一名」獎項。
+指導本系李祈昌、陶光柏、黃帟凱同學參加「第二屆金門縣青年志工籃球比賽」，榮獲「男子組第二名」獎項。
+指導本系王薇婷、陳俞帆、駱穎怡、黃玉甄同學參加「第二屆金門縣青年志工籃球比賽」，榮獲「女子組第三名」獎項。
+與李金譚老師共同指導本校學生李依樺、鄭怡婷、于傳弘及張舜傳同學，以「金大一號」作品參加「2013亞洲機器人運動競技大賽」獲得「佳作」獎項。(A08-實務專題競賽-大專院校組)
+與李金譚老師共同指導本校學生林佳慧、陳冠安、陳迪生及湯子觀同學，以「寵物智慧屋」作品參加「2013亞洲機器人運動競技大賽」獲得「佳作」獎項。(A08-實務專題競賽-大專院校組)
+與李金譚老師共同指導本校學生黃安琪同學，以「哦嗨唷」作品參加「2013亞洲智慧型機器人大賽」獲得大專院校組「第三名」獎項。(C02-輪式機器人循跡-大專院校組)
+與李金譚老師共同指導本校學生詹鈞丞、凃佑諭、王敬陽及鄧杰人同學，以「金門之守護者」作品參加「2013亞洲智慧型機器人大賽」獲得大專院校組「第四名」獎項。(C02-輪式機器人循跡-大專院校組)
+與李金譚老師共同指導本校學生林柏佑、王建鈞及文胤臣同學參加由教育部舉辦的「2014 國際智慧型人形機器人競賽」獲得「第一名」獎項。(大專組-無動力競賽-創意組)
+與李金譚老師共同指導本校學生林柏佑、王建鈞及文胤臣同學參加由教育部舉辦的「2014 國際智慧型人形機器人競賽」獲得「佳作」獎項。(大專組-無動力競賽-一般組)
+指導本校學生林聖涵及蔡育辰同學，參加「第四屆簡報達人頂尖新秀爭霸戰之決戰2014世界盃」晉級決賽，獲得「佳作」獎項。(大專院校組)
+瀏覽數:2856
+友善列印
+Line Facebook twitter
+
+傳真：(082)313529
+電話：(082)313531
+意見信箱：csie@email.nqu.edu.tw
+地址：金門縣金寧鄉大學路一號
