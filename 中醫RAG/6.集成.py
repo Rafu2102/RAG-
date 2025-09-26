@@ -9,7 +9,7 @@ def file_chunk_list():
 # ========================================================
 
     # 讀取整個文件
-    with open("RAG\knowledge\文件.txt" , encoding='utf-8' , mode='r') as fp:
+    with open("RAG/中醫RAG/knowledge/中醫診療配方.txt", encoding='utf-8' , mode='r') as fp:
         data=fp.read()
 
     # 根據空行分段
