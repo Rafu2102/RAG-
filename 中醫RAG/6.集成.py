@@ -9,7 +9,7 @@ def file_chunk_list():
 # ========================================================
 
     # 讀取整個文件
-    with open("RAG/中醫RAG/knowledge/中醫診療配方.txt", encoding='utf-8' , mode='r') as fp:
+    with open(r"knowledge\中醫診療配方.txt", encoding='utf-8' , mode='r') as fp:
         data=fp.read()
 
     # 根據空行分段
@@ -79,7 +79,7 @@ def initial():
 def run():
 
     # 查詢關鍵字
-    qs = "風寒感冒"
+    qs = "我肚子好痛我可能是怎麼了?請開給我處方。"
 
     # 把關鍵字也向量化
     qs_embedding = ollama_embedding_by_api(qs)

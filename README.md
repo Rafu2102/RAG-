@@ -15,7 +15,7 @@
 
 * 1、讀取文件內容:
 
-        with open("knowledge/文件.txt" , encoding='utf-8' , mode='r') as fp:
+        with open(r"knowledge\中醫診療配方.txt", encoding='utf-8' , mode='r') as fp:
 
             data=fp.read()
 
@@ -71,7 +71,7 @@
 
     # 1、讀取文件內容
 
-        with open("knowledge/文件.txt" , encoding='utf-8' , mode='r') as fp:
+        with open(r"knowledge\中醫診療配方.txt" , encoding='utf-8' , mode='r') as fp:
             data=fp.read()
 
     # 2、根據換行分段
@@ -197,7 +197,7 @@
     # ========================================================
 
         # 讀取整個文件
-        with open("D:\網頁\RAG\knowledge\文件.txt" , encoding='utf-8' , mode='r') as fp:
+        with open(r"knowledge\中醫診療配方.txt", encoding='utf-8' , mode='r') as fp:
             data=fp.read()
 
         # 根據空行分段
