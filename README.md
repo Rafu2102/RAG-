@@ -35,9 +35,9 @@
 
 也可使用像GPT提供的開源模型
 
-* 2、本地下載nomic-embed-text模型
+* 2、本地下載bge-m3模型
 
-        ollama pull nomic-embed-text
+        ollama pull bge-m3
 
 * 3、啟動ollama進行向量化
 
@@ -52,7 +52,7 @@
         res = requests.post(
             url="http://127.0.0.1:11434/api/embeddings",
             json={
-                "model": "nomic-embed-text",
+                "model": "bge-m3",
                 "prompt": text
             }
         )
@@ -85,7 +85,7 @@
         res = requests.post(
             url="http://127.0.0.1:11434/api/embeddings",
             json={
-                "model": "nomic-embed-text",
+                "model": "bge-m3",
                 "prompt": text
             }
         )
@@ -156,13 +156,13 @@
 
 ## 第四步 -- 文本推理模型
 
-這邊使用deepseek作為推理模型
+這邊使用ollama作為推理模型
 
 來整理資料庫的資料
 
 ### 1、安裝
 
-    ollama pull deepseek-r1:70b
+    ollama pull llama3.1:8b
 
 ### 2、使用
 
@@ -173,7 +173,7 @@
     response=response.post(
         url="http://127.0.0.1:11434/api/generate",
         json={
-            "model": "deepseek-r1:70b",
+            "model": "llama3.1:8b",
             "prompt": prompt,
             "stream":False
         }
