@@ -1,0 +1,134 @@
+### LLM settings ###
+models:
+  default_chat_model:
+    type: openai_chat
+    auth_type: api_key
+    api_key: ollama                # 隨便字串即可，Ollama不驗證
+    api_base: http://127.0.0.1:11434/v1
+    model: llama3.1:8b
+    encoding_model: cl100k_base             # Ollama 拉下來的模型名
+    model_supports_json: false     # llama3.1:8b 不支援強制 JSON，就關掉
+    concurrent_requests: 2
+    async_mode: threaded
+    retry_strategy: native
+    max_retries: 5
+    tokens_per_minute: null
+    requests_per_minute: null
+
+  default_embedding_model:
+    type: openai_embedding
+    auth_type: api_key
+    api_key: ollama
+    api_base: http://127.0.0.1:11434/v1
+    model: bge-m3
+    encoding_model: cl100k_base # Ollama 拉下來的 embedding 模型
+    model_supports_json: false
+    concurrent_requests: 2
+    async_mode: threaded
+    retry_strategy: native
+    max_retries: 5
+    tokens_per_minute: null
+    requests_per_minute: null
+
+### Input settings ###
+input:
+  storage:
+    type: file
+    base_dir: "input"
+  file_type: text
+
+chunks:
+  size: 1200
+  overlap: 100
+  group_by_columns: [id]
+
+### Output/storage settings ###
+output:
+  type: file
+  base_dir: "output"
+
+cache:
+  type: file
+  base_dir: "cache"
+
+reporting:
+  type: file
+  base_dir: "logs"
+
+vector_store:
+  default_vector_store:
+    type: lancedb
+    db_uri: output\lancedb
+    container_name: default
+    overwrite: True
+
+### Workflow settings ###
+embed_text:
+  model_id: default_embedding_model
+  vector_store_id: default_vector_store
+
+extract_graph:
+  model_id: default_chat_model
+  prompt: "prompts/extract_graph.txt"
+  entity_types: [organization,person,geo,event]
+  max_gleanings: 1
+
+summarize_descriptions:
+  model_id: default_chat_model
+  prompt: "prompts/summarize_descriptions.txt"
+  max_length: 500
+
+extract_graph_nlp:
+  text_analyzer:
+    extractor_type: regex_english
+  async_mode: threaded
+
+cluster_graph:
+  max_cluster_size: 10
+
+extract_claims:
+  enabled: false
+  model_id: default_chat_model
+  prompt: "prompts/extract_claims.txt"
+  description: "Any claims or facts that could be relevant to information discovery."
+  max_gleanings: 1
+
+community_reports:
+  model_id: default_chat_model
+  graph_prompt: "prompts/community_report_graph.txt"
+  text_prompt: "prompts/community_report_text.txt"
+  max_length: 2000
+  max_input_length: 8000
+
+embed_graph:
+  enabled: false
+
+umap:
+  enabled: false
+
+snapshots:
+  graphml: false
+  embeddings: false
+
+### Query settings ###
+local_search:
+  chat_model_id: default_chat_model
+  embedding_model_id: default_embedding_model
+  prompt: "prompts/local_search_system_prompt.txt"
+
+global_search:
+  chat_model_id: default_chat_model
+  map_prompt: "prompts/global_search_map_system_prompt.txt"
+  reduce_prompt: "prompts/global_search_reduce_system_prompt.txt"
+  knowledge_prompt: "prompts/global_search_knowledge_system_prompt.txt"
+
+drift_search:
+  chat_model_id: default_chat_model
+  embedding_model_id: default_embedding_model
+  prompt: "prompts/drift_search_system_prompt.txt"
+  reduce_prompt: "prompts/drift_search_reduce_prompt.txt"
+
+basic_search:
+  chat_model_id: default_chat_model
+  embedding_model_id: default_embedding_model
+  prompt: "prompts/basic_search_system_prompt.txt"
