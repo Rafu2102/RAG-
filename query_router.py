@@ -231,10 +231,10 @@ def _extract_metadata_by_rules(question: str) -> dict:
             mapping = {"一": "1", "二": "2", "上": "1", "下": "2", "1": "1", "2": "2"}
             filters["semester"] = mapping.get(sem_str, sem_str)
     else:
-        # 單獨檢查學期 (如 "上學期", "第1學期")
-        sem_match = re.search(r"第([一二12])學期|([上下])學期", question)
+        # 單獨檢查學期 (如 "大一上", "二下", "上學期", "第1學期")
+        sem_match = re.search(r"(?:大[一二三四]|[一二三四]|碩[一二])([上下])|第([一二12])學期|([上下])學期", question)
         if sem_match:
-            sem_str = sem_match.group(1) or sem_match.group(2)
+            sem_str = sem_match.group(1) or sem_match.group(2) or sem_match.group(3)
             mapping = {"一": "1", "二": "2", "上": "1", "下": "2", "1": "1", "2": "2"}
             filters["semester"] = mapping.get(sem_str, sem_str)
 
@@ -261,12 +261,12 @@ def _extract_metadata_by_rules(question: str) -> dict:
     elif any(kw in question for kw in ["資工", "資訊工程"]):
         filters["dept_short"] = "資工系"
 
-    # ── 年級檢查 ──
+    # ── 年級檢查 (支援口語和口誤) ──
     grade_patterns = {
-        r"大一|一年級": "一",
-        r"大二|二年級": "二",
-        r"大三|三年級": "三",
-        r"大四|四年級": "四",
+        r"大一|一年級|第一(?=[上下])|(?<=資工)一|資一": "一",
+        r"大二|二年級|第二(?=[上下])|(?<=資工)二|資二": "二",
+        r"大三|三年級|第三(?=[上下])|(?<=資工)三|資三": "三",
+        r"大四|四年級|第四(?=[上下])|(?<=資工)四|資四": "四",
         r"碩一|研一|碩班一年級": "碩一",
         r"碩二|研二|碩班二年級": "碩二",
     }
