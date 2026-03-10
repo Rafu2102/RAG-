@@ -1,0 +1,85 @@
+國立金門大學114學年度第2學期資工系課程
+學年度：114學年度
+學期：第2學期
+課程名稱：資訊科技英文導論 (English for Information Technology)
+部別：日間部學士班
+開課班級：資工一
+學分數：3.0學分
+授課時數：3.0小時
+授課教師：李錫捷
+必選修：必修
+教室：E320多媒體實驗室
+修課上限人數：60人
+上課時間：每周星期一下午第5節~下午第7節
+
+課程教學目標：
+1. You’ll build the language skills you need through short, engaging video lessons, hands-on vocabulary and grammar practice, and interactive reading and listening activities. Each course focuses on practical English—so you’ll be ready to collaborate with your team, manage tasks, offer advice, and take part in online tech communities. By the end, you’ll be better equipped to share ideas, solve problems, and succeed in international IT environments.
+
+課程教學綱要：
+1. Practice English in real-world IT scenarios, including cybersecurity, software development, AI prompting, data analysis, DevOps, quality assurance, machine learning, project management, tech support, UX/UI, community management, and game design.
+2. English for IT: Describing and Comparing
+3. English for IT: Advice and Time
+4. English for IT: Needs and Responsibilities
+5. English for IT: People and Quantities
+
+教科書資料：
+1. 書名：cisco.netacad.net
+2. 出版日期：未標註
+3. 作者：未標註
+4. 出版社：未標註
+5. 版本：未標註
+
+參考書資料：
+1-1. 書名：Computers - Information Technology in Perspective
+1-2. 出版日期：未標註
+1-3. 作者：Larry Long and Nancy Long
+1-4. 出版社：Pearson Prentice Hall
+1-5. 版本：未標註
+
+2-1. 書名：Computer Science: An Overview
+2-2. 出版日期：未標註
+2-3. 作者：J. Glenn Brookshear
+2-4. 出版社：Pearson Education, Inc.
+2-5. 版本：未標註
+
+3-1. 書名：Oxford English for Information Technology
+3-2. 出版日期：未標註
+3-3. 作者：Eric H. Glendinning and John McEwan
+3-4. 出版社：Oxford University Press
+3-5. 版本：未標註
+
+4-1. 書名：Infotech - English for Computer Users
+4-2. 出版日期：未標註
+4-3. 作者：Santiago Remacha Esteras
+4-4. 出版社：Cambridge University Express
+4-5. 版本：未標註
+
+※請遵守智慧財產權觀念，依著作權法規定，教科書及教材不得非法影印與使用盜版軟體。
+
+教學進度表（2026年春季學期）：
+第1週課程 (2026/02/22─2026/02/28)：Improving Performance
+第2週課程 (2026/03/01─2026/03/07)：Your Digital Helpers
+第3週課程 (2026/03/08─2026/03/14)：Your Digital Thinkers
+第4週課程 (2026/03/15─2026/03/21)：Monitoring a Project
+第5週課程 (2026/03/22─2026/03/28)：Working Together
+第6週課程 (2026/03/29─2026/04/04)：Progress Updates
+第7週課程 (2026/04/05─2026/04/11)：Improving Collaboration
+第8週課程 (2026/04/12─2026/04/18)：Midterm Exam
+第9週課程 (2026/04/19─2026/04/25)：Watching it Work
+第10週課程 (2026/04/26─2026/05/02)：Workflow in Action
+第11週課程 (2026/05/03─2026/05/09)：Understanding Good Quality
+第12週課程 (2026/05/10─2026/05/16)：Basic Describing and Comparing
+第13週課程 (2026/05/17─2026/05/23)：Better Tools, Better Results
+第14週課程 (2026/05/24─2026/05/30)：Make Life Easier and Ask the Right Questions
+第15週課程 (2026/05/31─2026/06/06)：Key Terms
+第16週課程 (2026/06/07─2026/06/13)：Final Exam
+第17週課程 (2026/06/14─2026/06/20)：彈性補充教學(自主學習、探究與實作)
+第18週課程 (2026/06/21─2026/06/27)：彈性補充教學(自主學習、探究與實作)
+
+成績評定方式：
+1. Quiz/HWs：占總成績35%
+2. Midterm：占總成績30%
+3. Final：占總成績35%
+
+課堂要求：
+無詳細課堂要求說明

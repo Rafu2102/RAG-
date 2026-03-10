@@ -1,0 +1,74 @@
+國立金門大學114學年度第1學期資工系課程
+學年度：114學年度
+學期：第1學期
+課程名稱：人工智慧導論 (Introduction to Artificial Intelligence)
+部別：日間部學士班
+開課班級：資工三
+學分數：3.0學分
+授課時數：3.0小時
+授課教師：李錫捷
+必選修：選修
+教室：E320多媒體實驗室
+修課上限人數：60人
+上課時間：每周星期一下午第5節~下午第7節
+
+課程教學目標：
+1. This course will introduce modern Data Mining knowledge with hands on experiences. A variety of AI or data mining programs will be introduced and used in the class with a focus on WEKA.
+
+課程教學綱要：
+1. Introduction to WEKA
+2. Introduction to Data Mining
+3. Deep Learning with TensorFlow+Keras
+
+教科書資料：
+1. 書名：Data Mining - Practical Machine Learning Tools and Techniques Ian H. Witten, Eibe Frank, Mark A. Hall, and Christopher J. Pal Morgan Kaufmann (an imprint of Elsevier)
+2. 出版日期：未標註
+3. 作者：Ian H. Witten, Eibe Frank, Mark A. Hall, and Christopher J. Pal
+4. 出版社：Morgan Kaufmann (an imprint of Elsevier)
+5. 版本：未標註
+
+參考書資料：
+1-1. 書名：人工智慧實務
+1-2. 出版日期：未標註
+1-3. 作者：謝政勳、廖先洲，李聯旺編譯
+1-4. 出版社：全華
+1-5. 版本：未標註
+
+2-1. 書名：TensorFlow+Keras深度學習人工智慧實務應用
+2-2. 出版日期：未標註
+2-3. 作者：林大貴
+2-4. 出版社：博碩
+2-5. 版本：未標註
+
+3-1. 書名：Data Mining - Practical Machine Learning Tools and Techniques
+3-2. 出版日期：未標註
+3-3. 作者：Ian H. Witten, Eibe Frank, Mark A. Hall, and Christopher J. Pal
+3-4. 出版社：Morgan Kaufmann (an imprint of Elsevier)
+3-5. 版本：未標註
+
+※請遵守智慧財產權觀念，依著作權法規定，教科書及教材不得非法影印與使用盜版軟體。
+
+教學進度表（2025年秋季學期）：
+第1週課程 (2025/09/14─2025/09/20)：Introduction to AI, Data Mining
+第2週課程 (2025/09/21─2025/09/27)：Getting started with Weka
+第3週課程 (2025/09/28─2025/10/04)：Evaluation
+第4週課程 (2025/10/05─2025/10/11)：Simple classifiers
+第5週課程 (2025/10/12─2025/10/18)：More classifiers
+第6週課程 (2025/10/19─2025/10/25)：Putting it all together
+第7週課程 (2025/10/26─2025/11/01)：Exploring Weka's interfaces, and working with big data
+第8週課程 (2025/11/02─2025/11/08)：Midterm Project
+第9週課程 (2025/11/09─2025/11/15)：Exploring the Experimenter
+第10週課程 (2025/11/16─2025/11/22)：Classification rules, association rules, and clustering
+第11週課程 (2025/11/23─2025/11/29)：Selecting attributes and counting the cost
+第12週課程 (2025/11/30─2025/12/06)：Neural networks, learning curves, and performance optimization
+第13週課程 (2025/12/07─2025/12/13)：Time series forecasting
+第14週課程 (2025/12/14─2025/12/20)：Image Filters and Their Applications
+第15週課程 (2025/12/21─2025/12/27)：Hands-on Experiences with Generative AI
+第16週課程 (2025/12/28─2026/01/03)：Final Project
+第17週課程 (2026/01/04─2026/01/10)：彈性補充教學(自主學習、探究與實作)
+第18週課程 (2026/01/11─2026/01/17)：彈性補充教學(自主學習、探究與實作)
+
+成績評定方式：
+1. Hws：占總成績30%
+2. Midterm report：占總成績30%
+3. Final project：占總成績40%

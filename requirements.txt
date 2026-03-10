@@ -1,0 +1,29 @@
+# NQU Campus Assistant RAG Chatbot - Dependencies
+# ================================================
+
+# LlamaIndex Core
+llama-index-core>=0.11.0
+
+# LangChain
+langchain>=0.2.0
+langchain-community>=0.2.0
+
+# Vector Store & Search
+faiss-cpu>=1.7.4
+rank-bm25>=0.2.2
+
+# Chinese Text Processing
+jieba>=0.42.1
+
+# Reranker (Cross-Encoder)
+sentence-transformers>=3.0.0
+
+# ML Framework
+torch>=2.1.0
+transformers>=4.40.0
+
+# HTTP Requests (for Ollama API)
+requests>=2.31.0
+
+# CLI Enhancement
+rich>=13.7.0

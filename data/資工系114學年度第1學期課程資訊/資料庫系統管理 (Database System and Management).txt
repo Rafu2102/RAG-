@@ -1,0 +1,63 @@
+國立金門大學114學年度第1學期資工系課程
+學年度：114學年度
+學期：第1學期
+課程名稱：資料庫系統管理 (Database System and Management)
+部別：日間部學士班
+開課班級：資工二
+學分數：3.0學分
+授課時數：3.0小時
+授課教師：馮玄明
+必選修：必修
+教室：I102圖資電腦教室
+修課上限人數：70人
+上課時間：每周星期一下午第5節~下午第7節
+
+課程教學目標：
+1. Database design and management concept
+2. Familiar with database platform
+
+課程教學綱要：
+1. Introduction BACKGROUND
+2. THE RELATIONAL MODEL AND LANGUAGES
+3. DATABASE ANALYSIS AND DESIGN
+4. METHODOLOGY in database
+
+教科書資料：
+1. 書名：Database System -A practical approach to design, implememtion, and Management
+2. 出版日期：未標註
+3. 作者：Thomas Connoly & Carolyn Begg
+4. 出版社：Pearson
+5. 版本：未標註
+
+參考書資料：
+無參考書
+
+※請遵守智慧財產權觀念，依著作權法規定，教科書及教材不得非法影印與使用盜版軟體。
+
+教學進度表（2025年秋季學期）：
+第1週課程 (2025/09/14─2025/09/20)：Introduction to Databases 資料庫簡介
+第2週課程 (2025/09/21─2025/09/27)：Database Environment structure 資料庫環境架構
+第3週課程 (2025/09/28─2025/10/04)：Database Architecture and the web 資料庫架構與Web
+第4週課程 (2025/10/05─2025/10/11)：The Relational Model 關聯式資料模型
+第5週課程 (2025/10/12─2025/10/18)：Relational Algebra and Relational Calculus 關聯式代數與計算
+第6週課程 (2025/10/19─2025/10/25)：SQL: Data Manipulation SQL數據操作
+第7週課程 (2025/10/26─2025/11/01)：SQL: Data Definition SQL資料定義
+第8週課程 (2025/11/02─2025/11/08)：Advance SQL 進階SQL
+第9週課程 (2025/11/09─2025/11/15)：middle Exam 期中考
+第10週課程 (2025/11/16─2025/11/22)：Query-by-Example 實例查詢
+第11週課程 (2025/11/23─2025/11/29)：Database Analysis and the Case Study 資料庫分析和案例研究
+第12週課程 (2025/11/30─2025/12/06)：Entity-Relationship Modeling 實體關係建模
+第13週課程 (2025/12/07─2025/12/13)：Enhanced Entity-Relationship Modeling 進階實體關係建模
+第14週課程 (2025/12/14─2025/12/20)：Normalization 標準化
+第15週課程 (2025/12/21─2025/12/27)：Advanced Normalization 進階標準化
+第16週課程 (2025/12/28─2026/01/03)：Final EXAM 資料庫設計
+第17週課程 (2026/01/04─2026/01/10)：Final Reports 期末
+第18週課程 (2026/01/11─2026/01/17)：Final Reports 期末報告
+
+成績評定方式：
+1. Middle：占總成績30%
+2. Final：占總成績40%
+3. Other (reports)：占總成績30%
+
+課堂要求：
+1. 申請安心就學方案的學生成績可依規定另外計算.
