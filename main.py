@@ -158,6 +158,19 @@ def rag_pipeline(
         memory.add_assistant_message(answer_obj.answer)
         return answer_obj.answer
 
+    # 【Agentic 攔截：無明確課程特徵的 General 查詢短路】
+    # 當分類為 general，且沒有抓到任何跟實體課程有關的條件時（不計入預設塞入的 semester/academic_year）
+    core_filters = {k: v for k, v in route_result.metadata_filters.items() if k not in ["semester", "academic_year"]}
+    if route_result.query_type == "general" and not core_filters:
+        logger.info("  [dim]⚠️ 偵測到無具體課程過濾條件的一般/通用提問，啟動直接對答防護（跳過 RAG 檢索）[/dim]")
+        # 因為沒資料可找，直接叫 LLM 把問題當成閒聊或通用對話回答
+        from llm_answer import generate_chitchat_answer
+        # 可以稍微調整系統 prompt，或直接復用 chitchat 邏輯
+        answer_obj = generate_chitchat_answer(question, memory)
+        memory.add_user_message(question)
+        memory.add_assistant_message(answer_obj.answer)
+        return answer_obj.answer
+
     # 【優化】精確查詢跳過 Multi-query 擴充
     if "course_name_keyword" in route_result.metadata_filters and route_result.query_type in ["course_info", "grading", "schedule", "textbook", "syllabus"]:
         queries = [question]  # 精確查詢，捨棄 LLM 擴充的 queries
