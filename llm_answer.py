@@ -152,7 +152,11 @@ USER_CONTEXT_PROMPT = """[檢索到的課程資料]
 [使用者問題]
 {question}
 
-請嚴格遵守上方的【核心防幻覺指令】、【推理規則】與【輸出格式指令】，給出最終回答："""
+📝 系統提示：本次檢索共找到 【{course_count}】 門不同的課程。
+請嚴格遵守上方的【核心防幻覺指令】、【推理規則】與【輸出格式指令】。
+如果你選擇了「情況二」的清單格式，請確保你的清單中【必須剛好有 {course_count} 項】，絕對不允許遺漏任何一門課！
+
+請給出最終回答："""
 
 
 # =============================================================================
@@ -224,10 +228,19 @@ def generate_answer(
 
     context = "\n\n".join(context_items) if context_items else "（無相關資料）"
 
+    unique_courses = set()
+    for chunk in chunks:
+        if chunk.final_score >= 0.0:
+            course_name = chunk.node.metadata.get("course_name")
+            if course_name:
+                unique_courses.add(course_name)
+    course_count = len(unique_courses)
+
     # ── 組合 prompt（拆分為 System 規則 + User 資料，防止 TAIDE 忽略 context）──
     user_prompt = USER_CONTEXT_PROMPT.format(
         context=context,
         question=query,
+        course_count=course_count
     )
 
     # ── 呼叫 Ollama API ──
