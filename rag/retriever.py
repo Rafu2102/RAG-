@@ -30,8 +30,8 @@ from llama_index.core.schema import TextNode
 import json
 import re
 import config
-from data_loader import ollama_embed_query, tokenize_chinese
-from query_router import RouteResult
+from .data_loader import ollama_embed_query, tokenize_chinese
+from .query_router import RouteResult
 from concurrent.futures import ThreadPoolExecutor
 
 logger = logging.getLogger(__name__)
@@ -557,13 +557,13 @@ def _apply_hard_metadata_filter(
 # =============================================================================
 if __name__ == "__main__":
     config.setup_logging()
-    from data_loader import load_and_index
+    from .data_loader import load_and_index
 
     print("载入索引...")
     nodes, faiss_idx, bm25_idx = load_and_index()
 
     # 測試路由
-    from query_router import route_query
+    from .query_router import route_query
     question = "深度學習的教科書是什麼？"
     route = route_query(question)
     print(f"\n❓ {question}")

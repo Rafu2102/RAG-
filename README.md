@@ -35,12 +35,14 @@
 | 🔄 **Cross-Encoder Reranker** | bge-reranker-large 精細重排，Top-30 → Top-8，GPU batch=16 |
 | 📅 **多學期動態支援** | 自動檢測最新學期，支援 `114上`、`114年第1學期` 等口語化時間查詢 |
 | 🔗 **One-shot Router+Rewrite** | 合併路由分類與查詢改寫為**單次 LLM 呼叫**，省去重複載入開銷 |
-| 🤖 **Agentic RAG Bypass** | 3B 小模型辨識意圖 (Chitchat Bypass)，閒聊 ~1 秒直通不佔 RAG 資源 |
+| 📅 **Google Calendar Agent** | Llama 3 意圖轉譯，支援排課 (自動建立 18 週循環)、自訂事件 (生日/開會) 定位與學校既定行程寫入 |
+| 🛡️ **安全行事曆防呆** | 賦予 Agent 行事曆**移除權限**，並透過嚴格的所有權 (Ownership) `source` 標籤比對，確保**絕對不誤刪**使用者私人事件 |
+| 🤖 **Agentic Bypass 高速通道** | 偵測為閒聊、刪除事件、或自訂行程時，直接從主流程**短路攔截 (Bypass)**，省去神經網路檢索運算，回應速度小於 5 秒 |
 | 🧠 **VRAM 死亡交叉防護** | 3B `keep_alive=0` 卸載 + Pipeline 後 `gc.collect()` + `torch.cuda.empty_cache()` |
 | 📜 **XML 嚴格輸出鎖定** | 採 `<example_format>` 強制模板束縛，絕對拒絕 LLM 說廢話及亂印課表 |
 | 🧩 **智慧區段感知 Chunking** | 短區段（≤512 字）保持完整不切；僅超長區段啟動 SentenceSplitter |
 | ⚡ **GPU 加速 (CUDA)** | 自動偵測 GPU (PyTorch)，Reranker batch=16 壓榨 8GB VRAM |
-| 🇹🇼 **繁體中文最佳化** | Regex 解碼器 + 口語翻譯蒟蒻 (禮拜二→星期二，grading→成績評定) |
+| 🇹🇼 **繁中在地化與同義詞拓撲** | Regex 解碼器 + 口語翻譯蒟蒻 (禮拜二→星期二，加退選→停修)，另於 System Prompt 動態硬性注入絕對台灣時區與星期，使 相對時間 (如:下週二) 推算 100% 精準 |
 
 ---
 
@@ -55,41 +57,39 @@
 │  (query_router.py)            │     JSON Schema 強制格式
 │  · 問題分類 + Metadata 提取   │     keep_alive=0 VRAM 防護
 │  · Multi-query 改寫 (×3)      │
-│  · 閒聊短路判定               │
-└──────────┬────────────────────┘
-           ▼
-┌────────────────────────────────────┐
-│  Step 2: Hybrid Retriever           │
-│  (retriever.py)                     │
-│                                     │
-│  ┌─ 並行 Embedding (ThreadPool) ─┐ │
-│  │  Q1, Q2, Q3 → Ollama Embed   │ │
-│  └───────────┬───────────────────┘ │
-│              ▼                      │
-│  ┌──────────┐  ┌──────────┐        │
-│  │ Vector   │  │ BM25     │  ← 並行│
-│  │ (FAISS)  │  │ (jieba)  │        │
-│  └────┬─────┘  └────┬─────┘        │
-│       ▼              ▼              │
-│  ┌─────────────────────────┐       │
-│  │ RRF Fusion               │       │
-│  │ score = α·V + β·B + γ·M │       │
-│  │ + Hard Metadata Filter   │       │
-│  └─────────────────────────┘       │
-└──────────┬─────────────────────────┘
-           ▼
-┌──────────────────────┐
-│  Step 3: Reranker     │  ← bge-reranker-large (cross-encoder)
-│  (reranker.py)        │     Top-30 → Top-8, GPU batch=16
-│                       │     + VRAM GC (gc + empty_cache)
-└──────────┬───────────┘
-           ▼
-┌──────────────────────┐
-│  Step 4: LLM Answer   │  ← Llama 3.1 8B (Ollama - 8k Context)
-│  (llm_answer.py)      │     精簡 Prompt + 口語化問答
-└──────────┬───────────┘
-           ▼
-    回答 + 來源標註
+│  · 閒聊/行事曆短路判定        │
+└──────────┬───────────┬────────┘
+           │           │
+           │           ▼
+           │  ┌───────────────────────────────┐
+           │  │  Agentic Bypass 高速通道      │
+           │  │  (llm_calendar.py / answer)   │
+           │  │  · 閒聊直接對答 (<1s)         │
+           │  │  · 建立自訂/學校日曆 (<5s)    │
+           │  │  · 刪除日曆事件 (<5s)         │
+           │  └───────────────┬───────────────┘
+           ▼                  │
+┌─────────────────────────┐   │
+│  Step 2: Hybrid Retrieve│   │
+│  (retriever.py)         │   │
+│  · Vector + BM25 並行   │   │
+│  · RRF Fusion + 嚴格過濾│   │
+└──────────┬──────────────┘   │
+           ▼                  │
+┌─────────────────────────┐   │
+│  Step 3: Reranker       │   │
+│  (reranker.py)          │   │
+│  · Cross-Encoder GPU    │   │
+└──────────┬──────────────┘   │
+           ▼                  │
+┌─────────────────────────┐   │
+│  Step 4: LLM Action     │   │
+│  (llm_answer/calendar)  │   │
+│  · Llama 3.1 8B 生成    │   │
+│  · Agent 建立排課 (18週)│   │
+└──────────┬──────────────┘   │
+           ▼                  ▼
+    回答 + 來源標註 / 建立/刪除行事曆事件
 ```
 
 ---
@@ -100,11 +100,12 @@
 |------|------|------|
 | **生成大腦** | Llama 3.1 8B (TAIDE-LX Q4_K_M) | 繁中特化，處理進階推理與雙軌排版 |
 | **路由小腦** | Llama 3.2 3B (Ollama) | One-shot 分類+改寫，JSON Schema 強制格式，`keep_alive=0` |
+| **自動化代理** | Google Calendar API | CRUD 增刪改查、18週週期排課、所有權防呆機制 |
 | **Embedding** | multilingual-e5-large (1024 維) | 並行 Embedding (`ThreadPoolExecutor`) |
 | **Reranker** | BAAI/bge-reranker-large | Cross-Encoder，batch=16，推理後 VRAM GC |
 | **Vector Store** | FAISS (IndexFlatIP) | 高效向量相似度搜尋 |
 | **Keyword Search** | BM25Okapi + jieba | 中文關鍵字搜尋，並行執行 |
-| **防禦機制** | JSON Schema / VRAM GC / 翻譯蒟蒻 | 100% JSON 成功率 + VRAM 穩定 |
+| **防禦機制** | Agentic Bypass / VRAM GC | 低延遲短路攔截 + VRAM 穩定釋放 |
 | **介面** | Rich CLI / Discord.py | 終端機除錯介面與非同步 Discord 機器人 |
 
 ---
@@ -161,7 +162,8 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-> **注意**：`sentence-transformers` 會在首次執行時自動從 HuggingFace 下載 `bge-reranker-large` 模型（約 1.3GB）。
+> **注意**：首次啟用行事曆功能時，請確保你有將 Google Cloud 產生的 `credentials.json` 放置於 `tools/` 目錄中。系統首次執行行事曆動作時將引導你進行網頁授權並產生 `token.json`。
+> **注意 2**：`sentence-transformers` 會在首次執行時自動從 HuggingFace 下載 `bge-reranker-large` 模型（約 1.3GB）。
 
 ### 4. 確認 Ollama 服務運行
 
@@ -177,21 +179,32 @@ curl http://localhost:11434/api/generate -d '{"model": "llama3.1:8b", "prompt": 
 
 ## 🚀 使用方法
 
-### 啟動程式
+### 方式一：啟動終端機互動介面 (本地預覽測試)
 
 ```bash
 cd "d:\AI HYBRID"
 python main.py
 ```
 
-### CLI 指令
-
-| 指令 | 說明 |
+| CLI 指令 | 說明 |
 |------|------|
 | `/quit` | 退出程式 |
 | `/rebuild` | 重建索引（資料更新後使用） |
 | `/clear` | 清除對話歷史 |
 | `/debug` | 切換 Debug 模式（顯示詳細檢索資訊） |
+
+### 方式二：啟動 Discord 機器人 (對外服務)
+
+```bash
+cd "d:\AI HYBRID"
+# 請確保 .env 檔案中已填寫正確的 DISCORD_BOT_TOKEN
+python discord_bot.py
+```
+
+機器人啟動後，在 Discord 頻道中可以：
+1. 直接 Tag 機器人發問：`@NQU_Agent 深度學習是誰教的？`
+2. 透過私人訊息 (DM) 與機器人無干擾對話。
+3. 同步斜線指令：`!sync` (僅限管理員)。
 
 ### 首次執行
 
@@ -272,11 +285,18 @@ final_score = α × RRF_norm(vector_rank)     （語意相似度）
 - **閒聊旁路**：使用 3B 快速模型（~1 秒），`keep_alive=0` 不佔 VRAM
 - **進階推理授權**：允許從課程內容推斷教授專長與實驗室能力需求
 
+### `llm_calendar.py` & `tools/calendar_tool.py` — 智慧行事曆代理
+
+- **三重意圖分流**：將行事曆意圖精細分為 `weekly_course` (每週課程)、`academic_event` (學校行程) 與 `custom_event` (自訂事件)。
+- **18 週自動擴充**：針對課程，自動生成 `RRULE:FREQ=WEEKLY;COUNT=18` 將一整學期課表建置完畢。
+- **Agentic 刪除權限**：具備解析並執行 `remove` 動作的能力，搭配 `extendedProperties.private.source == NQU_agent` 所有權驗證，提供最高防護層級的防呆刪除。
+
 ### `main.py` — 主 Pipeline
 
 CLI 互動介面，串接所有模組：
 1. 載入索引 → 2. 接收問題 → 3. **合併 Router+Rewrite** →
-4. 並行 Hybrid Retrieve → 5. Rerank → 6. LLM Answer → 7. 顯示回答
+   *(Agentic Bypass：閒聊 / 非發散型行事曆事件直接攔截回應跳出)*
+4. 並行 Hybrid Retrieve → 5. Rerank → 6. LLM Answer/Calendar Action → 7. 顯示回答
 
 每次 pipeline 結束後強制 VRAM GC，每個步驟都有計時器。
 
@@ -349,7 +369,32 @@ Top-8 chunks + 對話歷史 + 問題
 ...
 ```
 
-### 範例 3：多輪對話與閒聊
+### 範例 3：Agentic Calendar 行事曆智慧建置 (18週)
+
+```
+🧑‍🎓 你：幫我把微積分加到日曆
+🤖 助理：📅 意圖判定：weekly_course (目標：微積分)
+...(自動 RAG 檢索確認微積分是禮拜一第 2~4 節)...
+✅ 已成功將課程加入 Google Calendar，為您設定為**每週重複 (共18週)**！
+📌 課程：微積分
+🕒 首堂開始：{'dateTime': '2026-03-16T09:10:00'}
+🕒 首堂結束：{'dateTime': '2026-03-16T12:00:00'}
+🔗 事件連結：https://www.google.com/calendar/event?eid=...
+```
+
+### 範例 4：行事曆 RAG 短路攔截 (Bypass)
+
+```
+🧑‍🎓 你：2026年5月29是我生日請幫我加到行事曆
+🤖 助理：⚡ 行事曆意圖為 custom_event (add)，直接攔截跳過 RAG 檢索！(耗時 < 5s)
+✅ 已新增到 Google Calendar
+📌 標題：生日
+🕒 開始：{'date': '2026-05-29'}
+🕒 結束：{'date': '2026-05-29'}
+🔗 事件連結：https://...
+```
+
+### 範例 5：多輪對話與閒聊
 
 ```
 🧑‍🎓 你：嗨你好
@@ -408,18 +453,26 @@ CHUNK_OVERLAP = 50        # 超長區段切分時保持上下文連貫
 ```
 d:\AI HYBRID\
 ├── config.py               # 全域設定（α/β/γ 權重、模型設定、自動偵測最新學期等）
-├── data_loader.py           # 資料解析 + 多學期遞迴掃描 + FAISS/BM25 索引
-├── query_rewrite.py         # Query Rewrite + Multi-query RAG（備用 fallback）
-├── query_router.py          # 合併式 Router+Rewrite + 時間 Regex 攔截 + VRAM 防護
-├── retriever.py             # Hybrid Retriever（嚴格過濾防護 + 零幻覺攔截 + RRF）
-├── reranker.py              # Cross-Encoder Reranker（batch=16 + VRAM GC）
-├── llm_answer.py            # XML 強制模板 + 智慧推薦引擎 + 防進度表洗版
-├── main.py                  # 主 Pipeline（短路防爆攔截 + VRAM GC）
-├── discord_bot.py           # Discord Bot 非同步介面 + 實時 sync 指令
-├── requirements.txt         # Python 依賴套件
-├── README.md                # 本文件
-├── .env                     # DISCORD_BOT_TOKEN
-├── index_store/             # 索引持久化目錄（自動生成）
+├── main.py                 # 主 Pipeline（短路防爆攔截 + VRAM GC）
+├── discord_bot.py          # Discord Bot 非同步介面 + 實時 sync 指令
+├── requirements.txt        # Python 依賴套件
+├── README.md               # 本文件
+├── .env                    # DISCORD_BOT_TOKEN
+├── rag/
+│   ├── data_loader.py      # 資料解析 + 多學期遞迴掃描 + FAISS/BM25 索引
+│   ├── query_router.py     # 合併式 Router+Rewrite + 時間 Regex 攔截 + VRAM 防護
+│   ├── retriever.py        # Hybrid Retriever（嚴格過濾防護 + 零幻覺攔截 + RRF）
+│   └── reranker.py         # Cross-Encoder Reranker（batch=16 + VRAM GC）
+├── llm/
+│   ├── llm_answer.py       # XML 強制模板 + 智慧推薦引擎 + 防進度表洗版
+│   └── llm_calendar.py     # Llama 3 意圖轉譯與口語時間精準擷取（Agentic Calendar）
+├── tools/
+│   ├── calendar_tool.py    # Google Calendar API (CRUD) 與安全所有權檢查
+│   ├── search_event_tool.py # 學校行事曆檢索與學生俗稱同義詞拓撲 (events.json)
+│   ├── credentials.json    # Google API 憑證 (請自行放上以便授權)
+│   ├── token.json          # Google API 授權 Token (自動產生)
+│   └── events.json         # 學校行事曆靜態檔
+├── index_store/            # 索引持久化目錄（自動生成）
 └── data/
     ├── 資工系113學年度第2學期課程資訊/
     │   ├── 深度學習 (Deep Learning).txt

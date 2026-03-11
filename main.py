@@ -35,11 +35,11 @@ from rich.table import Table
 from rich import box
 
 import config
-from data_loader import load_and_index
-from query_router import route_and_rewrite, route_query
-from retriever import hybrid_retrieve
-from reranker import rerank
-from llm_answer import generate_answer, format_sources, ConversationMemory
+from rag.data_loader import load_and_index
+from rag.query_router import route_and_rewrite, route_query
+from rag.retriever import hybrid_retrieve
+from rag.reranker import rerank
+from llm.llm_answer import generate_answer, format_sources, ConversationMemory
 
 logger = logging.getLogger(__name__)
 console = Console()
@@ -126,7 +126,7 @@ def rag_pipeline(
     )
     if is_trivial:
         logger.info("  👋 規則式閒聊攔截：跳過 Router+Retriever，直接回應")
-        from llm_answer import generate_chitchat_answer
+        from llm.llm_answer import generate_chitchat_answer
         answer_obj = generate_chitchat_answer(question, memory)
         memory.add_user_message(question)
         memory.add_assistant_message(answer_obj.answer)
@@ -152,11 +152,31 @@ def rag_pipeline(
     # 【Agentic 攔截：閒聊短路】
     if route_result.query_type == "chitchat":
         logger.info("  [dim]👋 偵測到日常閒聊，跳過檢索直接回應[/dim]")
-        from llm_answer import generate_chitchat_answer
+        from llm.llm_answer import generate_chitchat_answer
         answer_obj = generate_chitchat_answer(question, memory)
         memory.add_user_message(question)
         memory.add_assistant_message(answer_obj.answer)
         return answer_obj.answer
+
+    # 【Agentic 攔截：學校行事曆 (Academic Calendar) 查詢短路】
+    if route_result.query_type == "academic_calendar":
+        logger.info("  [dim]📅 偵測到學校行事曆查詢，攔截 RAG 檢索直接查詢 events.json[/dim]")
+        from tools.search_event_tool import search_academic_events
+        academic_events = search_academic_events(question)
+        
+        if academic_events:
+            from llm.llm_calendar import generate_academic_event_answer
+            answer_str = generate_academic_event_answer(question, academic_events)
+            memory.add_user_message(question)
+            memory.add_assistant_message(answer_str)
+            return answer_str
+        else:
+            # 查不到特定事件則 fallback 給通用模型或提示
+            fallback_msg = "🤔 抱歉，我在學校的行事曆上沒有找到與您問題相關的特定行程或節日喔！"
+            logger.info("  [dim]📅 找不到對應學校事件，直接觸發 Fallback 回應[/dim]")
+            memory.add_user_message(question)
+            memory.add_assistant_message(fallback_msg)
+            return fallback_msg
 
     # 【Agentic 攔截：無明確課程特徵的 General 查詢短路】
     # 當分類為 general，且沒有抓到任何跟實體課程有關的條件時（不計入預設塞入的 semester/academic_year）
@@ -164,12 +184,29 @@ def rag_pipeline(
     if route_result.query_type == "general" and not core_filters:
         logger.info("  [dim]⚠️ 偵測到無具體課程過濾條件的一般/通用提問，啟動直接對答防護（跳過 RAG 檢索）[/dim]")
         # 因為沒資料可找，直接叫 LLM 把問題當成閒聊或通用對話回答
-        from llm_answer import generate_chitchat_answer
+        from llm.llm_answer import generate_chitchat_answer
         # 可以稍微調整系統 prompt，或直接復用 chitchat 邏輯
         answer_obj = generate_chitchat_answer(question, memory)
         memory.add_user_message(question)
         memory.add_assistant_message(answer_obj.answer)
         return answer_obj.answer
+
+    # 【Agentic 攔截：非課程的行事曆操作短路】
+    calendar_intent_data = None
+    if route_result.query_type == "calendar_action":
+        from llm.llm_calendar import extract_calendar_intent, execute_calendar_action
+        logger.info("  [dim]📅 偵測到行事曆操作，預先解析意圖...[/dim]")
+        calendar_intent_data = extract_calendar_intent(question)
+        
+        # 如果是自訂時間、學校事件、或是刪除動作，完全不需要經過 RAG 查詢課程清單！直接短路執行。
+        if calendar_intent_data["action_type"] == "remove" or calendar_intent_data["intent_type"] in ["custom_event", "academic_event"]:
+            logger.info(f"  [dim]⚡ 行事曆意圖為 {calendar_intent_data['intent_type']} ({calendar_intent_data['action_type']})，直接攔截跳過 RAG 檢索！[/dim]")
+            answer_str = execute_calendar_action(question, calendar_intent_data)
+            memory.add_user_message(question)
+            memory.add_assistant_message(answer_str)
+            return answer_str
+        else:
+            logger.info("  [dim]📅 意圖為 weekly_course，需要進入 RAG 檢索課表[/dim]")
 
     # 【優化】精確查詢跳過 Multi-query 擴充
     if "course_name_keyword" in route_result.metadata_filters and route_result.query_type in ["course_info", "grading", "schedule", "textbook", "syllabus"]:
@@ -249,29 +286,37 @@ def rag_pipeline(
             console.print(f"      [dim]#{i+1} [{course}][{section}] score={c.final_score:.4f}[/dim]")
 
     # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-    # Step 5: LLM Answer Generation
+    # Step 5: LLM Answer Generation / Action Execution
     # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     step_start = time.time()
-    answer_result = generate_answer(
-        query=question,
-        chunks=reranked_chunks,
-        memory=memory,
-    )
-    print_step(5, f"LLM Answer → {len(answer_result.answer)} 字", time.time() - step_start)
+    
+    if route_result.query_type == "calendar_action" and calendar_intent_data:
+        logger.info("  [dim]📅 觸發行事曆建立流程 (weekly_course RAG 提供支援)[/dim]")
+        from llm.llm_calendar import execute_calendar_action
+        final_answer = execute_calendar_action(question, calendar_intent_data, reranked_chunks)
+        print_step(5, f"Calendar Action → 完成", time.time() - step_start)
+    else:
+        answer_result = generate_answer(
+            query=question,
+            chunks=reranked_chunks,
+            memory=memory,
+        )
+        final_answer = answer_result.answer
+        print_step(5, f"LLM Answer → {len(final_answer)} 字", time.time() - step_start)
 
     total_time = time.time() - total_start
     console.print(f"\n  [dim]⏱️ 總耗時：{total_time:.2f}s[/dim]\n")
 
     # ── 更新對話記憶 ──
     memory.add_user_message(question)
-    memory.add_assistant_message(answer_result.answer)
+    memory.add_assistant_message(final_answer)
 
     # 【VRAM 防爆】每次 pipeline 結束後清理 GPU 殘留記憶體
     gc.collect()
     if torch.cuda.is_available():
         torch.cuda.empty_cache()
 
-    return answer_result.answer
+    return final_answer
 
 
 # =============================================================================

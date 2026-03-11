@@ -16,8 +16,8 @@ from discord import app_commands
 from dotenv import load_dotenv
 
 import config
-from data_loader import load_and_index
-from llm_answer import ConversationMemory
+from rag.data_loader import load_and_index
+from llm.llm_answer import ConversationMemory
 from main import rag_pipeline
 
 # 載入環境變數
@@ -125,6 +125,42 @@ async def slash_ask(interaction: discord.Interaction, question: str):
         await interaction.followup.send(f"❌ 抱歉，系統發生錯誤：{e}")
 
 
+@tree.command(name="add_calendar", description="📅 專屬指令：將課程或學校事件快速加入 Google 行事曆")
+@app_commands.describe(event="請輸入想加入的課程或事件 (例如：什麼時候停修申請 / 程式設計 / 演算法)")
+async def slash_add_calendar(interaction: discord.Interaction, event: str):
+    
+    # 1. 告訴 Discord 我們正在思考
+    await interaction.response.defer()
+    
+    channel_id = interaction.channel_id
+    memory = get_channel_memory(channel_id)
+
+    try:
+        # 強制附加強烈意圖字詞，確保 Query Router 100% 走 calendar_action 路由
+        augmented_query = f"{event} 幫我加到行事曆"
+        
+        answer = await asyncio.to_thread(
+            rag_pipeline,
+            augmented_query,
+            global_nodes,
+            global_faiss,
+            global_bm25,
+            memory,
+            False
+        )
+        
+        # 確保回傳長度合法
+        if len(answer) > 1950:
+            answer = answer[:1950] + "\n... (訊息過長已截斷)"
+            
+        final_reply = f"**👤 你要求加入行事曆：** {event}\n\n**🤖 助理回報：**\n{answer}"
+        await interaction.followup.send(final_reply)
+        
+    except Exception as e:
+        logger.exception("Discord Slash Add Calendar Error")
+        await interaction.followup.send(f"❌ 抱歉，行事曆新增發生錯誤：{e}")
+
+
 # =========================================================================
 # 🤖 Discord Events
 # =========================================================================
@@ -150,7 +186,7 @@ async def on_ready():
         global_bm25 = bm25_idx
         
         # 預先載入 Reranker 模型，避免第一次查詢時卡頓超過 15 秒
-        from reranker import get_reranker
+        from rag.reranker import get_reranker
         get_reranker()
         
         logger.info(f"✅ 索引與模型載入完成！共 {len(nodes)} 個文件區段")
@@ -167,13 +203,13 @@ async def on_message(message: discord.Message):
 
     # 檢查是否是被 tag，或是以特定前綴開頭 (例如 !ask)
     is_mentioned = client.user in message.mentions
-    is_prefixed = message.content.startswith("!ask ")
+    is_prefixed = message.content.startswith("!ask")  # 把空格拿掉，增加容錯
     
     if not (is_mentioned or is_prefixed):
         return
 
     # 清除 tag 殘留字串或 !ask 前綴，取得真正的問題
-    question = message.content.replace(f"<@{client.user.id}>", "").replace("!ask ", "").strip()
+    question = message.content.replace(f"<@{client.user.id}>", "").replace("!ask", "").strip()
     
     if not question:
         await message.reply("請輸入你想要查詢的課程問題喔！")

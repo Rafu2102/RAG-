@@ -18,7 +18,7 @@ import torch
 from sentence_transformers import CrossEncoder
 
 import config
-from retriever import RetrievedChunk
+from .retriever import RetrievedChunk
 
 logger = logging.getLogger(__name__)
 

@@ -16,7 +16,7 @@ from typing import Optional
 import requests
 
 import config
-from retriever import RetrievedChunk
+from rag.retriever import RetrievedChunk
 
 logger = logging.getLogger(__name__)
 
