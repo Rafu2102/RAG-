@@ -16,7 +16,7 @@ from discord import app_commands
 from dotenv import load_dotenv
 
 import config
-from rag.data_loader import load_and_index
+from rag.data_loader import load_and_index, check_data_changes
 from rag.query_router import init_known_registry
 from llm.llm_answer import ConversationMemory
 from main import rag_pipeline
@@ -575,9 +575,27 @@ async def on_ready():
         logger.error(f"❌ 斜線指令同步失敗：{e}")
     
     # 啟動時自動載入向量資料庫與 Reranker 模型
-    logger.info("📂 正在載入課程資料與 Reranker 索引...")
+    logger.info("📂 正在檢查課程資料與載入索引...")
     try:
-        nodes, faiss_idx, bm25_idx = load_and_index()
+        # 【自動偵測新課程資料】
+        data_status = check_data_changes()
+        force_rebuild = data_status["has_changes"]
+        
+        if force_rebuild:
+            change_summary = []
+            if data_status["new_files"]:
+                change_summary.append(f"新增 {len(data_status['new_files'])} 個檔案")
+            if data_status["modified_files"]:
+                change_summary.append(f"修改 {len(data_status['modified_files'])} 個檔案")
+            if data_status["deleted_files"]:
+                change_summary.append(f"刪除 {len(data_status['deleted_files'])} 個檔案")
+            change_desc = "、".join(change_summary)
+            logger.info(f"🔄 偵測到課程資料變更（{change_desc}），自動重建索引...")
+            await client.change_presence(activity=discord.Game(name=f"🔄 重建索引中（{change_desc}）"))
+        else:
+            logger.info("✅ 課程資料無變更，載入既有索引")
+        
+        nodes, faiss_idx, bm25_idx = load_and_index(force_rebuild=force_rebuild)
         global_nodes = nodes
         global_faiss = faiss_idx
         global_bm25 = bm25_idx

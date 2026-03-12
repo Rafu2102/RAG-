@@ -67,6 +67,12 @@ def get_next_weekday(day_of_week: int) -> datetime:
 
 def extract_calendar_intent(query: str) -> dict:
     """僅負責透過 LLM 判斷使用者的行事曆意圖 (不涉及 RAG 或建立 API)"""
+    from llm.date_utils import normalize_chinese_datetime
+    
+    # 先正規化中文數字（三月16→3月16, 九點半→9點半）
+    normalized_query = normalize_chinese_datetime(query)
+    logger.info(f"📅 日期正規化：「{query}」→「{normalized_query}」")
+    
     tz = timezone(timedelta(hours=8))
     now = datetime.now(tz)
     
@@ -107,7 +113,7 @@ def extract_calendar_intent(query: str) -> dict:
    - 「刪除明天的行事曆」→ "{tomorrow_str}"
 4. **course_name / schedule_keyword**：僅 course_schedule_event 時填寫
 
-使用者輸入：{query}
+使用者輸入：{normalized_query}
 
 請純粹回傳 JSON。"""
 
@@ -158,7 +164,7 @@ def extract_calendar_intent(query: str) -> dict:
         if not e_name:
             import re as _re
             # 先移除時間表達式（九點十分、十一點半、下午三點等）
-            e_name = _re.sub(r'[一二三四五六七八九十\d]+點[十二三四五六七八九\d]*分?半?', '', query)
+            e_name = _re.sub(r'[一二三四五六七八九十\d]+點[十二三四五六七八九\d]*分?半?', '', normalized_query)
             # 移除日期/時間/行事曆關鍵字（含斜線日期如 3/16）
             e_name = _re.sub(r'(明天|今天|後天|大後天|下週.?|這週.?|\d+[/月]\d+[日號]?|上午|下午|晚上|早上)', '', e_name)
             e_name = _re.sub(r'(第[一二三四五六七八九十\d]+節|到|~|幫我|加到|新增|行事曆|日曆|提醒|裡面|裡|我的|要上|要去|把|的|刪除|刪掉|移除|取消|修改|變更|查看|列出|可以|嗎|是|可不可以)', '', e_name)

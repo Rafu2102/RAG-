@@ -499,6 +499,102 @@ def load_nodes(path: str) -> Optional[list[TextNode]]:
 
 
 # =============================================================================
+# 🔍 資料變更偵測（自動重建索引用）
+# =============================================================================
+
+import hashlib
+import json
+
+MANIFEST_PATH = os.path.join(config.INDEX_STORE_DIR, "data_manifest.json")
+
+
+def _compute_file_hash(filepath: str) -> str:
+    """計算檔案的 SHA256 hash"""
+    h = hashlib.sha256()
+    with open(filepath, "rb") as f:
+        for chunk in iter(lambda: f.read(8192), b""):
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def _scan_data_files(data_dir: str) -> dict:
+    """掃描 data/ 目錄下所有 .txt 課程檔，回傳 {相對路徑: hash}"""
+    file_hashes = {}
+    for root, dirs, files in os.walk(data_dir):
+        for fname in files:
+            if fname.endswith(".txt"):
+                fpath = os.path.join(root, fname)
+                rel_path = os.path.relpath(fpath, data_dir)
+                file_hashes[rel_path] = _compute_file_hash(fpath)
+    return file_hashes
+
+
+def check_data_changes(data_dir: str = None) -> dict:
+    """
+    偵測 data/ 目錄中的課程檔案是否有變更。
+    
+    Returns:
+        {
+            "has_changes": bool,
+            "new_files": list[str],
+            "modified_files": list[str],
+            "deleted_files": list[str],
+        }
+    """
+    if data_dir is None:
+        data_dir = config.DATA_DIR
+    
+    current_hashes = _scan_data_files(data_dir)
+    
+    # 讀取上次的 manifest
+    old_hashes = {}
+    if os.path.exists(MANIFEST_PATH):
+        try:
+            with open(MANIFEST_PATH, "r", encoding="utf-8") as f:
+                old_hashes = json.load(f)
+        except Exception as e:
+            logger.warning(f"⚠️ 讀取 data_manifest.json 失敗，視為全新：{e}")
+    
+    new_files = [f for f in current_hashes if f not in old_hashes]
+    deleted_files = [f for f in old_hashes if f not in current_hashes]
+    modified_files = [
+        f for f in current_hashes 
+        if f in old_hashes and current_hashes[f] != old_hashes[f]
+    ]
+    
+    has_changes = bool(new_files or modified_files or deleted_files)
+    
+    if has_changes:
+        logger.info(f"📂 資料變更偵測結果：新增 {len(new_files)} · 修改 {len(modified_files)} · 刪除 {len(deleted_files)}")
+        for f in new_files:
+            logger.info(f"  📄 [新增] {f}")
+        for f in modified_files:
+            logger.info(f"  ✏️ [修改] {f}")
+        for f in deleted_files:
+            logger.info(f"  🗑️ [刪除] {f}")
+    else:
+        logger.info("📂 資料無變更，索引可直接載入")
+    
+    return {
+        "has_changes": has_changes,
+        "new_files": new_files,
+        "modified_files": modified_files,
+        "deleted_files": deleted_files,
+    }
+
+
+def save_data_manifest(data_dir: str = None):
+    """儲存當前 data/ 目錄的 hash manifest（在索引重建後呼叫）"""
+    if data_dir is None:
+        data_dir = config.DATA_DIR
+    current_hashes = _scan_data_files(data_dir)
+    os.makedirs(os.path.dirname(MANIFEST_PATH), exist_ok=True)
+    with open(MANIFEST_PATH, "w", encoding="utf-8") as f:
+        json.dump(current_hashes, f, ensure_ascii=False, indent=2)
+    logger.info(f"💾 已儲存 data_manifest.json（{len(current_hashes)} 個檔案）")
+
+
+# =============================================================================
 # 🚀 主要入口：載入或建立索引
 # =============================================================================
 
@@ -530,6 +626,7 @@ def load_and_index(force_rebuild: bool = False):
     save_nodes(nodes, config.NODES_STORE_PATH)
     save_faiss_index(faiss_index, config.FAISS_INDEX_PATH)
     save_bm25_index(bm25_index, config.BM25_INDEX_PATH)
+    save_data_manifest()  # 儲存檔案 hash，下次啟動可偵測變更
 
     logger.info("✅ 索引建立完成！")
     return nodes, faiss_index, bm25_index
