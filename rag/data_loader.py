@@ -69,14 +69,59 @@ def parse_course_file(filepath: str) -> dict:
 
     # ── 推斷年級（grade）──
     grade = "未知"
-    grade_match = re.search(r"(碩[一二三]|[一二三四])", grade_class)
+    grade_match = re.search(r"(碩[一二三]|[一二三四五])", grade_class)
     if grade_match:
         grade = grade_match.group(1)
+    
+    # ── 推斷班級分組（class_group）── 如 電機一甲 → "甲"
+    class_group = ""
+    group_match = re.search(r"[一二三四五][甲乙丙丁]", grade_class)
+    if group_match:
+        class_group = group_match.group(0)[-1]  # 取最後一個字：甲 / 乙
+    
+    # ── 推斷進修部 ──
+    is_evening = "進修" in grade_class or "進修" in department
 
-    # ── 推斷系所簡稱 ──
-    dept_short = "資工系"  # 目前資料都是資工系，未來可擴展
+    # ── 推斷系所簡稱（從資料夾名稱或檔案路徑智慧偵測）──
+    # 完整科系對照表：資料夾名稱關鍵字 → dept_short
+    _DEPT_FOLDER_PATTERNS = {
+        # 理工學院
+        "資工": "資工系", "資訊工程": "資工系",
+        "電機": "電機系", "電機工程": "電機系",
+        "土木": "土木系", "工程管理": "土木系",
+        "食品": "食品系", "食品科學": "食品系",
+        # 管理學院
+        "企管": "企管系", "企業管理": "企管系",
+        "觀光": "觀光系", "觀光管理": "觀光系",
+        "運休": "運休系", "運動與休閒": "運休系",
+        "工管": "工管系", "工業工程": "工管系",
+        # 人文社會學院
+        "國際": "國際系", "大陸事務": "國際系",
+        "建築": "建築系",
+        "海邊": "海邊系", "海洋與邊境": "海邊系", "邊境管理": "海邊系",
+        "應英": "應英系", "應用英語": "應英系",
+        "華語": "華語系", "華語文": "華語系",
+        "都景": "都景系", "都市計畫": "都景系", "景觀": "都景系",
+        # 健康護理學院
+        "護理": "護理系",
+        "長照": "長照系", "長期照護": "長照系",
+        "社工": "社工系", "社會工作": "社工系",
+        # 通識
+        "通識": "通識中心",
+    }
+    
+    def _detect_dept_from_path(fpath: str) -> str:
+        """從檔案路徑（含資料夾名稱）偵測科系簡稱"""
+        # 優先用較長關鍵字匹配（避免「工」匹配到不相關的系）
+        sorted_patterns = sorted(_DEPT_FOLDER_PATTERNS.keys(), key=len, reverse=True)
+        for kw in sorted_patterns:
+            if kw in fpath:
+                return _DEPT_FOLDER_PATTERNS[kw]
+        return "未知"
+    
+    dept_short = _detect_dept_from_path(filepath)
     if "研究所" in department or "碩士" in department:
-        dept_short = "資工碩"
+        dept_short = dept_short.replace("系", "碩") if "系" in dept_short else dept_short + "碩"
 
     # ── 各區段文字提取 ──
     def extract_section(start_pattern: str, end_patterns: list, text: str) -> str:
@@ -138,6 +183,8 @@ def parse_course_file(filepath: str) -> dict:
         "dept_short": dept_short,
         "grade_class": grade_class,
         "grade": grade,
+        "class_group": class_group,
+        "is_evening": is_evening,
         "credits": credits,
         "teacher": teacher,
         "required_or_elective": required,

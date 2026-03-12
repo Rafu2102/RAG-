@@ -29,20 +29,21 @@
 |------|------|
 | 🔀 **Multi-query RAG** | 一個問題生成 3 個搜尋查詢，提高檢索覆蓋率 |
 | 🔗 **Hybrid Search** | Vector（語意）+ BM25（關鍵字）雙重搜尋，**並行 Embedding + 並行檢索** |
-| 🏷️ **Metadata Filtering** | **五維度嚴格匹配**：系所/年級/教師/課程類型/學年度學期 |
-| 🛡️ **Zero-Hit 嚴格防爆** | Hard Filter 物理捨棄不符條件資料，若無資料直接攔截，**實現零幻覺** |
+| 🏷️ **Metadata Filtering** | **六維度嚴格匹配**：系所/年級/教師/課程類型/學年度學期/必選修 |
+| 🛡️ **Zero-Hit 嚴格防爆** | Hard Filter 物理捨棄不符條件資料（含系所嚴格匹配），若無資料直接攔截，**實現零幻覺** |
 | 📊 **RRF 融合公式** | `final_score = α·RRF(Vector) + β·RRF(BM25) + γ·Metadata` |
-| 🔄 **Cross-Encoder Reranker** | bge-reranker-large 精細重排，Top-30 → Top-8，GPU batch=16 |
+| 🔄 **Cross-Encoder Reranker** | bge-reranker-large 精細重排 + **甲乙班去重偏好**，Top-30 → Top-8，GPU batch=16 |
 | 📅 **多學期動態支援** | 自動檢測最新學期，支援 `114上`、`114年第1學期` 等口語化時間查詢 |
 | 🔗 **One-shot Router+Rewrite** | 合併路由分類與查詢改寫為**單次 LLM 呼叫**，省去重複載入開銷 |
-| 📅 **Google Calendar Agent** | Llama 3 意圖轉譯，支援排課 (自動建立 18 週循環)、自訂事件 (生日/開會) 定位與學校既定行程寫入 |
+| 📅 **Google Calendar Agent** | 完整 CRUD 行事曆代理 — 支援新增/刪除/列出/修改，含週期排課、自訂事件、學校行事曆、時間定位搜尋 |
 | 🛡️ **安全行事曆防呆** | 賦予 Agent 行事曆**移除權限**，並透過嚴格的所有權 (Ownership) `source` 標籤比對，確保**絕對不誤刪**使用者私人事件 |
 | 🤖 **Agentic Bypass 高速通道** | 偵測為閒聊、刪除事件、或自訂行程時，直接從主流程**短路攔截 (Bypass)**，省去神經網路檢索運算，回應速度小於 5 秒 |
-| 🧠 **VRAM 死亡交叉防護** | 3B `keep_alive=0` 卸載 + Pipeline 後 `gc.collect()` + `torch.cuda.empty_cache()` |
-| 📜 **XML 嚴格輸出鎖定** | 採 `<example_format>` 強制模板束縛，絕對拒絕 LLM 說廢話及亂印課表 |
+| 🧠 **VRAM 死亡交叉防護** | 8B `keep_alive=0` 意圖解析後立即卸載 + 3B 輕量任務 + Pipeline 後 `gc.collect()` + `torch.cuda.empty_cache()` |
+| 📜 **統一格式輸出** | 單一課程列表格式，杜絕 LLM 重複輸出和幻覺課程 |
 | 🧩 **智慧區段感知 Chunking** | 短區段（≤512 字）保持完整不切；僅超長區段啟動 SentenceSplitter |
 | ⚡ **GPU 加速 (CUDA)** | 自動偵測 GPU (PyTorch)，Reranker batch=16 壓榨 8GB VRAM |
 | 🇹🇼 **繁中在地化與同義詞拓撲** | Regex 解碼器 + 口語翻譯蒟蒻 (禮拜二→星期二，加退選→停修)，另於 System Prompt 動態硬性注入絕對台灣時區與星期，使 相對時間 (如:下週二) 推算 100% 精準 |
+| 🔒 **必選修智慧過濾** | 自動偵測疑問句（「是必修嗎？」），避免誤設篩選條件 |
 
 ---
 
@@ -65,8 +66,9 @@
            │  │  Agentic Bypass 高速通道      │
            │  │  (llm_calendar.py / answer)   │
            │  │  · 閒聊直接對答 (<1s)         │
-           │  │  · 建立自訂/學校日曆 (<5s)    │
-           │  │  · 刪除日曆事件 (<5s)         │
+           │  │  · 行事曆意圖解析 (8B)        │  ← 升級為 8B 精準判斷
+           │  │  · CRUD 操作 (新增/刪/改/查)  │
+           │  │  · 未註冊用戶安全攔截         │
            │  └───────────────┬───────────────┘
            ▼                  │
 ┌─────────────────────────┐   │
@@ -74,12 +76,14 @@
 │  (retriever.py)         │   │
 │  · Vector + BM25 並行   │   │
 │  · RRF Fusion + 嚴格過濾│   │
+│  · dept_short Hard Filter│   │
 └──────────┬──────────────┘   │
            ▼                  │
 ┌─────────────────────────┐   │
 │  Step 3: Reranker       │   │
 │  (reranker.py)          │   │
 │  · Cross-Encoder GPU    │   │
+│  · 甲乙班去重偏好       │   │
 └──────────┬──────────────┘   │
            ▼                  │
 ┌─────────────────────────┐   │
@@ -87,9 +91,10 @@
 │  (llm_answer/calendar)  │   │
 │  · Llama 3.1 8B 生成    │   │
 │  · Agent 建立排課 (18週)│   │
+│  · 統一格式輸出         │   │
 └──────────┬──────────────┘   │
            ▼                  ▼
-    回答 + 來源標註 / 建立/刪除行事曆事件
+    回答 + 來源標註 / CRUD 行事曆事件
 ```
 
 ---
@@ -98,14 +103,14 @@
 
 | 層級 | 技術 | 說明 |
 |------|------|------|
-| **生成大腦** | Llama 3.1 8B (TAIDE-LX Q4_K_M) | 繁中特化，處理進階推理與雙軌排版 |
-| **路由小腦** | Llama 3.2 3B (Ollama) | One-shot 分類+改寫，JSON Schema 強制格式，`keep_alive=0` |
-| **自動化代理** | Google Calendar API | CRUD 增刪改查、18週週期排課、所有權防呆機制 |
+| **生成大腦** | Llama 3.1 8B (TAIDE-LX Q4_K_M) | 繁中特化，課程問答 + 行事曆意圖解析 |
+| **路由小腦** | Llama 3.2 3B (Ollama) | One-shot 分類+改寫+閒聊，JSON Schema 強制格式，`keep_alive=0` |
+| **自動化代理** | Google Calendar API | 完整 CRUD（新增/刪除/修改/列出）、18週週期排課、**時間定位搜尋**、所有權防呆機制 |
 | **Embedding** | multilingual-e5-large (1024 維) | 並行 Embedding (`ThreadPoolExecutor`) |
-| **Reranker** | BAAI/bge-reranker-large | Cross-Encoder，batch=16，推理後 VRAM GC |
+| **Reranker** | BAAI/bge-reranker-large | Cross-Encoder，batch=16，推理後 VRAM GC + **甲乙班去重** |
 | **Vector Store** | FAISS (IndexFlatIP) | 高效向量相似度搜尋 |
 | **Keyword Search** | BM25Okapi + jieba | 中文關鍵字搜尋，並行執行 |
-| **防禦機制** | Agentic Bypass / VRAM GC | 低延遲短路攔截 + VRAM 穩定釋放 |
+| **防禦機制** | Agentic Bypass / VRAM GC / 未註冊防護 | 低延遲短路攔截 + VRAM 穩定釋放 + Token 存在性驗證 |
 | **介面** | Rich CLI / Discord.py | 終端機除錯介面與非同步 Discord 機器人 |
 
 ---
@@ -115,7 +120,7 @@
 ### 硬體需求
 
 | 組件 | 最低需求 | 推薦配置 |
-|------|---------|---------|
+|------|---------|---------| 
 | **GPU** | GTX 1080 (8GB) | RTX 4060 (8GB) |
 | **RAM** | 16GB | 32GB |
 | **儲存空間** | 10GB | 20GB |
@@ -133,8 +138,11 @@
 ### 1. 安裝 Ollama 模型
 
 ```bash
-# 安裝 Llama 3.1 8B（生成模型）
+# 安裝 Llama 3.1 8B（生成模型 + 行事曆意圖解析）
 ollama pull llama3.1:8b
+
+# 安裝 Llama 3.2 3B（路由/改寫/閒聊 快速模型）
+ollama pull llama3.2:latest
 
 # 安裝 multilingual-e5-large（Embedding 模型）
 ollama pull multilingual-e5-large
@@ -239,11 +247,6 @@ python discord_bot.py
 5. **FAISS 索引**：L2 正規化 + Inner Product = Cosine Similarity
 6. **BM25 索引**：jieba 中文分詞 + 停用詞過濾
 
-### `query_rewrite.py` — 查詢改寫（備用）
-
-- **Multi-query RAG**：將一個問題改寫為 3 個不同角度的搜尋查詢
-- 已被合併式 `route_and_rewrite()` 取代，作為獨立弌 fallback 保留
-
 ### `query_router.py` — 合併式 Router + Rewrite
 
 - **One-shot Router+Rewrite**：單次 3B 模型呼叫同時完成路由分類 + 查詢改寫
@@ -252,6 +255,7 @@ python discord_bot.py
 - **VRAM 死亡交叉防護**：`keep_alive=0` 用完立即卸載 3B 模型
 - **規則式路由加強版**：支援口語化翻譯 (大二→二) + 正則表達式自動攔截 `114年第1學期`、`114上` 等時間片語
 - **LLM 幻覺防線**：驗證 LLM 提取的 filter 是否真的出現在問題中
+- **必選修疑問句偵測**：自動識別「是必修嗎？」等問句，避免誤設 `required_or_elective` 過濾器
 
 ### `retriever.py` — Hybrid Retriever + 嚴格過濾防護
 
@@ -269,27 +273,53 @@ final_score = α × RRF_norm(vector_rank)     （語意相似度）
 - 並行 Embedding：`ThreadPoolExecutor` 同時對 3 個 query 呼叫 Ollama Embed API
 - 並行搜尋：FAISS + BM25 同時執行，透過 `vector_search_with_embedding()` 避免重複 API 呼叫
 
-**Zero-Hit 嚴格防護網**：當指定特定教師、學期或課程名稱時，不匹配的 chunk 會遭到**物理刪除**不送入後續流程。若刪除後結果為空，立即中斷流程，**徹底解決 RAG 最常見的無關資料通靈幻覺問題**。
+**Zero-Hit 嚴格防護網**：`dept_short` 加入 Hard Filter 嚴格匹配系所，不匹配的 chunk 遭**物理刪除**。若刪除後結果為空，立即中斷流程，**徹底解決 RAG 最常見的無關資料通靈幻覺問題**。
 
 ### `reranker.py` — Cross-Encoder Reranker
 
 - 使用 `BAAI/bge-reranker-large` cross-encoder，batch=16
 - 分數融合：`final = sigmoid(rerank) × 0.75 + metadata × 0.25`
 - 情境加分：時間查詢→basic_info +0.10，專長查詢→objectives/syllabus +0.20
+- **甲乙班去重偏好**：相同課程的甲/乙班只保留最高分者，預設偏好甲班
 - **VRAM GC**：推理後 `gc.collect()` + `torch.cuda.empty_cache()`
 
-### `llm_answer.py` — 精簡化生成大腦
+### `llm_answer.py` — 統一格式生成大腦
 
-- **精簡 Prompt**：從 ~1200 字縮減至 ~700 字，節約 ~500 tokens 給實際資料
-- **雙軌排版**：自動根據給定數據多寡，切換為詳細介紹或精簡列表
+- **統一格式 Prompt**：移除「情況一/情況二」分支，單一格式杜絕重複輸出
+- **防重複規則**：明確禁止同一門課出現兩次
+- **防幻覺**：移除「必須剛好有 N 項」的數量壓力，改為柔性提示
 - **閒聊旁路**：使用 3B 快速模型（~1 秒），`keep_alive=0` 不佔 VRAM
 - **進階推理授權**：允許從課程內容推斷教授專長與實驗室能力需求
 
 ### `llm_calendar.py` & `tools/calendar_tool.py` — 智慧行事曆代理
 
-- **三重意圖分流**：將行事曆意圖精細分為 `weekly_course` (每週課程)、`academic_event` (學校行程) 與 `custom_event` (自訂事件)。
-- **18 週自動擴充**：針對課程，自動生成 `RRULE:FREQ=WEEKLY;COUNT=18` 將一整學期課表建置完畢。
-- **Agentic 刪除權限**：具備解析並執行 `remove` 動作的能力，搭配 `extendedProperties.private.source == NQU_agent` 所有權驗證，提供最高防護層級的防呆刪除。
+#### 四大意圖分流
+
+| intent_type | 說明 | 範例 |
+|---|---|---|
+| `custom_event` | 使用者已給時間 | 「明天九點開會」「5/29 生日」 |
+| `weekly_course` | 每週課程排課 | 「把線性代數加到日曆」 |
+| `course_schedule_event` | 課程進度表活動 | 「微積分期中考加到行事曆」 |
+| `academic_event` | 學校行政事件 | 「加退選加到行事曆」 |
+
+#### 完整 CRUD 操作矩陣
+
+| 操作 | 名稱搜尋 | 時間定位 | 通配符 `*` |
+|------|---------|---------|------------|
+| **新增 (add)** | ✅ | ✅ start_dt/end_dt | - |
+| **刪除 (remove)** | ✅ keyword | ✅ ±1hr 窗口 | ✅ 全匹配 |
+| **列出 (list)** | - | ✅ target_date 指定日 | ✅ 全列出 |
+| **修改 (update)** | ✅ keyword | ✅ ±1hr 窗口 | ✅ 全匹配 |
+
+#### 核心特性
+
+- **8B 意圖解析**：行事曆意圖判斷使用 8B 主模型提高準確度，`keep_alive=0` 確保 VRAM 安全
+- **18 週自動擴充**：針對課程，自動生成 `RRULE:FREQ=WEEKLY;COUNT=18` 完成一整學期排課
+- **所有權防呆**：`extendedProperties.private.source == NQU_agent` 確保不誤刪私人事件
+- **雙模式定位**：支援「按名稱搜尋」和「按時間窗口定位」，解決「刪除明天九點的」等時間式操作
+- **event_name 三階防線**：LLM 提取 → Regex 清洗 → 動作詞偵測（含「刪除/行事曆」等詞自動設為 `*` 通配）
+- **未註冊保護**：操作前檢測 Discord ID 與 Token 存在性，友善提醒用戶先綁定帳號
+- **target_date 精準查詢**：支援「我下週五有什麼行程」指定日期列出事件
 
 ### `main.py` — 主 Pipeline
 
@@ -323,7 +353,7 @@ CLI 互動介面，串接所有模組：
   → 合併去重
   → Metadata Scoring（department ✓ +0.3, grade ✓ +0.25, ...）
   → RRF Fusion: score = 0.5×V + 0.3×B + 0.2×M
-  → Hard Filter（不匹配 -3.0 沈底）
+  → Hard Filter（dept_short 嚴格匹配 + 不匹配 -3.0 沈底）
   → Top-30 候選
 ```
 
@@ -333,6 +363,7 @@ CLI 互動介面，串接所有模組：
 Top-30 候選
   → bge-reranker-large (GPU batch=16)
   → 分數融合: sigmoid(rerank)×0.75 + metadata×0.25
+  → 甲乙班去重（保留最高分，偏好甲班）
   → VRAM GC (gc + empty_cache)
   → Top-8 最終結果
 ```
@@ -342,7 +373,7 @@ Top-30 候選
 ```
 Top-8 chunks + 對話歷史 + 問題
   → Llama 3.1 8B (TAIDE-LX, 8k Context)
-  → 精簡 Prompt (~700 字)
+  → 統一格式 Prompt（防重複、防幻覺）
   → 回答 + 來源標註 + VRAM GC
 ```
 
@@ -355,7 +386,11 @@ Top-8 chunks + 對話歷史 + 問題
 ```
 🧑‍🎓 你：深度學習是誰教的？
 
-🤖 助理：這門「深度學習」是由馮玄明教授開設的選修課喔！這門課主要是帶領研究生深入了解最新的 AI 模型與實作。如果你有興趣上這門課，我可以再幫你查查它需要什麼先備知識，想了解看看嗎？ (來源：【深度學習】基本資訊)
+🤖 助理：
+📘 **深度學習** (Deep Learning)
+- 👨‍🏫 授課教師：馮玄明 | 🎓 學分：3 | 🏷️ 選修
+- ⏰ 時間地點：星期三 5~7節 @ E302
+- 💡 帶領研究生深入了解最新的 AI 模型與實作
 ```
 
 ### 範例 2：多課程查詢
@@ -363,50 +398,72 @@ Top-8 chunks + 對話歷史 + 問題
 ```
 🧑‍🎓 你：資工系二年級有哪些必修課？
 
-🤖 助理：資工二的必修課總共有以下這幾門喔：
-1. **資料結構** (3學分) — 授課老師是馮玄明教授。(來源：【資料結構】基本資訊)  
-2. **系統程式** (3學分) — 授課老師是陳鍾誠教授。(來源：【系統程式】基本資訊)
+🤖 助理：
+📘 **資料結構** (Data Structures)
+- 👨‍🏫 授課教師：馮玄明 | 🎓 學分：3 | 🏷️ 必修
+- ⏰ 時間地點：星期一 2~4節 @ E301
+- 💡 學習各種資料結構的設計與應用
+
+📘 **系統程式** (System Programming)
+- 👨‍🏫 授課教師：陳鍾誠 | 🎓 學分：3 | 🏷️ 必修
+- ⏰ 時間地點：星期三 2~4節 @ E302
+- 💡 深入瞭解系統層級的程式設計
 ...
 ```
 
-### 範例 3：Agentic Calendar 行事曆智慧建置 (18週)
+### 範例 3：行事曆 CRUD 操作
 
 ```
 🧑‍🎓 你：幫我把微積分加到日曆
 🤖 助理：📅 意圖判定：weekly_course (目標：微積分)
-...(自動 RAG 檢索確認微積分是禮拜一第 2~4 節)...
-✅ 已成功將課程加入 Google Calendar，為您設定為**每週重複 (共18週)**！
-📌 課程：微積分
-🕒 首堂開始：{'dateTime': '2026-03-16T09:10:00'}
-🕒 首堂結束：{'dateTime': '2026-03-16T12:00:00'}
-🔗 事件連結：https://www.google.com/calendar/event?eid=...
-```
+✅ 已成功將課程加入 Google Calendar，為您設定為每週重複 (共18週)！
 
-### 範例 4：行事曆 RAG 短路攔截 (Bypass)
-
-```
-🧑‍🎓 你：2026年5月29是我生日請幫我加到行事曆
-🤖 助理：⚡ 行事曆意圖為 custom_event (add)，直接攔截跳過 RAG 檢索！(耗時 < 5s)
+🧑‍🎓 你：明天九點十分要上通識課幫我加到行事曆
+🤖 助理：📅 意圖判定：custom_event (目標：通識課)
 ✅ 已新增到 Google Calendar
-📌 標題：生日
-🕒 開始：{'date': '2026-05-29'}
-🕒 結束：{'date': '2026-05-29'}
-🔗 事件連結：https://...
+📌 標題：通識課 | 🕒 2026-03-14 09:10 ~ 11:10
+
+🧑‍🎓 你：刪除明天九點的行事曆
+🤖 助理：📅 執行行事曆移除（時間定位 ±1hr）
+✅ 已成功清理 1 筆行程：[自訂] 通識課
+
+🧑‍🎓 你：我下週五有什麼行程
+🤖 助理：📅 2026-03-21 的行事曆事件：
+🤖 [課程] 微積分 (王老師) ─ 2026-03-21 09:10
 ```
 
-### 範例 5：多輪對話與閒聊
+### 範例 4：閒聊與多輪對話
 
 ```
 🧑‍🎓 你：嗨你好
-🤖 助理：哈囉你好呀！近來課業還順利嗎？我是金大資工專屬的校園課程助理。不管你想找好過的選修還是各年級必修都能問我喔！今天想查點什麼呢？
+🤖 助理：哈囉你好呀！今天想查點什麼呢？
 
 🧑‍🎓 你：那資料結構用什麼教科書？
-🤖 助理：我看了一下這門課的資料，資料結構的主要教科書是《Data Structures: A Pseudocode Approach with C》(Gilberg / Forouzan 著) 喔！需要幫你查這門課的配分方式嗎？
+🤖 助理：資料結構的主要教科書是《Data Structures: A Pseudocode Approach with C》
 ```
 
 ---
 
 ## ⚙️ 設定調整
+
+### 模型配置
+
+```python
+# config.py
+OLLAMA_MODEL      = "Yu-Feng/Llama-3.1-TAIDE-LX-8B-Chat:Q4_K_M"  # 8B 主力（回答+行事曆意圖）
+OLLAMA_FAST_MODEL = "llama3.2:latest"                              # 3B 輕量（路由/改寫/閒聊/時間解析）
+```
+
+**模型用途分配**：
+
+| 模組 | 模型 | 用途 |
+|------|------|------|
+| `llm_answer.py` | 🔴 8B | 主要課程問答回答 |
+| `llm_calendar.py` 意圖解析 | 🔴 8B | 行事曆意圖分類 + JSON 結構化輸出 |
+| `query_router.py` | 🟢 3B | 路由分類 + 查詢改寫 |
+| `llm_calendar.py` 時間解析 | 🟢 3B | 課程節次 JSON 解析 |
+| `llm_calendar.py` 學校事件 | 🟢 3B | 學校行事曆回覆 |
+| `llm_answer.py` 閒聊 | 🟢 3B | 閒聊對答 |
 
 ### Hybrid Fusion 權重
 
@@ -452,25 +509,25 @@ CHUNK_OVERLAP = 50        # 超長區段切分時保持上下文連貫
 
 ```
 d:\AI HYBRID\
-├── config.py               # 全域設定（α/β/γ 權重、模型設定、自動偵測最新學期等）
+├── config.py               # 全域設定（α/β/γ 權重、8B/3B 模型設定、自動偵測最新學期等）
 ├── main.py                 # 主 Pipeline（短路防爆攔截 + VRAM GC）
-├── discord_bot.py          # Discord Bot 非同步介面 + 實時 sync 指令
+├── discord_bot.py          # Discord Bot 非同步介面 + 身分管理 + 行事曆授權
 ├── requirements.txt        # Python 依賴套件
 ├── README.md               # 本文件
 ├── .env                    # DISCORD_BOT_TOKEN
 ├── rag/
 │   ├── data_loader.py      # 資料解析 + 多學期遞迴掃描 + FAISS/BM25 索引
-│   ├── query_router.py     # 合併式 Router+Rewrite + 時間 Regex 攔截 + VRAM 防護
-│   ├── retriever.py        # Hybrid Retriever（嚴格過濾防護 + 零幻覺攔截 + RRF）
-│   └── reranker.py         # Cross-Encoder Reranker（batch=16 + VRAM GC）
+│   ├── query_router.py     # 合併式 Router+Rewrite + 必選修疑問句偵測 + VRAM 防護
+│   ├── retriever.py        # Hybrid Retriever（dept_short Hard Filter + 零幻覺攔截 + RRF）
+│   └── reranker.py         # Cross-Encoder Reranker（batch=16 + 甲乙班去重 + VRAM GC）
 ├── llm/
-│   ├── llm_answer.py       # XML 強制模板 + 智慧推薦引擎 + 防進度表洗版
-│   └── llm_calendar.py     # Llama 3 意圖轉譯與口語時間精準擷取（Agentic Calendar）
+│   ├── llm_answer.py       # 統一格式 Prompt + 防重複防幻覺 + 推薦引擎
+│   └── llm_calendar.py     # 8B 意圖判斷 + CRUD 行事曆代理 + 未註冊防護
 ├── tools/
-│   ├── calendar_tool.py    # Google Calendar API (CRUD) 與安全所有權檢查
+│   ├── calendar_tool.py    # Google Calendar API CRUD + 時間定位搜尋 + 所有權防呆
 │   ├── search_event_tool.py # 學校行事曆檢索與學生俗稱同義詞拓撲 (events.json)
 │   ├── credentials.json    # Google API 憑證 (請自行放上以便授權)
-│   ├── token.json          # Google API 授權 Token (自動產生)
+│   ├── tokens/             # 各用戶 Google API 授權 Token (per-user, 自動產生)
 │   └── events.json         # 學校行事曆靜態檔
 ├── index_store/            # 索引持久化目錄（自動生成）
 └── data/

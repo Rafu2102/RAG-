@@ -140,8 +140,32 @@ def rerank(
     # 依 reranker 分數排序
     chunks.sort(key=lambda c: c.final_score, reverse=True)
 
+    # 【甲乙去重】同課程 + 同區段 + 同老師的多班級 chunk 只保留一個
+    # 優先保留甲班（或無班級標記的），除非使用者明確查詢乙班
+    seen_keys = {}  # key -> chunk
+    dup_count = 0
+    for chunk in chunks:
+        meta = chunk.node.metadata
+        dedup_key = (meta.get("course_name", ""), meta.get("section", ""), meta.get("teacher", ""))
+        cg = meta.get("class_group", "")
+        
+        if dedup_key in seen_keys:
+            existing_cg = seen_keys[dedup_key].node.metadata.get("class_group", "")
+            # 偏好甲班（甲 or 空）：如果現有的是乙而新的是甲，替換
+            if existing_cg == "乙" and cg in ("甲", ""):
+                seen_keys[dedup_key] = chunk
+            dup_count += 1
+            continue
+        seen_keys[dedup_key] = chunk
+    
+    deduped = list(seen_keys.values())
+    deduped.sort(key=lambda c: c.final_score, reverse=True)
+    
+    if dup_count > 0:
+        logger.info(f"  🔄 去重：移除 {dup_count} 個重複 chunks（同課程+同區段+同老師，優先保留甲班）")
+    
     # 取 Top-N
-    results = chunks[:top_n]
+    results = deduped[:top_n]
 
     logger.info(
         f"✅ Reranker 完成：Top-{len(chunks)} → Top-{len(results)} "

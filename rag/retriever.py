@@ -481,7 +481,7 @@ def _apply_hard_metadata_filter(
     filters = route_result.metadata_filters
 
     # 【完整硬過濾名單】包含所有結構化 metadata 條件
-    hard_keys = {"course_name_keyword", "teacher", "day_of_week", "grade", "required_or_elective", "time_period", "semester", "academic_year"}
+    hard_keys = {"dept_short", "course_name_keyword", "teacher", "day_of_week", "grade", "class_group", "is_evening", "required_or_elective", "time_period", "semester", "academic_year"}
     active_hard = {k: v for k, v in filters.items() if k in hard_keys}
 
     if not active_hard:
@@ -494,7 +494,11 @@ def _apply_hard_metadata_filter(
             # 【防呆機制】確保 val 一律變成 list 格式，避免 TypeError
             v_list = val if isinstance(val, list) else [val]
             
-            if key == "course_name_keyword":
+            if key == "dept_short":
+                meta_dept = meta.get("dept_short", "")
+                if not any(v in meta_dept or meta_dept in v for v in v_list if v):
+                    return False
+            elif key == "course_name_keyword":
                 # 只要 list 裡面有任何一個關鍵字對中即可
                 if not any(v in meta.get("course_name", "") for v in v_list):
                     return False
@@ -538,6 +542,14 @@ def _apply_hard_metadata_filter(
             elif key == "academic_year":
                 meta_ay = meta.get("academic_year", "")
                 if not any(v == meta_ay for v in v_list):
+                    return False
+            elif key == "class_group":
+                meta_cg = meta.get("class_group", "")
+                if not any(v == meta_cg for v in v_list):
+                    return False
+            elif key == "is_evening":
+                meta_evening = meta.get("is_evening", False)
+                if not meta_evening:
                     return False
         return True
 

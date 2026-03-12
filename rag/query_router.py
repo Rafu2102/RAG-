@@ -19,6 +19,44 @@ import config
 
 logger = logging.getLogger(__name__)
 
+# ── 動態名冊（啟動時從索引自動建構，取代硬編碼清單）──
+_known_teachers: set[str] = set()
+_known_courses: set[str] = set()
+
+
+def init_known_registry(nodes: list) -> None:
+    """
+    從已索引的 Nodes metadata 中自動建構教師與課程名冊。
+    應在 load_and_index() 完成後呼叫一次。
+    """
+    global _known_teachers, _known_courses
+    teachers = set()
+    courses = set()
+
+    for node in nodes:
+        meta = getattr(node, "metadata", {})
+
+        # 教師：處理多人共授（如 "李錫捷、吳佳駿、柯志亨"）
+        teacher_str = meta.get("teacher", "")
+        if teacher_str and teacher_str != "未知":
+            for t in re.split(r"[、,，/]", teacher_str):
+                t = t.strip()
+                if len(t) >= 2:
+                    teachers.add(t)
+
+        # 課程名稱：完整名 + 去括號的簡稱
+        course_name = meta.get("course_name", "")
+        if course_name and course_name != "未知":
+            courses.add(course_name)
+            # 提取去括號的簡稱（如 "微積分(一)" → "微積分"）
+            short = re.sub(r"[（(][^）)]*[）)]", "", course_name).strip()
+            if short and len(short) >= 2 and short != course_name:
+                courses.add(short)
+
+    _known_teachers = teachers
+    _known_courses = courses
+    logger.info(f"📋 動態名冊初始化完成 | 教師：{len(teachers)} 人 | 課程關鍵字：{len(courses)} 個")
+
 
 # =============================================================================
 # 📋 路由結果資料類別
@@ -59,7 +97,7 @@ ROUTER_PROMPT = """你是一個校園課程助理的問題分類器。
 
 ## Metadata 條件
 從問題中提取以下可能的過濾條件（若有提到）：
-- dept_short：系所簡稱（如 "資工系", "資工碩"）
+- dept_short：系所簡稱（如 "資工系", "電機系", "企管系", "觀光系", "護理系", "食品系" 等，碩士為 "資工碩" 等）
 - grade：年級（如 "一", "二", "三", "四", "碩一", "碩二"）
 - teacher：教師名稱（如 "馮玄明", "吳佳駿"）
 - required_or_elective：必修 或 選修
@@ -90,8 +128,13 @@ ROUTER_PROMPT = """你是一個校園課程助理的問題分類器。
 # 🔀 合併式 Router+Rewrite Prompt（單次 LLM 呼叫）
 # =============================================================================
 
-COMBINED_ROUTER_REWRITE_PROMPT = """你是國立金門大學資工系的校園課程助理問題分析器。
+COMBINED_ROUTER_REWRITE_PROMPT = """你是國立金門大學的校園課程助理問題分析器。
 請同時完成以下兩個任務：
+
+## 👤 使用者隱藏身分資料 (自動注入)
+{user_profile_str}
+當使用者在問題中使用代名詞（如：「我」、「我們系」、「我的」、「大幾」）或沒有明確指名科系/年級時，請**主動**將這些身分資訊填入 `metadata_filters` 的 `dept_short` 或 `grade` 中！
+⚠️ 【絕對優先規則】：如果使用者在問題中**明確指定了其他的系所或年級**（例如：「企管系大一的課」、「財金系」），請**絕對優先**使用使用者句子中的條件，不可被隱藏身分覆蓋！
 
 ## 任務 1：問題分類與閒聊判定
 判斷問題類型並提取 metadata 過濾條件。
@@ -226,11 +269,11 @@ def _extract_metadata_by_rules(question: str) -> dict:
 
     import re
     
-    # ── 學年度與學期檢查 (如 "114學年度第1學期", "114上", "114-1") ──
-    year_sem_match = re.search(r"(\d{3})\s*(?:年|學年度)?\s*(?:第([一二12])學期|([上下])學期?|-([12]))", question)
+    # ── 學年度與學期檢查 (如 "114學年度第1學期", "114上", "114級上", "114-1") ──
+    year_sem_match = re.search(r"(\d{3})\s*(?:年|學年度|級|級的)?\s*(?:第([一二12])學期|([上下])學期?|-([12])|的?([上下]))", question)
     if year_sem_match:
         filters["academic_year"] = year_sem_match.group(1)
-        sem_str = year_sem_match.group(2) or year_sem_match.group(3) or year_sem_match.group(4)
+        sem_str = year_sem_match.group(2) or year_sem_match.group(3) or year_sem_match.group(4) or year_sem_match.group(5)
         if sem_str:
             mapping = {"一": "1", "二": "2", "上": "1", "下": "2", "1": "1", "2": "2"}
             filters["semester"] = mapping.get(sem_str, sem_str)
@@ -257,20 +300,52 @@ def _extract_metadata_by_rules(question: str) -> dict:
             filters["day_of_week"] = d
             break
 
-    # ── 系所檢查 (修正優先順序) ──
-    # 先檢查是否包含碩士關鍵字 (包含碩一、碩二)
-    if any(kw in question for kw in ["碩", "研究所"]):
-        filters["dept_short"] = "資工碩"
-    # 如果不是碩士，再判斷是不是一般資工系
-    elif any(kw in question for kw in ["資工", "資訊工程"]):
-        filters["dept_short"] = "資工系"
+    # ── 系所檢查（支援全校 18 系所，簡稱 + 完整名稱 + 口語）──
+    _DEPT_PATTERNS = {
+        # 理工學院 (先長後短，避免「工」誤匹配)
+        "資訊工程": "資工系", "資工": "資工系",
+        "電機工程": "電機系", "電機": "電機系",
+        "土木與工程管理": "土木系", "土木工程": "土木系", "土木": "土木系",
+        "食品科學": "食品系", "食品": "食品系",
+        # 管理學院
+        "企業管理": "企管系", "企管": "企管系",
+        "觀光管理": "觀光系", "觀光": "觀光系",
+        "運動與休閒": "運休系", "運休": "運休系",
+        "工業工程與管理": "工管系", "工業工程": "工管系", "工管": "工管系",
+        # 人文社會學院
+        "國際暨大陸事務": "國際系", "大陸事務": "國際系", "國際": "國際系",
+        "建築": "建築系",
+        "海洋與邊境管理": "海邊系", "海洋與邊境": "海邊系", "海邊": "海邊系", "邊境管理": "海邊系",
+        "應用英語": "應英系", "應英": "應英系",
+        "華語文": "華語系", "華語": "華語系",
+        "都市計畫與景觀": "都景系", "都市計畫": "都景系", "都景": "都景系",
+        # 健康護理學院
+        "護理": "護理系",
+        "長期照護": "長照系", "長照": "長照系",
+        "社會工作": "社工系", "社工": "社工系",
+        # 通識
+        "通識": "通識中心",
+    }
+    # 先檢查是否包含碩士關鍵字
+    is_master = any(kw in question for kw in ["碩", "研究所"])
+    # 用最長匹配優先（避免「工管」被「工」先匹配到）
+    sorted_dept_keys = sorted(_DEPT_PATTERNS.keys(), key=len, reverse=True)
+    for kw in sorted_dept_keys:
+        if kw in question:
+            dept = _DEPT_PATTERNS[kw]
+            if is_master:
+                filters["dept_short"] = dept.replace("系", "碩") if "系" in dept else dept + "碩"
+            else:
+                filters["dept_short"] = dept
+            break
 
-    # ── 年級檢查 (支援口語和口誤) ──
+    # ── 年級檢查 (支援五年制、口語) ──
     grade_patterns = {
-        r"大一|一年級|第一(?=[上下])|(?<=資工)一|資一": "一",
-        r"大二|二年級|第二(?=[上下])|(?<=資工)二|資二": "二",
-        r"大三|三年級|第三(?=[上下])|(?<=資工)三|資三": "三",
-        r"大四|四年級|第四(?=[上下])|(?<=資工)四|資四": "四",
+        r"大一|一年級": "一",
+        r"大二|二年級": "二",
+        r"大三|三年級": "三",
+        r"大四|四年級": "四",
+        r"大五|五年級": "五",
         r"碩一|研一|碩班一年級": "碩一",
         r"碩二|研二|碩班二年級": "碩二",
     }
@@ -278,6 +353,15 @@ def _extract_metadata_by_rules(question: str) -> dict:
         if re.search(pattern, question):
             filters["grade"] = g
             break
+    
+    # ── 甲乙班檢查 (如「電機一甲」「一甲」「甲班」) ──
+    group_match = re.search(r"[一二三四五]([甲乙丙丁])|([甲乙丙丁])班", question)
+    if group_match:
+        filters["class_group"] = group_match.group(1) or group_match.group(2)
+    
+    # ── 進修部檢查 ──
+    if "進修" in question or "夜間" in question:
+        filters["is_evening"] = True
 
     # ── 節次／時段提取（如「第二到四堂」→ time_period: "2-4"）──
     def _cn_to_num(s):
@@ -292,37 +376,38 @@ def _extract_metadata_by_rules(question: str) -> dict:
         if p_start and p_end:
             filters["time_period"] = f"{p_start}-{p_end}"
 
-    # ── 必修 / 選修檢查 ──
+    # ── 必修 / 選修檢查（防幻覺：若使用者在「詢問」而非「篩選」，不填入 filter）──
+    # 例如：「資料結構是選修嗎？」→ 不填（使用者在問）
+    #       「電機大一有什麼必修」→ 填入（使用者在篩選）
+    _req_elec_word = None
     if "必修" in question:
-        filters["required_or_elective"] = "必修"
+        _req_elec_word = "必修"
     elif "選修" in question:
-        filters["required_or_elective"] = "選修"
+        _req_elec_word = "選修"
+    
+    if _req_elec_word:
+        # 檢查是否為疑問句：後接 嗎/？/呢 或 前接 是/是否/算
+        word_pos = question.index(_req_elec_word)
+        after = question[word_pos + len(_req_elec_word):word_pos + len(_req_elec_word) + 3]
+        before = question[max(0, word_pos - 3):word_pos]
+        is_asking = bool(re.search(r"[嗎？呢]", after)) or "是不是" in question or "還是" in question
+        is_asking = is_asking or bool(re.search(r"(是|是否|算)$", before))
+        
+        if not is_asking:
+            filters["required_or_elective"] = _req_elec_word
     elif any(kw in question for kw in ["推薦", "建議", "推介", "適合"]):
         # 推薦情境：必修本來就要修，不需要推薦，自動篩選選修
         filters["required_or_elective"] = "選修"
 
-    # ── 教師名稱提取（使用已知教師名冊，自動去除「老師」「教授」後綴）──
-    known_teachers = [
-        "柯志亨", "潘進儒", "馮玄明", "陳鍾誠", "吳佳駿", "李錫捷",
-        "趙于翔", "王建鈞", "李金譚", "羅志仁", "陳華慶", "許悠洋",
-    ]
-    # 先清除「教授」「老師」後綴再比對
+    # ── 教師名稱提取（動態名冊，自動去除「老師」「教授」後綴）──
     clean_q = re.sub(r"(老師|教授)", "", question)
-    for teacher in known_teachers:
+    for teacher in sorted(_known_teachers, key=len, reverse=True):
         if teacher in clean_q:
             filters["teacher"] = teacher
             break
 
-    # ── 課程名稱關鍵字 ──
-    course_keywords = [
-        "微積分", "線性代數", "資料結構", "演算法", "計算機概論", "作業系統",
-        "網路", "資料庫", "人工智慧", "機器學習", "深度學習", "軟體工程",
-        "程式設計", "物件導向", "視窗程式", "網頁設計", "計算機組織", "組合語言",
-        "多媒體", "人工智慧", "VR", "Linux", "資訊安全", "網路安全",
-        "機器人", "專題", "實習", "資料處理", "國防", "英文",
-        "商業數據", "生成式AI", "生成式人工智慧",
-    ]
-    for kw in course_keywords:
+    # ── 課程名稱關鍵字（動態清單，從索引自動建構）──
+    for kw in sorted(_known_courses, key=len, reverse=True):
         if kw in question:
             filters["course_name_keyword"] = kw
             break
@@ -432,6 +517,7 @@ def route_and_rewrite(
     question: str,
     chat_history: list[dict] = None,
     num_queries: int = None,
+    user_profile: dict = None
 ) -> tuple:
     """
     合併 Query Router + Query Rewrite 為單次 LLM 呼叫。
@@ -464,12 +550,20 @@ def route_and_rewrite(
     #         history_lines.append(f"{role}：{msg['content'][:200]}")
     #     history_str = "\n".join(history_lines)
     
+    # 格式化使用者身分
+    profile_str = "使用者尚未註冊身分。請依問題字面判斷。"
+    if user_profile:
+        dept = user_profile.get("department", "未知")
+        grade = user_profile.get("grade", "未知")
+        profile_str = f"該名使用者是【{dept}】的【{grade}年級】學生。"
+    
     # ── Step 2: 合併式 LLM 呼叫 (Router + Rewrite 一次搞定) ──
     try:
         prompt = COMBINED_ROUTER_REWRITE_PROMPT.format(
             num_queries=num_queries,
             chat_history=history_str,
             question=question,
+            user_profile_str=profile_str
         )
         
         response = requests.post(
@@ -499,14 +593,37 @@ def route_and_rewrite(
         llm_filters = data.get("metadata_filters", {})
         
         # 【防幻覺】驗證 LLM filters
+        # 但若使用者有註冊身分，其 dept_short 和 grade 是由 Profile 注入的，
+        # 不需要在問題原文出現也可以信任（因為 Prompt 明確指示了 LLM 自動補全）
+        profile_trusted_keys = set()
+        if user_profile:
+            if user_profile.get("department"):
+                profile_trusted_keys.add("dept_short")
+            if user_profile.get("grade"):
+                profile_trusted_keys.add("grade")
+        
         verified_filters = {}
         for k, v in llm_filters.items():
-            if isinstance(v, str) and v and v in question:
+            if k in profile_trusted_keys:
+                # 由 Profile 注入的欄位，信任 LLM 的輸出
+                if isinstance(v, str) and v:
+                    verified_filters[k] = v
+            elif isinstance(v, str) and v and v in question:
                 verified_filters[k] = v
             elif isinstance(v, list):
                 valid_list = [item for item in v if item in question]
                 if valid_list:
                     verified_filters[k] = valid_list
+        
+        # 【正規化】LLM 可能回傳「三年級」但 metadata 只存「三」，統一格式
+        if "grade" in verified_filters:
+            g = verified_filters["grade"]
+            # 去除多餘的「年級」「年」後綴
+            g = g.replace("年級", "").replace("年", "").strip()
+            # 也處理「大一」→「一」的口語
+            g = g.replace("大", "")
+            if g:
+                verified_filters["grade"] = g
         
         # 合併 LLM + 規則 filters（規則較精準，優先覆蓋 LLM 的結果）
         merged_filters = {**verified_filters, **rule_filters}

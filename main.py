@@ -85,6 +85,8 @@ def rag_pipeline(
     bm25_index,
     memory: ConversationMemory,
     debug: bool = False,
+    user_profile: dict = None,
+    discord_id: str = None,
 ) -> str:
     """
     執行完整的 RAG Pipeline。
@@ -139,6 +141,7 @@ def rag_pipeline(
     route_result, queries = route_and_rewrite(
         question=question,
         chat_history=memory.get_history(),
+        user_profile=user_profile,
     )
 
     # 【學期預設】若使用者未指定學期，自動注入當前學期 filter
@@ -198,13 +201,16 @@ def rag_pipeline(
         logger.info("  [dim]📅 偵測到行事曆操作，預先解析意圖...[/dim]")
         calendar_intent_data = extract_calendar_intent(question)
         
-        # 如果是自訂時間、學校事件、或是刪除動作，完全不需要經過 RAG 查詢課程清單！直接短路執行。
-        if calendar_intent_data["action_type"] == "remove" or calendar_intent_data["intent_type"] in ["custom_event", "academic_event"]:
+        # 如果是自訂時間、學校事件、刪除、列出、或修改動作，完全不需要經過 RAG 查詢課程清單！直接短路執行。
+        # 但 course_schedule_event 需要 RAG 來搜尋教學進度表，所以不走短路。
+        if calendar_intent_data["action_type"] in ["remove", "list", "update"] or calendar_intent_data["intent_type"] in ["custom_event", "academic_event"]:
             logger.info(f"  [dim]⚡ 行事曆意圖為 {calendar_intent_data['intent_type']} ({calendar_intent_data['action_type']})，直接攔截跳過 RAG 檢索！[/dim]")
-            answer_str = execute_calendar_action(question, calendar_intent_data)
+            answer_str = execute_calendar_action(question, calendar_intent_data, discord_id=discord_id)
             memory.add_user_message(question)
             memory.add_assistant_message(answer_str)
             return answer_str
+        elif calendar_intent_data["intent_type"] == "course_schedule_event":
+            logger.info("  [dim]📅 意圖為 course_schedule_event，需進入 RAG 搜尋教學進度表[/dim]")
         else:
             logger.info("  [dim]📅 意圖為 weekly_course，需要進入 RAG 檢索課表[/dim]")
 
@@ -293,7 +299,7 @@ def rag_pipeline(
     if route_result.query_type == "calendar_action" and calendar_intent_data:
         logger.info("  [dim]📅 觸發行事曆建立流程 (weekly_course RAG 提供支援)[/dim]")
         from llm.llm_calendar import execute_calendar_action
-        final_answer = execute_calendar_action(question, calendar_intent_data, reranked_chunks)
+        final_answer = execute_calendar_action(question, calendar_intent_data, reranked_chunks, discord_id=discord_id)
         print_step(5, f"Calendar Action → 完成", time.time() - step_start)
     else:
         answer_result = generate_answer(
@@ -337,6 +343,8 @@ def main():
     console.print("[bold green]📂 載入資料與索引...[/bold green]\n")
     try:
         nodes, faiss_index, bm25_index = load_and_index()
+        from rag.query_router import init_known_registry
+        init_known_registry(nodes)
         console.print(f"[green]✅ 索引載入完成！共 {len(nodes)} 個文件區段[/green]\n")
     except Exception as e:
         console.print(f"[red]❌ 索引載入失敗：{e}[/red]")
