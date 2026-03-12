@@ -159,13 +159,16 @@ def extract_calendar_intent(query: str) -> dict:
             import re as _re
             # 先移除時間表達式（九點十分、十一點半、下午三點等）
             e_name = _re.sub(r'[一二三四五六七八九十\d]+點[十二三四五六七八九\d]*分?半?', '', query)
-            # 移除日期/時間/行事曆關鍵字
-            e_name = _re.sub(r'(明天|今天|後天|大後天|下週.?|這週.?|\d+月\d+[日號]?|上午|下午|晚上|早上)', '', e_name)
-            e_name = _re.sub(r'(第[一二三四五六七八九十\d]+節|到|~|幫我|加到|行事曆|日曆|提醒|裡面|裡|我的|要上|要去|把|的|刪除|刪掉|移除|取消|修改|變更|查看|列出)', '', e_name)
+            # 移除日期/時間/行事曆關鍵字（含斜線日期如 3/16）
+            e_name = _re.sub(r'(明天|今天|後天|大後天|下週.?|這週.?|\d+[/月]\d+[日號]?|上午|下午|晚上|早上)', '', e_name)
+            e_name = _re.sub(r'(第[一二三四五六七八九十\d]+節|到|~|幫我|加到|新增|行事曆|日曆|提醒|裡面|裡|我的|要上|要去|把|的|刪除|刪掉|移除|取消|修改|變更|查看|列出|可以|嗎|是|可不可以)', '', e_name)
             # 清理殘留的单字「我」和多餘空白
             e_name = _re.sub(r'^[我你他她們\s]+|[我你他她們\s]+$', '', e_name).strip()
             if not e_name:
-                e_name = "*"  # 刪除/查詢時無法提取 → 通配
+                if action_type == "add":
+                    e_name = query  # add 操作用原始 query 作為事件名
+                else:
+                    e_name = "*"  # 刪除/查詢時無法提取 → 通配
             res_data["event_name"] = e_name
             logger.warning(f"⚠️ LLM 未回傳 event_name，自動提取：{e_name}")
         
@@ -353,27 +356,50 @@ def execute_calendar_action(query: str, intent_data: dict, retrieved_chunks: lis
     
     # [流程 A] 自訂時間事件
     if intent_type == "custom_event":
-        e_start = intent_data.get("start_dt")
+        e_start = intent_data.get("start_dt") or start_dt
         e_end = intent_data.get("end_dt")
         
+        # 若有 start 但沒 end，自動 +2 小時（或全天事件）
+        if e_start and not e_end:
+            try:
+                from tools.calendar_tool import _parse_dt
+                _s = _parse_dt(e_start)
+                if _s.hour == 0 and _s.minute == 0:
+                    e_end = e_start  # 全天事件，start == end
+                else:
+                    e_end = (_s + timedelta(hours=2)).strftime('%Y-%m-%dT%H:%M:%S')
+            except Exception:
+                e_end = e_start
+        
+        # 標題清理：避免用 * 或原始 query 做標題
+        title = e_name if e_name not in ("*", "") else query
+        
         if e_start and e_end:
-            logger.info(f"📅 執行自訂時間事件建立：{e_name} {e_start} ~ {e_end}")
-            result = create_calendar_event(discord_id=discord_id, title=f"[自訂] {e_name}", start=e_start, end=e_end)
+            logger.info(f"📅 執行自訂時間事件建立：{title} {e_start} ~ {e_end}")
+            result = create_calendar_event(discord_id=discord_id, title=f"[自訂] {title}", start=e_start, end=e_end)
             if result["status"] == "success":
                 is_all_day = "T00:00:00" in e_start
                 start_display = f"{{'date': '{e_start.split('T')[0]}'}}" if is_all_day else f"{{'dateTime': '{e_start}'}}"
                 end_display = f"{{'date': '{e_end.split('T')[0]}'}}" if is_all_day else f"{{'dateTime': '{e_end}'}}"
                 return (
                     f"✅ 已新增到 Google Calendar\n"
-                    f"📌 標題：{e_name}\n"
+                    f"📌 標題：{title}\n"
                     f"🕒 開始：{start_display}\n"
                     f"🕒 結束：{end_display}\n"
                     f"🔗 事件連結：{result['htmlLink']}"
                 )
             elif result["status"] == "exists":
-                return f"⚠️ 行事曆已有相同事件，已略過新增\n📌 標題：{e_name}\n🔗 事件連結：{result['htmlLink']}"
+                return f"⚠️ 行事曆已有相同事件，已略過新增\n📌 標題：{title}\n🔗 事件連結：{result['htmlLink']}"
             else:
                 return f"❌ 建立失敗：{result.get('message', '未知錯誤')}"
+        else:
+            # custom_event 但缺少時間 → 友善引導
+            return (
+                f"😅 我知道你想加「**{title}**」到行事曆，但我沒有偵測到具體的時間。\n\n"
+                f"💡 **請提供具體時間**，例如：\n"
+                f"「3月16日是我生日加到行事曆」\n"
+                f"「明天下午三點開會幫我加行事曆」"
+            )
                 
     # [流程 B] 學校既定事件
     elif intent_type == "academic_event":
