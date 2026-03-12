@@ -505,7 +505,7 @@ def load_nodes(path: str) -> Optional[list[TextNode]]:
 import hashlib
 import json
 
-MANIFEST_PATH = os.path.join(config.INDEX_STORE_DIR, "data_manifest.json")
+MANIFEST_PATH = os.path.join(config.INDEX_DIR, "data_manifest.json")
 
 
 def _compute_file_hash(filepath: str) -> str:
