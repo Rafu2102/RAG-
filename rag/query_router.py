@@ -596,7 +596,8 @@ def route_and_rewrite(
                 "options": {
                     "temperature": 0.1,
                     "num_ctx": 2048,
-                    "num_predict": 300,  # 限縮：防止 3B 模型生成過多 queries 導致 JSON 截斷
+                    "num_predict": 500,  # 【企業級優化 8】放寬截斷上限
+                    "repeat_penalty": 1.2, # 嚴格懲罰重複生成，防止 LLM 卡在相同 query 的無限迴圈
                 },
             },
             timeout=config.OLLAMA_REQUEST_TIMEOUT,
