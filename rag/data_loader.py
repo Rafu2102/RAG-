@@ -20,7 +20,16 @@ import jieba
 import numpy as np
 import faiss
 import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 from rank_bm25 import BM25Okapi
+
+# 【企業級優化 3：全域 HTTP 連線池與防卡死】
+# 避免高併發時 requests.post() 狂開 TCP 連線導致 Socket 枯竭與 TIME_WAIT 卡死
+_ollama_session = requests.Session()
+_retries = Retry(total=3, backoff_factor=0.3, status_forcelist=[500, 502, 503, 504])
+_ollama_session.mount('http://', HTTPAdapter(max_retries=_retries, pool_connections=30, pool_maxsize=30))
+_ollama_session.mount('https://', HTTPAdapter(max_retries=_retries, pool_connections=30, pool_maxsize=30))
 
 from llama_index.core import Document, Settings
 from llama_index.core.node_parser import SentenceSplitter
@@ -356,7 +365,8 @@ def ollama_embed(texts: list[str], model: str = None, prefix: str = "passage: ")
         batch = texts[i:i + batch_size]
         prefixed = [f"{prefix}{t}" for t in batch]
 
-        response = requests.post(url, json={
+        # 【使用全域 Session】取代 requests.post 進行 TCP 連線復用
+        response = _ollama_session.post(url, json={
             "model": model,
             "input": prefixed,
         }, timeout=config.OLLAMA_REQUEST_TIMEOUT)
@@ -458,6 +468,34 @@ def build_bm25_index(nodes: list[TextNode]) -> BM25Okapi:
     為所有 Nodes 建立 BM25 關鍵字索引（jieba 中文分詞）。
     """
     logger.info("開始建立 BM25 索引...")
+    
+    # 【企業級優化 2：領域字典動態注入】
+    # 防止 jieba 將系上的特有老師名字（如：馮玄明）或專有名詞課名切碎
+    added_words = 0
+    for node in nodes:
+        meta = node.metadata
+        teacher = meta.get("teacher", "")
+        course = meta.get("course_name", "")
+        
+        # 加入老師名稱（處理多人共授）
+        if teacher and teacher != "未知":
+            for t in re.split(r"[、,，/]", teacher):
+                t = t.strip()
+                if len(t) >= 2:
+                    jieba.add_word(t, freq=2000)
+                    added_words += 1
+                    
+        # 加入課程名稱（全名 與 去括號簡稱）
+        if course and course != "未知":
+            jieba.add_word(course.strip(), freq=2000)
+            added_words += 1
+            short = re.sub(r"[（(][^）)]*[）)]", "", course).strip()
+            if short and len(short) >= 2 and short != course:
+                jieba.add_word(short, freq=2000)
+                added_words += 1
+                
+    logger.info(f"  📝 領域字典注入完成：已動態加入 {added_words} 個實體詞彙至 Jieba")
+
     tokenized_corpus = [tokenize_chinese(node.get_content()) for node in nodes]
     bm25 = BM25Okapi(tokenized_corpus)
     logger.info(f"BM25 索引建立完成：{len(tokenized_corpus)} 文件")

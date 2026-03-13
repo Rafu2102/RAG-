@@ -48,6 +48,8 @@ def get_reranker() -> CrossEncoder:
         else:
             logger.info(f"載入 Reranker 模型：{config.RERANKER_MODEL_NAME} (device={device})")
 
+        # 【企業級優化 5：安全截斷與長度保護】
+        # 明確加上 max_length=512 (或模型支援的最大上限)，防止隱性截斷報錯與 VRAM 突波
         _reranker_model = CrossEncoder(
             config.RERANKER_MODEL_NAME,
             max_length=512,

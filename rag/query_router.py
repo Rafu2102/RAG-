@@ -564,10 +564,24 @@ def route_and_rewrite(
     
     # ── Step 2: 合併式 LLM 呼叫 (Router + Rewrite 一次搞定) ──
     try:
+        # 【企業級優化 4：課表語意/口語時間對齊】
+        # 將學生的口語時間，隱式擴充為課表的標準節次，讓 BM25 和 LLM Rewrite 能精準命中
+        time_mapper = {
+            "早上": "第1節 第2節 第3節 第4節 上午",
+            "上午": "第1節 第2節 第3節 第4節",
+            "下午": "第5節 第6節 第7節 第8節 第9節",
+            "晚上": "第10節 第11節 第12節 夜間",
+        }
+        expanded_question = question
+        for spoken, formal in time_mapper.items():
+            if spoken in question:
+                expanded_question += f" ({formal})"
+                break
+
         prompt = COMBINED_ROUTER_REWRITE_PROMPT.format(
             num_queries=num_queries,
             chat_history=history_str,
-            question=question,
+            question=expanded_question,
             user_profile_str=profile_str
         )
         

@@ -588,10 +588,17 @@ def _apply_hard_metadata_filter(
     matched = [c for c in chunks if matches_hard(c)]
     unmatched = [c for c in chunks if not matches_hard(c)]
 
-    # 【關鍵修改】嚴格丟棄所有不符合 Metadata 的 chunks (Hard Filter)
-    # 如果使用者明確指定了學期、老師、星期等條件，不符合的資料絕不能讓 LLM 看到，否則會導致嚴重幻覺。
-    result = matched
-    logger.info(f"  🏷️ Hard Metadata Filter：{len(matched)} matched (保留) + {len(unmatched)} unmatched (嚴格捨棄)")
+    # 【企業級優化 1：Soft-Fallback】防範「玉石俱焚」陷阱
+    if len(matched) > 0:
+        # 正常情況：有符合條件的資料，嚴格捨棄不符合的
+        result = matched
+        logger.info(f"  🏷️ Hard Metadata Filter：保留 {len(matched)} 筆 matched，嚴格捨棄 {len(unmatched)} 筆 unmatched")
+    else:
+        # 防爆 Fallback：如果條件太嚴苛導致全軍覆沒，降權放行給 Reranker 裁決
+        for c in unmatched:
+            c.metadata_score -= 5.0  # 給予重度扣分
+        result = unmatched
+        logger.warning(f"  ⚠️ Hard Filter 全軍覆沒！啟動 Soft-Fallback，放行 {len(unmatched)} 筆降權資料交由 Reranker 裁決")
     
     return result
 
