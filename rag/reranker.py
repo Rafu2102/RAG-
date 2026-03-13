@@ -68,6 +68,7 @@ def rerank(
     chunks: list[RetrievedChunk],
     top_n: int = None,
     batch_size: int = None,
+    route_result = None,
 ) -> list[RetrievedChunk]:
     """
     使用 bge-reranker-large cross-encoder 對候選 chunks 進行精細重排序。
@@ -164,8 +165,50 @@ def rerank(
     if dup_count > 0:
         logger.info(f"  🔄 去重：移除 {dup_count} 個重複 chunks（同課程+同區段+同老師，優先保留甲班）")
     
-    # 取 Top-N
-    results = deduped[:top_n]
+    # ========================================================================
+    # 【課程完整覆蓋保證】— 教師查詢時確保每門課至少出現一次
+    #
+    # 問題：每門課有 ~6 個 section chunks，Top-10 只能裝 2-3 門課。
+    #       若老師教 5 門課，有 2 門會被 Top-N 切掉。
+    # 解法：先收集每門課的 basic_info（最精華），再用剩餘名額補高分 section。
+    # ========================================================================
+    
+    has_teacher_filter = bool(route_result and route_result.metadata_filters.get("teacher"))
+    
+    if has_teacher_filter and len(deduped) > top_n:
+        # 1. 收集每門課的最佳 chunk（優先 basic_info）
+        course_best = {}  # course_name -> chunk
+        for chunk in deduped:
+            cname = chunk.node.metadata.get("course_name", "")
+            section = chunk.node.metadata.get("section", "")
+            if cname not in course_best:
+                course_best[cname] = chunk
+            elif section == "basic_info" and course_best[cname].node.metadata.get("section", "") != "basic_info":
+                course_best[cname] = chunk  # basic_info 優先
+        
+        # 2. 保底：每門課至少 1 個 chunk
+        guaranteed = list(course_best.values())
+        guaranteed_ids = {c.node.node_id for c in guaranteed}
+        
+        # 3. 剩餘名額補高分 section
+        remaining = [c for c in deduped if c.node.node_id not in guaranteed_ids]
+        remaining.sort(key=lambda c: c.final_score, reverse=True)
+        
+        # 【關鍵優化】動態提升 top_n 容量
+        # 原本硬限制 top_n(10)，導致老師若教 3 門課，每門課只能分到約 3 個 chunk，LLM 沒資料寫課綱
+        # 現在改為：保障每門課「平均」有 4 個 chunk 的空間 (basic_info + syllabus + grading + schedule)
+        # 上限不超過 RETRIEVER_TOP_K (30)，避免塞爆 Context Window
+        effective_top_n = max(top_n, min(len(course_best) * 4, 30))
+        
+        fill_count = max(0, effective_top_n - len(guaranteed))
+        
+        results = guaranteed + remaining[:fill_count]
+        results.sort(key=lambda c: c.final_score, reverse=True)
+        
+        logger.info(f"  📚 教師模式：開課數 {len(course_best)} 門，動態提升 Top-N 容量至 {effective_top_n}，已放入 {len(results)} 個區段")
+    else:
+        # 一般模式：直接 Top-N
+        results = deduped[:top_n]
 
     logger.info(
         f"✅ Reranker 完成：Top-{len(chunks)} → Top-{len(results)} "
