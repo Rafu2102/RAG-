@@ -680,9 +680,18 @@ def route_and_rewrite(
     except Exception as e:
         logger.warning(f"合併 Router+Rewrite LLM 呼叫失敗，使用規則 fallback：{e}")
         
+        # 【企業級優化 7：Router 崩潰備援身份遺落修復】
+        # 若 LLM 當機，必須把學生的 dept_short 和 grade 補回規則過濾器中，否則會海底撈針
+        fallback_filters = rule_filters.copy()
+        if user_profile:
+            if user_profile.get("department") and "dept_short" not in fallback_filters:
+                fallback_filters["dept_short"] = user_profile["department"]
+            if user_profile.get("grade") and "grade" not in fallback_filters:
+                fallback_filters["grade"] = user_profile["grade"]
+        
         route_result = RouteResult(
             query_type=rule_type,
-            metadata_filters=rule_filters,
+            metadata_filters=fallback_filters,
             confidence=0.5,
         )
         return route_result, [question]

@@ -273,6 +273,7 @@ def rag_pipeline(
         query=question,
         chunks=retrieved_chunks,
         top_n=config.RERANKER_TOP_N,
+        route_result=route_result,
     )
     print_step(4, f"Reranker → Top-{len(reranked_chunks)} "
                f"(from {len(retrieved_chunks)} candidates)", time.time() - step_start)
