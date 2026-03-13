@@ -483,15 +483,27 @@ def _apply_hard_metadata_filter(
     # 【完整硬過濾名單】包含所有結構化 metadata 條件
     hard_keys = {"dept_short", "course_name_keyword", "teacher", "day_of_week", "grade", "class_group", "is_evening", "required_or_elective", "time_period", "semester", "academic_year"}
     
-    # 【智慧豁免】查特定老師時不限年級（使用者想看該老師的所有課）
+    # ========================================================================
+    # 【智慧豁免系統】— 精確實體查詢時放寬 profile 注入的過濾條件
+    #
+    # 原因：使用者身分(如資工系三年級)會被自動注入 dept_short + grade，
+    #       但當使用者指名特定「老師」或「課程名」時，該老師/課程
+    #       可能屬於其他系所或年級。若不豁免會導致 0 結果。
+    #
+    # 規則：
+    #   - 指定老師 → 豁免 dept_short + grade（老師可能跨系教課）
+    #   - 指定課程名 → 豁免 grade（同課可能開在不同年級）
+    #   - 無具體實體 → 全部硬過濾（正確行為）
+    # ========================================================================
+    
     if "teacher" in filters and filters["teacher"]:
         hard_keys.discard("grade")
-        logger.info(f"  🏷️ 偵測到教師查詢「{filters['teacher']}」，豁免 grade 硬過濾")
+        hard_keys.discard("dept_short")
+        logger.info(f"  🏷️ 教師查詢「{filters['teacher']}」→ 豁免 grade + dept_short 硬過濾")
     
-    # 【智慧豁免】查特定課程名稱時不限年級和系所（課名本身已足夠精確）
     if "course_name_keyword" in filters and filters["course_name_keyword"]:
         hard_keys.discard("grade")
-        logger.info(f"  🏷️ 偵測到課程名稱查詢「{filters['course_name_keyword']}」，豁免 grade 硬過濾")
+        logger.info(f"  🏷️ 課程名稱查詢「{filters['course_name_keyword']}」→ 豁免 grade 硬過濾")
 
     active_hard = {k: v for k, v in filters.items() if k in hard_keys}
 
