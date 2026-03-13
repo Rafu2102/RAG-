@@ -503,7 +503,8 @@ def _apply_hard_metadata_filter(
     
     if "course_name_keyword" in filters and filters["course_name_keyword"]:
         hard_keys.discard("grade")
-        logger.info(f"  🏷️ 課程名稱查詢「{filters['course_name_keyword']}」→ 豁免 grade 硬過濾")
+        hard_keys.discard("dept_short")
+        logger.info(f"  🏷️ 課程名稱查詢「{filters['course_name_keyword']}」→ 豁免 grade + dept_short 硬過濾")
 
     active_hard = {k: v for k, v in filters.items() if k in hard_keys}
 
@@ -522,8 +523,16 @@ def _apply_hard_metadata_filter(
                 if not any(v in meta_dept or meta_dept in v for v in v_list if v):
                     return False
             elif key == "course_name_keyword":
-                # 只要 list 裡面有任何一個關鍵字對中即可
-                if not any(v in meta.get("course_name", "") for v in v_list):
+                # 【嚴格單獨課程隔離】確保不會因為短關鍵字帶入其他課程的資訊
+                # 先取出 metadata 裡的完整課程名稱
+                c_name = meta.get("course_name", "")
+                
+                # 從括號前提取課程簡稱（如 "電力系統 (Power System)" -> "電力系統"）
+                c_name_short = re.sub(r"[（(][^）)]*[）)]", "", c_name).strip()
+                
+                # 【嚴格匹配】關鍵字必須完全等於「簡稱」或「全名」
+                # 這樣能保證「資料結構」不會意外配對到「進階資料結構」
+                if not any(v == c_name_short or v == c_name for v in v_list):
                     return False
             elif key == "teacher":
                 # 【修復稱謂 Bug】自動移除「教授」、「老師」，確保能精準比對到名字
