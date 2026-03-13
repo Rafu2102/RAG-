@@ -482,6 +482,17 @@ def _apply_hard_metadata_filter(
 
     # 【完整硬過濾名單】包含所有結構化 metadata 條件
     hard_keys = {"dept_short", "course_name_keyword", "teacher", "day_of_week", "grade", "class_group", "is_evening", "required_or_elective", "time_period", "semester", "academic_year"}
+    
+    # 【智慧豁免】查特定老師時不限年級（使用者想看該老師的所有課）
+    if "teacher" in filters and filters["teacher"]:
+        hard_keys.discard("grade")
+        logger.info(f"  🏷️ 偵測到教師查詢「{filters['teacher']}」，豁免 grade 硬過濾")
+    
+    # 【智慧豁免】查特定課程名稱時不限年級和系所（課名本身已足夠精確）
+    if "course_name_keyword" in filters and filters["course_name_keyword"]:
+        hard_keys.discard("grade")
+        logger.info(f"  🏷️ 偵測到課程名稱查詢「{filters['course_name_keyword']}」，豁免 grade 硬過濾")
+
     active_hard = {k: v for k, v in filters.items() if k in hard_keys}
 
     if not active_hard:
