@@ -1,0 +1,67 @@
+國立金門大學114學年度第2學期電機系課程
+學年度：114學年度
+學期：第2學期
+課程名稱：電子學(二) (Microelectronic Circuits II)
+部別：日間部學士班
+開課班級：電機二乙
+學分數：3.0學分
+授課時數：3.0小時
+授課教師：李金譚
+必選修：必修
+教室：E201王振坤講堂
+修課上限人數：100人
+上課時間：每周星期一上午第2節~上午第4節
+
+課程教學目標：
+1. This course introduces the basic physics and operation principles of semiconductor devices, the fundamentals of diode, BJT, MOSFET, and other semiconductor devices. Students could learn basic knowledge on semiconductor devices that includes DC characteristic, small signal characteristics and frequency characteristics. Students could also learn some well know useful circuits, and have ability to analyze or design the simple application circuits.
+
+課程教學綱要：
+1. The following is the brief summary of the topics that are covered in this course. Topic I presents the BJT’s DC characteristic, biasing schemes and analysis procedures. Topic II introduces the BJT’s AC characteristic and small signal models. Topic III outlines the different types of BJT’s single stage amplifiers. Topic IV introduces the fundamentals of field effect transistor (FET). Topic V presents the MOSFET’s DC characteristic, biasing schemes and analysis procedures. Topic VI outlines the different types of FET’s single stage amplifiers. Topic VII Frequency Response. Topic VIII Power Amplifiers.
+
+教科書資料：
+1-1. 書名：Microelectronics Circuit Analysis and Design
+1-2. 出版日期：未標註
+1-3. 作者：D.A. Neamen
+1-4. 出版社：McGraw-Hill
+1-5. 版本：未標註
+
+2-1. 書名：微電子學
+2-2. 出版日期：未標註
+2-3. 作者：SEDRA/Smith(曹恆偉譯)
+2-4. 出版社：滄海圖書
+2-5. 版本：第八版
+
+參考書資料：
+1-1. 書名：Microelectronic Circuits
+1-2. 出版日期：未標註
+1-3. 作者：Sedra/Smith
+1-4. 出版社：未標註
+1-5. 版本：未標註
+
+※請遵守智慧財產權觀念，依著作權法規定，教科書及教材不得非法影印與使用盜版軟體。
+
+教學進度表（2026年春季學期）：
+第1週課程 (2026/02/22─2026/02/28)：BJT Transistor operation modes and Professional Ethics
+第2週課程 (2026/03/01─2026/03/07)：BJT Circuits at DC
+第3週課程 (2026/03/08─2026/03/14)：BJT Small signal operation
+第4週課程 (2026/03/15─2026/03/21)：BJT Amplifiers I
+第5週課程 (2026/03/22─2026/03/28)：BJT Amplifiers II
+第6週課程 (2026/03/29─2026/04/04)：MOSFET Physical operation
+第7週課程 (2026/04/05─2026/04/11)：MOSFET Characteristics
+第8週課程 (2026/04/12─2026/04/18)：Midterm Examination
+第9週課程 (2026/04/19─2026/04/25)：MOSFET DC Biasing schemes
+第10週課程 (2026/04/26─2026/05/02)：MOSFET Amplifiers I
+第11週課程 (2026/05/03─2026/05/09)：MOSFET Amplifiers II
+第12週課程 (2026/05/10─2026/05/16)：Basic JFET Characteristics and Amplifiers
+第13週課程 (2026/05/17─2026/05/23)：Frequency Response I
+第14週課程 (2026/05/24─2026/05/30)：Frequency Response II
+第15週課程 (2026/05/31─2026/06/06)：Frequency Response III
+第16週課程 (2026/06/07─2026/06/13)：Final Examination
+第17週課程 (2026/06/14─2026/06/20)：Self-directed Learning I
+第18週課程 (2026/06/21─2026/06/27)：Self-directed Learning II
+
+成績評定方式：
+1. The course grade is based upon the results of the weekly quiz (20%), the midterm examination (30%), the final examination (40%) and the attendance of course (10%).
+
+課堂要求：
+無詳細課堂要求說明

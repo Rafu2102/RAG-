@@ -1,0 +1,20 @@
+# Python
+venv/
+.venv/
+__pycache__/
+
+# Secret
+.env
+tools/data/tokens/
+credentials.json
+
+# Large Data & Models
+*.dll
+*.npy
+*.bin
+*.zip
+index_store/
+data/data.zip
+data/data/
+範例/
+

@@ -1,0 +1,45 @@
+# NQU Campus Assistant RAG Chatbot - Dependencies
+# ================================================
+
+# LlamaIndex Core
+llama-index-core>=0.11.0
+
+# LangChain
+langchain>=0.2.0
+langchain-community>=0.2.0
+
+# Vector Store & Search
+faiss-cpu>=1.7.4
+rank-bm25>=0.2.2
+
+# Chinese Text Processing (CKIP Tagger — 中研院繁體中文 SOTA 模型)
+ckiptagger>=0.2.1
+tensorflow>=2.10.0
+gdown>=4.7.0
+
+# Reranker (Cross-Encoder)
+sentence-transformers>=3.0.0
+
+# ML Framework
+torch>=2.1.0
+transformers>=4.40.0
+
+# HTTP Requests (for Ollama API)
+requests>=2.31.0
+
+# CLI Enhancement
+rich>=13.7.0
+
+# Google Calendar Integration
+beautifulsoup4
+markdown
+nest_asyncio
+json-repair
+PyMuPDF
+google-api-python-client>=2.0.0
+google-auth-httplib2>=0.2.0
+google-auth-oauthlib>=1.2.0
+
+# Discord Bot
+discord.py>=2.3.0
+python-dotenv>=1.0.0

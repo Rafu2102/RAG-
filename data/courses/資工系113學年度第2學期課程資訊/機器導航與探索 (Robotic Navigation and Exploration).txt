@@ -1,0 +1,94 @@
+國立金門大學113學年度第2學期資工系課程  
+學年度：113學年度  
+學期：第2學期  
+課程名稱：機器導航與探索 (Robotic Navigation and Exploration)  
+部別：學分班  
+開課班級：學分班  
+學分數：3學分  
+授課時數：3小時  
+授課教師：王建鈞  
+必選修：選修  
+教室：E319數位系統應用實驗  
+修課上限人數：15人  
+上課時間：每周星期一下午第10節~第12節 
+備註：AI聯盟衛星課程；學碩合開課程；主開學校清華大學/胡敏君
+協同老師：王建鈞
+同步遠距上課時間：每週一晚上18:30點~21:20點
+
+課程教學目標：  
+1. 學習即時追蹤與地圖建置（SLAM），包含機率模型與相機模型等基礎，以及基於深度學習的 RGB-based 3D SLAM 方法。  
+2. 理解場景理解的核心，包括機器學習與深度學習技術，並掌握物件偵測與語意分割。  
+3. 掌握動作控制方法，包括路徑規劃與導航演算法，並結合強化學習引導路徑規劃。  
+4. 學生須自備具 GPU 顯卡的電腦，以支援課程實作需求。  
+5. 期末專題採分組開發，訓練學生協作與研究能力。  
+
+課程教學綱要：  
+1.即時追蹤與地圖建置 (SLAM)  
+2.場景理解 (Scene Understanding)  
+3.探索導航的動作控制 (Action Control)  
+4.深度學習與強化學習在機器人領域的應用
+
+教科書資料：  
+1. 書名：Reinforcement Learning: An Introduction (Second Edition)  
+2. 出版日期：2018年  
+3. 作者：Richard S. Sutton, Andrew G. Barto  
+4. 出版社：MIT Press (Cambridge, MA)  
+5. 版本：未標註  
+
+參考書資料：  
+1-1. 書名：Reinforcement Learning: An Introduction (Second Edition)  
+1-2. 出版日期：2018年  
+1-3. 作者：Richard S. Sutton & Andrew G. Barto  
+1-4. 出版社：MIT Press  
+1-5. 版本：未標註  
+
+2-1. 書名：Probabilistic Robotics  
+2-2. 出版日期：2005年  
+2-3. 作者：Sebastian Thrun, Wolfram Burgard, Dieter Fox  
+2-4. 出版社：MIT Press  
+2-5. 版本：未標註  
+
+3-1. 書名：Machine Learning: A Probabilistic Perspective  
+3-2. 出版日期：2012年  
+3-3. 作者：Kevin Murphy  
+3-4. 出版社：MIT Press  
+3-5. 版本：未標註  
+
+4-1. 書名：Probabilistic Graphical Models: Principles and Techniques  
+4-2. 出版日期：2009年  
+4-3. 作者：Daphne Koller, Nir Friedman  
+4-4. 出版社：MIT Press  
+4-5. 版本：未標註  
+
+5-1. 書名：Deep Learning  
+5-2. 出版日期：2016年  
+5-3. 作者：Ian Goodfellow, Yoshua Bengio, Aaron Courville  
+5-4. 出版社：MIT Press  
+5-5. 版本：未標註  
+
+課程教學進度表（2025年春季學期）：  
+1週 (02/17)：Introduction to Robotic Navigation and Exploration  
+2週 (02/24)：Kinematic Model and Path Tracking Control（Control System Basics、PID Control、Differential Drive Vehicle、Pure Pursuit Control、Kinematic Bicycle Model）【Lab 1】  
+3週 (03/03)：Motion Planning（Path Planning、Curve Interpolation、Trajectory Planning）【Lab 2】  
+4週 (03/10)：Reinforcement Learning (I)（MDP、Value Function、Bellman Equation）  
+5週 (03/17)：Reinforcement Learning (II)（Q-Learning、Sarsa、DQN、Policy Gradient、Actor-Critic）  
+6週 (03/24)：Project Environment Building (I)【Lab 3】  
+7週 (03/31)：Project Environment Building (II)【Lab 4】  
+8週 (04/07)：Project Environment Building (III)【Lab 5】  
+9週 (04/14)：SLAM Back-end (I)（State Estimation、Bayes Filter、Kalman Filter、Extended Kalman Filter）  
+10週 (04/21)：SLAM Back-end (II)（Graph-based Optimization、Bundle Adjustment for 2D SLAM）  
+11週 (04/28)：3D SLAM (I)（Feature Descriptor、Multi-view Geometry、Lie Group & Lie Algebra）  
+12週 (05/05)：3D SLAM (II)（ORB-SLAM、Direct Method、DNN-based SLAM）  
+13週 (05/12)：3D Embodied Agent  
+14週 (05/19)：Paper Presentation (I)  
+15週 (05/26)：Paper Presentation (II)  
+16週 (06/02)：Project Presentation & Demo  
+
+成績評定方式：  
+1.作業：60%（每次 15%，共四次）  
+2.論文閱讀報告：10%  
+3.自走車期末專題（實作、書面報告、口頭報告）：30%  
+
+課堂要求：  
+1.學生需自備具備 GPU 的電腦  
+2.建議先修課程：Python 程式設計、影像處理、深度學習

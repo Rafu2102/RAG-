@@ -1,0 +1,128 @@
+{
+  "_description": "資工系畢業學分規則 — 111學年度(含)以後入學適用",
+  "_source": "資訊工程學系大學部課程規劃表-111學年度入學.pdf",
+  "_last_updated": "2026-03-25",
+
+  "department": "資訊工程學系",
+  "applicable_from": "111",
+
+  "total_required": 130,
+
+  "categories": {
+    "共同必修": {
+      "required_credits": 8,
+      "courses": [
+        { "name": "國文(一)", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "英文(一)", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "國文(二)", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "英文(二)", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "服務教育", "credits": 0, "year": 1, "semester": 1, "note": "0學分必修" },
+        { "name": "服務教育", "credits": 0, "year": 1, "semester": 2, "note": "0學分必修" }
+      ]
+    },
+    "通識": {
+      "required_credits": 16,
+      "note": "依本校「學生修習通識教育課程辦法」規定",
+      "domains": {
+        "人文": { "min_credits": 4 },
+        "社會": { "min_credits": 4 },
+        "自然": { "min_credits": 4 }
+      }
+    },
+    "體育": {
+      "required_credits": 0,
+      "required_semesters": 2,
+      "note": "依本校「體育課程實施辦法」規定，0學分但需修滿2學期"
+    },
+    "院必修": {
+      "required_credits": 6,
+      "courses": [
+        { "name": "微積分(一)", "credits": 3, "year": 1, "semester": 1 },
+        { "name": "計算機概論", "credits": 3, "year": 1, "semester": 1 }
+      ]
+    },
+    "系必修": {
+      "required_credits": 51,
+      "courses": [
+        { "name": "程式設計", "credits": 3, "year": 1, "semester": 1 },
+        { "name": "數位邏輯", "credits": 3, "year": 1, "semester": 1 },
+        { "name": "多媒體概論", "credits": 3, "year": 1, "semester": 1 },
+        { "name": "線性代數", "credits": 3, "year": 1, "semester": 2 },
+        { "name": "程式設計進階", "credits": 3, "year": 1, "semester": 2 },
+        { "name": "資訊網路", "credits": 3, "year": 1, "semester": 2 },
+        { "name": "網頁設計", "credits": 3, "year": 1, "semester": 2 },
+        { "name": "資訊科技英文導論", "credits": 3, "year": 1, "semester": 2 },
+        { "name": "計算機結構", "credits": 3, "year": 2, "semester": 1 },
+        { "name": "資料結構", "credits": 3, "year": 2, "semester": 1 },
+        { "name": "電路學", "credits": 3, "year": 2, "semester": 1 },
+        { "name": "系統程式", "credits": 3, "year": 2, "semester": 2 },
+        { "name": "資料庫系統管理", "credits": 3, "year": 2, "semester": 2 },
+        { "name": "離散數學", "credits": 3, "year": 2, "semester": 2 },
+        { "name": "作業系統", "credits": 3, "year": 3, "semester": 1 },
+        { "name": "專題製作(一)", "credits": 3, "year": 3, "semester": 1 },
+        { "name": "專題製作(二)", "credits": 3, "year": 3, "semester": 2 }
+      ]
+    },
+    "專業選修": {
+      "required_credits": 49,
+      "max_from_other_dept": 12,
+      "note": "包括12學分可選修非本學系所開設之課程",
+      "tracks": {
+        "一般選修": {
+          "courses": [
+            "套裝軟體認證", "電腦輔助電路設計與模擬", "電腦應用軟體認證",
+            "數位邏輯實習", "微積分(二)", "資訊科技認證", "智慧型行動裝置軟體設計",
+            "程式與數學", "iOS程式設計", "多媒體程式設計", "機率與統計",
+            "演算法", "遊戲程式設計", "多媒體應用軟體", "行動科技與生活",
+            "VR科技應用導論", "多媒體整合", "專題研究(一)", "工程倫理",
+            "校外專業實習(一)", "國際資訊證照導論", "雲端資訊認證",
+            "專題製作(三)", "專題研究(二)", "企業實務培訓", "校外專業實習(二)",
+            "智慧淨零碳排與AI應用", "元宇宙在精準健康產業的應用",
+            "島嶼永續與智慧淨零應用"
+          ]
+        },
+        "網路技術與應用選修": {
+          "courses": [
+            "TCP/IP協定", "網站設計進階", "Linux作業系統實務",
+            "伺服器架設", "區塊鏈實務與安全", "Linux系統自動化運維",
+            "互動式網頁程式設計", "雲端通訊整合實務", "資訊安全與隱私",
+            "高等資料庫", "計算機網路", "電腦網路安全概論", "無線網路",
+            "網路模擬與分析", "雲端運算", "電腦網路安全實務", "資訊與網路安全概論"
+          ]
+        },
+        "人工智慧選修": {
+          "courses": [
+            "現代程式語言", "演算法與資料分析", "資料處理實務",
+            "資料探勘導論", "科學計算", "人工智慧導論", "人工智慧",
+            "商業數據分析應用", "機器學習", "人工智慧實務",
+            "資料科學", "深度學習概論", "模式識別", "影像處理",
+            "大型語言模型導論", "計算式智慧", "深度學習",
+            "人工智慧在酒類檢測與分析", "人工智慧在食品產業之應用",
+            "人工智慧代理導論"
+          ]
+        },
+        "AIoT選修": {
+          "courses": [
+            "單晶片原理應用", "電腦硬體裝修", "微電腦數位實習",
+            "嵌入式系統概論", "嵌入式微處理器系統", "物聯網智慧應用",
+            "互動式程式設計", "硬體描述語言程式設計與模擬",
+            "機器人控制入門", "智慧型機器人", "樹莓派實務與應用"
+          ]
+        },
+        "TAICA選修": {
+          "courses": [
+            "生成式AI文字與圖像生成的原理與實務",
+            "基礎程式設計(C++)", "機器導航與探索",
+            "生成式人工智慧的人文導論"
+          ]
+        }
+      }
+    }
+  },
+
+  "graduation_conditions": [
+    "修滿130學分",
+    "通過本校「學生英文及資訊能力畢業門檻及輔導辦法」",
+    "取得本系表列之任一資訊相關專業證照"
+  ]
+}

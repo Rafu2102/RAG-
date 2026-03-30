@@ -1,0 +1,67 @@
+國立金門大學114學年度第2學期資工系課程
+學年度：114學年度
+學期：第2學期
+課程名稱：資料結構 (Data Structure)
+部別：日間部學士班
+開課班級：資工二
+學分數：3.0學分
+授課時數：3.0小時
+授課教師：馮玄明
+必選修：必修
+教室：I102圖資電腦教室
+修課上限人數：60人
+上課時間：每周星期一下午第5節~下午第7節
+
+課程教學目標：
+1. Learn the real concept of data structure
+2. Learn the detail codeing skill
+
+課程教學綱要：
+1. Data structure concept discription
+2. code demonstration
+
+教科書資料：
+1-1. 書名：Data Structures: A Pseudocode Approach with C 2/e
+1-2. 出版日期：未標註
+1-3. 作者：Gilberg/Forouzan
+1-4. 出版社：未標註
+1-5. 版本：未標註
+
+2-1. 書名：資料結構：使用Python
+2-2. 出版日期：未標註
+2-3. 作者：蔡明志
+2-4. 出版社：碁峰
+2-5. 版本：未標註
+
+參考書資料：
+無參考書
+
+※請遵守智慧財產權觀念，依著作權法規定，教科書及教材不得非法影印與使用盜版軟體。
+
+教學進度表（2026年春季學期）：
+第1週課程 (2026/02/22─2026/02/28)：Introduction to Data structure
+第2週課程 (2026/03/01─2026/03/07)：Ch2-(1)Explain the difference between iteration and recursion ch2-(2)Design a recursive algorithm Determine when an recursion is an appropriate solution ch2-(3)Write simple recursive functions
+第3週課程 (2026/03/08─2026/03/14)：Ch3-(1)Explain the design, use, and operation of a stack Ch3-(2)Implement a stack using a linked list structure Ch3-(3) Understand the operation of the stack ADT Ch3-(4) Write application programs using the stack ADT 
+第4週課程 (2026/03/15─2026/03/21)：Ch3-(5) Discuss reversing data, parsing, postponing and backtracking Ch4-(1)Explain the design, use, and operation of a queue Ch4-(2)Implement a queue using a linked list structure Ch4-(3)Understand the operation of the queue ADT 
+第5週課程 (2026/03/22─2026/03/28)：Ch4-(4) Write application programs using the queue ADT Ch4-(5)Explain categorizing data and queue simulation
+第6週課程 (2026/03/29─2026/04/04)：Ch5-1 Explain the design, use, and operation of a linear list Ch5-2 Implement a linear list using a linked list structure 
+第7週課程 (2026/04/05─2026/04/11)：Ch5-3 Understand the operation of the linear list ADT Ch5-4 Write application programs using the linear list ADT Ch5-5 Design and implement different link-list structures
+第8週課程 (2026/04/12─2026/04/18)：Middle Exam
+第9週課程 (2026/04/19─2026/04/25)：Ch6-1 Understand and use basic tree terminology and concepts Ch6-2 Recognize and define the basic attributes of a binary tree Ch6-3 Process trees using depth-first and breadth-first traversals Ch6-4 Parse expressions using a binary tree 
+第10週課程 (2026/04/26─2026/05/02)：Ch6-5 Design and implement Huffman trees Ch6-6 Understand the basic use and processing of general trees CH7-1 Create and implement binary search trees CH7-2 Understand the operation of the binary search tree ADT
+第11週課程 (2026/05/03─2026/05/09)：CH7-3 Write application programs using the binary search tree ADT CH7-4 Design and implement a list using a BST CH7-5 Design and implement threaded trees Ch8-1 Explain the differences between a BST and an AVL tree 
+第12週課程 (2026/05/10─2026/05/16)：Ch8-2 Insert, delete, and process nodes in an AVL tree Ch8-3 Understand the operation of the AVL tree ADT Ch8-4 Write application programs using an AVL tree
+第13週課程 (2026/05/17─2026/05/23)：Ch9-1 Define and implement heap structures Ch9-2 Understand the operation and use of the heap ADT Ch9-3 Design and implement selection applications using a heap Ch9-4 Design and implement priority queues using a heap 
+第14週課程 (2026/05/24─2026/05/30)：Ch10-1 Define and discuss multiway tree structures Ch10-2 Understand the operation and use of the B-tree ADT Ch10-3 Discuss the use and implementation of simplified B-trees Ch10-4 Compare and contrast B-trees, B*trees, and T+trees 
+第15週課程 (2026/05/31─2026/06/06)：Ch10-5 Discuss the design and use a lexical search trees (Tries) Ch11-1 Understand and use basic graph terminology and concepts Ch11-2 Define and discuss basic graph and network structures Ch11-3 Design and implement graph and network applications 
+第16週課程 (2026/06/07─2026/06/13)：Final Exam
+第17週課程 (2026/06/14─2026/06/20)：Online Self-Directed Learning 線上自主學習
+第18週課程 (2026/06/21─2026/06/27)：Online Self-Directed Learning 線上自主學習
+
+成績評定方式：
+1. 期中考：占總成績30%
+2. 期末考：占總成績30%
+3. 平時(上課,作業, 小考)：占總成績40%
+
+課堂要求：
+1. 請勿吵鬧

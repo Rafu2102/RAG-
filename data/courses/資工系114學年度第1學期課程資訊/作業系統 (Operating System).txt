@@ -1,0 +1,67 @@
+國立金門大學114學年度第1學期資工系課程
+學年度：114學年度
+學期：第1學期
+課程名稱：作業系統 (Operating System)
+部別：日間部學士班
+開課班級：資工三
+學分數：3.0學分
+授課時數：3.0小時
+授課教師：馮玄明
+必選修：必修
+教室：I102圖資電腦教室
+修課上限人數：60人
+上課時間：每周星期一上午第2節~上午第4節
+
+課程教學目標：
+1. Introduces the general topic of operating systems and a handful of important concepts (multiprogramming, time sharing, distributed system, and so on).
+
+課程教學綱要：
+1. Process Management
+2. Memory Management
+3. Storage Management
+4. Protection and Security
+5. Distributed Systems
+
+教科書資料：
+1. 書名：OPERATING SYSTEM CONCEPTS
+2. 出版日期：未標註
+3. 作者：SILBERSCHATZ
+4. 出版社：東華書局代理
+5. 版本：未標註
+
+參考書資料：
+1. 書名：自訂教材
+2. 出版日期：未標註
+3. 作者：未標註
+4. 出版社：未標註
+5. 版本：未標註
+
+※請遵守智慧財產權觀念，依著作權法規定，教科書及教材不得非法影印與使用盜版軟體。
+
+教學進度表（2025年秋季學期）：
+第1週課程 (2025/09/14─2025/09/20)：Introduction
+第2週課程 (2025/09/21─2025/09/27)：Operating-System Structures
+第3週課程 (2025/09/28─2025/10/04)：Processes & Threads
+第4週課程 (2025/10/05─2025/10/11)：CPU Scheduling & Process Synchronization
+第5週課程 (2025/10/12─2025/10/18)：Main Memory & Virtual Memory
+第6週課程 (2025/10/19─2025/10/25)：1st homeworks
+第7週課程 (2025/10/26─2025/11/01)：File-System Interface & File-System Implementation
+第8週課程 (2025/11/02─2025/11/08)：Mass-Storage Structure & I/O Systems
+第9週課程 (2025/11/09─2025/11/15)：Middle Exam
+第10週課程 (2025/11/16─2025/11/22)：Protection
+第11週課程 (2025/11/23─2025/11/29)：Security
+第12週課程 (2025/11/30─2025/12/06)：Distributed System Structure
+第13週課程 (2025/12/07─2025/12/13)：2nd homeworks
+第14週課程 (2025/12/14─2025/12/20)：Security
+第15週課程 (2025/12/21─2025/12/27)：Security
+第16週課程 (2025/12/28─2026/01/03)：Final Exam
+第17週課程 (2026/01/04─2026/01/10)：Self-Learning and Enhanced Teaching
+第18週課程 (2026/01/11─2026/01/17)：Self-Learning and Enhanced Teaching
+
+成績評定方式：
+1. 平時：占總成績40%
+2. 期中：占總成績30%
+3. 期末：占總成績30%
+
+課堂要求：
+1. 準時上課
