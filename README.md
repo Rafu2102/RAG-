@@ -1,7 +1,7 @@
 # 🎓 NQU 校園智慧助理機器人 (Campus AI Assistant)
 
 > **國立金門大學資訊工程學系 · Ultimate Agentic RAG 智慧問答系統**
-> *最後更新時間：2026-03-31*
+> *最後更新時間：2026-04-13*
 
 基於 **Agentic Intent-Driven Hybrid RAG（代理式意圖驅動混合檢索增強生成）** 架構的超級校園生態系助理。全面升級採用最新的 **Gemini 3.1 Pro (主大腦)** 與 **Gemini Flash Lite (路由/決策)** 雙備援架構。搭載獨創的 **5-Step 自我修正思考鏈 (CoT)**、無上限的**全景上下文回填 (Context Backfill)** 技術，以及**原生語意職涯跨域探索**能力，提供低延遲、絕對零幻覺、高資安防護的校園問答與 Google 行事曆代管服務。
 
@@ -174,7 +174,56 @@
 
 ## 📦 安裝步驟
 
-### 1. 安裝 Ollama 模型 (針對 Embedding)
+### ⚡ 快速開始 (Quick Start)
+
+```bash
+# 1. Clone 專案
+git clone https://github.com/Rafu2102/RAG-.git
+cd RAG-
+
+# 2. 建立環境變數檔案（從範本複製）
+cp .env.example .env
+# 然後用編輯器打開 .env，填入你自己的 API 金鑰
+
+# 3. 建立虛擬環境 & 安裝套件
+python -m venv venv
+.\venv\Scripts\activate          # Windows
+# source venv/bin/activate       # Linux/Mac
+pip install -r requirements.txt
+
+# 4. 啟動（二選一）
+python main.py                   # CLI 互動模式
+python discord_bot.py            # Discord 機器人
+python run_all.py                # Discord + Telegram 雙平台同時啟動
+```
+
+### 詳細步驟
+
+#### Step 1：設定環境變數 🔐
+
+專案根目錄已提供 `.env.example` 範本檔，包含所有必要的環境變數與取得方式說明。
+
+```bash
+# 複製範本
+cp .env.example .env
+```
+
+然後編輯 `.env`，填入以下金鑰：
+
+| 變數名稱 | 必填 | 說明 | 取得方式 |
+|----------|------|------|---------|
+| `DISCORD_BOT_TOKEN` | ✅ | Discord 機器人 Token | [Discord Developer Portal](https://discord.com/developers/applications) → Bot → Token |
+| `TELEGRAM_BOT_TOKEN` | 選填 | Telegram 機器人 Token | Telegram 搜尋 `@BotFather` → `/newbot` |
+| `GEMINI_API_KEY` | ✅ | Google Gemini API 金鑰 | [Google AI Studio](https://aistudio.google.com/apikey) |
+| `OPENROUTER_API_KEY` | 選填 | OpenRouter 備用 API | [OpenRouter](https://openrouter.ai/keys) |
+| `ADMIN_DISCORD_IDS` | ✅ | 管理員 Discord ID（逗號分隔） | Discord 開發者模式 → 右鍵用戶 → 複製 ID |
+| `OWNER_DISCORD_ID` | ✅ | Bot 擁有者 Discord ID | 同上 |
+| `AUDIT_CHANNEL_ID` | 選填 | 審核日誌頻道 ID | 右鍵 Discord 頻道 → 複製 ID |
+| `DEBUG_LOG_CHANNEL_ID` | 選填 | 偵錯日誌頻道 ID | 同上 |
+
+> ⚠️ **安全提醒**：`.env` 已被 `.gitignore` 排除，**絕不會**被上傳到 GitHub。
+
+#### Step 2：安裝 Ollama 模型（針對 Embedding）
 
 即使大語言模型核心已升級為 Gemini API，本地向量計算 (Embedding) 仍依賴 `multilingual-e5-large` 以保護知識庫隱私並省下 API 費用：
 
@@ -186,7 +235,7 @@ ollama pull multilingual-e5-large
 ollama list
 ```
 
-### 2. 建立 Python 環境
+#### Step 3：建立 Python 環境
 
 ```bash
 # 建立虛擬環境
@@ -199,16 +248,34 @@ python -m venv venv
 source venv/bin/activate
 ```
 
-### 3. 安裝 Python 套件
+#### Step 4：安裝 Python 套件
 
 ```bash
 pip install -r requirements.txt
 ```
 
-> **注意**：首次啟用行事曆功能時，請確保你有將 Google Cloud 產生的 `credentials.json` 放置於 `tools/data/` 目錄中。系統首次執行行事曆動作時將引導你進行網頁授權並自動在 `tools/data/tokens/` 下產生每位使用者獨立的 Token 檔案。
-> **注意 2**：`sentence-transformers` 會在首次執行時自動從 HuggingFace 下載 `bge-reranker-large` 模型（約 1.3GB）。
+> **注意**：`sentence-transformers` 會在首次執行時自動從 HuggingFace 下載 `bge-reranker-base` 模型（約 1.1GB）。
 
-### 4. 確認 Ollama 服務運行
+#### Step 5：設定 Google Calendar 功能（選填）
+
+若需要行事曆功能（`/add_calendar`、`/upload_schedule` 等），需額外設定 Google OAuth：
+
+1. 前往 [Google Cloud Console](https://console.cloud.google.com/) 建立專案
+2. 啟用 **Google Calendar API**
+3. 建立 **OAuth 2.0 用戶端 ID**（應用程式類型：桌面應用程式）
+4. 下載 `credentials.json` 並放置於 `tools/data/` 目錄下
+5. 使用者首次使用行事曆指令時，系統會引導完成 OAuth 授權，Token 會自動儲存於 `tools/data/tokens/`
+
+```
+tools/
+└── data/
+    ├── credentials.json    ← 放在這裡
+    └── tokens/             ← 使用者 Token（自動產生，已被 .gitignore 排除）
+```
+
+> 如果不需要行事曆功能，可以跳過此步驟，系統其他功能仍可正常運作。
+
+#### Step 6：確認 Ollama 服務運行
 
 ```bash
 # 啟動 Ollama 服務
@@ -656,10 +723,15 @@ d:\AI HYBRID\
 ├── config.py                   # 全域設定（α/β/γ 權重、Gemini 雙模配置、自動偵測最新學期）
 ├── main.py                     # 主 Pipeline（CLI 介面 + 短路防爆攔截 + VRAM GC）
 ├── discord_bot.py              # Discord Bot 啟動入口（32 行，匯入 bot/ 子模組）
+├── telegram_bot.py             # Telegram Bot 啟動入口（共用 AI 核心與記憶系統）
+├── run_all.py                  # 🚀 雙平台統一啟動器（Discord + Telegram 同時運行）
+├── mcp_server.py               # MCP Server 入口
 ├── utils.py                    # 共用工具函式（smart_split_message 等）
 ├── nlp_utils.py                # CKIP Tagger 繁中分詞工具
 ├── requirements.txt            # Python 依賴套件
-├── .env                        # DISCORD_BOT_TOKEN + ADMIN_DISCORD_IDS
+├── .env.example                # ✅ 環境變數範本（clone 後複製為 .env 並填入金鑰）
+├── .env                        # 🔒 實際環境變數（.gitignore 排除，不會上傳）
+├── .gitignore                  # Git 忽略規則（保護敏感檔案）
 │
 ├── bot/                        # 🤖 Discord Bot 模組化架構
 │   ├── __init__.py             # 共用 client、tree、全域狀態、科系對照表
@@ -694,18 +766,19 @@ d:\AI HYBRID\
 │   ├── dcard_search_tool.py    # Dcard 教授評價搜尋
 │   ├── schedule_manager.py     # 課表存取與排課解析
 │   ├── transcript_manager.py   # 成績單存取與畢業進度驗證
-│   ├── events.json             # 學校行事曆靜態檔
+│   ├── ocr_engine.py           # Gemini Vision 課表/成績單圖片辨識引擎
 │   └── data/                   # 📁 資料目錄
-│       ├── credentials.json    # Google API 憑證
+│       ├── credentials.json    # 🔒 Google API 憑證（.gitignore 排除）
 │       ├── groups.json         # 群組資料庫
-│       ├── users/              # 存放使用者課表 (.json) 與成績單 (_transcript.json) 等個人文件
-│       └── tokens/             # 各用戶 OAuth Token (per-user, 自動產生)
+│       ├── users/              # 存放使用者課表與成績單等個人文件
+│       └── tokens/             # 🔒 各用戶 OAuth Token（.gitignore 排除）
 │
-├── index_store/                # 索引持久化目錄（自動生成）
+├── index_store/                # 🔒 索引持久化目錄（自動生成，.gitignore 排除）
 └── data/                       # 系統 RAG 本地知識庫
     ├── courses/                # 課程資料 (依系所學期分類)
     ├── professors/             # 教授百科目錄
     ├── dept_info/              # 系所資訊目錄
+    ├── events.json             # 學校行事曆事件
     └── rules/                  # 畢業門檻等獨立規則 (graduation_rules.json)
 ```
 
