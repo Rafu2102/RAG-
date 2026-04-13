@@ -194,7 +194,6 @@ pip install -r requirements.txt
 # 4. 啟動（二選一）
 python main.py                   # CLI 互動模式
 python discord_bot.py            # Discord 機器人
-python run_all.py                # Discord + Telegram 雙平台同時啟動
 ```
 
 ### 詳細步驟
@@ -223,13 +222,13 @@ cp .env.example .env
 
 > ⚠️ **安全提醒**：`.env` 已被 `.gitignore` 排除，**絕不會**被上傳到 GitHub。
 
-#### Step 2：安裝 Ollama 模型（針對 Embedding）
+#### Step 2：安裝 Ollama（選填，僅本地備援用）
 
-即使大語言模型核心已升級為 Gemini API，本地向量計算 (Embedding) 仍依賴 `multilingual-e5-large` 以保護知識庫隱私並省下 API 費用：
+> ℹ️ **Embedding 已升級為 Gemini Cloud API**，不再需要本地 Ollama 產生向量。Ollama 僅在您需要本地 LLM 備援時才需安裝。
 
 ```bash
-# 安裝 multilingual-e5-large（核心 Embedding 模型）
-ollama pull multilingual-e5-large
+# 若需要本地 LLM 備援，可安裝以下模型（選填）
+ollama pull llama3.2:latest
 
 # 確認模型已安裝
 ollama list
@@ -254,7 +253,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-> **注意**：`sentence-transformers` 會在首次執行時自動從 HuggingFace 下載 `bge-reranker-v2-m3` 模型（約 1.1GB）。
+> **注意**：`sentence-transformers` 會在首次執行時自動從 HuggingFace 下載 `bge-reranker-base` 模型（約 1.1GB）。
 
 #### Step 5：設定 Google Calendar 功能（選填）
 
@@ -275,14 +274,14 @@ tools/
 
 > 如果不需要行事曆功能，可以跳過此步驟，系統其他功能仍可正常運作。
 
-#### Step 6：確認 Ollama 服務運行
+#### Step 6：確認 Ollama 服務運行（僅在使用本地 LLM 時需要）
 
 ```bash
-# 啟動 Ollama 服務
+# 啟動 Ollama 服務（僅在需要本地 LLM 備援時）
 ollama serve
 
 # （另開終端）測試 Ollama 是否正常
-curl http://localhost:11434/api/generate -d '{"model": "llama3.1:8b", "prompt": "Hello"}'
+curl http://localhost:11434/api/generate -d '{"model": "llama3.2:latest", "prompt": "Hello"}'
 ```
 
 ---
@@ -365,7 +364,7 @@ python discord_bot.py
 - Gemini API 設定（API 金鑰, 雙腦備援模型變數，含 Timeout 與 maxOutputTokens 常數）
 - Gemini Embedding 2 Preview 雲端設定（模型名稱、維度、3072、批次大小、Rate Limit）
 - Ollama 連線設定（URL，僅用於本地 LLM 備援）
-- Reranker 模型設定（bge-reranker-v2-m3, TOP_N=10, BATCH=32）
+- Reranker 模型設定（bge-reranker-base, TOP_N=10, BATCH=32）
 - Chunk 設定（size=512, overlap=50）
 - Hybrid Fusion 權重（α=0.5, β=0.3, γ=0.2）
 - Metadata 匹配獎勵分數
@@ -735,8 +734,8 @@ d:\AI HYBRID\
 ├── config.py                   # 全域設定（α/β/γ 權重、Gemini 雙模配置、自動偵測最新學期）
 ├── main.py                     # 主 Pipeline（CLI 介面 + 短路防爆攔截 + VRAM GC）
 ├── discord_bot.py              # Discord Bot 啟動入口（32 行，匯入 bot/ 子模組）
-├── telegram_bot.py             # Telegram Bot 啟動入口（共用 AI 核心與記憶系統）
-├── run_all.py                  # 🚀 雙平台統一啟動器（Discord + Telegram 同時運行）
+├── telegram_bot.py             # 🚧 Telegram Bot 啟動入口（Beta，開發中）
+├── run_all.py                  # 🚀 雙平台統一啟動器（Beta，Discord + Telegram 同時運行）
 ├── mcp_server.py               # MCP Server 入口
 ├── utils.py                    # 共用工具函式（smart_split_message 等）
 ├── nlp_utils.py                # CKIP Tagger 繁中分詞工具
@@ -754,10 +753,11 @@ d:\AI HYBRID\
 │   ├── cmd_ask.py              # /ask, /add_calendar, /dcard_search
 │   ├── cmd_schedule.py         # 課表指令 (/upload_schedule, /my_schedule...)
 │   ├── cmd_transcript.py       # 成績單與畢業進度指令 (/upload_transcript, /my_gpa...)
+│   ├── ui_utils.py             # Discord UI 安全基底元件 (SafeView, safe_respond)
 │   └── events.py               # on_ready (索引載入+同步) + on_message (問答+審計)
 │
 ├── rag/                        # 🔍 Agentic 檢索增強生成核心
-│   ├── data_loader.py          # 課程/師資 TXT 解析 + Chunking + Ollama Embedding
+│   ├── data_loader.py          # 課程/師資 TXT 解析 + Chunking + Gemini Embedding
 │   ├── index_manager.py        # FAISS/BM25 雙引擎管理與自動 Reload 機制
 │   ├── metadata_filters.py     # 11 組 Hard Filter 特判與實體豁免邏輯
 │   ├── query_router.py         # Gemini 5-Step CoT 路由樞紐 (Native Career 判定)
