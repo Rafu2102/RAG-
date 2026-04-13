@@ -40,17 +40,17 @@
 | 🏷️ **Metadata Filtering** | **六維度嚴格匹配**：系所/年級/教師/課程類型/學年度學期/必選修 |
 | 🛡️ **Zero-Hit 嚴格防爆** | Hard Filter 物理捨棄不符條件資料（含系所嚴格匹配），若無資料直接攔截，**實現零幻覺** |
 | 📊 **RRF 融合公式** | `final_score = α·RRF(Vector) + β·RRF(BM25) + γ·Metadata` |
-| 🔄 **Cross-Encoder Reranker** | bge-reranker-large 精細重排 + **甲乙班去重偏好**，Top-30 → Top-8，GPU batch=16 |
+| 🔄 **Cross-Encoder Reranker** | bge-reranker-base 精細重排 + **甲乙班去重偏好**，Top-30 → Top-10，GPU batch=32 |
 | 📅 **多學期動態支援** | 自動檢測最新學期，支援 `114上`、`114年第1學期` 等口語化時間查詢 |
 | 🔗 **One-shot Router+Rewrite** | 合併路由分類與查詢改寫為**單次 LLM 呼叫**，省去重複載入開銷 |
 | 📅 **Google Calendar Agent** | 完整 CRUD 行事曆代理 — 支援新增/刪除/列出/修改，含週期排課、自訂事件、學校行事曆、時間定位搜尋 |
 | 📸 **Gemini Vision 課表萃取** | 支援學生直接將「選課系統截圖」發送給機器人，由 Gemini 視覺模型一秒解析複雜的 NQU 節次、授課教師與教室，並且自動轉為 JSON 實體直接循環排入 Google 日曆。 |
 | 🛡️ **安全行事曆防呆** | 賦予 Agent 行事曆**移除權限**，並透過嚴格的所有權 (Ownership) `source` 標籤比對，確保**絕對不誤刪**使用者私人事件 |
 | 🤖 **Agentic Bypass 高速通道** | 偵測為閒聊、刪除事件、或自訂行程時，直接從主流程**短路攔截 (Bypass)**，省去神經網路檢索運算，回應速度小於 5 秒 |
-| 🧠 **VRAM 死亡交叉防護** | 8B `keep_alive=0` 意圖解析後立即卸載 + 3B 輕量任務 + Pipeline 後 `gc.collect()` + `torch.cuda.empty_cache()` |
+| 🧠 **VRAM 死亡交叉防護** | 8B `keep_alive="5m"` 閒置 5 分鐘後自動卸載 + 3B 輕量任務 + Pipeline 後 `gc.collect()` + `torch.cuda.empty_cache()` |
 | 📜 **統一格式輸出** | 單一課程列表格式，杜絕 LLM 重複輸出和幻覺課程 |
 | 🧩 **智慧區段感知 Chunking** | 短區段（≤512 字）保持完整不切；僅超長區段啟動 SentenceSplitter |
-| ⚡ **GPU 加速 (CUDA)** | 自動偵測 GPU (PyTorch)，Reranker batch=16 壓榨 8GB VRAM |
+| ⚡ **GPU 加速 (CUDA)** | 自動偵測 GPU (PyTorch)，Reranker batch=32 壓榨 8GB VRAM |
 | 🇹🇼 **繁中在地化與同義詞拓撲** | Regex 解碼器 + 口語翻譯蒟蒻 (禮拜二→星期二，加退選→停修)，另於 System Prompt 動態硬性注入絕對台灣時區與星期，使 相對時間 (如:下週二) 推算 100% 精準 |
 | 🔒 **必選修智慧過濾** | 自動偵測疑問句（「是必修嗎？」），避免誤設篩選條件 |
 
@@ -145,12 +145,12 @@
 | **生成大腦** | **Gemini 3.1 Pro** | 全新升級主核心，負責複雜課程對答推理、225KB+ Context Backfill，以及 **Vision 高精度圖像解構** |
 | **路由小腦** | **Gemini Flash Lite** | One-shot CoT 分類、意圖解構、原生職涯規劃偵測與 Schema 強制輸出 |
 | **自動化代理** | Google Calendar API | 完整 CRUD、專武級 NQU N-Type (夜間部A/B/C) 時間定位、所有權防呆機制 |
-| **Embedding** | multilingual-e5-large (1024 維) | 取代輕量級，提升檢索語意深度，支援並行 ThreadPool (可透過 Ollama 本地化佈署) |
-| **Reranker** | BAAI/bge-reranker-large | Cross-Encoder，batch=16，推理後 VRAM GC + **甲乙班去重硬偏好** |
+| **Embedding** | Gemini Embedding 2 Preview (3072 維) | 全面升級雲端 Embedding，Matryoshka 架構支援 128~3072 維度，batchEmbedContents 批次處理，內建 Rate Limiter (3000 RPM / 1M TPM) |
+| **Reranker** | BAAI/bge-reranker-base | Cross-Encoder，batch=32，推理後 VRAM GC + **甲乙班去重硬偏好** |
 | **Vector Store** | FAISS (IndexFlatIP) | 餘弦相似度 (Cosine Similarity) 快速過濾 |
 | **Keyword Search** | BM25Okapi + CKIP Tagger | 深度學習繁中分詞，領域專有名詞保護 (強制教師斷詞) |
 | **防禦機制** | Agentic Bypass / TTL Cache / Cooldowns | 低延遲短路攔截 + 防記憶體流失 + 防洗版速率限制 |
-| **介面** | Rich CLI / Discord.py | 終端機除錯介面與非同步 Discord 機器人 |
+| **介面** | Rich CLI / Discord.py / Telegram Bot | 終端機除錯介面 + 非同步 Discord 機器人 + Telegram 雙平台支援 |
 
 ---
 
@@ -167,7 +167,7 @@
 ### 軟體需求
 
 - **Python** 3.10+
-- **Ollama** (僅作為本地 Embedding 橋樑使用)
+- **Ollama** (選填，僅作為本地 LLM 備援使用，Embedding 已升級為 Gemini Cloud API)
 - **CUDA** 11.8+ / 12.4 (需安裝 PyTorch 2.6 CUDA 版本以啟用 GPU 加速)
 
 ---
@@ -254,7 +254,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-> **注意**：`sentence-transformers` 會在首次執行時自動從 HuggingFace 下載 `bge-reranker-base` 模型（約 1.1GB）。
+> **注意**：`sentence-transformers` 會在首次執行時自動從 HuggingFace 下載 `bge-reranker-v2-m3` 模型（約 1.1GB）。
 
 #### Step 5：設定 Google Calendar 功能（選填）
 
@@ -344,11 +344,35 @@ python discord_bot.py
 | `/my_failed` | ⚠️ 查詢不及格或未完成課程 | 所有人 |
 | `!sync` | ⚙️ 強制同步指令 | 管理員 |
 
+### 方式三：啟動 Telegram 機器人
+
+```bash
+# 請確保 .env 檔案中已填寫正確的 TELEGRAM_BOT_TOKEN
+python telegram_bot.py
+```
+
+Telegram 機器人支援以下指令：
+
+| 指令 | 說明 |
+|------|------|
+| `/start` | 👋 歡迎訊息與功能介紹 |
+| `/help` | ❓ 查看幫助訊息 |
+| 直接傳訊 | 🤖 直接傳送文字即可問答 |
+
+### 方式四：Discord + Telegram 雙平台同時啟動
+
+```bash
+# 統一啟動器，同時運行兩個 Bot
+python run_all.py
+```
+
+> 💡 `run_all.py` 會在單一終端中同時管理 Discord 與 Telegram Bot，共享相同的 AI 核心、記憶系統與 RAG 索引。
+
 ### 首次執行
 
 首次執行時，程式會：
 1. 解析 `data/` 目錄下的所有課程 TXT 檔案
-2. 使用 Ollama embedding 建立 FAISS 向量索引
+2. 使用 **Gemini Embedding 2 Preview 雲端 API** 建立 FAISS 向量索引 (3072 維)
 3. 使用 CKIP Tagger 深度學習分詞建立 BM25 關鍵字索引
 4. 將索引持久化到 `index_store/` 目錄
 
@@ -361,19 +385,20 @@ python discord_bot.py
 ### `config.py` — 全域設定
 
 集中管理所有可調參數：
-- Gemini API 設定（API 金鑰, 雙腦備援模型變數）
-- Ollama 連線設定（URL, Embedding 專用模型名稱）
-- Embedding / Reranker 模型名稱
+- Gemini API 設定（API 金鑰, 雙腦備援模型變數，含 Timeout 與 maxOutputTokens 常數）
+- Gemini Embedding 2 Preview 雲端設定（模型名稱、維度、3072、批次大小、Rate Limit）
+- Ollama 連線設定（URL，僅用於本地 LLM 備援）
+- Reranker 模型設定（bge-reranker-v2-m3, TOP_N=10, BATCH=32）
 - Chunk 設定（size=512, overlap=50）
 - Hybrid Fusion 權重（α=0.5, β=0.3, γ=0.2）
 - Metadata 匹配獎勵分數
-- 檢索 / Reranker top-k 設定 (RETRIEVER_TOP_K=30, RERANKER_TOP_N=8, BATCH=16)
+- 檢索 top-k 設定 (RETRIEVER_TOP_K=30)
 
 ---
 
 ### `bot/` — Discord Bot 模組化架構
 
-機器人被拆分為 7 個獨立模組，`discord_bot.py` 僅作為 32 行的啟動入口。
+機器人被拆分為 **10 個獨立模組**，`discord_bot.py` 僅作為 32 行的啟動入口。
 
 | 模組 | 職責 |
 |------|------|
@@ -383,8 +408,9 @@ python discord_bot.py
 | `bot/cmd_admin.py` | `/rebuild`、`/clear`、`/admin_broadcast`、`/admin_dm`、`/admin_invite`、`/admin_invite_code` |
 | `bot/cmd_groups.py` | 群組邀請 View (接受/拒絕按鈕) + `/join_group` |
 | `bot/cmd_ask.py` | `/ask`、`/add_calendar`、`/dcard_search` |
-| `bot/cmd_schedule.py` | `/upload_schedule`、`/my_schedule`、`/my_free`、`/my_credits` |
-| `bot/cmd_transcript.py` | `/upload_transcript`、`/my_credits_total`、`/my_gpa`、`/my_failed` |
+| `bot/cmd_schedule.py` | 課表指令 (`/upload_schedule`、`/my_schedule`、`/my_free`、`/my_credits`) |
+| `bot/cmd_transcript.py` | 成績單與畢業進度指令 (`/upload_transcript`、`/my_gpa`、`/my_failed`) |
+| `bot/ui_utils.py` | Discord UI 安全基底元件（SafeView、safe_respond、重複點擊防護、900s timeout） |
 | `bot/events.py` | `on_ready`（索引載入+指令同步）、`on_message`（@tag/!ask/DM 問答+審計） |
 
 ---
@@ -394,9 +420,9 @@ python discord_bot.py
 #### `rag/data_loader.py` — 資料解析與 Embedding
 
 1. **解析課程 TXT**：正則表達式提取結構化欄位
-2. **智慧區段感知 Chunking**：短區段（≤512 字）保持完整不切，僅超長區段啓動 SentenceSplitter
+2. **智慧區段感知 Chunking**：短區段（≤512 字）保持完整不切，僅超長區段啟動 SentenceSplitter
 3. **上下文防遺失**：每個 Node 前綴注入課程名稱/教師/年級等核心資訊
-4. **Ollama Embedding**：multilingual-e5-large + `passage:/query:` 前綴，batch=64
+4. **Gemini Embedding 2 Preview**：雲端 batchEmbedContents API，`RETRIEVAL_DOCUMENT/RETRIEVAL_QUERY` task_type 非對稱檢索最佳化，batch=100，內建 Thread-safe Rate Limiter
 
 #### `rag/index_manager.py` — 索引管理中心
 
@@ -428,8 +454,9 @@ final_score = α × RRF_norm(vector_rank)     （語意相似度）
 預設權重：α=0.5, β=0.3, γ=0.2
 
 **效能優化**：
-- 並行 Embedding：`ThreadPoolExecutor` 同時對 3 個 query 呼叫 Ollama Embed API
-- 並行搜尋：FAISS + BM25 同時執行
+- 並行 Embedding：使用 Gemini `batchEmbedContents` API 單次批次處理所有 queries
+- 並行搜尋：FAISS + BM25 同時執行（ThreadPoolExecutor）
+- Metadata-First 注入機制：當教室、老師、課名等實體明確時，直接暴力補進被 top-k 遺漏的 chunks
 
 **Zero-Hit 嚴格防護網**：`dept_short` 加入 Hard Filter 嚴格匹配系所，不匹配的 chunk 遭**物理刪除**。若刪除後結果為空，立即中斷流程。
 
@@ -442,9 +469,11 @@ final_score = α × RRF_norm(vector_rank)     （語意相似度）
 
 #### `rag/reranker.py` — Cross-Encoder Reranker
 
-- 使用 `BAAI/bge-reranker-large` cross-encoder，batch=16
+- 使用 `BAAI/bge-reranker-base` cross-encoder，batch=32
 - 分數融合：`final = sigmoid(rerank) × 0.75 + metadata × 0.25`
+- **情境加分防護**：根據查詢意圖動態加分 basic_info、objectives、教授資訊等區段
 - **甲乙班去重偏好**：相同課程的甲/乙班只保留最高分者，預設偏好甲班
+- **課程完整覆蓋保證**：確保每門課至少出現一次，動態擴大 Top-N 容量
 - **VRAM GC**：推理後 `gc.collect()` + `torch.cuda.empty_cache()`
 
 ---
@@ -483,6 +512,7 @@ final_score = α × RRF_norm(vector_rank)     （語意相似度）
 | `tools/dcard_search_tool.py` | Dcard 金門大學版教授評價搜尋 |
 | `tools/schedule_manager.py` | 個人課表資料存取、空堂計算、學期學分統計 |
 | `tools/transcript_manager.py` | 歷年成績單解析、GPA 計算、畢業學分比對與不及格警告 |
+| `tools/ocr_engine.py` | Gemini Vision 課表/成績單圖片辨識引擎（Zero-shot 萃取 NQU 節次、教師、教室） |
 | `tools/data/` | 資料目錄 — `credentials.json`、`groups.json`、`tokens/` |
 
 ### `main.py` — 主 Pipeline
@@ -516,10 +546,11 @@ CLI 互動介面，串接所有模組：
 ### Step 2: Hybrid Retriever (並行檢索)
 
 ```
-並行 Embedding (3 queries → ThreadPool)
+並行 Embedding (Gemini batchEmbedContents 一次批次處理所有 queries)
   → 並行 FAISS Vector Search (Top-30) + BM25 Search (Top-30)
   → RRF Fusion + Metadata 絕對命中加權
   → Hard Filter（必選修/系所強制剃除）
+  → Metadata-First 注入（補齊被 top-k 遺漏的精確匹配 chunks）
 ```
 
 ### Step 3: Intent Injection & Context Backfill (全景回填)
@@ -535,8 +566,9 @@ CLI 互動介面，串接所有模組：
 
 ```
 Top-N 候選陣列
-  → bge-reranker-large (GPU batch=16)
-  → 分數融合 + 甲乙班去重偏好
+  → bge-reranker-base (GPU batch=32)
+  → 情境加分防護 + 分數融合 + 甲乙班去重偏好
+  → 課程完整覆蓋保證（動態擴大 Top-N）
   → VRAM GC 釋放
 ```
 
@@ -662,8 +694,11 @@ Top-N 候選陣列
 import os
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
-GEMINI_MODEL = "gemini-3.1-pro"          # 主力：複雜解答、Context Backfill
-GEMINI_FAST_MODEL = "gemini-3.1-flash-lite"# 高速：五步 CoT 路由、閒聊 Bypass
+# 主力 Pro 模型 URL（複雜解答、Context Backfill、Vision OCR）
+GEMINI_API_URL = f"https://...models/gemini-3.1-pro-preview:generateContent?key={GEMINI_API_KEY}"
+
+# 高速 Flash Lite 模型 URL（五步 CoT 路由、閒聊 Bypass）
+GEMINI_FAST_API_URL = f"https://...models/gemini-3.1-flash-lite-preview:generateContent?key={GEMINI_API_KEY}"
 ```
 
 **架構派工分配**：
@@ -689,9 +724,9 @@ HYBRID_GAMMA = 0.2   # γ — Metadata 匹配（增大提升結構化過濾）
 ### Retriever / Reranker 參數
 
 ```python
-RETRIEVER_TOP_K = 30      # 31門課×6區段≈186 chunks，30 已足夠且降低雜訊
-RERANKER_TOP_N = 8        # 精選 8 個高品質 chunk 進入 LLM
-RERANKER_BATCH_SIZE = 16  # GPU batch size（8GB VRAM 穩定運行）
+RETRIEVER_TOP_K = 30      # 59門課（跨學期），semester filter 先篩出 ~30，30 chunks 足夠
+RERANKER_TOP_N = 10       # 精選 10 個高品質 chunk（星期二有 9 門課，需足夠容量）
+RERANKER_BATCH_SIZE = 32  # GPU batch size（bge-reranker-base ≈1.1GB，8GB VRAM 穩定跑 32 批次）
 ```
 
 ### Chunk 設定
