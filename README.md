@@ -150,7 +150,7 @@
 | **Vector Store** | FAISS (IndexFlatIP) | 餘弦相似度 (Cosine Similarity) 快速過濾 |
 | **Keyword Search** | BM25Okapi + CKIP Tagger | 深度學習繁中分詞，領域專有名詞保護 (強制教師斷詞) |
 | **防禦機制** | Agentic Bypass / TTL Cache / Cooldowns | 低延遲短路攔截 + 防記憶體流失 + 防洗版速率限制 |
-| **介面** | Rich CLI / Discord.py / Telegram Bot | 終端機除錯介面 + 非同步 Discord 機器人 + Telegram 雙平台支援 |
+| **介面** | Rich CLI / Discord.py | 終端機除錯介面 + 非同步 Discord 機器人（Telegram Bot 開發中） |
 
 ---
 
@@ -344,29 +344,6 @@ python discord_bot.py
 | `/my_failed` | ⚠️ 查詢不及格或未完成課程 | 所有人 |
 | `!sync` | ⚙️ 強制同步指令 | 管理員 |
 
-### 方式三：啟動 Telegram 機器人
-
-```bash
-# 請確保 .env 檔案中已填寫正確的 TELEGRAM_BOT_TOKEN
-python telegram_bot.py
-```
-
-Telegram 機器人支援以下指令：
-
-| 指令 | 說明 |
-|------|------|
-| `/start` | 👋 歡迎訊息與功能介紹 |
-| `/help` | ❓ 查看幫助訊息 |
-| 直接傳訊 | 🤖 直接傳送文字即可問答 |
-
-### 方式四：Discord + Telegram 雙平台同時啟動
-
-```bash
-# 統一啟動器，同時運行兩個 Bot
-python run_all.py
-```
-
-> 💡 `run_all.py` 會在單一終端中同時管理 Discord 與 Telegram Bot，共享相同的 AI 核心、記憶系統與 RAG 索引。
 
 ### 首次執行
 
