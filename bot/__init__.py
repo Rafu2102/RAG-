@@ -95,7 +95,7 @@ class TTLMemoryCache:
         for k in keys_to_delete:
             del self.cache[k]
 
-channel_memories = TTLMemoryCache(maxsize=500, ttl_seconds=3600)  # 保留 1 小時，最多 500 個頻道
+user_memories = TTLMemoryCache(maxsize=500, ttl_seconds=3600)  # 保留 1 小時，最多 500 位使用者（每人獨立記憶）
 global_nodes = None
 global_faiss = None
 global_bm25 = None
@@ -108,6 +108,6 @@ gpu_semaphore = asyncio.Semaphore(1)
 active_gpu_requests = 0
 
 
-def get_channel_memory(channel_id: int) -> ConversationMemory:
-    """取得特定頻道的對話記憶，若無則建立"""
-    return channel_memories.get(channel_id)
+def get_user_memory(user_id: int) -> ConversationMemory:
+    """取得特定使用者的對話記憶，若無則建立。每位學生有獨立的記憶空間，不會交叉污染。"""
+    return user_memories.get(user_id)

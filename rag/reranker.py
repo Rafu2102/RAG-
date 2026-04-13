@@ -52,10 +52,15 @@ def get_reranker() -> CrossEncoder:
         if device == "cpu":
             logger.info(f"載入 Reranker 模型：{config.RERANKER_MODEL_NAME} (device=cpu)")
 
+        model_kwargs = {}
+        if device == "cuda":
+            model_kwargs["torch_dtype"] = torch.float16
+
         _reranker_model = CrossEncoder(
             config.RERANKER_MODEL_NAME,
             max_length=512,
             device=device,
+            model_kwargs=model_kwargs
         )
             
         logger.info("Reranker 模型載入完成")
@@ -196,8 +201,8 @@ def rerank(
     
     needs_coverage = is_course_query or has_teacher_filter or has_req_filter or is_general_with_profile
     
-    if is_career_planning:
-        # 大範圍探索問題，直接放行所有去重後的結果，不設 top_n 上限
+    if is_career_planning and route_result and route_result.query_type == "course_info":
+        # 大範圍探索問題（僅限 course_info），直接放行所有去重後的結果
         results = deduped
         logger.info(f"  🌌 職涯探索模式：強制放行所有 {len(results)} 個不重複的 chunks 供 LLM 全景分析")
     elif needs_coverage:
@@ -246,7 +251,9 @@ def rerank(
             f"(最高={results[0].final_score:.4f}, "
             f"最低={results[-1].final_score:.4f})"
         )
-        for i, chunk in enumerate(results):
+        # 只印前 30 筆，避免 log 爆炸
+        log_limit = min(30, len(results))
+        for i, chunk in enumerate(results[:log_limit]):
             meta = chunk.node.metadata
             info_type = meta.get("info_type", "")
             if info_type:
@@ -256,6 +263,8 @@ def rerank(
                 course = meta.get("course_name", "?")
                 section = meta.get("section", "?")
                 logger.info(f"  #{i+1} [{course}][{section}] score={chunk.final_score:.4f}")
+        if len(results) > log_limit:
+            logger.info(f"  ... 還有 {len(results) - log_limit} 個 chunks 未顯示")
     else:
         logger.warning("⚠️ Reranker 完成但結果為空，所有候選 chunks 均被過濾")
 

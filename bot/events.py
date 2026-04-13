@@ -10,21 +10,23 @@ bot/events.py — Discord Events (on_ready, on_message)
 import re
 import asyncio
 import logging
+import time
+import io
 import discord  # type: ignore
 
 import bot as _bot
 from bot import (
     client, tree, logger,
     ADMIN_DISCORD_IDS,
-    bot_ready, gpu_semaphore, get_channel_memory,
-    channel_memories,
+    bot_ready, gpu_semaphore, get_user_memory,
+    user_memories,
 )
 from rag.index_manager import load_and_index, check_data_changes
 from rag.query_router import init_known_registry
 from main import rag_pipeline
 from tools.auth import get_user_profile
 from utils import smart_split_message
-from bot.audit import send_audit_dm
+from bot.audit import send_audit_dm, send_debug_log
 from bot.cmd_groups import GroupInviteView
 
 
@@ -149,10 +151,9 @@ async def on_message(message: discord.Message):
         await message.reply("請輸入你想要查詢的課程問題喔！")
         return
 
-    channel_id = message.channel.id
-    memory = get_channel_memory(channel_id)
     discord_id = str(message.author.id)
     user_profile = get_user_profile(discord_id)
+    memory = get_user_memory(int(discord_id))  # 🆕 每位學生獨立記憶，不再按頻道共用
     
     profile_tag = ""
     if user_profile:
@@ -173,11 +174,26 @@ async def on_message(message: discord.Message):
                 async with gpu_semaphore:
                     logger.info(f"🚀 GPU 取得 | {message.author.display_name} 開始處理問題：{str(question)[:40]}")
                     
-                    answer = await asyncio.to_thread(
-                        rag_pipeline, question,
-                        _bot.global_nodes, _bot.global_faiss, _bot.global_bm25,
-                        memory, False, user_profile, discord_id
-                    )
+                    # 【Debug Log 捕獲】在 pipeline 執行期間捕獲所有 log
+                    log_capture = io.StringIO()
+                    log_handler = logging.StreamHandler(log_capture)
+                    log_handler.setLevel(logging.INFO)
+                    log_handler.setFormatter(logging.Formatter('%(name)s | %(message)s'))
+                    
+                    root_logger = logging.getLogger()
+                    root_logger.addHandler(log_handler)
+                    
+                    pipeline_start = time.time()
+                    try:
+                        answer = await asyncio.to_thread(
+                            rag_pipeline, question,
+                            _bot.global_nodes, _bot.global_faiss, _bot.global_bm25,
+                            memory, False, user_profile, discord_id
+                        )
+                    finally:
+                        root_logger.removeHandler(log_handler)
+                    pipeline_elapsed = time.time() - pipeline_start
+                    captured_log = log_capture.getvalue()
                     
             finally:
                 _bot.active_gpu_requests -= 1
@@ -194,7 +210,7 @@ async def on_message(message: discord.Message):
                 else:
                     await message.channel.send(part)
             
-            # 【審計推播】
+            # 【審計推播】（Bot 擁有者的問答會被 send_audit_dm 內部跳過）
             client.loop.create_task(
                 send_audit_dm(
                     student=message.author,
@@ -206,6 +222,18 @@ async def on_message(message: discord.Message):
                 )
             )
             
+            # 【Debug Log 推播】完整 pipeline log 發到 debug 頻道
+            client.loop.create_task(
+                send_debug_log(
+                    student=message.author,
+                    question=question,
+                    answer=answer,
+                    pipeline_log=captured_log,
+                    source=audit_source,
+                    elapsed=pipeline_elapsed,
+                )
+            )
+            
         except Exception as e:
             logger.exception(f"❌ {audit_source} 錯誤 | 使用者：{message.author.display_name} | 問題：{str(question)[:50]}")
             error_msg = str(e)
@@ -213,3 +241,4 @@ async def on_message(message: discord.Message):
                 await message.reply("❌ 糟糕！我的 AI 核心 (Ollama) 似乎沒有啟動，請管理員檢查一下伺服器喔！")
             else:
                 await message.reply("❌ 查詢時發生內部錯誤，請稍後再試！(內部錯誤)")
+

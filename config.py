@@ -67,6 +67,9 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 GEMINI_API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-pro-preview:generateContent?key={GEMINI_API_KEY}"
 GEMINI_FAST_API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite-preview:generateContent?key={GEMINI_API_KEY}"
 
+# ── Telegram Bot 設定 ──
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "")
+
 # ── Gemini API Timeout 常數（秒）──
 GEMINI_PRO_TIMEOUT = 60.0          # Pro 模型預設 timeout（含 thinking 首 token 延遲）
 GEMINI_FLASH_TIMEOUT = 15.0        # Flash Lite 模型預設 timeout
@@ -74,8 +77,8 @@ GEMINI_OCR_TIMEOUT = 120.0         # OCR 多模態長耗時 timeout（課表/成
 
 # ── Gemini API maxOutputTokens 常數 ──
 GEMINI_PRO_MAX_TOKENS = 8192       # Pro 模型：RAG 主回答、OCR 等長文輸出
-GEMINI_FLASH_MAX_TOKENS = 2048     # Flash Lite：Router/Rewrite、意圖分類等中等輸出
-GEMINI_SHORT_MAX_TOKENS = 1024      # 極短輸出：指代消解、閒聊（一句話）、行事曆包裝
+GEMINI_FLASH_MAX_TOKENS = 4096     # Flash Lite：Router/Rewrite、意圖分類等中等輸出
+GEMINI_SHORT_MAX_TOKENS = 2048      # 極短輸出：指代消解、閒聊（一句話）、行事曆包裝
 
 OLLAMA_BASE_URL = "http://localhost:11434"
 OLLAMA_MODEL = "Yu-Feng/Llama-3.1-TAIDE-LX-8B-Chat:Q4_K_M"
@@ -99,9 +102,9 @@ EMBEDDING_MAX_RETRIES = 3               # API 失敗自動重試次數
 # =============================================================================
 # 🔄 Reranker 模型設定
 # =============================================================================
-RERANKER_MODEL_NAME = "BAAI/bge-reranker-large"
+RERANKER_MODEL_NAME = "BAAI/bge-reranker-base"
 RERANKER_TOP_N = 10               # 精選 10 個高品質 chunk（星期二有 9 門課，需足夠容量）
-RERANKER_BATCH_SIZE = 16          # [GPU 壓榨] bge-reranker-large ≈1.3GB，8GB VRAM 穩定跑 16 批次
+RERANKER_BATCH_SIZE = 32          # [GPU 壓榨] bge-reranker-base ≈1.3GB，8GB VRAM 穩定跑 32 批次
 
 # =============================================================================
 # 📄 Chunking 設定
@@ -133,7 +136,7 @@ RRF_K = 60                        # Reciprocal Rank Fusion 常數
 # =============================================================================
 # 💬 對話記憶設定
 # =============================================================================
-MEMORY_WINDOW_SIZE = 0                # [暫時停用] 設為 0 停用對話記憶，避免跨題污染。恢復請改回 5
+MEMORY_WINDOW_SIZE = 5                # 設定為 5 輪記憶，以利多輪連續提問（如：對此教授繼續深入追問）
 
 # =============================================================================
 # 🔀 Multi-query 設定

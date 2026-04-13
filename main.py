@@ -61,8 +61,9 @@ def resolve_coreference(question: str, chat_history: list[dict]) -> str:
     """
     import requests, json
 
-    # 只取最近 2 輪對話（4 條訊息），避免上下文太長
-    recent = chat_history[-(config.MEMORY_WINDOW_SIZE * 2):]
+    # 【防呆優化】指代消解只需要「最近 2 輪對話（4 條訊息）」的語境即可。
+    # 如果把設定的 5 輪（10 條訊息）全塞給判斷器，它可能會被太久以前的別的主題（例如 4 輪前提到的其他教授）給帶偏。
+    recent = chat_history[-4:]
     history_lines = []
     for msg in recent:
         role = "使用者" if msg["role"] == "user" else "助理"
@@ -235,47 +236,100 @@ def rag_pipeline(
         memory.add_assistant_message(answer_obj.answer)
         return answer_obj.answer
 
+    # [攔截 1.2] 聯網搜尋 (Web Search)
+    if route_result.query_type == "web_search":
+        logger.info("  [dim]🌐 偵測到校外/即時大眾問題，啟動 Google Search 聯網搜尋（跳過本地 RAG 資料庫）[/dim]")
+        from llm.llm_answer import generate_web_search_answer
+        
+        step_start_web = time.time()
+        answer_obj = generate_web_search_answer(question, memory)
+        
+        memory.add_user_message(question)
+        memory.add_assistant_message(answer_obj.answer)
+        
+        print_step(2, "Google Search 聯網解答", time.time() - step_start_web)
+        total_time = time.time() - total_start
+        console.print(f"\n  [dim]⏱️ 總耗時：{total_time:.2f}s[/dim]\n")
+        
+        return answer_obj.answer
+
+    # ── 🛡️ 混合意圖安全閥：偵測推薦/搜尋關鍵字，避免個人資料攔截吃掉推薦需求 ──
+    _RECOMMEND_KEYWORDS = [
+        "推薦", "建議", "有什麼可以上", "選什麼", "修什麼", "可以上什麼",
+        "適合", "好過", "甜", "涼", "容易", "簡單",
+        "哪門課", "哪堂課", "什麼課比較",
+    ]
+    def _has_recommend_intent(q: str) -> bool:
+        return any(kw in q for kw in _RECOMMEND_KEYWORDS)
+
     # [攔截 1.5] 個人課表查詢 (Personal Schedule)
     if route_result.query_type == "personal_schedule" and discord_id:
-        logger.info("  📅 偵測到個人課表查詢，跳過 RAG 直接查詢個人資料")
-        from tools.schedule_manager import get_schedule_context_for_llm
-        personal_ctx = get_schedule_context_for_llm(discord_id, question)
-        if personal_ctx:
-            logger.info("  ✨ 課表資料取得成功，交由 LLM 進行友善包裝")
-            from llm.llm_answer import generate_personal_info_answer
-            answer = generate_personal_info_answer(question, personal_ctx, "課表")
-            memory.add_user_message(question)
-            memory.add_assistant_message(answer)
-            total_time = time.time() - total_start
-            print_step(2, f"個人課表直接回答 (跳過 RAG)", total_time)
-            return answer
+        if _has_recommend_intent(question):
+            logger.info("  📅➡️🔍 個人課表查詢中偵測到推薦意圖，改走 RAG Pipeline（課表將自動注入 LLM Prompt）")
+            route_result.query_type = "course_info"
+            # 不 return，讓流程繼續往下走到 Retriever + generate_answer（已內建課表注入）
+        elif route_result.metadata_filters.get("course_name_keyword"):
+            # 🆕 衝堂檢查：需要同時取得個人課表 + 目標課程的 RAG 資料
+            target_course = route_result.metadata_filters["course_name_keyword"]
+            logger.info(f"  📅🔍 偵測到衝堂/課程資格查詢，同時查詢個人課表 + RAG 課程資料：{target_course}")
+            from tools.schedule_manager import get_schedule_context_for_llm
+            personal_ctx = get_schedule_context_for_llm(discord_id, question)
+            if personal_ctx:
+                # 改走 course_info RAG，讓 generate_answer 內建的課表注入機制一併處理
+                route_result.query_type = "course_info"
+                logger.info("  📅➡️🔍 改走 course_info RAG Pipeline（個人課表 + 課程 RAG 雙資料源）")
+                # 不 return，繼續走到 Retriever + generate_answer
+            else:
+                logger.info("  ⚠️ 使用者尚未匯入課表，fallback 提示")
+                fallback = "❌ 您還沒有匯入個人課表資料喔！請先使用 `/upload_schedule` 上傳您的課表 JSON。"
+                memory.add_user_message(question)
+                memory.add_assistant_message(fallback)
+                return fallback
         else:
-            logger.info("  ⚠️ 使用者尚未匯入課表，fallback 提示")
-            fallback = "❌ 您還沒有匯入個人課表資料喔！請先使用 `/upload_schedule` 上傳您的課表 JSON。"
-            memory.add_user_message(question)
-            memory.add_assistant_message(fallback)
-            return fallback
+            logger.info("  📅 偵測到個人課表查詢，跳過 RAG 直接查詢個人資料")
+            from tools.schedule_manager import get_schedule_context_for_llm
+            personal_ctx = get_schedule_context_for_llm(discord_id, question)
+            if personal_ctx:
+                logger.info("  ✨ 課表資料取得成功，交由 LLM 進行友善包裝")
+                from llm.llm_answer import generate_personal_info_answer
+                answer = generate_personal_info_answer(question, personal_ctx, "課表")
+                memory.add_user_message(question)
+                memory.add_assistant_message(answer)
+                total_time = time.time() - total_start
+                print_step(2, f"個人課表直接回答 (跳過 RAG)", total_time)
+                return answer
+            else:
+                logger.info("  ⚠️ 使用者尚未匯入課表，fallback 提示")
+                fallback = "❌ 您還沒有匯入個人課表資料喔！請先使用 `/upload_schedule` 上傳您的課表 JSON。"
+                memory.add_user_message(question)
+                memory.add_assistant_message(fallback)
+                return fallback
 
     # [攔截 1.6] 個人成績/學分查詢 (Personal Transcript)
     if route_result.query_type == "personal_transcript" and discord_id:
-        logger.info("  📊 偵測到個人成績/學分查詢，跳過 RAG 直接查詢成績單")
-        from tools.transcript_manager import get_transcript_context_for_llm
-        personal_ctx = get_transcript_context_for_llm(discord_id, question)
-        if personal_ctx:
-            logger.info("  ✨ 成績資料取得成功，交由 LLM 進行友善包裝")
-            from llm.llm_answer import generate_personal_info_answer
-            answer = generate_personal_info_answer(question, personal_ctx, "成績單")
-            memory.add_user_message(question)
-            memory.add_assistant_message(answer)
-            total_time = time.time() - total_start
-            print_step(2, f"個人成績單直接回答 (跳過 RAG)", total_time)
-            return answer
+        if _has_recommend_intent(question):
+            logger.info("  📊➡️🔍 成績查詢中偵測到推薦意圖（如：被當了推薦補什麼），改走 RAG Pipeline")
+            route_result.query_type = "course_info"
+            # 不 return，讓流程繼續往下走
         else:
-            logger.info("  ⚠️ 使用者尚未匯入成績單，fallback 提示")
-            fallback = "❌ 您還沒有匯入歷年成績單資料喔！請先使用 `/upload_transcript` 上傳您的成績單 JSON。"
-            memory.add_user_message(question)
-            memory.add_assistant_message(fallback)
-            return fallback
+            logger.info("  📊 偵測到個人成績/學分查詢，跳過 RAG 直接查詢成績單")
+            from tools.transcript_manager import get_transcript_context_for_llm
+            personal_ctx = get_transcript_context_for_llm(discord_id, question)
+            if personal_ctx:
+                logger.info("  ✨ 成績資料取得成功，交由 LLM 進行友善包裝")
+                from llm.llm_answer import generate_personal_info_answer
+                answer = generate_personal_info_answer(question, personal_ctx, "成績單")
+                memory.add_user_message(question)
+                memory.add_assistant_message(answer)
+                total_time = time.time() - total_start
+                print_step(2, f"個人成績單直接回答 (跳過 RAG)", total_time)
+                return answer
+            else:
+                logger.info("  ⚠️ 使用者尚未匯入成績單，fallback 提示")
+                fallback = "❌ 您還沒有匯入歷年成績單資料喔！請先使用 `/upload_transcript` 上傳您的成績單 JSON。"
+                memory.add_user_message(question)
+                memory.add_assistant_message(fallback)
+                return fallback
 
     # [攔截 2] 學校行事曆 (Academic Calendar)
     if route_result.query_type == "academic_calendar":
@@ -447,6 +501,7 @@ def rag_pipeline(
             route_result=route_result,
             all_nodes=nodes,
             user_profile=user_profile,
+            discord_id=discord_id,
         )
         final_answer = answer_result.answer
         print_step(5, f"LLM Answer → {len(final_answer)} 字", time.time() - step_start)

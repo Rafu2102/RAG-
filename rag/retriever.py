@@ -580,7 +580,7 @@ def hybrid_retrieve(
     # 🌌 職涯大範圍探勘模式 (Full Curriculum Scan Mode)
     # 針對 Frontend/Backend/AI 等規劃，直接抽取科系之所有課程與就業資訊，無視檢索！
     # ========================================================================
-    if getattr(route_result, "is_career_planning", False):
+    if getattr(route_result, "is_career_planning", False) and route_result.query_type == "course_info":
         target_depts = route_result.metadata_filters.get("dept_short", [])
         if isinstance(target_depts, str):
             target_depts = [target_depts]

@@ -58,12 +58,13 @@ async def slash_rebuild(interaction: discord.Interaction):
 # 🗑️ /clear — 清除對話記憶
 # =========================================================================
 
-@tree.command(name="clear", description="🗑️ 清除當前頻道的對話記憶")
+@tree.command(name="clear", description="🗑️ 清除你的個人對話記憶")
 async def slash_clear(interaction: discord.Interaction):
-    from bot import channel_memories
-    if interaction.channel_id in channel_memories:
-        channel_memories[interaction.channel_id].clear()
-    await interaction.response.send_message("✅ 已經為您清除這個頻道的對話記憶囉！")
+    from bot import user_memories
+    user_id = interaction.user.id
+    if user_id in user_memories.cache:
+        user_memories.cache[user_id][0].clear()
+    await interaction.response.send_message("✅ 已經為您清除個人對話記憶囉！其他人的記憶不受影響 😊", ephemeral=True)
 
 
 # =========================================================================
@@ -186,16 +187,16 @@ async def group_name_autocomplete(interaction: discord.Interaction, current: str
 @tree.command(name="admin_broadcast", description="📢 [管理員專用] 發送系統廣播公告給指定學生群體")
 @app_commands.default_permissions(administrator=True)
 @app_commands.describe(
-    title="公告標題 (可選，不填則自動產生)",
-    content="公告內容 (可選，不填則留空)",
-    attachment="附件檔案 (可選，直接上傳)",
+    message="📢 公告主要內容 (直接打字即可，不填則只發附件)",
+    title="📌 廣播標題 (可選填，預設為「系統公告」)",
+    attachment="📎 附件檔案 (可選填，直接上傳)",
     dept="目標科系 (不填=全校)", grade="目標年級 (不填=全系)",
     group="目標群組標籤 (不填=不限群組)"
 )
 @app_commands.autocomplete(group=group_name_autocomplete)
 async def slash_admin_broadcast(
     interaction: discord.Interaction,
-    title: str = None, content: str = None,
+    message: str = None, title: str = None,
     attachment: discord.Attachment = None,
     dept: str = None, grade: str = None, group: str = None,
 ):
@@ -206,11 +207,11 @@ async def slash_admin_broadcast(
             pass
         return
 
-    # 至少要有 title / content / attachment 其中一個
-    if not title and not content and not attachment:
+    # 至少要有 message / title / attachment 其中一個
+    if not title and not message and not attachment:
         try:
             await interaction.response.send_message(
-                "❌ 請至少提供 **標題**、**內容** 或 **附件** 其中一項！", ephemeral=True
+                "❌ 請至少提供 **內容**、**標題** 或 **附件** 其中一項！", ephemeral=True
             )
         except discord.NotFound:
             pass
@@ -238,9 +239,9 @@ async def slash_admin_broadcast(
     if group: filter_parts.append(f"標籤:[{group}]")
     filter_msg = " ".join(filter_parts) if filter_parts else "全校"
 
-    # 自動填充標題
+    # 自動填充標題與內容
     final_title = title or ("📎 資料分享" if attachment else "📢 系統公告")
-    final_content = content or ""
+    final_content = message or ""
     file_url = attachment.url if attachment else None
     file_name = attachment.filename if attachment else None
 

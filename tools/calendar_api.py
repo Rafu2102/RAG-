@@ -290,17 +290,23 @@ def delete_calendar_events(discord_id: str, keyword: str, calendar_id: str = "pr
 
 # === 行事曆 CRUD：讀取 (List) ===
 
-def list_calendar_events(discord_id: str, days: int = 7, calendar_id: str = "primary", target_date: str = None) -> dict:
-    """列出使用者的行事曆事件。"""
+def list_calendar_events(discord_id: str, days: int = 7, calendar_id: str = "primary", target_date: str = None, time_min_str: str = None, time_max_str: str = None) -> dict:
+    """列出使用者的行事曆事件。支援指定確切的天數、特定單日 (target_date) 或絕對的起始/結束時間 (time_min_str, time_max_str)"""
     try:
         service = get_service(discord_id)
         now_dt = datetime.now(TAIPEI_TZ)
         
-        if target_date and str(target_date).lower() not in ("null", "none"):
+        if time_min_str and time_max_str:
+            time_min = time_min_str
+            time_max = time_max_str
+        elif target_date and str(target_date).lower() not in ("null", "none"):
             from datetime import date as _date
             d = _date.fromisoformat(target_date[:10])
             time_min = _to_utc_rfc3339(datetime.combine(d, datetime.min.time(), tzinfo=TAIPEI_TZ))
             time_max = _to_utc_rfc3339(datetime.combine(d + timedelta(days=1), datetime.min.time(), tzinfo=TAIPEI_TZ))
+        elif days < 0:
+            time_min = _to_utc_rfc3339(now_dt + timedelta(days=days))
+            time_max = _to_utc_rfc3339(now_dt)
         else:
             time_min = _to_utc_rfc3339(now_dt)
             time_max = _to_utc_rfc3339(now_dt + timedelta(days=days))

@@ -56,7 +56,7 @@ def _match_dept_short(meta: dict, v_list: list, content: str = "") -> bool:
 def _match_course_name_keyword(meta: dict, v_list: list, content: str = "") -> bool:
     c_name = meta.get("course_name", "")
     c_name_short = re.sub(r"[（(][^）)]*[）)]", "", c_name).strip()
-    return any(v == c_name_short or v == c_name for v in v_list)
+    return any(v == c_name_short or v == c_name or v in c_name for v in v_list)
 
 def _match_teacher(meta: dict, v_list: list, content: str = "") -> bool:
     clean_vals = [re.sub(r"(老師|教授)$", "", v) for v in v_list]
@@ -204,8 +204,10 @@ def apply_hard_metadata_filter(
         exempt_keys.update(["grade", "dept_short"])
         logger.info(f"  🏷️ 教師查詢「{active_filters['teacher']}」→ 豁免 grade + dept_short 評分")
     if "course_name_keyword" in active_filters:
-        exempt_keys.update(["grade", "dept_short"])
-        logger.info(f"  🏷️ 課程名稱查詢「{active_filters['course_name_keyword']}」→ 豁免 grade + dept_short 評分")
+        # 【關鍵修復】不再對 course_name_keyword 自動豁免 dept_short 與 grade
+        # 這樣當使用者「明確指定」資工系微積分時，電機系微積分才會被成功 -100 分斬殺！
+        # 若使用者只是找微積分，Router 現在不會補上 dept_short，所以也不會被誤殺。
+        logger.info(f"  🏷️ 課程名稱查詢「{active_filters['course_name_keyword']}」→ 嚴格套用系級評分機制")
     if "classroom" in active_filters:
         exempt_keys.update(["grade", "dept_short"])
         logger.info(f"  🏷️ 教室查詢「{active_filters['classroom']}」→ 豁免 grade + dept_short 評分")
@@ -228,10 +230,16 @@ def apply_hard_metadata_filter(
             if not handler:
                 continue
             
+            # 動態判定排他性條件：若有指定特定課程名稱或教師，學期和學年不再是必須完美匹配的排他條件
+            # 這樣即使課程是上學期開的，也能被找到，只是分數稍低（-2.0 而非 -100.0）
+            is_exclusive = key in _EXCLUSIVE_KEYS
+            if key in ["semester", "academic_year"] and ("course_name_keyword" in scoring_filters or "teacher" in scoring_filters):
+                is_exclusive = False
+            
             v_list = val if isinstance(val, list) else [val]
             is_match = handler(meta, v_list, content)
 
-            if key in _EXCLUSIVE_KEYS:
+            if is_exclusive:
                 # 排他性條件：匹配加分，不匹配直接斬殺（-100）
                 score_delta += 2.0 if is_match else -100.0
             elif key in _HIGH_WEIGHT_KEYS:

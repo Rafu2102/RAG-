@@ -15,7 +15,7 @@ import discord  # type: ignore
 from discord import app_commands  # type: ignore
 
 import bot as _bot
-from bot import tree, logger, bot_ready, gpu_semaphore, get_channel_memory
+from bot import tree, logger, bot_ready, gpu_semaphore, get_user_memory
 from main import rag_pipeline
 from tools.auth import get_user_profile
 from tools.dcard_search_tool import search_dcard_professor, search_nqu_news, search_campus_info
@@ -36,13 +36,11 @@ async def slash_ask(interaction: discord.Interaction, question: str):
         await interaction.followup.send("⏳ 機器人正在啟動中，請稍後再試！")
         return
     
-    channel_id = interaction.channel_id
-    memory = get_channel_memory(channel_id)
+    discord_id = str(interaction.user.id)
+    user_profile = get_user_profile(discord_id)
+    memory = get_user_memory(int(discord_id))  # 每位學生獨立記憶
 
     try:
-        discord_id = str(interaction.user.id)
-        user_profile = get_user_profile(discord_id)
-
         try:
             _bot.active_gpu_requests += 1
             if _bot.active_gpu_requests > 1:
@@ -93,14 +91,12 @@ async def slash_add_calendar(interaction: discord.Interaction, event: str):
         await interaction.followup.send("⏳ 機器人正在啟動中，請稍後再試！")
         return
     
-    channel_id = interaction.channel_id
-    memory = get_channel_memory(channel_id)
+    discord_id = str(interaction.user.id)
+    user_profile = get_user_profile(discord_id)
+    memory = get_user_memory(int(discord_id))
+    augmented_query = f"{event} 幫我加到行事曆"
 
     try:
-        discord_id = str(interaction.user.id)
-        user_profile = get_user_profile(discord_id)
-        augmented_query = f"{event} 幫我加到行事曆"
-        
         try:
             _bot.active_gpu_requests += 1
             if _bot.active_gpu_requests > 1:

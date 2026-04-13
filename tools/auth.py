@@ -84,14 +84,16 @@ def verify_and_save_token(discord_id: str, auth_response_url: str, department: s
     creds = flow.credentials
     creds_dict = json.loads(creds.to_json())
     
-    # 【保留 nickname】若使用者重新註冊，保留舊的 nickname
+    # 【保留 nickname 與 groups】若使用者重新註冊，保留舊的 nickname 與群組標籤
     existing_nickname = ""
+    existing_groups = []
     token_path = get_user_token_path(discord_id)
     if token_path.exists():
         try:
             with open(token_path, "r", encoding="utf-8") as f:
                 old_data = json.load(f)
                 existing_nickname = old_data.get("profile", {}).get("nickname", "")
+                existing_groups = old_data.get("profile", {}).get("groups", [])
         except Exception:
             pass
     
@@ -114,6 +116,7 @@ def verify_and_save_token(discord_id: str, auth_response_url: str, department: s
         "department_full": dept_full,
         "grade": grade,
         "class_group": class_group,
+        "groups": existing_groups,
     }
     if existing_nickname:
         profile["nickname"] = existing_nickname

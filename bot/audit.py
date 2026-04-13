@@ -3,12 +3,14 @@
 bot/audit.py — 監控審計 Log 系統
 =================================
 將所有系統事件（問答、廣播、管理操作）發送到伺服器的監控頻道。
+新增：Debug Log 頻道，發送完整 pipeline log 供開發者偵錯。
 
 頻道偵測優先順序：
 1. .env 的 AUDIT_CHANNEL_ID（最可靠）
 2. 自動搜尋頻道名稱包含 "bot" 或 "監控" 或 "log" 的文字頻道
 """
 
+import os
 import logging
 import discord  # type: ignore
 
@@ -16,8 +18,15 @@ from bot import client, AUDIT_CHANNEL_ID
 
 logger = logging.getLogger("discord_bot")
 
+# Bot 擁有者 ID — 此 ID 的問答不會被發送到監控頻道（避免自己測試被洗版）
+OWNER_DISCORD_ID = os.getenv("OWNER_DISCORD_ID", "660039552836042752")
+
+# Debug Log 專用頻道 ID（完整 pipeline log）
+DEBUG_LOG_CHANNEL_ID = os.getenv("DEBUG_LOG_CHANNEL_ID", "1480089837079101553")
+
 # 快取頻道物件，避免每次都搜尋
 _audit_channel_cache: discord.TextChannel | None = None
+_debug_channel_cache: discord.TextChannel | None = None
 
 # 可匹配的頻道名稱關鍵字（只要包含任一個就算匹配）
 _CHANNEL_NAME_KEYWORDS = [
@@ -69,10 +78,29 @@ async def _get_audit_channel() -> discord.TextChannel | None:
     return None
 
 
+async def _get_debug_channel() -> discord.TextChannel | None:
+    """取得 Debug Log 專用頻道（快取）"""
+    global _debug_channel_cache
+    if _debug_channel_cache:
+        return _debug_channel_cache
+    
+    if DEBUG_LOG_CHANNEL_ID:
+        try:
+            ch = client.get_channel(int(DEBUG_LOG_CHANNEL_ID))
+            if ch and isinstance(ch, discord.TextChannel):
+                _debug_channel_cache = ch
+                logger.info(f"📋 Debug Log 頻道已綁定: #{ch.name} (ID: {ch.id})")
+                return ch
+        except (ValueError, TypeError):
+            pass
+    return None
+
+
 def reset_audit_cache():
     """重設快取（用於 on_ready 時重新偵測）"""
-    global _audit_channel_cache  # type: ignore
+    global _audit_channel_cache, _debug_channel_cache
     _audit_channel_cache = None
+    _debug_channel_cache = None
 
 
 # =========================================================================
@@ -87,7 +115,12 @@ async def send_audit_dm(
     channel_name: str = "私訊",
     user_profile: dict = None,
 ):
-    """將學生的問答紀錄發送到監控頻道。"""
+    """將學生的問答紀錄發送到監控頻道。Bot 擁有者的問答會被跳過。"""
+    # 跳過 Bot 擁有者（避免自己測試洗版）
+    if str(student.id) == OWNER_DISCORD_ID:
+        logger.info(f"📋 跳過審計（Bot 擁有者）：{student.display_name}")
+        return
+    
     audit_channel = await _get_audit_channel()
     if not audit_channel:
         return
@@ -164,3 +197,67 @@ async def send_audit_log(
         await audit_channel.send(embed=embed)
     except Exception as e:
         logger.error(f"📋 審計 Log 發送失敗: {e}")
+
+
+# =========================================================================
+# 🔧 Debug Log — 完整 Pipeline 偵錯紀錄
+# =========================================================================
+
+async def send_debug_log(
+    student: discord.User | discord.Member,
+    question: str,
+    answer: str,
+    pipeline_log: str,
+    source: str = "@tag",
+    elapsed: float = 0.0,
+):
+    """
+    將完整的 pipeline log 發送到 Debug 頻道，供開發者偵錯。
+    包含：Router 結果、搜尋關鍵字、檢索分數、LLM 回答等完整流程。
+    """
+    debug_channel = await _get_debug_channel()
+    if not debug_channel:
+        return
+
+    embed = discord.Embed(
+        title="🔧 Pipeline Debug Log",
+        color=discord.Color.orange(),
+        timestamp=discord.utils.utcnow()
+    )
+    embed.add_field(name="👤 使用者", value=f"{student.display_name} (`{student.id}`)", inline=True)
+    embed.add_field(name="📡 來源", value=f"`{source}`", inline=True)
+    embed.add_field(name="⏱️ 耗時", value=f"`{elapsed:.2f}s`", inline=True)
+    embed.add_field(name="❓ 問題", value=f"```\n{question[:500]}\n```", inline=False)
+    
+    # Pipeline log 可能很長，截斷到 Discord 限制
+    log_preview = pipeline_log[:3500] if len(pipeline_log) > 3500 else pipeline_log
+    embed.add_field(name="📜 Pipeline Log", value=f"```\n{log_preview}\n```", inline=False)
+    
+    # 回答預覽
+    answer_preview = answer[:800] + "..." if len(answer) > 800 else answer
+    embed.add_field(name="🤖 最終回答", value=f"```\n{answer_preview[:1000]}\n```", inline=False)
+    
+    embed.set_thumbnail(url=student.display_avatar.url)
+    embed.set_footer(text="NQU 校園智慧助理 · Debug Log")
+
+    try:
+        await debug_channel.send(embed=embed)
+        logger.info(f"🔧 Debug Log 已發送到 #{debug_channel.name}")
+    except discord.HTTPException as e:
+        # Embed 太長時改用純文字發送
+        if e.status == 400:
+            try:
+                text_msg = (
+                    f"🔧 **Pipeline Debug Log**\n"
+                    f"👤 {student.display_name} | 📡 `{source}` | ⏱️ `{elapsed:.2f}s`\n"
+                    f"❓ `{question[:100]}`\n\n"
+                    f"```\n{pipeline_log[:1800]}\n```"
+                )
+                await debug_channel.send(text_msg)
+                logger.info(f"🔧 Debug Log (純文字模式) 已發送到 #{debug_channel.name}")
+            except Exception as e2:
+                logger.error(f"🔧 Debug Log 發送失敗 (fallback): {e2}")
+        else:
+            logger.error(f"🔧 Debug Log 發送失敗: {e}")
+    except Exception as e:
+        logger.error(f"🔧 Debug Log 發送失敗: {e}")

@@ -2,11 +2,14 @@
 venv/
 .venv/
 __pycache__/
+*.pyc
 
-# Secret
+# Secret / Credentials
 .env
+.env.*
 tools/data/tokens/
 credentials.json
+tools/data/credentials.json
 
 # Large Data & Models
 *.dll
@@ -17,4 +20,20 @@ index_store/
 data/data.zip
 data/data/
 範例/
+
+# IDE & Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS temp files
+Thumbs.db
+.DS_Store
+
+# Gemini Agent
+.gemini/
+
+# Logs
+*.log
 
