@@ -20,13 +20,13 @@ import logging
 from bot import client, DISCORD_BOT_TOKEN
 
 # ── 匯入所有子模組，讓 @tree.command 和 @client.event 被註冊 ──
-import bot.cmd_identity   # noqa: F401 — /identity_login
-import bot.cmd_admin      # noqa: F401 — /rebuild, /clear, /admin_*
-import bot.cmd_groups     # noqa: F401 — /join_group, GroupInviteView
-import bot.cmd_ask        # noqa: F401 — /ask, /add_calendar, /dcard_search
-import bot.cmd_schedule   # noqa: F401 — /upload_schedule, /my_schedule, /my_free, /my_credits
-import bot.cmd_transcript # noqa: F401 — /upload_transcript, /my_credits_total, /my_gpa, /my_failed
-import bot.events         # noqa: F401 — on_ready, on_message
+import bot.discord.cmd_identity   # noqa: F401 — /identity_login
+import bot.discord.cmd_admin      # noqa: F401 — /rebuild, /clear, /admin_*
+import bot.discord.cmd_groups     # noqa: F401 — /join_group, GroupInviteView
+import bot.discord.cmd_ask        # noqa: F401 — /ask, /add_calendar, /dcard_search
+import bot.discord.cmd_schedule   # noqa: F401 — /upload_schedule, /my_schedule, /my_free, /my_credits
+import bot.discord.cmd_transcript # noqa: F401 — /upload_transcript, /my_credits_total, /my_gpa, /my_failed
+import bot.discord.events         # noqa: F401 — on_ready, on_message
 
 logger = logging.getLogger("discord_bot")
 

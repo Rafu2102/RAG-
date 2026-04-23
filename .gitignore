@@ -8,6 +8,8 @@ __pycache__/
 .env
 .env.*
 tools/data/tokens/
+tools/data/discord_tokens/
+tools/data/telegram_tokens/
 credentials.json
 tools/data/credentials.json
 
@@ -33,6 +35,10 @@ Thumbs.db
 
 # Gemini Agent
 .gemini/
+.agent/
+
+# Reports
+報告/
 
 # Logs
 *.log

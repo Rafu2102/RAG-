@@ -12,7 +12,7 @@ import logging
 import discord  # type: ignore
 
 from bot import tree, DEPT_MAPPING, logger
-from bot.ui_utils import SafeView, safe_respond, safe_defer
+from bot.discord.ui_utils import SafeView, safe_respond, safe_defer
 from tools.auth import get_auth_url, verify_and_save_token, get_user_profile, delete_user_token
 
 

@@ -67,21 +67,25 @@ def resolve_coreference(question: str, chat_history: list[dict]) -> str:
     history_lines = []
     for msg in recent:
         role = "使用者" if msg["role"] == "user" else "助理"
-        history_lines.append(f"{role}：{msg['content'][:150]}")
+        history_lines.append(f"{role}：{msg['content']}")
     history_str = "\n".join(history_lines)
 
-    prompt = f"""你是一個極度精準的指代消解器。
+    prompt = f"""你是一個負責「上下文補全」與「指代消解」的 AI 代理。
 
 【對話歷史】
 {history_str}
 
-【最新問題】
+【最新提問】
 {question}
 
-【任務】
-如果最新問題包含代名詞（如「這門課」「那個老師」「他」「它」「那邊」等），請替換為對話歷史中對應的具體名詞，輸出完整的改寫句子。
-如果最新問題已經是完整的獨立句子（不需要上下文就能理解），請【照抄原句】。
-只輸出改寫後的句子，不要解釋。"""
+【任務規則】
+1. 分析最新提問：是否包含代名詞（這、那、他、這門課），或是「隱式省略」（例如直接問「期中考呢？」、「那老師是誰？」、「第九週是幾號？」）。
+2. 對照對話歷史：尋找【最接近當下】的討論主題（例如剛剛才提到的課程名稱、教授姓名）。
+3. 補全提問：將省略的主詞、受詞或代名詞替換為明確的實體名稱。
+4. 原封不動：如果最新提問已經非常完整（不需要看歷史就能理解），請【直接照抄原句】，絕對不要畫蛇添足。
+5. 嚴禁對話：你不是聊天機器人，請【只輸出】改寫後的那一句話，絕對不要輸出「改寫如下：」或任何解釋。
+
+請輸出最終改寫的句子："""
 
     try:
         resp = requests.post(
@@ -333,22 +337,29 @@ def rag_pipeline(
 
     # [攔截 2] 學校行事曆 (Academic Calendar)
     if route_result.query_type == "academic_calendar":
-        logger.info("  [dim]📅 偵測到學校行事曆查詢，攔截 RAG 檢索直接查詢 events.json[/dim]")
-        from tools.search_event_tool import search_academic_events
-        academic_events = search_academic_events(question)
-        
-        if academic_events:
-            from llm.llm_calendar import generate_academic_event_answer
-            answer_str = generate_academic_event_answer(question, academic_events)
-            memory.add_user_message(question)
-            memory.add_assistant_message(answer_str)
-            return answer_str
+        # 如果同時帶有課程名稱，代表問的是「某門課的第幾週日期」而非全校行事曆
+        # 此時應走 RAG 搜尋 schedule_table，而非翻 events.json
+        has_course = bool(route_result.metadata_filters.get("course_name_keyword"))
+        if has_course:
+            logger.info("  📅→📚 行事曆查詢帶有課程名稱，改走 RAG 搜尋課程進度表")
+            route_result.query_type = "course_info"
         else:
-            fallback_msg = "🤔 抱歉，我在學校的行事曆上沒有找到與您問題相關的特定行程或節日喔！"
-            logger.info("  [dim]📅 找不到對應學校事件，直接觸發 Fallback 回應[/dim]")
-            memory.add_user_message(question)
-            memory.add_assistant_message(fallback_msg)
-            return fallback_msg
+            logger.info("  [dim]📅 偵測到學校行事曆查詢，攔截 RAG 檢索直接查詢 events.json[/dim]")
+            from tools.search_event_tool import search_academic_events
+            academic_events = search_academic_events(question)
+            
+            if academic_events:
+                from llm.llm_calendar import generate_academic_event_answer
+                answer_str = generate_academic_event_answer(question, academic_events)
+                memory.add_user_message(question)
+                memory.add_assistant_message(answer_str)
+                return answer_str
+            else:
+                fallback_msg = "🤔 抱歉，我在學校的行事曆上沒有找到與您問題相關的特定行程或節日喔！"
+                logger.info("  [dim]📅 找不到對應學校事件，直接觸發 Fallback 回應[/dim]")
+                memory.add_user_message(question)
+                memory.add_assistant_message(fallback_msg)
+                return fallback_msg
 
     # [攔截 3] 缺乏課程特徵的通用查詢 (General fallback)
     core_filters = {k: v for k, v in route_result.metadata_filters.items() if k not in ["semester", "academic_year"]}
@@ -541,6 +552,9 @@ def main():
         nodes, faiss_index, bm25_index = load_and_index()
         from rag.query_router import init_known_registry
         init_known_registry(nodes)
+        # 預載 CKIP 斷詞模型（消除首次查詢的 TensorFlow 冷啟動 ~9 秒）
+        from nlp_utils import get_ws_model
+        get_ws_model()
         console.print(f"[green]✅ 索引載入完成！共 {len(nodes)} 個文件區段[/green]\n")
     except Exception as e:
         console.print(f"[red]❌ 索引載入失敗：{e}[/red]")

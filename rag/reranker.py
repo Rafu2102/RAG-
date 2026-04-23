@@ -150,36 +150,40 @@ def rerank(
     # 依 reranker 分數排序
     chunks.sort(key=lambda c: c.final_score, reverse=True)
 
-    # 【甲乙去重】同課程 + 同區段 + 同老師的多班級 chunk 只保留一個
-    # 優先保留甲班（或無班級標記的），除非使用者明確查詢乙班
-    seen_keys = {}  # key -> chunk
+    # 【去重邏輯修正】同課程 + 同區段 + 同老師的多班級 chunk 只保留一個來源檔案
+    # 允許同一份 source_file 的連續切片 (Sequential Chunks) 並存，防止長課表被腰斬
+    seen_files_for_key = {}  # dedup_key -> 該課程被選中的 source_file
+    deduped = []
     dup_count = 0
     _NON_COURSE_TYPES = ("professor_info", "dept_intro", "career_info", "student_union", "dept_news", "dept_general", "graduation_rules", "policy", "policy_rules")
+    
     for chunk in chunks:
         meta = chunk.node.metadata
-        # 教授/系所資訊用不同的 dedup key（避免全部 collapse 成一個）
         info_type = meta.get("info_type", "")
         if info_type in _NON_COURSE_TYPES:
-            # 針對非課程 Node，每個切片都是獨立的文字塊，加入 node_id 確保不碰撞
-            dedup_key = (info_type, chunk.node.node_id)
-        else:
-            dedup_key = (meta.get("course_name", ""), meta.get("section", ""), meta.get("teacher", ""))
-        cg = meta.get("class_group", "")
+            deduped.append(chunk)
+            continue
+            
+        dedup_key = (meta.get("course_name", ""), meta.get("section", ""), meta.get("teacher", ""))
+        source_file = meta.get("source_file", "")
         
-        if dedup_key in seen_keys:
-            existing_cg = seen_keys[dedup_key].node.metadata.get("class_group", "")
-            # 偏好甲班（甲 or 空）：如果現有的是乙而新的是甲或空，替換
-            if existing_cg == "乙" and cg in ("甲", ""):
-                seen_keys[dedup_key] = chunk
-            dup_count += 1
+        if dedup_key not in seen_files_for_key:
+            # 第一次看到這個組合，直接登記這份檔案為「合法來源」
+            seen_files_for_key[dedup_key] = source_file
+            deduped.append(chunk)
         else:
-            seen_keys[dedup_key] = chunk
-    
-    deduped = list(seen_keys.values())
+            chosen_file = seen_files_for_key[dedup_key]
+            if source_file == chosen_file:
+                # 這是同一份檔案被切出來的「下半段」，絕對不能刪除！
+                deduped.append(chunk)
+            else:
+                # 這是另一份檔案（例如乙班），視為重複班級資料刪除
+                dup_count += 1
+                
     deduped.sort(key=lambda c: c.final_score, reverse=True)
     
     if dup_count > 0:
-        logger.info(f"  🔄 去重：移除 {dup_count} 個重複 chunks（同課程+同區段+同老師，優先保留甲班）")
+        logger.info(f"  🔄 去重：移除 {dup_count} 個重複 chunks（保留高分班級，允許同檔連續切片）")
     
     # ========================================================================
     # 【課程完整覆蓋保證】— 確保每門課至少出現一次

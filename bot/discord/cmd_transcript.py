@@ -17,7 +17,7 @@ import discord  # type: ignore
 from discord import app_commands  # type: ignore
 
 from bot import tree, logger
-from bot.ui_utils import SafeView, safe_respond, safe_defer
+from bot.discord.ui_utils import SafeView, safe_respond, safe_defer
 from tools.transcript_manager import (
     save_transcript, get_transcript,
     query_credit_progress, query_failed_courses, query_gpa,

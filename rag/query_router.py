@@ -603,7 +603,7 @@ def route_and_rewrite(
                 "response_schema": COMBINED_OUTPUT_SCHEMA,
                 "maxOutputTokens": config.GEMINI_FLASH_MAX_TOKENS,
                 "thinkingConfig": {
-                    "thinkingLevel": "medium"
+                    "thinkingLevel": "low"
                 }
             }
         }

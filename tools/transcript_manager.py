@@ -14,10 +14,15 @@ from datetime import datetime, timezone, timedelta
 
 logger = logging.getLogger("discord_bot")
 
-TOKEN_DIR = Path(__file__).parent / "data" / "tokens"
+TOKEN_DIR = Path(__file__).parent / "data" / "discord_tokens"
 
-def _get_user_token_path(discord_id: str) -> Path:
-    return TOKEN_DIR / f"{discord_id}_token.json"
+# ── 雙軌路由：tg_ 前綴 → telegram_tokens/ ──
+_TG_TOKEN_DIR = Path(__file__).parent / "data" / "telegram_tokens"
+
+def _get_user_token_path(user_id: str) -> Path:
+    if user_id.startswith("tg_"):
+        return _TG_TOKEN_DIR / f"{user_id[3:]}_token.json"
+    return TOKEN_DIR / f"{user_id}_token.json"
 
 
 def _load_user_data(discord_id: str) -> dict | None:

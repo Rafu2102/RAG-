@@ -71,9 +71,9 @@ GEMINI_FAST_API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/
 TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "")
 
 # ── Gemini API Timeout 常數（秒）──
-GEMINI_PRO_TIMEOUT = 60.0          # Pro 模型預設 timeout（含 thinking 首 token 延遲）
-GEMINI_FLASH_TIMEOUT = 15.0        # Flash Lite 模型預設 timeout
-GEMINI_OCR_TIMEOUT = 120.0         # OCR 多模態長耗時 timeout（課表/成績單）
+GEMINI_PRO_TIMEOUT = 240.0         # Pro 模型預設 timeout（大資料 + thinking 模式耗時較長）
+GEMINI_FLASH_TIMEOUT = 30.0        # Flash Lite 模型預設 timeout
+GEMINI_OCR_TIMEOUT = 240.0         # OCR 多模態長耗時 timeout（課表/成績單）
 
 # ── Gemini API maxOutputTokens 常數 ──
 GEMINI_PRO_MAX_TOKENS = 8192       # Pro 模型：RAG 主回答、OCR 等長文輸出
@@ -109,9 +109,9 @@ RERANKER_BATCH_SIZE = 32          # [GPU 壓榨] bge-reranker-base ≈1.3GB，8G
 # =============================================================================
 # 📄 Chunking 設定
 # =============================================================================
-# 根據實際資料分析：5/6 區段 ≤512 字元，僅進度表 (avg 826) 需要切分
-CHUNK_SIZE = 512                  # 升級：讓 basic_info/objectives/syllabus/grading/textbooks 100% 不被切分
-CHUNK_OVERLAP = 50                # 增加重疊，確保進度表切分時保持完整的週次上下文
+# 根據實際資料分析：進度表 (avg 826, max ~1200) 若被切分會導致後半段遺失上下文
+CHUNK_SIZE = 1536                 # 升級：擴大 Chunk Size，確保 18 週進度表 100% 裝進同一個 Chunk 裡！
+CHUNK_OVERLAP = 128               # 重疊字元
 
 # =============================================================================
 # 🔍 檢索設定

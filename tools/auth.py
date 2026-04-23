@@ -23,8 +23,17 @@ BASE_DIR = Path(__file__).resolve().parent
 DATA_DIR = BASE_DIR / "data"
 DATA_DIR.mkdir(exist_ok=True)
 CREDS_PATH = DATA_DIR / "credentials.json"
-TOKENS_DIR = DATA_DIR / "tokens"
-TOKENS_DIR.mkdir(exist_ok=True)
+
+# ── 雙軌 Token 路由 ──
+# Discord ID: 純數字 (18碼) → discord_tokens/
+# Telegram ID: "tg_" 前綴    → telegram_tokens/
+DISCORD_TOKENS_DIR = DATA_DIR / "discord_tokens"
+DISCORD_TOKENS_DIR.mkdir(exist_ok=True)
+TELEGRAM_TOKENS_DIR = DATA_DIR / "telegram_tokens"
+TELEGRAM_TOKENS_DIR.mkdir(exist_ok=True)
+
+# 向後相容：舊程式碼若直接引用 TOKENS_DIR，指向 discord 區
+TOKENS_DIR = DISCORD_TOKENS_DIR
 
 
 # === OAuth 授權 ===
@@ -32,9 +41,12 @@ TOKENS_DIR.mkdir(exist_ok=True)
 # 【PKCE 關鍵】快取 Flow 物件，保存 code_verifier
 _pending_flows: dict[str, "Flow"] = {}
 
-def get_user_token_path(discord_id: str) -> Path:
-    """取得特定使用者的 Token 檔案路徑"""
-    return TOKENS_DIR / f"{discord_id}_token.json"
+def get_user_token_path(user_id: str) -> Path:
+    """取得特定使用者的 Token 檔案路徑（自動依 tg_ 前綴路由至 Telegram 區）"""
+    if user_id.startswith("tg_"):
+        real_id = user_id[3:]
+        return TELEGRAM_TOKENS_DIR / f"{real_id}_token.json"
+    return DISCORD_TOKENS_DIR / f"{user_id}_token.json"
 
 def get_auth_url(discord_id: str) -> str:
     """產生給使用者點擊的 Google 授權網址，並快取 Flow 物件以保留 PKCE code_verifier"""
@@ -201,7 +213,7 @@ def get_targeted_users(target_dept: str = None, target_grade: str = None, target
         list[dict]: [{"discord_id": "123", "department": "資工系", "grade": "三", "groups": [...]}, ...]
     """
     targets = []
-    for token_file in TOKENS_DIR.glob("*_token.json"):
+    for token_file in DISCORD_TOKENS_DIR.glob("*_token.json"):
         discord_id = token_file.stem.replace("_token", "")
         try:
             with open(token_file, "r", encoding="utf-8") as f:

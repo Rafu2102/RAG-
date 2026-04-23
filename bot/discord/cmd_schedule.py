@@ -18,7 +18,7 @@ from discord import app_commands  # type: ignore
 from datetime import datetime, timezone, timedelta
 
 from bot import tree, logger
-from bot.ui_utils import SafeView, safe_respond, safe_defer
+from bot.discord.ui_utils import SafeView, safe_respond, safe_defer
 from tools.schedule_manager import (
     save_schedule, get_schedule,
     query_day_schedule, query_free_periods, query_credit_summary,

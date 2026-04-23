@@ -12,7 +12,7 @@ import discord  # type: ignore
 from discord import app_commands  # type: ignore
 
 from bot import tree, logger
-from bot.ui_utils import SafeView, safe_respond
+from bot.discord.ui_utils import SafeView, safe_respond
 from tools.group_manager import add_user_group, get_group_by_code
 
 

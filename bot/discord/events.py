@@ -26,8 +26,9 @@ from rag.query_router import init_known_registry
 from main import rag_pipeline
 from tools.auth import get_user_profile
 from utils import smart_split_message
-from bot.audit import send_audit_dm, send_debug_log
-from bot.cmd_groups import GroupInviteView
+from bot.discord.audit import send_audit_dm, send_debug_log
+from bot.discord.cmd_groups import GroupInviteView
+from bot.discord.ipc_server import start_ipc_server
 
 
 # =========================================================================
@@ -40,6 +41,9 @@ async def on_ready():
     
     # 【持久化按鈕】讓群組邀請按鈕在重啟後依然有效
     client.add_view(GroupInviteView(group_name="__placeholder__"))
+    
+    # 啟動跨平台 IPC 通訊伺服器
+    client.loop.create_task(start_ipc_server())
     
     # 同步斜線指令
     try:
@@ -84,6 +88,14 @@ async def on_ready():
             logger.info("✅ Reranker 模型預載完成")
         except Exception as e:
             logger.warning(f"⚠️ Reranker 預載失敗（首次查詢時會自動重試）：{e}")
+        
+        # 預先載入 CKIP 斷詞模型（消除首次查詢的 TensorFlow + CKIP 冷啟動延遲 ~9 秒）
+        try:
+            from nlp_utils import get_ws_model
+            get_ws_model()
+            logger.info("✅ CKIP 斷詞模型預載完成")
+        except Exception as e:
+            logger.warning(f"⚠️ CKIP 預載失敗（首次查詢時會自動重試）：{e}")
         
         await client.change_presence(activity=discord.Game(name="✅ 已就緒 · 輸入 / 查詢課程"))
         

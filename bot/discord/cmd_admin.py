@@ -24,8 +24,8 @@ from rag.index_manager import load_and_index
 from rag.query_router import init_known_registry
 from tools.auth import get_targeted_users
 from tools.group_manager import create_group, list_all_groups
-from bot.cmd_groups import GroupInviteView
-from bot.audit import send_audit_log
+from bot.discord.cmd_groups import GroupInviteView
+from bot.discord.audit import send_audit_log
 import bot as _bot  # 用於更新 global 狀態
 
 

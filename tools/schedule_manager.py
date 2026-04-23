@@ -34,11 +34,16 @@ PERIOD_TIME_MAP = {
 
 DAY_NAMES = {1: "星期一", 2: "星期二", 3: "星期三", 4: "星期四", 5: "星期五", 6: "星期六", 7: "星期日"}
 
-TOKEN_DIR = Path(__file__).parent / "data" / "tokens"
+TOKEN_DIR = Path(__file__).parent / "data" / "discord_tokens"
+
+# ── 雙軌路由：tg_ 前綴 → telegram_tokens/ ──
+_TG_TOKEN_DIR = Path(__file__).parent / "data" / "telegram_tokens"
 
 
-def _get_user_token_path(discord_id: str) -> Path:
-    return TOKEN_DIR / f"{discord_id}_token.json"
+def _get_user_token_path(user_id: str) -> Path:
+    if user_id.startswith("tg_"):
+        return _TG_TOKEN_DIR / f"{user_id[3:]}_token.json"
+    return TOKEN_DIR / f"{user_id}_token.json"
 
 
 def _load_user_data(discord_id: str) -> dict | None:

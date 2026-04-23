@@ -205,6 +205,71 @@ def _extract_date_from_schedule(chunks: list, keyword: str) -> dict | None:
     
     return None
 
+# === 上課時間字串解析 (使用 Gemini) ===
+def _parse_schedule_string(schedule_str: str) -> list[dict]:
+    if not schedule_str or schedule_str == "?":
+        return []
+        
+    prompt = f"""你是一個精準的時間解析器。
+請分析這堂課的上課時間字串，找出所有的上課時段，並純粹回傳 JSON。
+若該課程一週有多次上課時間（例如：星期一與星期三），請將所有時段各自拆解為物件，放入 schedules 陣列中。
+如果沒有寫上課時間，請回傳空的 schedules 陣列。
+
+上課時間字串：{schedule_str}
+
+## 節次對照表（金門大學）
+第1節 08:10-09:00、第2節 09:10-10:00、第3節 10:10-11:00、第4節 11:10-12:00
+第5節 13:30-14:20、第6節 14:30-15:20、第7節 15:30-16:20、第8節 16:30-17:20
+第N節(晚) 18:30-19:20、第10節 19:25-20:15、第11節 20:20-21:10、第12節 21:15-22:05
+
+請擷取出每一個時段的：
+1. day_of_week: 星期幾 (1=星期一, 2=星期二... 7=星期日)
+2. start_period: 開始節次 (如第5節則為 5，第N節則為 9)
+3. end_period: 結束節次 (如有波浪號如 5~7 則 end 為 7，否則同 start)
+
+ℹ️ 注意：如果看到「第N節」，請將 N 視為第 9 節（晚間第一節）。
+"""
+    schedule_schema = {
+        "type": "OBJECT",
+        "properties": {
+            "schedules": {
+                "type": "ARRAY",
+                "description": "這堂課所有的上課時段列表 (若跨多天則會有多筆)",
+                "items": {
+                    "type": "OBJECT",
+                    "properties": {
+                        "day_of_week": {"type": "INTEGER", "description": "星期幾 (1=星期一, 2=星期二... 7=星期日)"},
+                        "start_period": {"type": "INTEGER", "description": "開始節次 (例如 1~12)"},
+                        "end_period": {"type": "INTEGER", "description": "結束節次 (例如 1~12)"}
+                    },
+                    "required": ["day_of_week", "start_period", "end_period"]
+                }
+            }
+        },
+        "required": ["schedules"]
+    }
+
+    try:
+        payload = {
+            "contents": [{"parts": [{"text": prompt}]}],
+            "generationConfig": {
+                "temperature": 1.0,
+                "maxOutputTokens": config.GEMINI_SHORT_MAX_TOKENS,
+                "responseMimeType": "application/json",
+                "responseSchema": schedule_schema,
+                "thinkingConfig": {"thinkingLevel": "low"}
+            }
+        }
+        response = requests.post(config.GEMINI_FAST_API_URL, json=payload, timeout=config.GEMINI_FLASH_TIMEOUT)
+        response.raise_for_status()
+        
+        text_content = response.json().get("candidates", [{}])[0].get("content", {}).get("parts", [{}])[0].get("text", "").strip()
+        data = json.loads(text_content)
+        return data.get("schedules", [])
+    except Exception as e:
+        logger.warning(f"解析 schedule_str 失敗: {e}")
+        return []
+
 # === Calendar Action Handlers ===
 
 def _handle_remove(discord_id: str, e_name: str, start_dt: str | None, target_date: str | None, intent_type: str = "") -> str:
@@ -346,6 +411,64 @@ def execute_calendar_action(query: str, intent_data: dict, retrieved_chunks: lis
         logger.error(f"❌ 行事曆操作失敗 | discord_id={discord_id} | {e}")
         return f"❌ 行事曆操作時發生錯誤：{str(e)}"
     
+    # === [短路防禦] 課程事件若帶有具體日期，嘗試提取課表時間進行推算 ===
+    if intent_type in ["course_schedule_event", "weekly_course"] and start_dt:
+        logger.info(f"📅 攔截：意圖 {intent_type} 已有明確日期 {start_dt}，準備推算課表精確時間")
+        
+        # 1. 嘗試從 RAG 中找到 basic_info
+        schedule_str = ""
+        if retrieved_chunks:
+            for c in retrieved_chunks:
+                if c.node.metadata.get("section") == "basic_info":
+                    schedule_str = c.node.metadata.get("schedule", "")
+                    break
+        
+        # 2. 如果有找到上課時間字串，解析它
+        if schedule_str and schedule_str != "?":
+            schedules = _parse_schedule_string(schedule_str)
+            if schedules:
+                # 取第一個上課時段進行推算
+                sched = schedules[0]
+                day_of_week = sched.get("day_of_week")
+                start_p = sched.get("start_period")
+                end_p = sched.get("end_period")
+                
+                if day_of_week is not None and start_p is not None and end_p is not None:
+                    from tools.calendar_api import _parse_dt
+                    dt = _parse_dt(start_dt)
+                    
+                    # 計算日期偏移：Python isoweekday() 1=Mon, 7=Sun
+                    days_ahead = day_of_week - dt.isoweekday()
+                    # 如果 days_ahead < 0 (例如起始日為星期日 7，目標為星期三 3)，則為 +3 天 (往後找)
+                    # 如果起始日為星期二 2，目標為星期一 1，則 days_ahead = -1，我們把它推到下週一嗎？
+                    # 因為使用者給的 start_dt 通常是該週的起點 (週日或週一)，所以往後找最合理
+                    if days_ahead < 0:
+                        days_ahead += 7
+                        
+                    exact_date = dt + timedelta(days=days_ahead)
+                    date_str = exact_date.strftime("%Y-%m-%d")
+                    
+                    start_time_str = NQU_PERIOD_START.get(start_p, "08:10")
+                    end_time_str = NQU_PERIOD_END.get(end_p, "09:00")
+                    
+                    # 覆寫 start_dt 和 end_dt 為精確時間！
+                    start_dt = f"{date_str}T{start_time_str}:00"
+                    intent_data["start_dt"] = start_dt
+                    intent_data["end_dt"] = f"{date_str}T{end_time_str}:00"
+                    
+                    # 將事件標題優化
+                    course_name = intent_data.get("course_name", e_name)
+                    if intent_type == "course_schedule_event":
+                        schedule_keyword = intent_data.get("schedule_keyword", "課程活動")
+                        intent_data["event_name"] = f"[{schedule_keyword}] {course_name}"
+                    else:
+                        intent_data["event_name"] = f"[課程] {course_name}"
+                        
+                    logger.info(f"📅 課表推算成功：{start_dt} ~ {intent_data['end_dt']}")
+        
+        # 不論有沒有推算成功，都短路降級為 custom_event (若沒推算成功，就會用原本的 00:00 全天事件保底)
+        intent_type = "custom_event"
+    
     # === [流程 1] 課程教學進度表事件（如期中考、期末考）===
     if intent_type == "course_schedule_event":
         course_name = intent_data.get("course_name", e_name)
@@ -480,7 +603,6 @@ def execute_calendar_action(query: str, intent_data: dict, retrieved_chunks: lis
     # [流程 C] 批次匯入個人課表
     elif intent_type == "import_schedule":
         from tools.schedule_manager import get_schedule, PERIOD_TIME_MAP
-        import json
         
         schedule = get_schedule(discord_id)
         if not schedule or "courses" not in schedule:
@@ -604,80 +726,12 @@ def execute_calendar_action(query: str, intent_data: dict, retrieved_chunks: lis
     if not schedule_str or schedule_str == "?":
         return f"😅 抱歉，我找到了【{course_name}】，但它的資訊裡沒有寫明上課時間，我無法幫你加到行事曆喔。"
         
-    # 使用 3B/8B LLM 搭配 Structured Output 安全提取節次
-    prompt = f"""你是一個精準的時間解析器。
-請分析這堂課的上課時間字串，找出所有的上課時段，並純粹回傳 JSON。
-若該課程一週有多次上課時間（例如：星期一與星期三），請將所有時段各自拆解為物件，放入 schedules 陣列中。
-如果沒有寫上課時間，請回傳空的 schedules 陣列。
-
-上課時間字串：{schedule_str}
-
-## 節次對照表（金門大學）
-第1節 08:10-09:00、第2節 09:10-10:00、第3節 10:10-11:00、第4節 11:10-12:00
-第5節 13:30-14:20、第6節 14:30-15:20、第7節 15:30-16:20、第8節 16:30-17:20
-第N節(晚) 18:30-19:20、第10節 19:25-20:15、第11節 20:20-21:10、第12節 21:15-22:05
-
-請擷取出每一個時段的：
-1. day_of_week: 星期幾 (1=星期一, 2=星期二... 7=星期日)
-2. start_period: 開始節次 (如第5節則為 5，第N節則為 9)
-3. end_period: 結束節次 (如有波浪號如 5~7 則 end 為 7，否則同 start)
-
-ℹ️ 注意：如果看到「第N節」，請將 N 視為第 9 節（晚間第一節）。
-"""
-
+    # 使用 helper 函數解析上課時間
     logger.info(f"📅 呼叫 Gemini 解析行事曆時間: {schedule_str}")
+    schedules = _parse_schedule_string(schedule_str)
     
-    schedule_schema = {
-        "type": "OBJECT",
-        "properties": {
-            "schedules": {
-                "type": "ARRAY",
-                "description": "這堂課所有的上課時段列表 (若跨多天則會有多筆)",
-                "items": {
-                    "type": "OBJECT",
-                    "properties": {
-                        "day_of_week": {
-                            "type": "INTEGER",
-                            "description": "星期幾 (1=星期一, 2=星期二... 7=星期日)"
-                        },
-                        "start_period": {
-                            "type": "INTEGER",
-                            "description": "開始節次 (例如 1~12)"
-                        },
-                        "end_period": {
-                            "type": "INTEGER",
-                            "description": "結束節次 (例如 1~12)"
-                        }
-                    },
-                    "required": ["day_of_week", "start_period", "end_period"]
-                }
-            }
-        },
-        "required": ["schedules"]
-    }
-
-    try:
-        payload = {
-            "contents": [{"parts": [{"text": prompt}]}],
-            "generationConfig": {
-                "temperature": 1.0,
-                "maxOutputTokens": config.GEMINI_SHORT_MAX_TOKENS,
-                "responseMimeType": "application/json",
-                "responseSchema": schedule_schema,
-                "thinkingConfig": {
-                    "thinkingLevel": "low"
-                }
-            }
-        }
-        response = requests.post(config.GEMINI_FAST_API_URL, json=payload, timeout=config.GEMINI_FLASH_TIMEOUT)
-        response.raise_for_status()
-        
-        text_content = response.json()["candidates"][0]["content"]["parts"][0]["text"].strip()
-        data = json.loads(text_content)
-        
-        schedules = data.get("schedules", [])
-        if not schedules:
-             return f"😅 解析失敗：【{course_name}】雖然有上課時間字串 ({schedule_str})，但我無法辨識其內容，無法為您加到行事曆。"
+    if not schedules:
+        return f"😅 解析失敗：【{course_name}】雖然有上課時間字串 ({schedule_str})，但我無法辨識其內容，無法為您加到行事曆。"
              
         event_title = f"[課程] {course_name} ({teacher})"
         
