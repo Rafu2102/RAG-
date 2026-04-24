@@ -30,7 +30,9 @@
 
 | 功能 | 說明 |
 |------|------|
+| 🤖 **雙軌平台架構** | 核心邏輯解耦！完美支援 **Discord 機器人**與 **Telegram 機器人**並行運作，Telegram 實裝 Inline Keyboard 互動式防呆選單。 |
 | 🧠 **Agentic 雙腦架構** | **Gemini 3.1 Pro** 負責極深度的長文本分析與回答，**Flash Lite** 負責快決策、5 步 CoT 路由規劃、意圖判斷與防禦攔截。 |
+| 🎓 **個人化學分感知** | 動態攔截成績單！詢問「我差幾學分畢業」時，系統會自動在底層注入您的**歷年成績進度 + RAG 畢業法規**，給出專屬您的量身選課建議。 |
 | 🔮 **5-Step CoT 路由** | 產生搜尋策略前，強制五階段自我詰問（意圖判定 → 條件盤點 → 跨域特判 → 防幻覺警告 → Step-Back 擴充），消滅搜尋誤判。 |
 | 🔀 **全景 Context Backfill** | 突破 RAG Top-K 限制！涉及系所級別查詢時，繞過向量檢索，將高達 225KB+ 的全系教授簡歷、實驗室與設備地圖一次性「硬派注入」主大腦。 |
 | 🌟 **Native Semantic Routing**| 棄用死板關鍵字，交由 LLM 透過語意原生輸出 `is_career_planning` 布林值，實現真正的智慧「跨域課程」探索解鎖。 |
@@ -45,13 +47,14 @@
 | 🔗 **One-shot Router+Rewrite** | 合併路由分類與查詢改寫為**單次 LLM 呼叫**，省去重複載入開銷 |
 | 📅 **Google Calendar Agent** | 完整 CRUD 行事曆代理 — 支援新增/刪除/列出/修改，含週期排課、自訂事件、學校行事曆、時間定位搜尋 |
 | 📸 **Gemini Vision 課表萃取** | 支援學生直接將「選課系統截圖」發送給機器人，由 Gemini 視覺模型一秒解析複雜的 NQU 節次、授課教師與教室，並且自動轉為 JSON 實體直接循環排入 Google 日曆。 |
-| 🛡️ **安全行事曆防呆** | 賦予 Agent 行事曆**移除權限**，並透過嚴格的所有權 (Ownership) `source` 標籤比對，確保**絕對不誤刪**使用者私人事件 |
+| 🛡️ **安全行事曆防呆** | 賦予 Agent 行事曆**移除權限**，並透過嚴格的所有權 (Ownership) 標籤比對。另實作 UI `_clear_all_user_states` 防護網與資料庫**覆蓋警告**，確保**絕對不誤刪**使用者私人事件或手滑覆蓋資料。 |
 | 🤖 **Agentic Bypass 高速通道** | 偵測為閒聊、刪除事件、或自訂行程時，直接從主流程**短路攔截 (Bypass)**，省去神經網路檢索運算，回應速度小於 5 秒 |
+| 📡 **跨平台 IPC 審計系統** | 透過 `bot/discord/ipc_server.py` 進行跨處理程序通訊，統一收集來自 Telegram、CLI 的對話紀錄並發送到 Discord `#bot_modify` 頻道進行中央監控。 |
 | 🧠 **VRAM 死亡交叉防護** | 8B `keep_alive="5m"` 閒置 5 分鐘後自動卸載 + 3B 輕量任務 + Pipeline 後 `gc.collect()` + `torch.cuda.empty_cache()` |
 | 📜 **統一格式輸出** | 單一課程列表格式，杜絕 LLM 重複輸出和幻覺課程 |
 | 🧩 **智慧區段感知 Chunking** | 短區段（≤512 字）保持完整不切；僅超長區段啟動 SentenceSplitter |
 | ⚡ **GPU 加速 (CUDA)** | 自動偵測 GPU (PyTorch)，Reranker batch=32 壓榨 8GB VRAM |
-| 🇹🇼 **繁中在地化與同義詞拓撲** | Regex 解碼器 + 口語翻譯蒟蒻 (禮拜二→星期二，加退選→停修)，另於 System Prompt 動態硬性注入絕對台灣時區與星期，使 相對時間 (如:下週二) 推算 100% 精準 |
+| 🇹🇼 **繁中在地化與同義詞拓撲** | Regex 解碼器 + 口語翻譯蒟蒻 (禮拜二→星期二，加退選→停修)，另於 System Prompt 動態硬性注入絕對台灣時區與星期，使 相對時間 推算 100% 精準 |
 | 🔒 **必選修智慧過濾** | 自動偵測疑問句（「是必修嗎？」），避免誤設篩選條件 |
 
 ---
@@ -60,9 +63,10 @@
 
 在最新世代的架構中，本系統從傳統硬編碼 (Hard-coded) 的 RAG 過渡到了**具有能動性 (Agentic) 的 LLM 驅動系統**：
 
-1. **雙重 Few-Shot 陷阱防護**：賦予 LLM 解析「實體豁免陷阱（單查教授但不限科系）」與「跨域探索陷阱（商管學生想學寫程式）」的精準判斷力，自動決定何時應收緊過濾器，何時應放寬到全校搜尋。
-2. **終極設備與師資注入 (Facility & Professor Injection)**：打破傳統 RAG「相關度低就被拋棄」的缺點。對教授的研究室、專業等廣泛查詢，系統會直接召喚系所底層的 `facility_info`（教學設備與空間文件）連同所有教授的履歷，全數傾倒入百萬 Token 級別的語境中盲測分析。
-3. **消除 Python-Side 判斷瓶頸**：大幅刪減 Python 端的 `any(kw in ...)` 單詞命中漏洞，將所有決策權利與護城河驗證上繳至 Gemini 核心，達到「真正的降維打擊」。
+1. **極致的上下文融合 (Deep Personalization Injection)**：當使用者詢問畢業門檻時，系統不再只是回傳死板的法規，而是自動攔截學生的「必修/選修進度」及「歷年成績單」，將其與 RAG 檢索到的規章無縫熔接，讓 Gemini 動態給出專屬的學分建議。
+2. **雙重 Few-Shot 陷阱防護**：賦予 LLM 解析「實體豁免陷阱（單查教授但不限科系）」與「跨域探索陷阱（商管學生想學寫程式）」的精準判斷力，自動決定何時應收緊過濾器，何時應放寬到全校搜尋。
+3. **終極設備與師資注入 (Facility & Professor Injection)**：打破傳統 RAG「相關度低就被拋棄」的缺點。對教授的研究室、專業等廣泛查詢，系統會直接召喚系所底層的 `facility_info`（教學設備與空間文件）連同所有教授的履歷，全數傾倒入百萬 Token 級別的語境中盲測分析。
+4. **消除 Python-Side 判斷瓶頸**：大幅刪減 Python 端的 `any(kw in ...)` 單詞命中漏洞，將所有決策權利與護城河驗證上繳至 Gemini 核心，達到「真正的降維打擊」。
 
 ---
 
@@ -72,16 +76,17 @@
 
 1. **記憶體防護 (Memory Leak Prevention)**：實作手寫 `TTLMemoryCache` (LRU Cache)，頻道在預定時間無活躍後會自動釋放對話記憶體，解決無限增長的 RAM 問題。
 2. **併發控制防呆 (Race Condition Fixes)**：GPU Semaphore 等待佇列引入嚴謹的 `try...finally` 搭配 Atomic 自增機制，確保排隊數字永不同步錯誤。
-3. **安全限速 (Rate Limiting)**：為 `/ask`, `/add_calendar` 等指令加上了 `@app_commands.checks.cooldown(1, 10)`，限制每 10 秒只能送出一次請求，防禦洗版與 DoS。
-4. **Prompt Injection 防範**：於字串層面轉義 XML 標籤 `< >`，並將使用者輸入框定於 `<user_question>` 標籤內，強制 LLM 忽略越權指令。
-5. **例外處理遮罩 (Exception Masking)**：阻擋 Raw Stack Trace 噴出至 Discord 頻道，將內部 API 與資料庫報錯轉化為友善的「系統忙碌」提示，詳細錯誤僅存於伺服器 Log。
+3. **UI 覆蓋防護與狀態淨化 (UI State Protection)**：在 Telegram / Discord 操作介面實作 `_clear_all_user_states` 防護網解決狀態漏損，並在重新綁定成績單、課表或行事曆前強制彈出**覆蓋警告**，杜絕手滑誤刪。
+4. **安全限速 (Rate Limiting)**：為 `/ask`, `/add_calendar` 等指令加上了 `@app_commands.checks.cooldown(1, 10)`，限制每 10 秒只能送出一次請求，防禦洗版與 DoS。
+5. **Prompt Injection 防範**：於字串層面轉義 XML 標籤 `< >`，並將使用者輸入框定於 `<user_question>` 標籤內，強制 LLM 忽略越權指令。
+6. **跨平台 IPC 稽核防護 (Cross-Process Audit)**：無論是從 CLI、Discord 還是 Telegram 進來的查詢，系統都會透過 IPC Server (Port 50505) 將所有互動記錄與除錯資訊發送至管理員的 `#bot_modify` 頻道。
 
 ---
 
 ## 🏗️ 系統架構
 
 ```text
-使用者提問
+使用者提問 (TG / Discord / CLI)
     │
     ▼
 ┌───────────────────────────────┐
@@ -113,7 +118,7 @@
 ┌─────────────────────────┐   │
 │  Step 3: Intent Inject  │   │
 │  & Context Backfill     │   │
-│  · 偵測教授/系所大哉問意圖│   │
+│  · 動態注入歷年成績與學分 │   │
 │  · 掛載 225KB+ 教學設備地圖│   │
 │    與全系師資履歷入候選池  │   │
 └──────────┬──────────────┘   │
@@ -142,15 +147,15 @@
 
 | 層級 | 技術 | 說明 |
 |------|------|------|
-| **生成大腦** | **Gemini 3.1 Pro** | 全新升級主核心，負責複雜課程對答推理、225KB+ Context Backfill，以及 **Vision 高精度圖像解構** |
+| **生成大腦** | **Gemini 3.1 Pro** | 全新升級主核心，負責複雜課程對答推理、225KB+ Context Backfill、個人成績深度解析，以及 **Vision 高精度圖像解構** |
 | **路由小腦** | **Gemini Flash Lite** | One-shot CoT 分類、意圖解構、原生職涯規劃偵測與 Schema 強制輸出 |
-| **自動化代理** | Google Calendar API | 完整 CRUD、專武級 NQU N-Type (夜間部A/B/C) 時間定位、所有權防呆機制 |
+| **自動化代理** | Google Calendar API | 完整 CRUD、專武級 NQU N-Type 時間定位、Trigram 模糊匹配演算法、所有權防呆機制 |
 | **Embedding** | Gemini Embedding 2 Preview (3072 維) | 全面升級雲端 Embedding，Matryoshka 架構支援 128~3072 維度，batchEmbedContents 批次處理，內建 Rate Limiter (3000 RPM / 1M TPM) |
 | **Reranker** | BAAI/bge-reranker-base | Cross-Encoder，batch=32，推理後 VRAM GC + **甲乙班去重硬偏好** |
 | **Vector Store** | FAISS (IndexFlatIP) | 餘弦相似度 (Cosine Similarity) 快速過濾 |
 | **Keyword Search** | BM25Okapi + CKIP Tagger | 深度學習繁中分詞，領域專有名詞保護 (強制教師斷詞) |
-| **防禦機制** | Agentic Bypass / TTL Cache / Cooldowns | 低延遲短路攔截 + 防記憶體流失 + 防洗版速率限制 |
-| **介面** | Rich CLI / Discord.py | 終端機除錯介面 + 非同步 Discord 機器人（Telegram Bot 開發中） |
+| **防禦機制** | Agentic Bypass / UI State / Cooldowns | 低延遲短路攔截 + 互動式 UI 狀態淨化防漏損 + 防洗版速率限制 |
+| **介面** | Discord.py / Python-Telegram-Bot | 雙平台獨立運作，支援 Discord Slash 指令與 Telegram Inline Keyboard 互動式選單 |
 
 ---
 
@@ -288,7 +293,15 @@ curl http://localhost:11434/api/generate -d '{"model": "llama3.2:latest", "promp
 
 ## 🚀 使用方法
 
-### 方式一：啟動終端機互動介面 (本地預覽測試)
+### 方式一：啟動三合一完整服務 (推薦)
+
+```bash
+cd "d:\AI HYBRID"
+# 將同時啟動 Discord、Telegram 與 Web API 伺服器
+python run_all.py
+```
+
+### 方式二：啟動終端機互動介面 (本地預覽測試)
 
 ```bash
 cd "d:\AI HYBRID"
@@ -302,15 +315,26 @@ python main.py
 | `/clear` | 清除對話歷史 |
 | `/debug` | 切換 Debug 模式（顯示詳細檢索資訊） |
 
-### 方式二：啟動 Discord 機器人 (對外服務)
+### 方式三：單獨啟動 Discord / Telegram
 
 ```bash
 cd "d:\AI HYBRID"
-# 請確保 .env 檔案中已填寫正確的 DISCORD_BOT_TOKEN
+# 僅啟動 Discord
 python discord_bot.py
+
+# 僅啟動 Telegram
+python telegram_bot.py
 ```
 
 機器人啟動後支援以下互動方式：
+
+### 📱 Telegram 操作介面 (NEW)
+
+Telegram 版本全面支援豐富的互動選單，請向機器人發送 `/start` 叫出主選單：
+- 支援一鍵綁定 Google 行事曆、上傳課表圖片、上傳成績單 PDF。
+- 內建**覆蓋防護機制**，誤觸按鈕不會覆蓋原有資料，並實作狀態淨化防漏損。
+
+### 🎮 Discord 操作介面
 
 | 類型 | 操作 |
 |------|------|
@@ -372,22 +396,36 @@ python discord_bot.py
 
 ---
 
-### `bot/` — Discord Bot 模組化架構
+### `bot/discord/` — Discord 專屬模組
 
-機器人被拆分為 **10 個獨立模組**，`discord_bot.py` 僅作為 32 行的啟動入口。
+Discord 機器人被拆分為多個獨立模組，核心啟動點位於專案根目錄的 `discord_bot.py`。
 
 | 模組 | 職責 |
 |------|------|
-| `bot/__init__.py` | 共用 client、tree、全域狀態、科系對照表、GPU 佇列 |
-| `bot/audit.py` | 監控審計 Log → 伺服器 `#bot_modify` 頻道 |
-| `bot/cmd_identity.py` | OAuth 身分註冊流程 UI + `/identity_login` |
-| `bot/cmd_admin.py` | `/rebuild`、`/clear`、`/admin_broadcast`、`/admin_dm`、`/admin_invite`、`/admin_invite_code` |
-| `bot/cmd_groups.py` | 群組邀請 View (接受/拒絕按鈕) + `/join_group` |
-| `bot/cmd_ask.py` | `/ask`、`/add_calendar`、`/dcard_search` |
-| `bot/cmd_schedule.py` | 課表指令 (`/upload_schedule`、`/my_schedule`、`/my_free`、`/my_credits`) |
-| `bot/cmd_transcript.py` | 成績單與畢業進度指令 (`/upload_transcript`、`/my_gpa`、`/my_failed`) |
-| `bot/ui_utils.py` | Discord UI 安全基底元件（SafeView、safe_respond、重複點擊防護、900s timeout） |
-| `bot/events.py` | `on_ready`（索引載入+指令同步）、`on_message`（@tag/!ask/DM 問答+審計） |
+| `bot/discord/audit.py` | 監控審計 Log → 伺服器 `#bot_modify` 頻道 |
+| `bot/discord/cmd_identity.py` | OAuth 身分註冊流程 UI + `/identity_login` |
+| `bot/discord/cmd_admin.py` | `/rebuild`、`/clear`、`/admin_broadcast` 等管理員指令 |
+| `bot/discord/cmd_groups.py` | 群組邀請 View (接受/拒絕按鈕) + `/join_group` |
+| `bot/discord/cmd_ask.py` | `/ask`、`/add_calendar`、`/dcard_search` |
+| `bot/discord/cmd_schedule.py` | 課表指令 (`/upload_schedule`、`/my_schedule` 等) |
+| `bot/discord/cmd_transcript.py` | 成績單與畢業進度指令 (`/upload_transcript`、`/my_gpa` 等) |
+| `bot/discord/ui_utils.py` | Discord UI 安全基底元件（SafeView、重複點擊防護） |
+| `bot/discord/events.py` | `on_ready`（載入+同步）、`on_message`（問答+審計） |
+| `bot/discord/ipc_server.py` | IPC Server，負責接收 Telegram 端傳來的稽核日誌 |
+
+---
+
+### `bot/telegram/` — Telegram 專屬模組 (NEW)
+
+Telegram 專屬的模組化架構，提供流暢的 Inline Keyboard 體驗，啟動點位於根目錄 `telegram_bot.py`：
+
+| 模組 | 職責 |
+|------|------|
+| `tg_ui_menus.py` | 負責所有 Inline Keyboard 互動選單，實裝 `_clear_all_user_states` 防護與覆蓋警告。 |
+| `tg_events.py` | 文字訊息攔截、照片解析（Gemini Vision 聯動）與檔案上傳處理。 |
+| `tg_audit.py` | 負責將使用者的操作日誌透過 IPC (Socket) 送往 Discord。 |
+| `tg_cmd_schedule.py`| 處理課表查詢、空堂查詢等相關邏輯。 |
+| `tg_cmd_transcript.py`| 處理歷年成績單、學分進度查詢相關邏輯。 |
 
 ---
 
@@ -744,17 +782,26 @@ d:\AI HYBRID\
 ├── .env                        # 🔒 實際環境變數（.gitignore 排除，不會上傳）
 ├── .gitignore                  # Git 忽略規則（保護敏感檔案）
 │
-├── bot/                        # 🤖 Discord Bot 模組化架構
-│   ├── __init__.py             # 共用 client、tree、全域狀態、科系對照表
-│   ├── audit.py                # 監控審計 Log → #bot_modify 頻道
-│   ├── cmd_identity.py         # OAuth 身分註冊 + /identity_login
-│   ├── cmd_admin.py            # /rebuild, /clear, /admin_broadcast, /admin_dm, /admin_invite*
-│   ├── cmd_groups.py           # GroupInviteView + /join_group
-│   ├── cmd_ask.py              # /ask, /add_calendar, /dcard_search
-│   ├── cmd_schedule.py         # 課表指令 (/upload_schedule, /my_schedule...)
-│   ├── cmd_transcript.py       # 成績單與畢業進度指令 (/upload_transcript, /my_gpa...)
-│   ├── ui_utils.py             # Discord UI 安全基底元件 (SafeView, safe_respond)
-│   └── events.py               # on_ready (索引載入+同步) + on_message (問答+審計)
+├── bot/                        # 🤖 機器人模組化架構
+│   ├── __init__.py             # 共用全域狀態與對照表
+│   ├── discord/                # 🎮 Discord 專屬模組
+│   │   ├── audit.py            # 監控審計 Log → #bot_modify 頻道
+│   │   ├── cmd_identity.py     # OAuth 身分註冊 + /identity_login
+│   │   ├── cmd_admin.py        # /rebuild, /clear, /admin_broadcast 等
+│   │   ├── cmd_groups.py       # GroupInviteView + /join_group
+│   │   ├── cmd_ask.py          # /ask, /add_calendar, /dcard_search
+│   │   ├── cmd_schedule.py     # 課表指令 (/upload_schedule, /my_schedule...)
+│   │   ├── cmd_transcript.py   # 成績單與畢業進度指令
+│   │   ├── ui_utils.py         # Discord UI 安全基底元件
+│   │   ├── events.py           # on_ready + on_message 事件
+│   │   └── ipc_server.py       # IPC Server (接收 Telegram 日誌)
+│   └── telegram/               # 📱 Telegram 專屬模組
+│       ├── tg_main.py          # TG 啟動入口與路由
+│       ├── tg_ui_menus.py      # Inline Keyboard 選單與防護網
+│       ├── tg_events.py        # 訊息處理與相片辨識
+│       ├── tg_audit.py         # 將日誌透過 IPC 傳送給 Discord
+│       ├── tg_cmd_schedule.py  # 課表相關邏輯
+│       └── tg_cmd_transcript.py# 成績單與學分相關邏輯
 │
 ├── rag/                        # 🔍 Agentic 檢索增強生成核心
 │   ├── data_loader.py          # 課程/師資 TXT 解析 + Chunking + Gemini Embedding

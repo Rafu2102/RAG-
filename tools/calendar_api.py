@@ -32,23 +32,47 @@ def _title_matches_keyword(ev_title: str, keyword: str) -> bool:
     """
     if keyword == "*":
         return True
+        
+    def _norm(s: str) -> str:
+        return s.lower().replace("週", "周").replace("台", "臺")
+
     title_clean = ev_title
     for prefix in _TITLE_PREFIXES:
         title_clean = title_clean.replace(prefix, "").strip()
-    kw_lower = keyword.lower()
+        
+    kw_norm = _norm(keyword)
+    title_norm = _norm(title_clean)
+    ev_norm = _norm(ev_title)
     
-    if kw_lower in title_clean.lower() or kw_lower in ev_title.lower():
+    if kw_norm in title_norm or kw_norm in ev_norm:
         return True
         
     # 如果關鍵字包含「與、跟、和、、」等連接詞，拆解並允許部分匹配
     import re
-    parts = re.split(r'跟|與|和|及|、|,|\s+', kw_lower)
+    parts = re.split(r'跟|與|和|及|、|,|\s+', kw_norm)
     parts = [p.strip() for p in parts if len(p.strip()) >= 2] # 關鍵字至少需 2 字防誤刪
     if parts:
         for p in parts:
-            if p in title_clean.lower() or p in ev_title.lower():
+            if p in title_norm or p in ev_norm:
                 return True
                 
+    # 處理前後綴顛倒或無空白連接的情境 (例如「互動式網頁期中考」配對「[期中考] 互動式網頁程式設計」)
+    ev_clean = ev_norm.replace("[", "").replace("]", "")
+    if len(kw_norm) >= 4 and set(kw_norm).issubset(set(ev_clean)):
+        # 確保字元不是隨機散落，要求至少有連續 3 個字的特徵片段存在
+        if any(kw_norm[i:i+3] in ev_clean for i in range(len(kw_norm)-2)):
+            return True
+
+    # 處理「第九周進度」匹配「第九週課程進度」的情境
+    # 允許關鍵字的字元之間有最多 3 個其他字元（例如漏打「課程」）
+    if len(kw_norm) >= 4:
+        pattern = ".{0,3}".join([re.escape(c) for c in kw_norm])
+        try:
+            if re.search(pattern, title_norm) or re.search(pattern, ev_norm):
+                return True
+        except Exception:
+            pass
+
     return False
 
 
@@ -334,11 +358,23 @@ def list_calendar_events(discord_id: str, days: int = 7, calendar_id: str = "pri
                 "htmlLink": ev.get("htmlLink", "")
             })
         
-        logger.info(f"📅 行事曆讀取 | ID: {discord_id} | 未來 {days} 天 | 共 {len(events)} 筆事件")
+        # 根據參數動態決定描述字串
+        if time_min_str and time_max_str:
+            t1 = time_min_str[:10]
+            t2 = time_max_str[:10]
+            desc = f"{t1} 到 {t2}"
+        elif target_date and str(target_date).lower() not in ("null", "none"):
+            desc = f"{str(target_date)[:10]} 當天"
+        elif days < 0:
+            desc = f"過去 {abs(days)} 天內"
+        else:
+            desc = f"未來 {days} 天內"
+            
+        logger.info(f"📅 行事曆讀取 | ID: {discord_id} | {desc} | 共 {len(events)} 筆事件")
         return {
             "status": "success",
             "events": events,
-            "message": f"找到 {len(events)} 筆未來 {days} 天內的行事曆事件"
+            "message": f"找到 {len(events)} 筆 {desc} 的行事曆事件"
         }
     except Exception as e:
         logger.error(f"❌ 行事曆讀取錯誤 | ID: {discord_id} | {e}")

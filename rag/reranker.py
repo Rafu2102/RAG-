@@ -39,7 +39,7 @@ def get_reranker() -> CrossEncoder:
     """
     global _reranker_model
     if _reranker_model is None:
-        # GPU 偵測（防禦 CUDA 初始化失敗 — Ollama 佔用 GPU 時可能發生）
+        # GPU 偵測（防禦 CUDA 初始化失敗 — 其他程序佔用 GPU 時可能發生）
         device = "cpu"
         if torch.cuda.is_available():
             try:

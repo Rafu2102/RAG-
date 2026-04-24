@@ -3,7 +3,7 @@
 retriever.py — Hybrid Retriever 模組
 ======================================
 負責：
-1. Vector Search（FAISS + Ollama embedding）
+1. Vector Search（FAISS + Gemini Embedding API）
 2. BM25 Keyword Search（jieba 分詞）
 3. Metadata Filtering（department, grade, course_type, teacher, topic）
 4. Hybrid Fusion 分數計算：final_score = α*vector + β*BM25 + γ*metadata
@@ -240,13 +240,13 @@ def vector_search(
 
 
 def vector_search_with_embedding(
-    query_embedding: list,  # Ollama API 回傳的是 list[float]，不是 np.ndarray
+    query_embedding: list,  # Gemini Embedding API 回傳的是 list[float]
     faiss_index: faiss.IndexFlatIP,
     nodes: list[TextNode],
     top_k: int = None,
 ) -> list[RetrievedChunk]:
     """
-    使用已計算好的 embedding 進行 FAISS 搜尋（避免重複呼叫 Ollama Embed API）。
+    使用已計算好的 embedding 進行 FAISS 搜尋（避免重複呼叫 Embedding API）。
     配合 embed_queries_parallel 使用，實現真正的並行搜尋。
     """
     if top_k is None:

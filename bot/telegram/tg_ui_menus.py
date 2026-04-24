@@ -68,6 +68,17 @@ def _get_user_full_status(tg_id: str) -> dict:
     }
 
 
+def _clear_all_user_states(context: ContextTypes.DEFAULT_TYPE):
+    """清除所有輸入狀態，避免回到主頁後仍攔截對話"""
+    keys = [
+        "awaiting_upload", "awaiting_calendar_url", "awaiting_profile_info",
+        "awaiting_search", "temp_dept", "temp_grade", "temp_class_group",
+        "pending_schedule", "pending_transcript"
+    ]
+    for k in keys:
+        context.user_data.pop(k, None)
+
+
 def _build_dashboard_text(user_name: str, status: dict) -> str:
     """建構主控台狀態卡片（手機友好寬度）"""
     if not status["registered"]:
@@ -187,6 +198,7 @@ async def tg_button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE)
 
     # ── 返回主控台 ──
     if data == "menu_main":
+        _clear_all_user_states(context)
         await tg_start_command(update, context)
 
     # ── 科系設定：選擇學院 ──
@@ -310,30 +322,45 @@ async def tg_button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE)
 
     # ── 上傳課表 ──
     elif data == "menu_upload_schedule":
-        await query.edit_message_text(
-            "📅 上傳課表\n"
-            "━━━━━━━━━━━━━━\n\n"
-            "請傳送以下任一格式：\n"
-            "📷 課表截圖（PNG / JPG）→ AI 自動辨識\n"
-            "📄 課表 JSON 檔案 → 直接匯入\n\n"
-            "💡 截圖請從選課系統擷取完整的課表表格",
-            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ 取消 / 返回主頁", callback_data="menu_main")]])
-        )
-        context.user_data["awaiting_upload"] = "schedule"
+        status = _get_user_full_status(tg_id)
+        if status.get("has_schedule"):
+            text = (
+                "⚠️ 您已經上傳過課表了\n"
+                "━━━━━━━━━━━━━━\n\n"
+                "如果您上傳新的課表，原本的課程紀錄將會被覆蓋。\n"
+                "請問要繼續重新上傳嗎？"
+            )
+            keyboard = [
+                [InlineKeyboardButton("✅ 確認重新上傳", callback_data="force_upload_schedule")],
+                [InlineKeyboardButton("⬅️ 取消 / 返回主頁", callback_data="menu_main")],
+            ]
+            await query.edit_message_text(text, reply_markup=InlineKeyboardMarkup(keyboard))
+        else:
+            await _prompt_upload_schedule(query, context)
+
+    elif data == "force_upload_schedule":
+        await _prompt_upload_schedule(query, context)
 
     # ── 上傳成績單 ──
     elif data == "menu_upload_transcript":
-        await query.edit_message_text(
-            "📊 上傳成績單\n"
-            "━━━━━━━━━━━━━━\n\n"
-            "請傳送以下任一格式：\n"
-            "📄 成績單 PDF → AI 自動辨識\n"
-            "📷 成績單截圖（PNG / JPG）\n"
-            "📄 成績單 JSON 檔案 → 直接匯入\n\n"
-            "💡 請上傳「歷年成績表」PDF",
-            reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ 取消 / 返回主頁", callback_data="menu_main")]])
-        )
-        context.user_data["awaiting_upload"] = "transcript"
+        status = _get_user_full_status(tg_id)
+        if status.get("has_transcript"):
+            text = (
+                "⚠️ 您已經上傳過成績單了\n"
+                "━━━━━━━━━━━━━━\n\n"
+                "如果您上傳新的成績單，原本的學分紀錄將會被更新或覆蓋。\n"
+                "請問要繼續重新上傳嗎？"
+            )
+            keyboard = [
+                [InlineKeyboardButton("✅ 確認重新上傳", callback_data="force_upload_transcript")],
+                [InlineKeyboardButton("⬅️ 取消 / 返回主頁", callback_data="menu_main")],
+            ]
+            await query.edit_message_text(text, reply_markup=InlineKeyboardMarkup(keyboard))
+        else:
+            await _prompt_upload_transcript(query, context)
+
+    elif data == "force_upload_transcript":
+        await _prompt_upload_transcript(query, context)
 
     # ── 查詢指令路由 ──
     elif data.startswith("qry_"):
@@ -382,33 +409,24 @@ async def tg_button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE)
 
     # ── Google Calendar 綁定 ──
     elif data == "menu_calendar":
-        from tools.auth import get_auth_url
-        try:
-            auth_url = get_auth_url(tg_id)
+        status = _get_user_full_status(tg_id)
+        if status.get("has_credentials"):
             text = (
-                "📆 綁定 Google 行事曆\n"
+                "⚠️ 您已經綁定過行事曆了\n"
                 "━━━━━━━━━━━━━━\n\n"
-                "➀ 點下方按鈕登入 Google\n"
-                "➁ 完成授權後複製網址\n"
-                "➂ 貼回對話即完成！\n\n"
-                "💡 網址開頭像這樣：\n"
-                "http://localhost/?code=..."
+                "目前 AI 已具備讀寫您 Google 行事曆的權限。\n"
+                "重新綁定將會重新取得授權，請問要繼續嗎？"
             )
             keyboard = [
-                [InlineKeyboardButton("🔗 點我登入 Google", url=auth_url)],
-                [InlineKeyboardButton("⬅️ 返回主頁", callback_data="menu_main")],
+                [InlineKeyboardButton("✅ 重新綁定", callback_data="force_bind_calendar")],
+                [InlineKeyboardButton("⬅️ 取消 / 返回主頁", callback_data="menu_main")],
             ]
             await query.edit_message_text(text, reply_markup=InlineKeyboardMarkup(keyboard))
-            # 發送 ForceReply 讓使用者貼回網址
-            await context.bot.send_message(
-                chat_id=update.effective_chat.id,
-                text="請貼上授權後的網址（http://localhost/?code=...)",
-                reply_markup=ForceReply(selective=True),
-            )
-            context.user_data["awaiting_calendar_url"] = True
-        except Exception as e:
-            logger.exception("Calendar OAuth URL 產生失敗")
-            await query.edit_message_text(f"❌ 產生授權連結失敗：{e}")
+        else:
+            await _prompt_bind_calendar(update, context, query, tg_id)
+
+    elif data == "force_bind_calendar":
+        await _prompt_bind_calendar(update, context, query, tg_id)
 
     # ── 使用教學（升級版） ──
     elif data in ("menu_help", "help_1", "help_2", "help_3"):
@@ -656,3 +674,60 @@ async def process_calendar_url_input(update: Update, context: ContextTypes.DEFAU
             "http://localhost/?code=... 網址\n\n"
             "使用 /start 重新嘗試"
         )
+
+
+async def _prompt_upload_schedule(query, context: ContextTypes.DEFAULT_TYPE):
+    await query.edit_message_text(
+        "📅 上傳課表\n"
+        "━━━━━━━━━━━━━━\n\n"
+        "請傳送以下任一格式：\n"
+        "📷 課表截圖（PNG / JPG）→ AI 自動辨識\n"
+        "📄 課表 JSON 檔案 → 直接匯入\n\n"
+        "💡 截圖請從選課系統擷取完整的課表表格",
+        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ 取消 / 返回主頁", callback_data="menu_main")]])
+    )
+    context.user_data["awaiting_upload"] = "schedule"
+
+
+async def _prompt_upload_transcript(query, context: ContextTypes.DEFAULT_TYPE):
+    await query.edit_message_text(
+        "📊 上傳成績單\n"
+        "━━━━━━━━━━━━━━\n\n"
+        "請傳送以下任一格式：\n"
+        "📄 成績單 PDF → AI 自動辨識\n"
+        "📷 成績單截圖（PNG / JPG）\n"
+        "📄 成績單 JSON 檔案 → 直接匯入\n\n"
+        "💡 請上傳「歷年成績表」PDF",
+        reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton("⬅️ 取消 / 返回主頁", callback_data="menu_main")]])
+    )
+    context.user_data["awaiting_upload"] = "transcript"
+
+
+async def _prompt_bind_calendar(update: Update, context: ContextTypes.DEFAULT_TYPE, query, tg_id: str):
+    from tools.auth import get_auth_url
+    try:
+        auth_url = get_auth_url(tg_id)
+        text = (
+            "📆 綁定 Google 行事曆\n"
+            "━━━━━━━━━━━━━━\n\n"
+            "➀ 點下方按鈕登入 Google\n"
+            "➁ 完成授權後複製網址\n"
+            "➂ 貼回對話即完成！\n\n"
+            "💡 網址開頭像這樣：\n"
+            "http://localhost/?code=..."
+        )
+        keyboard = [
+            [InlineKeyboardButton("🔗 點我登入 Google", url=auth_url)],
+            [InlineKeyboardButton("⬅️ 返回主頁", callback_data="menu_main")],
+        ]
+        await query.edit_message_text(text, reply_markup=InlineKeyboardMarkup(keyboard))
+        # 發送 ForceReply 讓使用者貼回網址
+        await context.bot.send_message(
+            chat_id=update.effective_chat.id,
+            text="請貼上授權後的網址（http://localhost/?code=...)",
+            reply_markup=ForceReply(selective=True),
+        )
+        context.user_data["awaiting_calendar_url"] = True
+    except Exception as e:
+        logger.exception("Calendar OAuth URL 產生失敗")
+        await query.edit_message_text(f"❌ 產生授權連結失敗：{e}")

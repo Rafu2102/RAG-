@@ -536,7 +536,7 @@ def route_and_rewrite(
     合併 Query Router + Query Rewrite 為單次 LLM 呼叫。
     
     省去兩次獨立的 3B 模型載入/卸載開銷，節約 1~3 秒。
-    使用 Ollama Structured Outputs (JSON Schema) 保證 100% JSON 格式正確。
+    使用 Gemini Structured Outputs (JSON Schema) 保證 100% JSON 格式正確。
     
     Args:
         question: 使用者問題

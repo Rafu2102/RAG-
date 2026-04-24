@@ -11,7 +11,7 @@ Pipeline 流程：
     4. Query Router（判斷問題類型 + 提取 metadata filter）
     5. Hybrid Retriever（Vector + BM25 + Metadata → α/β/γ 融合）
     6. Reranker（Top-30 → Top-5）
-    7. LLM Answer（Llama 3.1 + Source Grounding）
+    7. LLM Answer（Gemini 3.1 Pro + Source Grounding）
     8. 更新對話記憶
     9. 回到步驟 2
 
@@ -40,76 +40,31 @@ from rag.index_manager import load_and_index
 from rag.query_router import route_and_rewrite
 from rag.retriever import hybrid_retrieve, intent_inject_chunks
 from rag.reranker import rerank
-from llm.llm_answer import generate_answer, format_sources, ConversationMemory, generate_chitchat_answer
+from llm.llm_answer import generate_answer, format_sources, ConversationMemory
+from llm.chitchat import generate_chitchat_answer
+from llm.coreference import resolve_coreference
 
 logger = logging.getLogger(__name__)
 console = Console()
 
 
-# =============================================================================
-# 🔗 指代消解 (Coreference Resolution)
-# =============================================================================
+# ═══════════════════════════════════════════════════════════════
+# 🔧 Pipeline 短路 helpers (B1/B2 DRY 修復)
+# ═══════════════════════════════════════════════════════════════
 
-def resolve_coreference(question: str, chat_history: list[dict]) -> str:
-    """
-    使用 Gemini Flash Lite 極速消解代名詞，讓 Router 收到乾淨的完整句子。
-    例如：
-        歷史：「微積分在哪上課？」→ 助理答…
-        新問題：「那這門課的老師是誰？」
-        → 改寫為：「微積分的老師是誰？」
-    若無需改寫（問題已完整），直接原封不動回傳。
-    """
-    import requests, json
+def _shortcircuit_chitchat(question: str, memory, user_profile: dict | None = None) -> str:
+    """閒聊短路：跳過 RAG，直接用 Flash Lite 回應並更新記憶。"""
+    answer_obj = generate_chitchat_answer(question, memory, user_profile)
+    memory.add_user_message(question)
+    memory.add_assistant_message(answer_obj.answer)
+    return answer_obj.answer
 
-    # 【防呆優化】指代消解只需要「最近 2 輪對話（4 條訊息）」的語境即可。
-    # 如果把設定的 5 輪（10 條訊息）全塞給判斷器，它可能會被太久以前的別的主題（例如 4 輪前提到的其他教授）給帶偏。
-    recent = chat_history[-4:]
-    history_lines = []
-    for msg in recent:
-        role = "使用者" if msg["role"] == "user" else "助理"
-        history_lines.append(f"{role}：{msg['content']}")
-    history_str = "\n".join(history_lines)
 
-    prompt = f"""你是一個負責「上下文補全」與「指代消解」的 AI 代理。
-
-【對話歷史】
-{history_str}
-
-【最新提問】
-{question}
-
-【任務規則】
-1. 分析最新提問：是否包含代名詞（這、那、他、這門課），或是「隱式省略」（例如直接問「期中考呢？」、「那老師是誰？」、「第九週是幾號？」）。
-2. 對照對話歷史：尋找【最接近當下】的討論主題（例如剛剛才提到的課程名稱、教授姓名）。
-3. 補全提問：將省略的主詞、受詞或代名詞替換為明確的實體名稱。
-4. 原封不動：如果最新提問已經非常完整（不需要看歷史就能理解），請【直接照抄原句】，絕對不要畫蛇添足。
-5. 嚴禁對話：你不是聊天機器人，請【只輸出】改寫後的那一句話，絕對不要輸出「改寫如下：」或任何解釋。
-
-請輸出最終改寫的句子："""
-
-    try:
-        resp = requests.post(
-            config.GEMINI_FAST_API_URL,
-            json={
-                "contents": [{"parts": [{"text": prompt}]}],
-                "generationConfig": {
-                    "temperature": 1.0,
-                    "maxOutputTokens": config.GEMINI_SHORT_MAX_TOKENS,
-                    "thinkingConfig": {"thinkingLevel": "minimal"}
-                }
-            },
-            timeout=10,
-        )
-        resp.raise_for_status()
-        rewritten = resp.json().get("candidates", [{}])[0].get("content", {}).get("parts", [{}])[0].get("text", "").strip()
-        if rewritten and len(rewritten) >= 2:
-            if rewritten != question:
-                logger.info(f"🔗 指代消解：「{question}」→「{rewritten}」")
-            return rewritten
-    except Exception as e:
-        logger.warning(f"⚠️ 指代消解失敗，使用原始問題：{e}")
-
-    return question
+def _shortcircuit_message(question: str, memory, message: str) -> str:
+    """固定訊息短路：回傳固定文字並更新記憶。"""
+    memory.add_user_message(question)
+    memory.add_assistant_message(message)
+    return message
 
 
 # =============================================================================
@@ -165,7 +120,7 @@ def rag_pipeline(
         → Step 2: Query Router (type + metadata filter)
         → Step 3: Hybrid Retriever (Vector + BM25 + Metadata → α·V + β·B + γ·M)
         → Step 4: Reranker (Top-30 → Top-5, cross-encoder)
-        → Step 5: LLM Answer (Llama 3.1 + source grounding)
+        → Step 5: LLM Answer (Gemini 3.1 Pro + source grounding)
         → Return answer with sources
 
     Args:
@@ -182,9 +137,9 @@ def rag_pipeline(
     total_start = time.time()
     console.print(f"\n[bold yellow]🔍 處理問題：[/bold yellow]{question}\n")
 
-    # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    # ═════════════════════════════════════
     # Step 0: 規則式閒聊快速攔截（在 LLM Router 之前，零延遲）
-    # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    # ═════════════════════════════════════
     stripped = re.sub(r'[\U00010000-\U0010ffff\u2600-\u27BF\u2700-\u27BF\uFE00-\uFE0F\u200d❤♥☺✨⭐🌟💕😀-🙏]+', '', question, flags=re.UNICODE).strip()
     common_greetings = {"你好", "哈囉", "嗨", "hi", "hello", "早安", "午安", "晚安", "謝謝", "感謝", "掰掰", "bye", "嗯", "ok", "好"}
     is_trivial = (
@@ -194,23 +149,20 @@ def rag_pipeline(
     )
     if is_trivial:
         logger.info("  👋 規則式閒聊攔截：跳過 Router+Retriever，直接回應")
-        answer_obj = generate_chitchat_answer(question, memory, user_profile)
-        memory.add_user_message(question)
-        memory.add_assistant_message(answer_obj.answer)
-        return answer_obj.answer
+        return _shortcircuit_chitchat(question, memory, user_profile)
 
-    # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    # ═════════════════════════════════════
     # Step 0.5: 指代消解 (Coreference Resolution)
-    # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    # ═════════════════════════════════════
     # 當有對話歷史時，先用 Flash Lite 極速消解代名詞
     # 例：「那老師是誰？」→「微積分的老師是誰？」
     chat_hist = memory.get_history()
     if chat_hist:
         question = resolve_coreference(question, chat_hist)
 
-    # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    # ═════════════════════════════════════
     # Step 1: 合併式 Router + Rewrite（單次 LLM 呼叫）
-    # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    # ═════════════════════════════════════
     step_start = time.time()
     route_result, queries = route_and_rewrite(
         question=question,
@@ -227,18 +179,15 @@ def rag_pipeline(
 
     print_step(1, f"Router+Rewrite → type={route_result.query_type}, filters={route_result.metadata_filters}, {len(queries)} queries", time.time() - step_start)
 
-    # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    # ═════════════════════════════════════
     # Step 2: Agentic 意圖攔截與短路機制
-    # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    # ═════════════════════════════════════
     # 若被短路，則不進入 RAG Retriever 階段，直接處理並返回
     
     # [攔截 1] 日常閒聊 (Chitchat)
     if route_result.query_type == "chitchat":
         logger.info("  [dim]👋 偵測到日常閒聊，跳過檢索直接回應[/dim]")
-        answer_obj = generate_chitchat_answer(question, memory, user_profile)
-        memory.add_user_message(question)
-        memory.add_assistant_message(answer_obj.answer)
-        return answer_obj.answer
+        return _shortcircuit_chitchat(question, memory, user_profile)
 
     # [攔截 1.2] 聯網搜尋 (Web Search)
     if route_result.query_type == "web_search":
@@ -257,7 +206,7 @@ def rag_pipeline(
         
         return answer_obj.answer
 
-    # ── 🛡️ 混合意圖安全閥：偵測推薦/搜尋關鍵字，避免個人資料攔截吃掉推薦需求 ──
+    # ══ 🛡️ 混合意圖安全閥：偵測推薦/搜尋關鍵字，避免個人資料攔截吃掉推薦需求 ══
     _RECOMMEND_KEYWORDS = [
         "推薦", "建議", "有什麼可以上", "選什麼", "修什麼", "可以上什麼",
         "適合", "好過", "甜", "涼", "容易", "簡單",
@@ -357,18 +306,13 @@ def rag_pipeline(
             else:
                 fallback_msg = "🤔 抱歉，我在學校的行事曆上沒有找到與您問題相關的特定行程或節日喔！"
                 logger.info("  [dim]📅 找不到對應學校事件，直接觸發 Fallback 回應[/dim]")
-                memory.add_user_message(question)
-                memory.add_assistant_message(fallback_msg)
-                return fallback_msg
+                return _shortcircuit_message(question, memory, fallback_msg)
 
     # [攔截 3] 缺乏課程特徵的通用查詢 (General fallback)
     core_filters = {k: v for k, v in route_result.metadata_filters.items() if k not in ["semester", "academic_year"]}
     if route_result.query_type == "general" and not core_filters:
         logger.info("  [dim]⚠️ 偵測到無具體課程過濾條件的一般提問，啟動直接對答防護（跳過 RAG 檢索）[/dim]")
-        answer_obj = generate_chitchat_answer(question, memory, user_profile)
-        memory.add_user_message(question)
-        memory.add_assistant_message(answer_obj.answer)
-        return answer_obj.answer
+        return _shortcircuit_chitchat(question, memory, user_profile)
 
     # [攔截 4] 行事曆操作預先判斷與短路 (Calendar Actions)
     calendar_intent_data = None
@@ -405,9 +349,9 @@ def rag_pipeline(
         for i, q in enumerate(queries):
             console.print(f"      [dim]Q{i+1}: {q}[/dim]")
 
-    # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    # ═════════════════════════════════════
     # Step 3: Hybrid Retriever
-    # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    # ═════════════════════════════════════
     step_start = time.time()
     retrieved_chunks = hybrid_retrieve(
         queries=queries,
@@ -421,9 +365,9 @@ def rag_pipeline(
                f"(α={config.HYBRID_ALPHA}, β={config.HYBRID_BETA}, γ={config.HYBRID_GAMMA})",
                time.time() - step_start)
 
-    # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    # ═════════════════════════════════════
     # Step 3.5: Intent-Driven Injection（意圖驅動注入）
-    # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    # ═════════════════════════════════════
     injected = intent_inject_chunks(
         intent=route_result.query_type,
         filters=route_result.metadata_filters,
@@ -464,9 +408,9 @@ def rag_pipeline(
             )
         console.print(table)
 
-    # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    # ═════════════════════════════════════
     # Step 4: Reranker (精細重排序與斬草除根)
-    # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    # ═════════════════════════════════════
     step_start = time.time()
     # 處理特例：若是找教授，因為會強制注入所有教授履歷(佔用名額)，所以要把 Top-N 加大，確保相關課程不會被擠掉
     actual_top_n = 25 if route_result.query_type == "professor_info" else config.RERANKER_TOP_N
@@ -494,9 +438,9 @@ def rag_pipeline(
             section = c.node.metadata.get("section", "?")
             console.print(f"      [dim]#{i+1} [{course}][{section}] score={c.final_score:.4f}[/dim]")
 
-    # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    # ═════════════════════════════════════
     # Step 5: LLM Answer Generation / Action Execution
-    # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+    # ═════════════════════════════════════
     step_start = time.time()
     
     if route_result.query_type == "calendar_action" and calendar_intent_data:
@@ -520,7 +464,7 @@ def rag_pipeline(
     total_time = time.time() - total_start
     console.print(f"\n  [dim]⏱️ 總耗時：{total_time:.2f}s[/dim]\n")
 
-    # ── 更新對話記憶 ──
+    # ══ 更新對話記憶 ══
     memory.add_user_message(question)
     memory.add_assistant_message(final_answer)
 
@@ -546,7 +490,7 @@ def main():
     # 顯示橫幅
     print_banner()
 
-    # ── 載入索引 ──
+    # ══ 載入索引 ══
     console.print("[bold green]📂 載入資料與索引...[/bold green]\n")
     try:
         nodes, faiss_index, bm25_index = load_and_index()
@@ -564,11 +508,11 @@ def main():
         console.print(f"  3. 資料目錄是否存在：{config.DATA_DIR}")
         sys.exit(1)
 
-    # ── 初始化對話記憶 ──
+    # ══ 初始化對話記憶 ══
     memory = ConversationMemory()
     debug_mode = False
 
-    # ── 互動主迴圈 ──
+    # ══ 互動主迴圈 ══
     console.print("[bold]💬 請輸入你的問題（輸入 /quit 退出）：[/bold]\n")
 
     while True:
@@ -578,7 +522,7 @@ def main():
             if not user_input:
                 continue
 
-            # ── 指令處理 ──
+            # ══ 指令處理 ══
             if user_input.lower() == "/quit":
                 console.print("\n[yellow]👋 感謝使用，再見！[/yellow]\n")
                 break
@@ -600,7 +544,7 @@ def main():
                 console.print(f"\n[yellow]🔧 Debug 模式已{status}[/yellow]\n")
                 continue
 
-            # ── 執行 RAG Pipeline ──
+            # ══ 執行 RAG Pipeline ══
             answer = rag_pipeline(
                 question=user_input,
                 nodes=nodes,

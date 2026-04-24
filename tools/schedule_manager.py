@@ -6,9 +6,9 @@ tools/schedule_manager.py — 課表資料管理
 
 存放位置：tools/data/tokens/{discord_id}.json 的 "schedule" 欄位
 
-OCR 方案（待實作）：
-    - 模型：minicpm-v（中文 OCR 表格辨識王者）
-    - 方式：透過 Ollama 多模態 API 將課表截圖轉為 JSON
+OCR 方案：
+    - 模型：Gemini 多模態 API（中文 OCR 表格辨識）
+    - 方式：透過 Gemini Vision API 將課表截圖轉為 JSON
     - 目前先支援手動 JSON 匯入
 """
 

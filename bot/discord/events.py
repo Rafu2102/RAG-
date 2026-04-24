@@ -250,7 +250,7 @@ async def on_message(message: discord.Message):
             logger.exception(f"❌ {audit_source} 錯誤 | 使用者：{message.author.display_name} | 問題：{str(question)[:50]}")
             error_msg = str(e)
             if "Connection refused" in error_msg or "Failed to establish a new connection" in error_msg:
-                await message.reply("❌ 糟糕！我的 AI 核心 (Ollama) 似乎沒有啟動，請管理員檢查一下伺服器喔！")
+                await message.reply("❌ 糟糕！我的 AI 核心 (Gemini API) 似乎連線失敗，請管理員檢查一下伺服器喔！")
             else:
                 await message.reply("❌ 查詢時發生內部錯誤，請稍後再試！(內部錯誤)")
 
