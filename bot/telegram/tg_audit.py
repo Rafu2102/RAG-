@@ -26,6 +26,8 @@ async def tg_send_audit_dm(
     elapsed: float = 0.0,
 ):
     """將使用者的問答紀錄轉發到 Discord 監控系統"""
+    # ⚠️ 暫時關閉問答監控功能，若需重新啟用，請將下方 return 這行註解或刪除
+    # return
     if os.environ.get("ENABLE_BOT_IPC") != "1":
         return
 
@@ -49,7 +51,7 @@ async def tg_send_audit_dm(
         # 使用 asyncio.create_task 放後台，避免卡住回應使用者
         asyncio.create_task(_send_ipc_post(url, payload))
     except Exception as e:
-        logger.error(f"❌ 傳送 IPC 審計紀錄失敗: {e}")
+        logger.debug(f"❌ 傳送 IPC 審計紀錄失敗: {e}")
 
 
 async def tg_send_audit_event(
@@ -59,6 +61,8 @@ async def tg_send_audit_event(
     color_val: int = 3447003, # 預設 blurple
 ):
     """將系統事件轉發到 Discord 監控系統"""
+    # ⚠️ 暫時關閉事件監控功能，若需重新啟用，請將下方 return 這行註解或刪除
+    # return
     if os.environ.get("ENABLE_BOT_IPC") != "1":
         return
 
@@ -76,7 +80,7 @@ async def tg_send_audit_event(
     try:
         asyncio.create_task(_send_ipc_post(url, payload))
     except Exception as e:
-        logger.error(f"❌ 傳送 IPC 審計事件失敗: {e}")
+        logger.debug(f"❌ 傳送 IPC 審計事件失敗: {e}")
 
 
 async def _send_ipc_post(url: str, payload: dict):
@@ -86,6 +90,6 @@ async def _send_ipc_post(url: str, payload: dict):
             async with session.post(url, json=payload, timeout=5.0) as response:
                 if response.status != 200:
                     text = await response.text()
-                    logger.warning(f"⚠️ IPC 伺服器回傳錯誤: {text}")
+                    logger.debug(f"⚠️ IPC 伺服器回傳錯誤: {text}")
     except Exception as e:
-        logger.warning(f"⚠️ 無法連接到 Discord IPC 伺服器，略過審計發送 ({e})")
+        logger.debug(f"⚠️ 無法連接到 Discord IPC 伺服器，略過審計發送 ({e})")

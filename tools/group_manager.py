@@ -13,7 +13,9 @@ from datetime import datetime, timedelta, timezone
 
 logger = logging.getLogger(__name__)
 
+import utils
 from tools.auth import get_user_token_path
+
 
 BASE_DIR = Path(__file__).resolve().parent
 DATA_DIR = BASE_DIR / "data"
@@ -43,8 +45,8 @@ def add_user_group(discord_id: str, group_name: str) -> bool:
         profile["groups"] = groups
         user_data["profile"] = profile
         
-        with open(token_path, "w", encoding="utf-8") as f:
-            json.dump(user_data, f, ensure_ascii=False, indent=4)
+        utils.atomic_write_json(token_path, user_data, indent=4)
+
         
         # 同步更新 groups.json 的 member_count
         if not already_in:
@@ -77,8 +79,8 @@ def remove_user_group(discord_id: str, group_name: str) -> bool:
         profile["groups"] = groups
         user_data["profile"] = profile
         
-        with open(token_path, "w", encoding="utf-8") as f:
-            json.dump(user_data, f, ensure_ascii=False, indent=4)
+        utils.atomic_write_json(token_path, user_data, indent=4)
+
         
         # 同步更新 groups.json 的 member_count
         if was_in:
@@ -117,8 +119,7 @@ def _load_groups() -> dict:
 
 def _save_groups(data: dict):
     """儲存群組資料庫"""
-    with open(GROUPS_PATH, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=4)
+    utils.atomic_write_json(GROUPS_PATH, data, indent=4)
 
 
 def create_group(group_name: str, creator_id: str, creator_name: str) -> str:
@@ -184,3 +185,58 @@ def delete_group(group_name: str) -> bool:
     _save_groups(groups)
     logger.info(f"🏷️ 群組刪除 | 名稱={group_name}")
     return True
+
+
+# === 群組成員掃描 (跨 Token 檔案) ===
+
+def get_group_members(group_name: str) -> list[dict]:
+    """
+    掃描所有 Discord Token 檔案，找出屬於指定群組的成員。
+
+    Returns:
+        list[dict]: [{"discord_id": "123", "nickname": "...", "department": "...", "grade": "..."}, ...]
+    """
+    from tools.auth import DISCORD_TOKENS_DIR
+    members = []
+    for token_file in DISCORD_TOKENS_DIR.glob("*_token.json"):
+        discord_id = token_file.stem.replace("_token", "")
+        try:
+            with open(token_file, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            profile = data.get("profile", {})
+            user_groups = profile.get("groups", [])
+            if group_name in user_groups:
+                members.append({
+                    "discord_id": discord_id,
+                    "nickname": profile.get("nickname", ""),
+                    "department": profile.get("department", "未知"),
+                    "department_full": profile.get("department_full", ""),
+                    "grade": profile.get("grade", "?"),
+                    "class_group": profile.get("class_group", ""),
+                })
+        except Exception as e:
+            logger.error(f"掃描使用者 {discord_id} 群組失敗: {e}")
+    return members
+
+
+def get_all_groups_detail() -> list[dict]:
+    """
+    取得所有群組的完整資訊，包含成員清單與人數。
+
+    Returns:
+        list[dict]: [{"name": "...", "invite_code": "...", "creator_name": "...",
+                       "created_at": "...", "member_count": N, "members": [...]}]
+    """
+    groups = _load_groups()
+    result = []
+    for name, info in groups.items():
+        members = get_group_members(name)
+        result.append({
+            "name": name,
+            "invite_code": info.get("invite_code", "?"),
+            "creator_name": info.get("creator_name", "?"),
+            "created_at": info.get("created_at", "?"),
+            "member_count": len(members),
+            "members": members,
+        })
+    return result

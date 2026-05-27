@@ -1,0 +1,213 @@
+國立金門大學113學年度第1學期應英系課程
+學年度：113學年度
+學期：第1學期
+課程名稱：研究方法 (Research Methods)
+部別：日間部學士班
+開課班級：應英三年級
+學分數：2.0學分
+授課時數：2.0小時
+授課教師：李盈興
+必選修：必修
+教室：426陳篤漢講堂
+修課上限人數：60人
+上課時間：每周星期四下午第7節~第8節
+
+課程教學目標：
+1. This course aims to provide students with basic concepts and techniques in doing empirical research. Students will learn how they can ask specific questions, link their questions to applicable methods, and interpret their data appropriately. Students will have hands-on experiences in conducting attitude survey and experimental study on the topics that they choose. The procedure from literature review, survey design, data analysis to research writing and presentation will be guided in a step-by-step manner. Students will also learn to edit their data and plot the graphs using Microsoft Excel.
+
+課程教學綱要：
+1. The content of this semester contains:
+- Making a logical proposal
+- Finding resources and reviewing previous studies
+- Designing a survey and an experiment
+- Data collection, analysis, and graphing
+- Constructing a formal Microsoft PowerPoint file
+- Presenting research results
+
+教科書資料：
+1. 書名：Weekly handouts.
+2. 出版日期：未標註
+3. 作者：未標註
+4. 出版社：未標註
+5. 版本：未標註
+
+參考書資料：
+1-1. 書名：Publication manual of the American Psychological Association (6th edition).
+1-2. 出版日期：未標註
+1-3. 作者：American Psychological Association.
+1-4. 出版社：Washington, DC: American Psychological Association.
+1-5. 版本：未標註
+
+2-1. 書名：The Practice of Social Research (12th edition).
+2-2. 出版日期：未標註
+2-3. 作者：Babbie, E.
+2-4. 出版社：Belmont, CA: Wadsworth Publishing.
+2-5. 版本：未標註
+
+3-1. 書名：Tricks of the Trade: How to Think about Your Research While You’re Doing It.
+3-2. 出版日期：未標註
+3-3. 作者：Becker, H. S.
+3-4. 出版社：Chicago, IL:University of Chicago Press.
+3-5. 版本：未標註
+
+4-1. 書名：Social Science Research: Principles, Methods, and Practices (2nd edition).
+4-2. 出版日期：未標註
+4-3. 作者：Bhattacherjee, A.
+4-4. 出版社：Create Space Independent Publishing Platform.
+4-5. 版本：未標註
+
+5-1. 書名：Research Design and Methods (9th edition).
+5-2. 出版日期：未標註
+5-3. 作者：Bordens, K. S. & Abbott, B. B.
+5-4. 出版社：New York: McGraw-Hill Education.
+5-5. 版本：未標註
+
+6-1. 書名：Making Sense of the Social World: Methods of Investigation (4th edition).
+6-2. 出版日期：未標註
+6-3. 作者：Chambliss, D. F. & Schutt, R. K.
+6-4. 出版社：London: Sage Publications.
+6-5. 版本：未標註
+
+7-1. 書名：Research Design: Qualitative, Quantitative, and Mixed Methods Approaches (3rd edition).
+7-2. 出版日期：未標註
+7-3. 作者：Creswell, J. W.
+7-4. 出版社：Thousand Oaks, CA: Sage Publications.
+7-5. 版本：未標註
+
+8-1. 書名：Questionnaires in Second Language Research: Construction, Administration, and Processing (2nd Edition).
+8-2. 出版日期：未標註
+8-3. 作者：Dörnyei, Z. & Taguchi, T.
+8-4. 出版社：Routledge.
+8-5. 版本：未標註
+
+9-1. 書名：Doing Research：Methods of Inquiry for Conflict Analysis.
+9-2. 出版日期：未標註
+9-3. 作者：Druckman, D.
+9-4. 出版社：Thousand Oaks, CA: Sage Publications.
+9-5. 版本：未標註
+
+10-1. 書名：How to Design and Evaluate Research in Education (9th edition).
+10-2. 出版日期：未標註
+10-3. 作者：Fraenkel, J. R., Wallen, N. E., & Hyn, H. H.
+10-4. 出版社：New York: McGraw-Hill Education.
+10-5. 版本：未標註
+
+11-1. 書名：Introducing Research Methodology: A Beginner’s Guide to Doing a Research Project.
+11-2. 出版日期：未標註
+11-3. 作者：Flick, U.
+11-4. 出版社：Reinbek be Hamburg: Rowohlt Verlag Gmbh.
+11-5. 版本：未標註
+
+12-1. 書名：Data Elicitation for Second and Foreign Language Research: A Practical Guide.
+12-2. 出版日期：未標註
+12-3. 作者：Gass, S. M. & Mackey, A.
+12-4. 出版社：Wiley-Blackwell.
+12-5. 版本：未標註
+
+13-1. 書名：The Cartoon Guide to Statistics.
+13-2. 出版日期：未標註
+13-3. 作者：Gonick, L., & Smith, W.
+13-4. 出版社：New York: Harper Perennial.
+13-5. 版本：未標註
+
+14-1. 書名：Head First Statistics.
+14-2. 出版日期：未標註
+14-3. 作者：Griffiths, D.
+14-4. 出版社：Sebastopol, CA: O'Reilly Media.
+14-5. 版本：未標註
+
+15-1. 書名：Research Methods and Data Analysis in the Social Sciences.
+15-2. 出版日期：未標註
+15-3. 作者：Herzog, T.
+15-4. 出版社：Old Tappan, NJ: Prentice Hall.
+15-5. 版本：未標註
+
+16-1. 書名：Quantitative Methods in Linguistics.
+16-2. 出版日期：未標註
+16-3. 作者：Johnson, K.
+16-4. 出版社：Blackwell.
+16-5. 版本：未標註
+
+17-1. 書名：Research Methodology: A Step-by-Step Guide for Beginners (3rd edition).
+17-2. 出版日期：未標註
+17-3. 作者：Kumar, R.
+17-4. 出版社：London: Sage Publications.
+17-5. 版本：未標註
+
+18-1. 書名：Behavioral Statistics in Action (4th edition).
+18-2. 出版日期：未標註
+18-3. 作者：Kyle, D. J., Vernoy, J., & Vernoy, M.
+18-4. 出版社：New York: McGraw-Hill.
+18-5. 版本：未標註
+
+19-1. 書名：Using the Scientific Methods (Let’s Explore Science).
+19-2. 出版日期：未標註
+19-3. 作者：Larson, K.
+19-4. 出版社：Rourke Pub Group.
+19-5. 版本：未標註
+
+20-1. 書名：Research Methods for English Language Teachers.
+20-2. 出版日期：未標註
+20-3. 作者：McDonough, J. & McDonough, S.
+20-4. 出版社：Routledge.
+20-5. 版本：未標註
+
+21-1. 書名：Neuman, W. L. (按原始資料作者欄為 Understanding research.)
+21-2. 出版日期：未標註
+21-3. 作者：Understanding research.
+21-4. 出版社：Old Tappan, NJ: Allyn & Bacon.
+21-5. 版本：未標註
+
+22-1. 書名：Gender and computers: similarities and differences in Iranian college students’ attitudes toward computers.
+22-2. 出版日期：未標註
+22-3. 作者：Shashaani, L. & Khalili, A.
+22-4. 出版社：Computer & Education, 37, 363-375.
+22-5. 版本：未標註
+
+23-1. 書名：Statistics for the Social Sciences (3rd edition).
+23-2. 出版日期：未標註
+23-3. 作者：Sirkin, R. M.
+23-4. 出版社：Thousand Oaks, CA: Sage Publications.
+23-5. 版本：未標註
+
+24-1. 書名：Writing up research: Experimental research report writing for students of English.
+24-2. 出版日期：未標註
+24-3. 作者：Weissberg, R. & Bucker, S.
+24-4. 出版社：Taipei: Pearson Education Taiwan
+24-5. 版本：未標註
+
+25-1. 書名：Projects in Linguistics: A Practical Guide to Researching Language (3rd Edition).
+25-2. 出版日期：未標註
+25-3. 作者：Wray, A. & Bloomer, A.
+25-4. 出版社：Routledge.
+25-5. 版本：未標註
+
+※請遵守智慧財產權觀念，依著作權法規定，教科書及教材不得非法影印與使用盜版軟體。
+
+教學進度表（2024年秋季學期）：
+第1週課程 (2024/09/08─2024/09/14)：Choosing the topic: An issue and some questions
+第2週課程 (2024/09/15─2024/09/21)：Doing literature review: The electronic database
+第3週課程 (2024/09/22─2024/09/28)：Designing the survey: The variables and index measures
+第4週課程 (2024/09/29─2024/10/05)：Designing the questionnaire: Google Forms
+第5週課程 (2024/10/06─2024/10/12)：Collecting the data
+第6週課程 (2024/10/13─2024/10/19)：Coding and plotting the data in Excel
+第7週課程 (2024/10/20─2024/10/26)：Preparing the presentation: PowerPoint
+第8週課程 (2024/10/27─2024/11/02)：[Presentation]
+第9週課程 (2024/11/03─2024/11/09)：Comparison and contrast: Survey vs. Experiment
+第10週課程 (2024/11/10─2024/11/16)：Choosing the topic: Materials, equipment and procedure
+第11週課程 (2024/11/17─2024/11/23)：Doing literature review: Referencing
+第12週課程 (2024/11/24─2024/11/30)：Running the experiment
+第13週課程 (2024/12/01─2024/12/07)：Running the experiment
+第14週課程 (2024/12/08─2024/12/14)：Coding and plotting the data in Excel
+第15週課程 (2024/12/15─2024/12/21)：Preparing the presentation: PowerPoint
+第16週課程 (2024/12/22─2024/12/28)：[Presentation]
+第17週課程 (2024/12/29─2025/01/04)：[Wrap-up]
+第18週課程 (2025/01/05─2025/01/11)：[Wrap-up]
+
+成績評定方式：
+1. Presentations: 30 * 2% = 60%
+2. Assignments: 30%
+3. Participation: 10%
+
+課堂要求：
+Students of every group should construct two research projects and complete two oral presentations for this course. The teacher will check attendance on all the meeting occasions. Students should participate in the group discussion after classes in order to prepare the requirements of the course every time. Students should respect the others who are presenting their research in class by not talking aloud, wandering from the seats or surfing the Internet on their smartphones.

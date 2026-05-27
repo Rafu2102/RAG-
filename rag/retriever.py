@@ -38,6 +38,81 @@ from concurrent.futures import ThreadPoolExecutor
 
 logger = logging.getLogger(__name__)
 
+# ── 全域單例 ThreadPoolExecutor ──
+_executor = ThreadPoolExecutor(max_workers=16)
+
+
+# =============================================================================
+# 🏢 Metadata 倒排索引登記表 (Metadata Inverted Registry)
+# =============================================================================
+
+class MetadataInvertedRegistry:
+    def __init__(self):
+        self.nodes = None
+        self.basic_info_nodes = []
+        self.by_teacher = {}          # teacher (clean name) -> list of nodes
+        self.by_classroom = {}        # classroom -> list of nodes
+        self.by_dept = {}             # dept_short -> list of nodes
+        self.by_course = {}           # course_name -> list of nodes
+        
+    def rebuild_if_needed(self, nodes: list[TextNode]):
+        if self.nodes is nodes:
+            return
+        self.nodes = nodes
+        self.basic_info_nodes = []
+        self.by_teacher = {}
+        self.by_classroom = {}
+        self.by_dept = {}
+        self.by_course = {}
+        
+        for node in nodes:
+            meta = getattr(node, "metadata", {})
+            if meta.get("section", "") != "basic_info":
+                continue
+            self.basic_info_nodes.append(node)
+            
+            # Index by teacher
+            teacher_str = meta.get("teacher", "")
+            if teacher_str and teacher_str != "未知":
+                for t in re.split(r"[、,，/]", teacher_str):
+                    t = t.strip()
+                    if t:
+                        clean_t = re.sub(r"(老師|教授)$", "", t).lower()
+                        if clean_t not in self.by_teacher:
+                            self.by_teacher[clean_t] = []
+                        self.by_teacher[clean_t].append(node)
+            
+            # Index by classroom
+            classroom = meta.get("classroom", "")
+            if classroom:
+                if classroom not in self.by_classroom:
+                    self.by_classroom[classroom] = []
+                self.by_classroom[classroom].append(node)
+                
+            # Index by department/dept_short
+            dept = meta.get("dept_short", meta.get("department", ""))
+            if dept:
+                if dept not in self.by_dept:
+                    self.by_dept[dept] = []
+                self.by_dept[dept].append(node)
+                
+            # Index by course name
+            course = meta.get("course_name", "")
+            if course:
+                c_name = course.lower()
+                if c_name not in self.by_course:
+                    self.by_course[c_name] = []
+                self.by_course[c_name].append(node)
+                
+                # Also index by short course name without parentheses
+                short_c = re.sub(r"[（(][^）)]*[）)]", "", c_name).strip()
+                if short_c and short_c != c_name:
+                    if short_c not in self.by_course:
+                        self.by_course[short_c] = []
+                    self.by_course[short_c].append(node)
+
+_metadata_registry = MetadataInvertedRegistry()
+
 
 # =============================================================================
 # 📋 檢索結果資料類別
@@ -113,17 +188,20 @@ def intent_inject_chunks(
 
     if intent == "professor_info":
         # 從 filters 提取教授名稱（去除「教授」「老師」等後綴）
-        raw_teacher = filters.get("teacher", "")
-        teacher = re.sub(r"(老師|教授)$", "", raw_teacher).strip()
+        raw_teachers = filters.get("teacher", [])
+        if isinstance(raw_teachers, str):
+            raw_teachers = [raw_teachers]
+            
+        teachers = [re.sub(r"(老師|教授)$", "", t).strip() for t in raw_teachers if t]
         
-        if teacher:
-            # 有明確教授名稱：精準注入該教授
+        if teachers:
+            # 有明確教授名稱：精準注入這些教授
             for node in nodes:
                 prof_name = node.metadata.get("professor_name", "")
                 info_type = node.metadata.get("info_type", "")
                 
                 # 模糊匹配教授名稱（防止 LLM 寫錯相似字，如 柯志恆 vs 柯志亨）
-                if prof_name and _fuzzy_name_match(teacher, prof_name) and info_type == "professor_info":
+                if prof_name and any(_fuzzy_name_match(t, prof_name) for t in teachers) and info_type == "professor_info":
                     injected.append(RetrievedChunk(
                         node=node,
                         vector_score=1.0,
@@ -412,7 +490,7 @@ def compute_metadata_score(node: TextNode, route_result: RouteResult) -> float:
     # ── 星期/時間匹配 (加權) ──
     if "day_of_week" in filters:
         max_possible += 0.3
-        # 檢查該片段的內文是否有提到「星期X」
+        # 檢查該片段の內文是否有提到「星期X」
         if filters["day_of_week"] in node.get_content():
             score += 0.3
 
@@ -549,6 +627,7 @@ def hybrid_retrieve(
     bm25_index: BM25Okapi,
     nodes: list[TextNode],
     top_k: int = None,
+    user_profile: dict | None = None,
 ) -> list[RetrievedChunk]:
     """
     執行 Hybrid Retrieval（支援 Multi-query 聚合）。
@@ -569,6 +648,7 @@ def hybrid_retrieve(
         bm25_index: BM25 索引
         nodes: 全部 Nodes
         top_k: 最終取前 k 個
+        user_profile: 使用者個人資料字典
 
     Returns:
         融合排序後的 RetrievedChunk 列表
@@ -576,53 +656,148 @@ def hybrid_retrieve(
     if top_k is None:
         top_k = config.RETRIEVER_TOP_K
 
+    # 確保記憶體倒排登記表已更新
+    _metadata_registry.rebuild_if_needed(nodes)
+
     # ========================================================================
     # 🌌 職涯大範圍探勘模式 (Full Curriculum Scan Mode)
     # 針對 Frontend/Backend/AI 等規劃，直接抽取科系之所有課程與就業資訊，無視檢索！
+    # ⚠️ 特例安全閥：若使用者有明確指定「課程關鍵字」、「老師」、「教室」或「通識領域」等具體條件，
+    #    代表他不是泛化探索，而是有明確檢索意圖（如「我想修海巡相關的課程」）。
+    #    此時絕對不可啟動全校掃描模式，應直接放行至正常的語意檢索，以精準命中並節約資源。
     # ========================================================================
-    if getattr(route_result, "is_career_planning", False) and route_result.query_type == "course_info":
-        target_depts = route_result.metadata_filters.get("dept_short", [])
-        if isinstance(target_depts, str):
-            target_depts = [target_depts]
+    has_explicit_target = False
+    if route_result.metadata_filters:
+        has_explicit_target = any(
+            route_result.metadata_filters.get(k) 
+            for k in ("course_name_keyword", "teacher", "classroom", "ge_domain")
+        )
+        
+    if getattr(route_result, "is_career_planning", False) and route_result.query_type == "course_info" and not has_explicit_target:
+        primary_dept = None
+        if user_profile and "department" in user_profile:
+            primary_dept = user_profile["department"]
+        
+        if not primary_dept and route_result.metadata_filters.get("dept_short"):
+            pd_val = route_result.metadata_filters.get("dept_short")
+            primary_dept = pd_val[0] if isinstance(pd_val, list) else pd_val
             
         logger.info(f"  🌌 啟動大範圍職涯全境掃描模式 (Full Curriculum Scan Mode)")
-        logger.info(f"  📌 目標系所：{target_depts if target_depts else '全校掃描'}")
+        logger.info(f"  📌 使用者主科系：{primary_dept if primary_dept else '無（全校各科系各限額隨機抽 15 門）'}")
         
-        scanned_results = []
+        # 建立科系節點的分類登記表
+        # 格式: {dept_name: {"course_nodes": [], "intro_nodes": []}}
+        dept_nodes_map = {}
+        
+        # 輔助函式：判斷是否為主科系 (模糊匹配)
+        def _is_primary_dept(node_dept):
+            if not primary_dept:
+                return False
+            n_clean = node_dept.replace("系所", "").replace("學系", "").replace("系", "").replace("資訊工程", "資工").strip()
+            p_clean = primary_dept.replace("系所", "").replace("學系", "").replace("系", "").replace("資訊工程", "資工").strip()
+            return n_clean in p_clean or p_clean in n_clean
+
+        # 遍歷所有節點，進行科系分類
         for node in nodes:
             meta = node.metadata
             info_type = meta.get("info_type", "")
-            node_dept = meta.get("dept_short", meta.get("department", ""))
-            
-            # 檢查系所是否吻合 (如果有指定科系的話)
-            dept_match = True
-            if target_depts:
-                # 緊急：舊版索引可能只有 department='資訊工程學系' 沒標 'dept_short'='資工系'
-                def _fuzzy_dept(t_dept, n_dept):
-                    if t_dept in n_dept: return True
-                    # 當 query 為 "資工" 而 node 為 "資訊工程" 時放行
-                    if t_dept.replace("系", "") in n_dept.replace("資訊工程", "資工"): return True
-                    return False
-                dept_match = any(_fuzzy_dept(d, node_dept) for d in target_depts if d)
+            node_dept = meta.get("dept_short", meta.get("department", "未知系所"))
+            if not node_dept:
+                node_dept = "未知系所"
                 
-            if not dept_match:
-                continue
+            if node_dept not in dept_nodes_map:
+                dept_nodes_map[node_dept] = {"course_nodes": [], "intro_nodes": []}
                 
-            # 提取 1: 該系所有的課程基本資訊與教學目標
-            # 注意：早期的課程 metadata 可能漏標 info_type="course_info"，因此用 course_name 欄位作為防呆判斷
+            # 分類課程節點與簡介就業節點
             if info_type == "course_info" or "course_name" in meta:
                 if meta.get("section", "") in ("basic_info", "objectives"):
+                    dept_nodes_map[node_dept]["course_nodes"].append(node)
+            elif info_type in ("career_info", "dept_intro"):
+                dept_nodes_map[node_dept]["intro_nodes"].append(node)
+                
+        scanned_results = []
+        dept_course_counts = {}
+        import random
+        
+        current_year = str(config.CURRENT_ACADEMIC_YEAR)
+        current_sem = str(config.CURRENT_SEMESTER)
+        
+        scanned_results = []
+        dept_course_counts = {}
+        import random
+        
+        current_year = str(config.CURRENT_ACADEMIC_YEAR)
+        current_sem = str(config.CURRENT_SEMESTER)
+        
+        # 收集所有非主科系的本學期課程，格式: {(course_name, dept_name): [nodes]}
+        other_courses_by_key = {}
+        
+        # 遍歷分類表，執行主科系本學期課程（本科）全部抽取、其餘科系合併抽樣的精準策略
+        for dept_name, groups in dept_nodes_map.items():
+            course_nodes = groups["course_nodes"]
+            intro_nodes = groups["intro_nodes"]
+            
+            is_primary = _is_primary_dept(dept_name)
+            
+            # 1. 處理主科系課程與簡介
+            if is_primary:
+                if course_nodes:
+                    selected_courses = [
+                        node for node in course_nodes
+                        if str(node.metadata.get("academic_year", "")) == current_year and
+                           str(node.metadata.get("semester", "")) == current_sem
+                    ]
+                    if selected_courses:
+                        for node in selected_courses:
+                            scanned_results.append(RetrievedChunk(
+                                node=node, vector_score=1.0, bm25_score=1.0, metadata_score=10.0, source="full_curriculum_scan"
+                            ))
+                        unique_courses = set(node.metadata.get("course_name") for node in selected_courses if node.metadata.get("course_name"))
+                        dept_course_counts[dept_name] = len(unique_courses)
+                
+                if intro_nodes:
+                    for node in intro_nodes:
+                        scanned_results.append(RetrievedChunk(
+                            node=node, vector_score=1.0, bm25_score=1.0, metadata_score=15.0, source="full_curriculum_scan"
+                        ))
+            else:
+                # 非主科系：先不抽取，只收集本學期課程，使用 (course_name, dept_name) 確保科系獨立性
+                if course_nodes:
+                    current_sem_nodes = [
+                        node for node in course_nodes
+                        if str(node.metadata.get("academic_year", "")) == current_year and
+                           str(node.metadata.get("semester", "")) == current_sem
+                    ]
+                    for node in current_sem_nodes:
+                        cname = node.metadata.get("course_name")
+                        if cname:
+                            key = (cname, dept_name)
+                            if key not in other_courses_by_key:
+                                other_courses_by_key[key] = []
+                            other_courses_by_key[key].append(node)
+                            
+        # 2. 對所有非主科系合併後的課程隨機抽樣最多 15 個課程-科系對
+        if other_courses_by_key:
+            unique_keys = list(other_courses_by_key.keys())
+            k = min(len(unique_keys), 15)
+            selected_keys = random.sample(unique_keys, k)
+            
+            for key in selected_keys:
+                nodes_to_add = other_courses_by_key[key]
+                for node in nodes_to_add:
                     scanned_results.append(RetrievedChunk(
                         node=node, vector_score=1.0, bm25_score=1.0, metadata_score=10.0, source="full_curriculum_scan"
                     ))
-            
-            # 提取 2: 該系專屬的就業方向、系所簡介
-            elif info_type in ("career_info", "dept_intro"):
-                scanned_results.append(RetrievedChunk(
-                    node=node, vector_score=1.0, bm25_score=1.0, metadata_score=15.0, source="full_curriculum_scan"
-                ))
-                
+                # 記錄各非主科系的抽樣課程數到 dept_course_counts 中
+                dname = key[1]
+                dept_course_counts[dname] = dept_course_counts.get(dname, 0) + 1
+                        
         logger.info(f"  ✅ 全境掃描完成，共抽取 {len(scanned_results)} 個核心節點供 LLM 分析")
+        if dept_course_counts:
+            # 依抽取數量降序排列印出，方便監控
+            sorted_counts = dict(sorted(dept_course_counts.items(), key=lambda x: x[1], reverse=True))
+            logger.info(f"     📊 職涯探索各科系課程抽取統計 (主科系全抽本學期，其餘合併限額共抽樣 15 門課程)：{sorted_counts}")
+            
         return scanned_results
 
     # ========================================================================
@@ -635,20 +810,19 @@ def hybrid_retrieve(
     logger.info(f"  🚀 並行 Embedding {len(queries)} 個查詢...")
     query_embeddings = embed_queries_parallel(queries)
 
-    # 並行執行所有 FAISS + BM25 搜尋
-    with ThreadPoolExecutor(max_workers=len(queries) * 2) as executor:
-        v_futures = [
-            executor.submit(vector_search_with_embedding, emb, faiss_index, nodes, top_k)
-            for emb in query_embeddings
-        ]
-        b_futures = [
-            executor.submit(bm25_search, q, bm25_index, nodes, top_k)
-            for q in queries
-        ]
-        for f in v_futures:
-            all_vector_results.extend(f.result())
-        for f in b_futures:
-            all_bm25_results.extend(f.result())
+    # 並行執行所有 FAISS + BM25 搜尋（使用全域單例 ThreadPoolExecutor，避免重複建立執行緒開銷）
+    v_futures = [
+        _executor.submit(vector_search_with_embedding, emb, faiss_index, nodes, top_k)
+        for emb in query_embeddings
+    ]
+    b_futures = [
+        _executor.submit(bm25_search, q, bm25_index, nodes, top_k)
+        for q in queries
+    ]
+    for f in v_futures:
+        all_vector_results.extend(f.result())
+    for f in b_futures:
+        all_bm25_results.extend(f.result())
 
     # ========================================================================
     # 問題：當使用者問「E321有什麼課」或「柯志亨的課」時，vector/BM25 的 top-K 很容易遺漏
@@ -666,6 +840,49 @@ def hybrid_retrieve(
     if has_high_weight_entity or has_specific_dept_grade:
         logger.info(f"  💉 觸發 Metadata-First 注入機制，補齊精確匹配的課程節點...")
         
+        # 1. 獲取初始候選節點集，極速縮小搜尋規模，消滅 O(N) 線性掃描 CPU 炸彈
+        candidates = {}
+        
+        if "teacher" in filters and filters["teacher"]:
+            t_vals = filters["teacher"] if isinstance(filters["teacher"], list) else [filters["teacher"]]
+            for tv in t_vals:
+                if not tv: continue
+                clean_tv = re.sub(r"(老師|教授)$", "", tv).lower()
+                for registered_t, t_nodes in _metadata_registry.by_teacher.items():
+                    if _fuzzy_name_match(clean_tv, registered_t):
+                        for n in t_nodes:
+                            candidates[n.node_id] = n
+                        
+        elif "classroom" in filters and filters["classroom"]:
+            c_vals = filters["classroom"] if isinstance(filters["classroom"], list) else [filters["classroom"]]
+            for cv in c_vals:
+                if not cv: continue
+                for registered_c, c_nodes in _metadata_registry.by_classroom.items():
+                    if cv in registered_c or registered_c in cv:
+                        for n in c_nodes:
+                            candidates[n.node_id] = n
+                        
+        elif "course_name_keyword" in filters and filters["course_name_keyword"]:
+            ck_vals = filters["course_name_keyword"] if isinstance(filters["course_name_keyword"], list) else [filters["course_name_keyword"]]
+            for ckv in ck_vals:
+                if not ckv: continue
+                ckv_lower = ckv.lower()
+                for registered_course, c_nodes in _metadata_registry.by_course.items():
+                    if ckv_lower in registered_course or registered_course in ckv_lower:
+                        for n in c_nodes:
+                            candidates[n.node_id] = n
+                        
+        elif "dept_short" in filters and filters["dept_short"]:
+            d_vals = filters["dept_short"] if isinstance(filters["dept_short"], list) else [filters["dept_short"]]
+            for dv in d_vals:
+                if not dv: continue
+                for registered_dept, d_nodes in _metadata_registry.by_dept.items():
+                    if dv in registered_dept or registered_dept in dv:
+                        for n in d_nodes:
+                            candidates[n.node_id] = n
+        else:
+            candidates = {n.node_id: n for n in _metadata_registry.basic_info_nodes}
+            
         # 收集已經在結果中的 node_id
         existing_ids = set()
         for c in all_vector_results:
@@ -673,13 +890,13 @@ def hybrid_retrieve(
         for c in all_bm25_results:
             existing_ids.add(c.node.node_id)
         
-        # 掃描所有 nodes，找出 metadata 完美匹配但被遺漏的
+        # 掃描極少量的候選 nodes，找出 metadata 完美匹配但被遺漏的
         injected_count = 0
         
         # 從 rag.metadata_filters 導入判斷邏輯
-        from rag.metadata_filters import _match_teacher, _match_classroom, _match_course_name_keyword, _match_grade
+        from rag.metadata_filters import _match_teacher, _match_classroom, _match_course_name_keyword, _match_grade, _match_dept_short
         
-        for node in nodes:
+        for node in candidates.values():
             if node.node_id in existing_ids:
                 continue
             meta = node.metadata
@@ -696,8 +913,7 @@ def hybrid_retrieve(
                 
                 # 只檢查關鍵的過濾條件，只要這幾個通過，就算符合注入標準
                 if k == "dept_short":
-                    meta_val = meta.get("dept_short", "")
-                    if not any(fv in meta_val or meta_val in fv for fv in v_list if fv):
+                    if not _match_dept_short(meta, v_list):
                         all_match = False
                         break
                 elif k == "grade":
@@ -724,9 +940,7 @@ def hybrid_retrieve(
                     if not any(fv == meta.get("semester", "") for fv in v_list):
                         all_match = False
                         break
-                        
                 elif k == "day_of_week":
-                    # 加入對上課時間的檢查
                     from rag.metadata_filters import _match_day_of_week
                     if not _match_day_of_week(meta, v_list):
                         all_match = False

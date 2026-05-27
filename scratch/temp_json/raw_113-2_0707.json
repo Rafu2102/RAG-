@@ -1,0 +1,22 @@
+{
+    "semester": "113-2",
+    "list_info": {
+        "部別": "日間部學士班",
+        "科系": "工業工程與管理學系",
+        "班級": "工管三",
+        "選課代碼": "0707",
+        "科目名稱": "資料庫管理系統",
+        "科目英文名": "Database Management System",
+        "學分": "3.0",
+        "時數": "3.0",
+        "必/選": "選修",
+        "授課教師": "陳建良",
+        "教室": "306工管系實驗教室",
+        "修課人數": "16",
+        "上限人數": "40",
+        "上課時間": "(五)2-4",
+        "限修備註": "",
+        "備註": ""
+    },
+    "detail_raw_text": "回上一頁\t國立金門大學\t \n \t教學綱要\t \n\n部別 : 日間部學士班\t113學年度第2學期\t列印日期 : 2026/05/24\n科目名稱 : 資料庫管理系統 (Database Management System)\t開課班級 : 工管三\t學　　分 : 3.0\t授課時數 : 3.0\n授課教師 : 陳建良\t必選修 : 選修\t \t \n\n\n1.教學目標\n本課程旨在讓學生掌握資料庫的基本架構與核心概念，學習 SQL 語法與資料庫管理技巧，並設計高效能的資料庫系統。課程涵蓋資料模型、正規化、查詢優化與索引應用，幫助學生將資料有效轉化為知識，提升數據管理與決策能力。此外，學生將透過實作練習，培養資料庫規劃與開發能力，為未來進階學習與實務應用奠定基礎。 \n\n\n2.教學綱要\n完成此課程可習得。1.建立關聯式資料庫的理論基礎與核心概念。2.熟悉並運用 Structured Query Language (SQL) 進行資料操作與管理。3.培養設計關聯式資料庫的能力，並透過實作分析與管理數據。 \n\n\n3.教科書\n1\t書名 : 自編講義　\n出版日期 : 年 月 \n作者 : 陳建良　出版社 : 　版本 :  \n2\t書名 : Modern Database Management　\n出版日期 : 2015年 月 \n作者 : Hoffer, J. A., Venkataraman, R., & Topi, H.　出版社 : Prentice Hall. (開發圖書)　版本 : 12th ed. \n\n\n4.參考書\n1\t書名 : 新觀念資料庫系統理論與設計實務　出版日期 : 2010年 月 \n作者 : 陳會安　出版社 : 旗標　版本 : 3rd ed. \n\n※請遵守智慧財產權觀念，依著作權法規定，教科書及教材不得非法影印與使用盜版軟體。\n\n5.教學進度表\n週次\t日期\t內容\t備註\n1\t\n2025/02/16─2025/02/22\n\tDatabase and database users \t \n2\t\n2025/02/23─2025/03/01\n\tDatabase System Concepts and Architecture \t \n3\t\n2025/03/02─2025/03/08\n\tData Model Concept \t \n4\t\n2025/03/09─2025/03/15\n\tEntity-Relationship Model \t \n5\t\n2025/03/16─2025/03/22\n\tEntity-Relationship Model \t \n6\t\n2025/03/23─2025/03/29\n\tRelational Data Model \t \n7\t\n2025/03/30─2025/04/05\n\tRelational Algebra \t \n8\t\n2025/04/06─2025/04/12\n\tSQL and Queries \t \n9\t\n2025/04/13─2025/04/19\n\t期中考 \t \n10\t\n2025/04/20─2025/04/26\n\tSQL and Queries \t \n11\t\n2025/04/27─2025/05/03\n\tViews in SQL \t \n12\t\n2025/05/04─2025/05/10\n\tRelational Calculus \t \n13\t\n2025/05/11─2025/05/17\n\tFunctional Dependency; Normalizations and Database Design \t \n14\t\n2025/05/18─2025/05/24\n\tTransaction and Concurrency Control \t \n15\t\n2025/05/25─2025/05/31\n\tRecovery issues. \t \n16\t\n2025/06/01─2025/06/07\n\tAdvanced SQL IIDatabase Applications Development \t \n17\t\n2025/06/08─2025/06/14\n\tData WarehousingBig Data and Analytics (NoSQL Databases, Hadoop, Spark, etc.) \t \n18\t\n2025/06/15─2025/06/21\n\t期末考 \t \n\n\n6.成績評定及課堂要求\n期中考30%、期末考30%、平常作業30%、出席10% \n \n \n\n\n8.永續發展目標(SDGs)：SDG9 工業化、創新及基礎建設\n\n\n9.大學社會責任(USR)關聯性：低"
+}

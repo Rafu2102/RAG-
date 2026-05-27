@@ -1,0 +1,70 @@
+國立金門大學112學年度第1學期長照系課程
+學年度：112學年度
+學期：第1學期
+課程名稱：高齡福祉科技 (Gerotechnology)
+部別：日間部學士班
+開課班級：長照四
+學分數：2.0學分
+授課時數：2.0小時
+授課教師：朱僑麗
+必選修：必修
+教室：D201長照系普通教室
+修課上限人數：45人
+上課時間：每周星期一下午第7節~第8節
+
+課程教學目標：
+1. This is an undergraduate-level introduction to the field of living e-technology, assistant and aging. This class will provide a focus on selected issues that currently characterize this field. The course will introduce the issue of physical and mental aging, the application of high technology on aging process, and the concept of design for older people. Our goal for this class is to help you understand the basic concepts and theoretical perspectives which have directed the high technology application.
+
+課程教學綱要：
+1. This is an undergraduate-level introduction to the field of living e-technology, assistant and aging. This class will provide a focus on selected issues that currently characterize this field. The course will introduce the issue of physical and mental aging, the application of high technology on aging process, and the concept of design for older people. Our goal for this class is to help you understand the basic concepts and theoretical perspectives which have directed the high technology application.
+
+教科書資料：
+無
+
+參考書資料：
+1. 書名：老年心理學 從心理科學看成功老化
+2. 出版日期：未標註
+3. 作者：程千芳
+4. 出版社：雙葉
+5. 版本：未標註
+
+※請遵守智慧財產權觀念，依著作權法規定，教科書及教材不得非法影印與使用盜版軟體。
+
+教學進度表（2023年秋季學期）：
+第1週課程 (2023/09/10─2023/09/16)：課程介紹，課程要求 (遠距同步授課)
+第2週課程 (2023/09/17─2023/09/23)：正向老化與心理健康、知覺系統老化 (中秋連假)
+第3週課程 (2023/09/24─2023/09/30)：失智症、阿茲海默症、語言溝通問題
+第4週課程 (2023/10/01─2023/10/07)：睡眠、情感情緒、疼痛處理
+第5週課程 (2023/10/08─2023/10/14)：成功老化與復原力、老化性格與習性 (本週課程於9/23日補課)
+第6週課程 (2023/10/15─2023/10/21)：活躍老化概念、健康指標
+第7週課程 (2023/10/22─2023/10/28)：活躍老化--社會安全與住宅安全
+第8週課程 (2023/10/29─2023/11/04)：人生轉折與老人需求
+第9週課程 (2023/11/05─2023/11/11)：社會連結
+第10週課程 (2023/11/12─2023/11/18)：期中討論
+第11週課程 (2023/11/19─2023/11/25)：連結斷裂
+第12週課程 (2023/11/26─2023/12/02)：連結設計、以人為中心的創新設計
+第13週課程 (2023/12/03─2023/12/09)：分組設計報告競賽
+第14週課程 (2023/12/10─2023/12/16)：分組設計報告競賽
+第15週課程 (2023/12/17─2023/12/23)：分組設計報告競賽
+第16週課程 (2023/12/24─2023/12/30)：分組設計報告競賽
+第17週課程 (2023/12/31─2024/01/06)：討論/期末考
+第18週課程 (2024/01/07─2024/01/13)：期末檢討
+
+成績評定方式：
+1. 期末報告 50%
+2. 出席 50%
+
+課堂要求：
+課堂中將涉及多項數位工具與軟體之應用及創意設計案例討論：
+1. App的應用參考：
+- https://www.kocpc.com.tw/archives/1507
+- http://www.techbang.com/posts/10611-programming-free-experience-homemade-mobile-app-app-designers-use-ibuildapp-promotion-pchome-200-skills
+2. 手機App的應用：
+- Android 系統：http://www.appinventor.tw/ai2、http://www.appinventor.tw/phone (Inventor軟體)
+- Apple 手機：Swift軟體
+3. 免費虛擬空間設計軟體：
+- http://www.funbugi.com/%E5%AE%A4%E5%85%A7%E8%A8%AD%E8%A8%88diy-10%E5%80%8B%E8%B6%85%E5%A5%BD%E7%94%A8%E7%9A%84%E5%85%8D%E8%B2%BB3d%E8%99%9B%E6%93%AC%E7%A9%BA%E9%96%93%E5%AE%A4%E5%85%A7%E8%A8%AD%E8%A8%88%E8%BB%9F%E9%AB%94/
+4. 創意設計的案例探討：
+- 皮卡自行車
+- 月亮燈
+- 迴紋針

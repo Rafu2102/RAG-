@@ -1,0 +1,123 @@
+{
+  "_description": "社工系畢業學分規則 — 111學年度入學新生適用",
+  "_source": "111課程規劃表-日間部_page-0001.jpg",
+  "_last_updated": "2026-05-26",
+  "department": "社會工作學系",
+  "applicable_from": "111",
+  "total_required": 128,
+  "categories": {
+    "共同必修": {
+      "required_credits": 8,
+      "courses": [
+        { "name": "國文(一)", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "英文(一)", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "服務教育", "credits": 0, "year": 1, "semester": 1 },
+        { "name": "國文(二)", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "英文(二)", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "服務教育", "credits": 0, "year": 1, "semester": 2 }
+      ]
+    },
+    "通識": {
+      "required_credits": 16,
+      "note": "依本校「學生修習通識教育課程辦法」規定"
+    },
+    "體育": {
+      "required_credits": 0,
+      "note": "依本校「體育課程實施辦法」規定"
+    },
+    "院必修": {
+      "required_credits": 3,
+      "courses": [
+        { "name": "心理學", "credits": 3, "year": 1, "semester": 1 }
+      ]
+    },
+    "系必修": {
+      "required_credits": 56,
+      "courses": [
+        { "name": "社會工作概論", "credits": 3, "year": 1, "semester": 1 },
+        { "name": "人類行為與社會環境", "credits": 3, "year": 1, "semester": 2 },
+        { "name": "實習指引", "credits": 1, "year": 1, "semester": 2 },
+        { "name": "社會學", "credits": 3, "year": 1, "semester": 2 },
+        { "name": "社會福利概論", "credits": 3, "year": 2, "semester": 1 },
+        { "name": "社會個案工作", "credits": 3, "year": 2, "semester": 1 },
+        { "name": "社會團體工作", "credits": 3, "year": 2, "semester": 1 },
+        { "name": "社會心理學", "credits": 3, "year": 2, "semester": 2 },
+        { "name": "社會統計", "credits": 3, "year": 2, "semester": 2 },
+        { "name": "社區工作", "credits": 3, "year": 2, "semester": 2 },
+        { "name": "社會研究法(一)", "credits": 2, "year": 3, "semester": 1 },
+        { "name": "方案設計與評估", "credits": 3, "year": 3, "semester": 1 },
+        { "name": "社會福利行政", "credits": 3, "year": 3, "semester": 1 },
+        { "name": "實習指引(二)", "credits": 1, "year": 3, "semester": 1 },
+        { "name": "社會工作倫理", "credits": 3, "year": 3, "semester": 2 },
+        { "name": "社會政策與社會立法", "credits": 3, "year": 3, "semester": 2 },
+        { "name": "社會研究法(二)", "credits": 2, "year": 3, "semester": 2 },
+        { "name": "社會工作管理", "credits": 3, "year": 4, "semester": 1 },
+        { "name": "社會工作實習(一)", "credits": 3, "year": 4, "semester": 1 },
+        { "name": "畢業專題", "credits": 2, "year": 4, "semester": 2 },
+        { "name": "社會工作實習(二)", "credits": 3, "year": 4, "semester": 2 }
+      ]
+    },
+    "專業選修": {
+      "required_credits": 45,
+      "max_from_other_dept": 9,
+      "note": "包括9學分可選修非本學系所開設之課程。",
+      "tracks": {
+        "專業選修課程": {
+          "courses": [
+            { "name": "志願服務", "credits": 2, "year": 1, "semester": 1 },
+            { "name": "長期照顧概論", "credits": 2, "year": 1, "semester": 1 },
+            { "name": "婚姻與家庭", "credits": 2, "year": 1, "semester": 1 },
+            { "name": "兒童福利服務", "credits": 2, "year": 1, "semester": 1 },
+            { "name": "社會問題", "credits": 2, "year": 1, "semester": 1 },
+            { "name": "心理衛生", "credits": 2, "year": 1, "semester": 2 },
+            { "name": "婦女福利服務", "credits": 2, "year": 1, "semester": 2 },
+            { "name": "貧窮與社會救助", "credits": 2, "year": 1, "semester": 2 },
+            { "name": "社會工作與法律", "credits": 2, "year": 1, "semester": 2 },
+            { "name": "在地服務學習", "credits": 2, "year": 1, "semester": 2 },
+            { "name": "學校社會工作", "credits": 2, "year": 2, "semester": 1 },
+            { "name": "老人福利服務與社會工作", "credits": 2, "year": 2, "semester": 1 },
+            { "name": "少年犯罪與觀護制度", "credits": 2, "year": 2, "semester": 1 },
+            { "name": "少年問題與社工處遇", "credits": 2, "year": 2, "semester": 1 },
+            { "name": "醫療社會學", "credits": 2, "year": 2, "semester": 1 },
+            { "name": "專業英文(一)", "credits": 2, "year": 2, "semester": 1 },
+            { "name": "團體動力", "credits": 2, "year": 2, "semester": 2 },
+            { "name": "助人歷程與會談技巧", "credits": 2, "year": 2, "semester": 2 },
+            { "name": "就業服務社會工作", "credits": 2, "year": 2, "semester": 2 },
+            { "name": "家庭社會工作", "credits": 2, "year": 2, "semester": 2 },
+            { "name": "早期療育社會工作", "credits": 2, "year": 2, "semester": 2 },
+            { "name": "專業英文(二)", "credits": 2, "year": 2, "semester": 2 },
+            { "name": "保護性社會工作", "credits": 2, "year": 3, "semester": 1 },
+            { "name": "身心障礙福利服務與社會工作", "credits": 2, "year": 3, "semester": 1 },
+            { "name": "社會工作論文導讀", "credits": 2, "year": 3, "semester": 1 },
+            { "name": "醫務社會工作", "credits": 2, "year": 3, "semester": 1 },
+            { "name": "遊戲治療", "credits": 2, "year": 3, "semester": 1 },
+            { "name": "社區照顧", "credits": 2, "year": 3, "semester": 2 },
+            { "name": "精神醫療社會工作", "credits": 2, "year": 3, "semester": 2 },
+            { "name": "多元文化社會工作", "credits": 2, "year": 3, "semester": 2 },
+            { "name": "藝術治療", "credits": 2, "year": 3, "semester": 2 },
+            { "name": "性別與社會政策", "credits": 2, "year": 3, "semester": 2 },
+            { "name": "志工管理", "credits": 2, "year": 4, "semester": 1 },
+            { "name": "社會資源開發與運用", "credits": 2, "year": 4, "semester": 1 },
+            { "name": "社會行銷", "credits": 2, "year": 4, "semester": 1 },
+            { "name": "原住民族社會工作與政策", "credits": 2, "year": 4, "semester": 1 },
+            { "name": "社會工作理論", "credits": 2, "year": 4, "semester": 1 },
+            { "name": "社會工作督導", "credits": 2, "year": 4, "semester": 1 },
+            { "name": "探索與冒險教育", "credits": 2, "year": 4, "semester": 2 },
+            { "name": "進階社會工作實習", "credits": 3, "year": 4, "semester": 2 },
+            { "name": "專題社會工作實習", "credits": 2, "year": 4, "semester": 2 },
+            { "name": "災變與復原社會工作", "credits": 2, "year": 4, "semester": 2 },
+            { "name": "非營利組織管理", "credits": 2, "year": 4, "semester": 2 },
+            { "name": "自殺防治", "credits": 2, "year": 4, "semester": 2 }
+          ]
+        }
+      }
+    }
+  },
+
+  "graduation_conditions": [
+    "畢業總學分至少修滿128學分，共同必修8學分、通識課程16學分，專業必修（院必修3學分及系必修56學分）59學分，選修至少45學分（包括9學分可選修非本學系所開設之專業課程）。",
+    "本系專業實習課程為大三到大四共必修6學分，實習時數400小時。為符合考選部社會工作師應考資格規定，課程名稱必須為「社會工作實習」，並合計400小時以上。本系之實習課程已納入專業必修課程，專業實習課程先修科目規定，請見本系實習辦法。",
+    "本系同學英文及資訊能力畢業門檻，按照本校「國立金門大學學生英文及資訊能力畢業門檻及輔導辦法」規定辦理。",
+    "隔年對開課程：(1)「少年問題與社工處遇」及「少年犯罪與觀護制度」隔年開授。(2)「志工管理」及「社會資源開發與運用」隔年開授。"
+  ]
+}

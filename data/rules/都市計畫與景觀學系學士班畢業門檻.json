@@ -1,0 +1,141 @@
+{
+  "_description": "都市計畫與景觀學系日間部學士班畢業學分規則 — 114學年度入學新生適用",
+  "_source": "114都市計畫與景觀學系課規表.pdf",
+  "_last_updated": "2026-05-24",
+  "department": "都市計畫與景觀學系日間部學士班",
+  "applicable_from": "114",
+  "total_required": 130,
+  "categories": {
+    "共同必修": {
+      "required_credits": 8,
+      "note": "共同必修合計24學分，其中包含共同必修8學分與通識課程16學分。",
+      "courses": [
+        { "name": "國文(一)", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "英文(一)", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "國文(二)", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "英文(二)", "credits": 2, "year": 1, "semester": 2 }
+      ]
+    },
+    "通識": {
+      "required_credits": 16,
+      "note": "依本校「學生修習通識教育課程辦法」規定。通識課程需修習16學分，涵蓋人文藝術、社會科學及自然科學三大領域，任一領域不得低於2門課。",
+      "domains": {
+        "人文藝術": { "min_courses": 2 },
+        "社會科學": { "min_courses": 2 },
+        "自然科學": { "min_courses": 2 }
+      }
+    },
+    "體育": {
+      "required_credits": 0,
+      "note": "依本校「體育課程實施辦法」規定。"
+    },
+    "院必修": {
+      "required_credits": 4,
+      "note": "院必修課程不受學年限制，只需於修業期限內完成即可。",
+      "courses": [
+        { "name": "社會科學概論", "credits": 2, "year": 2, "semester": 1, "note": "2小時" },
+        { "name": "當代文藝思潮", "credits": 2, "year": 2, "semester": 2, "note": "2小時" }
+      ]
+    },
+    "院選修": {
+      "required_credits": 0,
+      "note": "院選修為選修課程；院選修微學分課程之學分認定，以每2小時認定為0.1學分為原則。",
+      "courses": [
+        { "name": "走讀金門（微學分）", "credits": 1, "year": 2, "semester": 1, "note": "微學分" },
+        { "name": "越讀金門（微學分）", "credits": 1, "year": 2, "semester": 2, "note": "微學分" },
+        { "name": "傳記、生命史學與療癒書寫", "credits": 3, "year": 4, "semester": 1, "note": "3小時" },
+        { "name": "文化轉譯理論與實踐", "credits": 3, "year": 4, "semester": 1, "note": "3小時" },
+        { "name": "島嶼人文走讀", "credits": 3, "year": 4, "semester": 1, "note": "3小時" },
+        { "name": "數位敘事實踐", "credits": 3, "year": 4, "semester": 1, "note": "3小時" }
+      ]
+    },
+    "系必修": {
+      "required_credits": 66,
+      "note": "專業必修合計70學分，包含院必修4學分與系必修66學分。",
+      "courses": [
+        { "name": "都市與景觀設計(一)", "credits": 4, "year": 1, "semester": 1, "note": "6小時" },
+        { "name": "景觀學概論", "credits": 3, "year": 1, "semester": 1, "note": "3小時" },
+        { "name": "基礎圖學", "credits": 3, "year": 1, "semester": 1, "note": "3小時" },
+        { "name": "都市計畫概論", "credits": 3, "year": 1, "semester": 1, "note": "3小時" },
+        { "name": "景觀植物學", "credits": 3, "year": 1, "semester": 1, "note": "3小時" },
+        { "name": "電腦繪圖(一)", "credits": 3, "year": 1, "semester": 2, "note": "3小時" },
+        { "name": "植栽設計", "credits": 3, "year": 1, "semester": 2, "note": "3小時" },
+        { "name": "都市與景觀設計(二)", "credits": 4, "year": 1, "semester": 2, "note": "6小時" },
+        { "name": "都市與景觀設計(三)", "credits": 4, "year": 2, "semester": 1, "note": "6小時" },
+        { "name": "土地使用計畫", "credits": 3, "year": 2, "semester": 1, "note": "3小時" },
+        { "name": "地理資訊系統", "credits": 3, "year": 2, "semester": 1, "note": "3小時" },
+        { "name": "都市與景觀設計(四)", "credits": 4, "year": 2, "semester": 2, "note": "6小時" },
+        { "name": "都市及景觀計畫法規", "credits": 3, "year": 2, "semester": 2, "note": "3小時" },
+        { "name": "都市與景觀設計(五)", "credits": 4, "year": 3, "semester": 1, "note": "6小時" },
+        { "name": "都市設計", "credits": 3, "year": 3, "semester": 1, "note": "3小時" },
+        { "name": "敷地計畫", "credits": 3, "year": 3, "semester": 1, "note": "3小時" },
+        { "name": "都市與景觀設計(六)", "credits": 4, "year": 3, "semester": 2, "note": "6小時" },
+        { "name": "都市與景觀設計(七)", "credits": 4, "year": 4, "semester": 1, "note": "6小時" },
+        { "name": "專業實習", "credits": 1, "year": 4, "semester": 1, "note": "1小時。暑期校外實習課程；須在同一機構連續實習8週，並不低於320小時為原則" },
+        { "name": "都市與景觀設計(八)", "credits": 4, "year": 4, "semester": 2, "note": "6小時" }
+      ]
+    },
+    "專業選修": {
+      "required_credits": 36,
+      "max_from_other_dept": 10,
+      "note": "專業選修至少36學分，包括10學分可選修非本系所開設之專業課程；表列選修科目為預定科目，將視實際需要而調整。",
+      "courses": [
+        { "name": "環境生態學", "credits": 2, "year": 1, "semester": 1, "note": "2小時" },
+        { "name": "統計學", "credits": 3, "year": 1, "semester": 2, "note": "3小時" },
+        { "name": "土地法", "credits": 2, "year": 1, "semester": 2, "note": "2小時" },
+        { "name": "經濟學", "credits": 3, "year": 1, "semester": 2, "note": "3小時" },
+        { "name": "設計表現技法", "credits": 3, "year": 1, "semester": 2, "note": "3小時" },
+        { "name": "環境行為學", "credits": 2, "year": 2, "semester": 1, "note": "2小時" },
+        { "name": "都市與景觀史", "credits": 3, "year": 2, "semester": 1, "note": "3小時" },
+        { "name": "電腦繪圖(二)", "credits": 3, "year": 2, "semester": 1, "note": "3小時" },
+        { "name": "景觀工程學", "credits": 3, "year": 2, "semester": 2, "note": "3小時" },
+        { "name": "國家公園保育實務", "credits": 3, "year": 2, "semester": 2, "note": "3小時" },
+        { "name": "都市交通計畫", "credits": 3, "year": 2, "semester": 2, "note": "3小時" },
+        { "name": "視覺景觀理論及應用", "credits": 3, "year": 2, "semester": 2, "note": "3小時" },
+        { "name": "社區營造", "credits": 3, "year": 2, "semester": 2, "note": "3小時" },
+        { "name": "規劃分析方法", "credits": 3, "year": 2, "semester": 2, "note": "3小時" },
+        { "name": "都市經濟學", "credits": 3, "year": 3, "semester": 1, "note": "3小時" },
+        { "name": "都市社會學", "credits": 3, "year": 3, "semester": 1, "note": "3小時" },
+        { "name": "都市再生", "credits": 3, "year": 3, "semester": 1, "note": "3小時" },
+        { "name": "規劃理論", "credits": 3, "year": 3, "semester": 1, "note": "3小時" },
+        { "name": "環境景觀設計", "credits": 3, "year": 3, "semester": 1, "note": "3小時" },
+        { "name": "景觀植物應用", "credits": 3, "year": 3, "semester": 1, "note": "3小時" },
+        { "name": "AI在智慧城市與社區規劃設計之應用", "credits": 3, "year": 3, "semester": 1, "note": "3小時" },
+        { "name": "景觀實務專題", "credits": 3, "year": 3, "semester": 1, "note": "3小時" },
+        { "name": "永續都市", "credits": 2, "year": 3, "semester": 2, "note": "2小時" },
+        { "name": "都市防災", "credits": 3, "year": 3, "semester": 2, "note": "3小時" },
+        { "name": "營建材料與施工", "credits": 3, "year": 3, "semester": 2, "note": "3小時" },
+        { "name": "空間設計思考", "credits": 3, "year": 3, "semester": 2, "note": "3小時" },
+        { "name": "景觀生態學", "credits": 3, "year": 3, "semester": 2, "note": "3小時" },
+        { "name": "都市與景觀政策", "credits": 3, "year": 3, "semester": 2, "note": "3小時" },
+        { "name": "城鄉景觀風貌專題", "credits": 3, "year": 4, "semester": 1, "note": "3小時" },
+        { "name": "兩岸城鄉發展與規劃", "credits": 3, "year": 4, "semester": 1, "note": "3小時" },
+        { "name": "景觀施工與估價", "credits": 3, "year": 4, "semester": 1, "note": "3小時" },
+        { "name": "環境影響評估", "credits": 3, "year": 4, "semester": 1, "note": "3小時" },
+        { "name": "氣候變遷調適專題", "credits": 2, "year": 4, "semester": 1, "note": "2小時" },
+        { "name": "都市工程學", "credits": 3, "year": 4, "semester": 1, "note": "3小時" },
+        { "name": "多元遙感探測專題", "credits": 3, "year": 4, "semester": 2, "note": "3小時" },
+        { "name": "島嶼實察專題", "credits": 2, "year": 4, "semester": 2, "note": "2小時" },
+        { "name": "地方創生專題", "credits": 2, "year": 4, "semester": 2, "note": "2小時" },
+        { "name": "島嶼研究專題", "credits": 2, "year": 4, "semester": 2, "note": "2小時" }
+      ]
+    }
+  },
+  "graduation_conditions": [
+    "修滿130學分",
+    "共同必修8學分",
+    "通識課程16學分",
+    "專業必修70學分（院必修4學分及系必修66學分）",
+    "專業選修至少36學分（包括10學分可選修非本系所開設之專業課程）",
+    "須通過「本校學生英文及資訊能力畢業門檻及輔導辦法」相關規定始可畢業",
+    "表列選修科目為預定科目，將視實際需要而調整",
+    "暑期校外實習課程須在同一機構連續實習8週，並不低於320小時為原則",
+    "院必修課程不受學年限制，只需於修業期限內完成即可",
+    "院選修微學分課程之學分認定，以每2小時認定為0.1學分為原則",
+    "本表適用於114學年度入學新生"
+  ],
+  "revision_history": [
+    "114年6月4日113學年度第2學期第1次校級課程規劃委員會修訂通過",
+    "115年03月24日114學年度第2學期第1次系課程規劃委員會修訂通過"
+  ]
+}

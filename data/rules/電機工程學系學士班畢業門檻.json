@@ -1,0 +1,144 @@
+{
+  "_description": "電機工程學系學士班 課程規劃表 — 104學年度入學新生適用",
+  "_source": "電機_page-0001.jpg",
+  "_last_updated": "2026-05-26",
+  "department": "電機工程學系",
+  "applicable_from": "104",
+  "total_required": 128,
+  "categories": {
+    "共同必修": {
+      "required_credits": 8,
+      "courses": [
+        { "name": "國文(一)", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "英文(一)", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "國文(二)", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "英文(二)", "credits": 2, "year": 1, "semester": 2 }
+      ]
+    },
+    "通識": {
+      "required_credits": 18,
+      "note": "依本校「學生修習通識教育課程辦法」規定辦理"
+    },
+    "體育": {
+      "required_credits": 0,
+      "note": "依本校「體育課程實施辦法」規定辦理"
+    },
+    "系必修": {
+      "required_credits": 61,
+      "courses": [
+        { "name": "微積分(一)", "credits": 3, "year": 1, "semester": 1 },
+        { "name": "普通物理(一)", "credits": 3, "year": 1, "semester": 1 },
+        { "name": "計算機概論", "credits": 3, "year": 1, "semester": 1 },
+        { "name": "程式設計(一)", "credits": 3, "year": 1, "semester": 1 },
+        { "name": "微積分(二)", "credits": 3, "year": 1, "semester": 2 },
+        { "name": "普通物理(二)", "credits": 3, "year": 1, "semester": 2 },
+        { "name": "普通物理實驗", "credits": 1, "year": 1, "semester": 2 },
+        { "name": "程式設計(二)", "credits": 3, "year": 1, "semester": 2 },
+        { "name": "工程數學(一)", "credits": 3, "year": 1, "semester": 2 },
+        { "name": "邏輯設計", "credits": 3, "year": 1, "semester": 2 },
+        { "name": "邏輯設計實驗", "credits": 1, "year": 1, "semester": 2 },
+        { "name": "工程數學(二)", "credits": 3, "year": 2, "semester": 1 },
+        { "name": "電路學(一)", "credits": 3, "year": 2, "semester": 1 },
+        { "name": "電子學(一)", "credits": 3, "year": 2, "semester": 1 },
+        { "name": "電子電路實驗(一)", "credits": 1, "year": 2, "semester": 1 },
+        { "name": "電磁學(一)", "credits": 3, "year": 2, "semester": 2 },
+        { "name": "電路學(二)", "credits": 3, "year": 2, "semester": 2 },
+        { "name": "電子學(二)", "credits": 3, "year": 2, "semester": 2 },
+        { "name": "電子電路實驗(二)", "credits": 1, "year": 2, "semester": 2 },
+        { "name": "機率與統計", "credits": 3, "year": 2, "semester": 2 },
+        { "name": "信號與系統", "credits": 3, "year": 2, "semester": 2 },
+        { "name": "微處理機", "credits": 3, "year": 3, "semester": 1 },
+        { "name": "微處理機實驗", "credits": 1, "year": 3, "semester": 1 },
+        { "name": "專題研究(一)", "credits": 1, "year": 3, "semester": 2 },
+        { "name": "專題研究(二)", "credits": 1, "year": 4, "semester": 1 }
+      ]
+    },
+    "專業選修": {
+      "required_credits": 41,
+      "max_from_other_dept": 12,
+      "note": "包括最多12學分可選修非本學系（含進修部）所開設之課程",
+      "tracks": {
+        "通訊與訊號處理": {
+          "courses": [
+            { "name": "通訊系統(一)", "credits": 3, "year": 2, "semester": 2 },
+            { "name": "數位訊號處理", "credits": 3, "year": 3, "semester": 1 },
+            { "name": "電磁波", "credits": 3, "year": 3, "semester": 1 },
+            { "name": "天線工程", "credits": 3, "year": 3, "semester": 2 },
+            { "name": "數位通訊", "credits": 3, "year": 3, "semester": 2 },
+            { "name": "無線通訊", "credits": 3, "year": 3, "semester": 2 },
+            { "name": "微波工程", "credits": 3, "year": 4, "semester": 1 },
+            { "name": "光纖通訊", "credits": 3, "year": 4, "semester": 1 },
+            { "name": "射頻電路設計", "credits": 3, "year": 4, "semester": 1 },
+            { "name": "編碼理論", "credits": 3, "year": 4, "semester": 2 }
+          ]
+        },
+        "資訊與網路": {
+          "courses": [
+            { "name": "資料結構", "credits": 3, "year": 2, "semester": 1 },
+            { "name": "物件導向程式設計", "credits": 3, "year": 2, "semester": 1 },
+            { "name": "線性代數", "credits": 3, "year": 2, "semester": 2 },
+            { "name": "演算法", "credits": 3, "year": 2, "semester": 2 },
+            { "name": "作業系統", "credits": 3, "year": 3, "semester": 1 },
+            { "name": "計算機組織", "credits": 3, "year": 3, "semester": 1 },
+            { "name": "視窗程式設計", "credits": 3, "year": 3, "semester": 1 },
+            { "name": "計算機網路", "credits": 3, "year": 3, "semester": 2 },
+            { "name": "資料庫系統", "credits": 3, "year": 3, "semester": 2 },
+            { "name": "軟體工程", "credits": 3, "year": 3, "semester": 2 },
+            { "name": "數位影像處理", "credits": 3, "year": 4, "semester": 1 },
+            { "name": "網路安全", "credits": 3, "year": 4, "semester": 1 },
+            { "name": "類神經網路", "credits": 3, "year": 4, "semester": 1 },
+            { "name": "多媒體系統", "credits": 3, "year": 4, "semester": 2 }
+          ]
+        },
+        "微電子與光電": {
+          "courses": [
+            { "name": "近代物理", "credits": 3, "year": 2, "semester": 2 },
+            { "name": "固態物理概論", "credits": 3, "year": 3, "semester": 1 },
+            { "name": "半導體元件物理", "credits": 3, "year": 3, "semester": 1 },
+            { "name": "光電工程導論", "credits": 3, "year": 3, "semester": 2 },
+            { "name": "超大型積體電路設計", "credits": 3, "year": 3, "semester": 2 },
+            { "name": "平面顯示器原理", "credits": 3, "year": 3, "semester": 2 },
+            { "name": "太陽能電池原理與應用", "credits": 3, "year": 4, "semester": 1 },
+            { "name": "類比積體電路設計", "credits": 3, "year": 4, "semester": 1 },
+            { "name": "電子材料", "credits": 3, "year": 4, "semester": 2 }
+          ]
+        },
+        "系統與控制": {
+          "courses": [
+            { "name": "自動控制", "credits": 3, "year": 3, "semester": 1 },
+            { "name": "電機機械", "credits": 3, "year": 3, "semester": 1 },
+            { "name": "電力系統", "credits": 3, "year": 3, "semester": 2 },
+            { "name": "電力電子學", "credits": 3, "year": 3, "semester": 2 },
+            { "name": "數位控制系統", "credits": 3, "year": 3, "semester": 2 },
+            { "name": "感測與轉換", "credits": 3, "year": 4, "semester": 1 },
+            { "name": "電能轉換與控制", "credits": 3, "year": 4, "semester": 1 },
+            { "name": "可程式邏輯控制器", "credits": 3, "year": 4, "semester": 2 }
+          ]
+        },
+        "其他專業選修": {
+          "courses": [
+            { "name": "MATLAB程式設計", "credits": 3, "year": 2, "semester": 1 },
+            { "name": "基礎光學", "credits": 3, "year": 2, "semester": 2 },
+            { "name": "單晶片微電腦應用", "credits": 3, "year": 3, "semester": 1 },
+            { "name": "綠色能源科技概論", "credits": 3, "year": 3, "semester": 2 },
+            { "name": "科技英文", "credits": 2, "year": 3, "semester": 2 },
+            { "name": "工程倫理", "credits": 2, "year": 4, "semester": 1 },
+            { "name": "專利實務與智慧財產權", "credits": 3, "year": 4, "semester": 1 },
+            { "name": "產業實務專題", "credits": 3, "year": 4, "semester": 2 },
+            { "name": "暑期校外實習(一)", "credits": 3, "year": 2, "semester": 3 },
+            { "name": "暑期校外實習(二)", "credits": 3, "year": 3, "semester": 3 },
+            { "name": "學期校外實習(一)", "credits": 9, "year": 4, "semester": 1 },
+            { "name": "學期校外實習(二)", "credits": 9, "year": 4, "semester": 2 }
+          ]
+        }
+      }
+    }
+  },
+  "graduation_conditions": [
+    "畢業應修總學分至少128學分（含共同必修8學分、通識教育18學分、系必修61學分、專業選修41學分）。",
+    "本系學生修習外系（含進修部）所開課程，可承認為本系專業選修學分，惟最多以12學分為限。",
+    "依據本校「學生英文及資訊能力畢業門檻及輔導辦法」及本系相關實施要點規定，學生須通過相關規定始得畢業。",
+    "通識課程之修習，請依據本校「學生修習通識教育課程辦法」之規定辦理。",
+    "體育課程之修習，請依據本校「體育課程實施辦法」之規定辦理。"
+  ]
+}

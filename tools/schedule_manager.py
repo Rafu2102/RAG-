@@ -16,10 +16,11 @@ import json
 import logging
 from pathlib import Path
 from datetime import datetime, timezone, timedelta
+import utils
 
 logger = logging.getLogger("discord_bot")
 
-# 時段對照表（NQU 標準 9 節課）
+# 時段對照表（NQU 標準 12 節課，含夜間部）
 PERIOD_TIME_MAP = {
     1: ("08:10", "09:00"),
     2: ("09:10", "10:00"),
@@ -30,6 +31,10 @@ PERIOD_TIME_MAP = {
     7: ("15:30", "16:20"),
     8: ("16:30", "17:20"),
     9: ("17:30", "18:20"),
+    10: ("18:30", "19:15"),
+    11: ("19:20", "20:05"),
+    12: ("20:10", "20:55"),
+    13: ("21:00", "21:45"),
 }
 
 DAY_NAMES = {1: "星期一", 2: "星期二", 3: "星期三", 4: "星期四", 5: "星期五", 6: "星期六", 7: "星期日"}
@@ -58,8 +63,8 @@ def _load_user_data(discord_id: str) -> dict | None:
 def _save_user_data(discord_id: str, data: dict):
     """儲存使用者 JSON 資料"""
     path = _get_user_token_path(discord_id)
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=4)
+    utils.atomic_write_json(path, data, indent=4)
+
 
 
 # =========================================================================
@@ -103,10 +108,10 @@ def save_schedule(discord_id: str, schedule_data: dict) -> bool:
             timetable[day_str][str(period)] = course["name"]
 
     free_periods = {}
-    for day in range(1, 6):  # 只算星期一到五
+    for day in range(1, 8):  # 涵蓋週一至週日
         day_str = str(day)
         day_schedule = timetable.get(day_str, {})
-        free = [p for p in range(1, 10) if str(p) not in day_schedule]
+        free = [p for p in range(1, 14) if str(p) not in day_schedule]  # 涵蓋夜間部節次 9~13
         if free:
             free_periods[day_str] = free
 
@@ -145,7 +150,10 @@ def query_day_schedule(discord_id: str, day: int) -> str:
     """查詢某天的課表，返回人類可讀的文字"""
     schedule = get_schedule(discord_id)
     if not schedule:
-        return "❌ 您還沒有匯入課表資料。請先使用 `/upload_schedule` 上傳您的課表。"
+        if discord_id and discord_id.startswith("tg_"):
+            return "❌ 您還沒有匯入課表資料。請在主選單點擊「📅 上傳課表」或直接傳送課表圖片。"
+        else:
+            return "❌ 您還沒有匯入課表資料。請先使用 `/upload_schedule` 上傳您的課表。"
 
     day_str = str(day)
     day_name = DAY_NAMES.get(day, f"第{day}天")
@@ -187,7 +195,7 @@ def query_day_schedule(discord_id: str, day: int) -> str:
         free_str = ", ".join([f"第{p}節" for p in free])
         lines.append(f"  🕐 **空堂**：{free_str}")
 
-    return "\n".join(lines)
+    return utils.format_spacing("\n".join(lines))
 
 
 def query_free_periods(discord_id: str) -> str:
@@ -198,7 +206,7 @@ def query_free_periods(discord_id: str) -> str:
 
     free_periods = schedule.get("free_periods", {})
     lines = ["📅 **您的空堂總覽**："]
-    for day in range(1, 6):
+    for day in range(1, 8):
         day_str = str(day)
         day_name = DAY_NAMES[day]
         free = free_periods.get(day_str, [])
@@ -209,8 +217,8 @@ def query_free_periods(discord_id: str) -> str:
                 free_items.append(f"第{p}節({time_range[0]})")
             lines.append(f"  {day_name}：{', '.join(free_items)}")
         else:
-            lines.append(f"  {day_name}：沒有空堂 😢")
-    return "\n".join(lines)
+            lines.append(f"  {day_name}：沒有空堂 🎉")
+    return utils.format_spacing("\n".join(lines))
 
 
 def query_credit_summary(discord_id: str) -> str:
@@ -237,7 +245,7 @@ def query_credit_summary(discord_id: str) -> str:
     for t, info in by_type.items():
         lines.append(f"  • {t}：{info['count']} 門 ({info['credits']} 學分)")
 
-    return "\n".join(lines)
+    return utils.format_spacing("\n".join(lines))
 
 
 def get_schedule_context_for_llm(discord_id: str, query: str = "") -> str:
@@ -258,6 +266,8 @@ def get_schedule_context_for_llm(discord_id: str, query: str = "") -> str:
         "星期三": 3, "週三": 3, "禮拜三": 3, "wednesday": 3,
         "星期四": 4, "週四": 4, "禮拜四": 4, "thursday": 4,
         "星期五": 5, "週五": 5, "禮拜五": 5, "friday": 5,
+        "星期六": 6, "週六": 6, "禮拜六": 6, "saturday": 6,
+        "星期日": 7, "週日": 7, "禮拜日": 7, "sunday": 7,
     }
 
     # 空堂查詢 → 只傳空堂資料
@@ -281,7 +291,7 @@ def get_schedule_context_for_llm(discord_id: str, query: str = "") -> str:
             periods = course["periods"]
             time_start = PERIOD_TIME_MAP.get(periods[0], ("?", "?"))[0]
             time_end = PERIOD_TIME_MAP.get(periods[-1], ("?", "?"))[1]
-            return (
+            return utils.format_spacing(
                 f"【學生的課程資訊】\n"
                 f"課程：{course['name']} ({course.get('name_en', '')})\n"
                 f"教授：{course.get('instructor', '?')}\n"
@@ -292,6 +302,6 @@ def get_schedule_context_for_llm(discord_id: str, query: str = "") -> str:
 
     # 一般課表查詢 → 傳完整詳細課表
     lines = [f"【學生本學期詳細課表】"]
-    for day in range(1, 6):
+    for day in range(1, 8):
         lines.append(query_day_schedule(discord_id, day))
     return "\n\n".join(lines)

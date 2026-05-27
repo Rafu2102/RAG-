@@ -1,0 +1,68 @@
+國立金門大學113學年度第2學期工管系課程
+學年度：113學年度
+學期：第2學期
+課程名稱：微積分(二) (Calculus II)
+部別：日間部學士班
+開課班級：工管一
+學分數：3.0學分
+授課時數：3.0小時
+授課教師：鄭志中
+必選修：必修
+教室：321方文言講堂
+修課上限人數：60人
+上課時間：每周星期二上午第2節~第4節
+
+課程教學目標：
+1. 經由微積分的基本概念及應用方法的介紹，使同學熟悉管理相關學科中常使用之數學工具，教導學生能有效運用微積分並了解其生活之應用。如微分可用來求工廠產品的最少成本與最佳利潤狀況等。積分則是用來估計工廠設備的折舊率等。經由數學之演算過程，培養學生邏輯分析之能力。
+
+課程教學綱要：
+1. chapter 6. INTEGRATION
+2. chapter 7. additional topics in integration
+3. chapter 8. calculus of several variables
+4. chapter 9. differential equations
+
+教科書資料：
+1-1. 書名：Applied Calculus: For the Managerial, life and Soc
+1-2. 出版日期：未標註
+1-3. 作者：Soo. T. Tan
+1-4. 出版社：Cengage learning (高立代理)
+1-5. 版本：未標註
+
+2-1. 書名：Calculus
+2-2. 出版日期：未標註
+2-3. 作者：RON LARson
+2-4. 出版社：華泰
+2-5. 版本：10e
+
+參考書資料：
+無參考書
+
+※請遵守智慧財產權觀念，依著作權法規定，教科書及教材不得非法影印與使用盜版軟體。
+
+教學進度表（2025年春季學期）：
+第1週課程 (2025/02/16─2025/02/22)：Antiderivatives and the Rules of Integration
+第2週課程 (2025/02/23─2025/03/01)：Integration by Substitution Area and the Definite Integral
+第3週課程 (2025/03/02─2025/03/08)：The Fundamental Theorem of The Fundamental Theorem of Calculus Evaluating Definite Integrals
+第4週課程 (2025/03/09─2025/03/15)：Area Between Two Curves Applications of the Definite Integral to Business and Economics
+第5週課程 (2025/03/16─2025/03/22)：Integration by Parts
+第6週課程 (2025/03/23─2025/03/29)：Integration Using Tables of Integrals
+第7週課程 (2025/03/30─2025/04/05)：Numerical Integration Improper Integrals
+第8週課程 (2025/04/06─2025/04/12)：期中考
+第9週課程 (2025/04/13─2025/04/19)：Functions of Several Variables
+第10週課程 (2025/04/20─2025/04/26)：Functions of Several Variables
+第11週課程 (2025/04/27─2025/05/03)：Partial Derivatives Maxima and Minima of Functions of Several Variables
+第12週課程 (2025/05/04─2025/05/10)：The Method of Least Squares Constrained Maxima and Minima and the Method of Lagrange Multipliers
+第13週課程 (2025/05/11─2025/05/17)：Total Differentials Double Integrals
+第14週課程 (2025/05/18─2025/05/24)：Applications of Double Integrals
+第15週課程 (2025/05/25─2025/05/31)：Differential Equations
+第16週課程 (2025/06/01─2025/06/07)：期末考
+第17週課程 (2025/06/08─2025/06/14)：自我學習專題
+第18週課程 (2025/06/15─2025/06/21)：自我學習專題
+
+成績評定方式：
+1. 平時成績 40%
+2. 期中考 30%
+3. 期末考 30%
+
+課堂要求：
+出席

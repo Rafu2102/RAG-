@@ -1,0 +1,107 @@
+{
+  "_description": "企管系畢業學分規則 — 114學年度入學新生適用",
+  "_source": "114企管系日間部學士班課程規劃表_page-0001.jpg",
+  "_last_updated": "2026-05-26",
+  "department": "企業管理學系",
+  "applicable_from": "114",
+  "total_required": 128,
+  "categories": {
+    "共同必修": {
+      "required_credits": 8,
+      "courses": [
+        { "name": "國文(一)", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "英文(一)", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "國文(二)", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "英文(二)", "credits": 2, "year": 1, "semester": 2 }
+      ]
+    },
+    "通識": {
+      "required_credits": 16,
+      "note": "依本校「學生修習通識教育課程辦法」規定"
+    },
+    "體育": {
+      "required_credits": 0,
+      "note": "依本校「體育課程實施辦法」規定，0學分必修"
+    },
+    "院必修": {
+      "required_credits": 6,
+      "courses": [
+        { "name": "管理學", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "計算機概論", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "經濟學", "credits": 2, "year": 1, "semester": 2 }
+      ]
+    },
+    "系必修": {
+      "required_credits": 45,
+      "courses": [
+        { "name": "會計學(一)", "credits": 3, "year": 1, "semester": 1 },
+        { "name": "企業管理導論", "credits": 3, "year": 1, "semester": 1 },
+        { "name": "會計學(二)", "credits": 3, "year": 1, "semester": 2 },
+        { "name": "微積分", "credits": 3, "year": 1, "semester": 2 },
+        { "name": "統計學(一)", "credits": 3, "year": 2, "semester": 1 },
+        { "name": "行銷管理", "credits": 3, "year": 2, "semester": 1 },
+        { "name": "統計學(二)", "credits": 3, "year": 2, "semester": 2 },
+        { "name": "人力資源管理", "credits": 3, "year": 2, "semester": 2 },
+        { "name": "財務管理", "credits": 3, "year": 3, "semester": 1 },
+        { "name": "生產與作業管理", "credits": 3, "year": 3, "semester": 1 },
+        { "name": "管理資訊系統", "credits": 3, "year": 3, "semester": 2 },
+        { "name": "組織行為", "credits": 3, "year": 3, "semester": 2 },
+        { "name": "策略管理", "credits": 3, "year": 4, "semester": 1 },
+        { "name": "企業倫理", "credits": 3, "year": 4, "semester": 1 },
+        { "name": "專題製作", "credits": 3, "year": 4, "semester": 2 }
+      ]
+    },
+    "專業選修": {
+      "required_credits": 53,
+      "max_from_other_dept": 15,
+      "note": "包括15學分可選修非本學系所開設之課程。",
+      "tracks": {
+        "專業選修課程": {
+          "courses": [
+            { "name": "商用數學", "credits": 3, "year": 1, "semester": 2 },
+            { "name": "商事法", "credits": 3, "year": 1, "semester": 2 },
+            { "name": "創新與創業管理", "credits": 3, "year": 2, "semester": 1 },
+            { "name": "服務業行銷", "credits": 3, "year": 2, "semester": 1 },
+            { "name": "商業套裝軟體應用", "credits": 3, "year": 2, "semester": 1 },
+            { "name": "電子商務", "credits": 3, "year": 2, "semester": 2 },
+            { "name": "顧客關係管理", "credits": 3, "year": 2, "semester": 2 },
+            { "name": "行銷企劃", "credits": 3, "year": 2, "semester": 2 },
+            { "name": "管理數學", "credits": 3, "year": 2, "semester": 2 },
+            { "name": "品質管理", "credits": 3, "year": 2, "semester": 2 },
+            { "name": "投資學", "credits": 3, "year": 3, "semester": 1 },
+            { "name": "數位行銷", "credits": 3, "year": 3, "semester": 1 },
+            { "name": "供應鏈管理", "credits": 3, "year": 3, "semester": 1 },
+            { "name": "市場調查與分析", "credits": 3, "year": 3, "semester": 1 },
+            { "name": "績效管理與薪酬設計", "credits": 3, "year": 3, "semester": 1 },
+            { "name": "國際財務管理", "credits": 3, "year": 3, "semester": 1 },
+            { "name": "企業資源規劃", "credits": 3, "year": 3, "semester": 2 },
+            { "name": "行銷溝通", "credits": 3, "year": 3, "semester": 2 },
+            { "name": "財務報表分析", "credits": 3, "year": 3, "semester": 2 },
+            { "name": "消費者行為", "credits": 3, "year": 3, "semester": 2 },
+            { "name": "人工智慧與商業應用", "credits": 3, "year": 3, "semester": 2 },
+            { "name": "大數據分析", "credits": 3, "year": 3, "semester": 2 },
+            { "name": "金融市場與機構", "credits": 3, "year": 4, "semester": 1 },
+            { "name": "國際企業管理", "credits": 3, "year": 4, "semester": 1 },
+            { "name": "休閒產業管理", "credits": 3, "year": 4, "semester": 1 },
+            { "name": "勞資關係", "credits": 3, "year": 4, "semester": 1 },
+            { "name": "零售管理", "credits": 3, "year": 4, "semester": 1 },
+            { "name": "智慧科技應用", "credits": 3, "year": 4, "semester": 1 },
+            { "name": "專業實習(一)", "credits": 3, "year": 4, "semester": 1 },
+            { "name": "全球運籌管理", "credits": 3, "year": 4, "semester": 2 },
+            { "name": "行銷個案研討", "credits": 3, "year": 4, "semester": 2 },
+            { "name": "領導統御", "credits": 3, "year": 4, "semester": 2 },
+            { "name": "專案管理", "credits": 3, "year": 4, "semester": 2 },
+            { "name": "服務創新與設計", "credits": 3, "year": 4, "semester": 2 },
+            { "name": "專業實習(二)", "credits": 3, "year": 4, "semester": 2 }
+          ]
+        }
+      }
+    }
+  },
+
+  "graduation_conditions": [
+    "修滿至少128學分（含共同必修8學分、通識16學分、院必修6學分、系必修45學分、專業選修53學分）",
+    "須通過「本校學生英文及資訊能力畢業門檻及輔導辦法」",
+    "符合本系學生畢業規定（如實務專題或專業實習相關開設準則規定）"
+  ]
+}

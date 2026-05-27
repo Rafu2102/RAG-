@@ -9,8 +9,12 @@ tools/transcript_manager.py — 歷年成績單資料管理
 
 import json
 import logging
+import re
 from pathlib import Path
 from datetime import datetime, timezone, timedelta
+
+import config
+import utils
 
 logger = logging.getLogger("discord_bot")
 
@@ -35,26 +39,279 @@ def _load_user_data(discord_id: str) -> dict | None:
 
 def _save_user_data(discord_id: str, data: dict):
     path = _get_user_token_path(discord_id)
-    with open(path, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=4)
+    utils.atomic_write_json(path, data, indent=4)
 
 
-def _load_graduation_rules() -> dict | None:
-    rules_dir = Path(__file__).parent.parent / "data" / "rules"
-    if rules_dir.exists():
-        for path in rules_dir.glob("*.json"):
-            if "graduation" in path.name.lower() or "畢業" in path.name:
+_GE_DOMAIN_CACHE = None
+
+
+def _get_ge_course_domain_map() -> dict:
+    """
+    動態掃描 courses 目錄下名稱含「通識」的資料夾，解析所有課程 txt，
+    建立去空格課程名稱到大領域（人文藝術、社會科學、自然科學）的映射字典。
+    """
+    global _GE_DOMAIN_CACHE
+    if _GE_DOMAIN_CACHE is not None:
+        return _GE_DOMAIN_CACHE
+
+    domain_map = {}
+    courses_dir = Path(__file__).parent.parent / "data" / "courses"
+    if not courses_dir.exists():
+        _GE_DOMAIN_CACHE = {}
+        return _GE_DOMAIN_CACHE
+
+    # 搜尋含「通識」的子目錄
+    for path in courses_dir.glob("*通識*"):
+        if path.is_dir():
+            for txt_file in path.glob("*.txt"):
                 try:
-                    with open(path, "r", encoding="utf-8") as f:
-                        return json.load(f)
-                except Exception as e:
-                    logger.warning(f"Error loading {path}: {e}")
+                    with open(txt_file, "r", encoding="utf-8") as f:
+                        content = f.read()
+                except Exception:
+                    try:
+                        with open(txt_file, "r", encoding="utf-8-sig") as f:
+                            content = f.read()
+                    except Exception:
+                        continue
+
+                # 尋找課程名稱與通識主題領域
+                name_match = re.search(r"課程名稱：\s*(.*)", content)
+                domain_match = re.search(r"通識主題領域：\s*(.*)", content)
+
+                if name_match and domain_match:
+                    course_name = name_match.group(1).strip()
+                    domain_text = domain_match.group(1).strip()
+
+                    # 判定大領域
+                    big_domain = None
+                    if any(x in domain_text for x in ["人文", "藝術", "文學", "美學", "哲學", "歷史"]):
+                        big_domain = "人文藝術"
+                    elif any(x in domain_text for x in ["社會", "法政", "管理", "經濟", "公民"]):
+                        big_domain = "社會科學"
+                    elif any(x in domain_text for x in ["自然", "科技", "生命", "科學", "資訊", "數學", "環境"]):
+                        big_domain = "自然科學"
+
+                    if big_domain:
+                        cleaned_name = course_name.replace(" ", "")
+                        domain_map[cleaned_name] = big_domain
+
+                        # 處理括弧
+                        for delim in ["(", "（"]:
+                            if delim in course_name:
+                                prefix = course_name.split(delim)[0].strip().replace(" ", "")
+                                if prefix:
+                                    domain_map[prefix] = big_domain
+
+    _GE_DOMAIN_CACHE = domain_map
+    return _GE_DOMAIN_CACHE
+
+
+def _load_graduation_rules(discord_id: str = None) -> dict | None:
+    rules_dir = Path(__file__).parent.parent / "data" / "rules"
+    if not rules_dir.exists():
+        return None
+        
+    dept_keywords = []
+    if discord_id:
+        user_data = _load_user_data(discord_id)
+        if user_data:
+            profile = user_data.get("profile", {})
+            dept_short = profile.get("department", "")
+            dept_full = profile.get("department_full", "")
+            if dept_short:
+                dept_keywords.append(dept_short.replace("系", "").replace("所", ""))
+            if dept_full:
+                dept_keywords.append(dept_full.replace("系", "").replace("所", "").replace("學系", ""))
+
+    # 1. 優先精確匹配科系簡稱或全稱
+    if dept_keywords:
+        for path in rules_dir.glob("*.json"):
+            name = path.name.lower()
+            if "graduation" in name or "畢業" in name:
+                if any(kw in name for kw in dept_keywords):
+                    try:
+                        with open(path, "r", encoding="utf-8") as f:
+                            logger.info(f"🎯 動態畢業門檻路由：為 {discord_id} 載入精確科系規則檔 {path.name}")
+                            return json.load(f)
+                    except Exception as e:
+                        logger.warning(f"Error loading matched path {path}: {e}")
+
+    # 2. Fallback: 尋找任何畢業門檻規則檔
+    for path in rules_dir.glob("*.json"):
+        name = path.name.lower()
+        if "graduation" in name or "畢業" in name:
+            try:
+                with open(path, "r", encoding="utf-8") as f:
+                    logger.warning(f"⚠️ 未能精確匹配科系畢業門檻，fallback 載入規則檔 {path.name}")
+                    return json.load(f)
+            except Exception as e:
+                logger.warning(f"Error loading fallback path {path}: {e}")
     return None
 
 
-# =========================================================================
-# 📊 成績單存取
-# =========================================================================
+def recalculate_credit_progress(discord_id: str, transcript_data: dict) -> dict:
+    """
+    動態且精準地重算學生的學分進度，將商業邏輯與 OCR 徹底解耦。
+    根據學生的科系身分，動態路由加載對應的畢業門檻 JSON。
+    """
+    # 1. 載入畢業門檻規則
+    rules = _load_graduation_rules(discord_id)
+    
+    # 2. 定義預設畢業門檻值
+    total_required = 130
+    req_required = 65  # 共同必修(8) + 院必修(6) + 系必修(51)
+    elec_required = 49  # 專業選修
+    ge_required = 16  # 通識
+    
+    dept_req_courses = set()
+    
+    if rules:
+        total_required = rules.get("total_required", 130)
+        cats = rules.get("categories", {})
+        
+        # 動態計算必修總學分：共同必修 + 院必修 + 系必修
+        compulsory_cats = ["共同必修", "院必修", "系必修"]
+        req_required = sum(cats.get(rc, {}).get("required_credits", 0) for rc in compulsory_cats)
+        if req_required == 0:
+            req_required = 65  # 保底值
+            
+        # 選修與通識
+        elec_required = cats.get("專業選修", {}).get("required_credits", 49)
+        ge_required = cats.get("通識", {}).get("required_credits", 16)
+        
+        # 收集本系的所有必修課程名稱，用來做外系必修判定
+        for rc in compulsory_cats:
+            for req_c in cats.get(rc, {}).get("courses", []):
+                if isinstance(req_c, dict) and "name" in req_c:
+                    dept_req_courses.add(req_c["name"].replace(" ", ""))
+                elif isinstance(req_c, str):
+                    dept_req_courses.add(req_c.replace(" ", ""))
+                    
+        # 基本保底必修
+        dept_req_courses.update(["體育", "國文", "英文", "服務教育"])
+        
+    # 3. 遍歷學生所有學期課程，計算已修學分
+    earned_req = 0
+    earned_elec = 0
+    earned_ge = 0
+    
+    domains = {
+        "人文藝術": {"earned": 0},
+        "社會科學": {"earned": 0},
+        "自然科學": {"earned": 0}
+    }
+    
+    semesters = transcript_data.get("semesters", [])
+    for sem in semesters:
+        for c in sem.get("courses", []):
+            if c.get("status") in ("及格", "抵免"):
+                # 轉化 credits 為 int
+                try:
+                    creds = int(float(str(c.get("credits", 0)).strip()))
+                except Exception:
+                    creds = 0
+                    
+                t = c.get("type", "")
+                cat_key = {"必": "必修", "選": "選修", "通": "通識"}.get(t, t)
+                
+                if cat_key == "必修":
+                    cname = c["name"].replace(" ", "")
+                    # 檢查是否為本系必修
+                    is_own_req = True
+                    if dept_req_courses:
+                        is_own_req = any((req in cname or cname in req) for req in dept_req_courses)
+                        
+                    if is_own_req:
+                        earned_req += creds
+                    else:
+                        # 外系必修自動轉為選修
+                        earned_elec += creds
+                        # 在課程名稱上標記，便於 query 顯示 (避免重複標記)
+                        if "(外系必修→算入選修)" not in c["name"]:
+                            c["name"] = f"{c['name']} (外系必修→算入選修)"
+                elif cat_key == "選修":
+                    earned_elec += creds
+                elif cat_key == "通識":
+                    earned_ge += creds
+                    # 統計通識子領域
+                    c_name_orig = c.get("name", "")
+                    c_name = c_name_orig.replace(" ", "")
+                    c_domain = c.get("domain", "") or c.get("ge_domain", "") or ""
+
+                    # 取得括弧前的中文名稱
+                    c_name_clean = c_name
+                    for delim in ["(", "（"]:
+                        if delim in c_name_clean:
+                            c_name_clean = c_name_clean.split(delim)[0]
+
+                    domain_map = _get_ge_course_domain_map()
+                    matched_domain = None
+
+                    # 1. 精確對齊
+                    if c_name in domain_map:
+                        matched_domain = domain_map[c_name]
+                    elif c_name_clean in domain_map:
+                        matched_domain = domain_map[c_name_clean]
+
+                    # 2. 模糊匹配
+                    if not matched_domain:
+                        for key, dom in domain_map.items():
+                            if key and (key in c_name or c_name in key):
+                                matched_domain = dom
+                                break
+
+                    # 3. 傳統關鍵字比對兜底
+                    if not matched_domain:
+                        if any(x in c_domain or x in c_name_orig for x in ["人文", "藝術", "文學", "美學", "哲學", "歷史"]):
+                            matched_domain = "人文藝術"
+                        elif any(x in c_domain or x in c_name_orig for x in ["社會", "法政", "管理", "經濟", "公民"]):
+                            matched_domain = "社會科學"
+                        elif any(x in c_domain or x in c_name_orig for x in ["自然", "科技", "生命", "科學", "資訊", "環境"]):
+                            matched_domain = "自然科學"
+
+                    # 4. 終極兜底，保證學分不蒸發
+                    if not matched_domain:
+                        matched_domain = "人文藝術"
+                        c["domain"] = "人文藝術（自動歸類）"
+                    else:
+                        c["domain"] = matched_domain
+
+                    # 累加到 domains
+                    if matched_domain in domains:
+                        domains[matched_domain]["earned"] += creds
+                        
+    # 4. 更新學分摘要
+    required_earned = earned_req + earned_elec + earned_ge
+    required_remaining = max(0, total_required - required_earned)
+    
+    breakdown = {
+        "必修": {
+            "required": req_required,
+            "earned": earned_req,
+            "remaining": max(0, req_required - earned_req)
+        },
+        "選修": {
+            "required": elec_required,
+            "earned": earned_elec,
+            "remaining": max(0, elec_required - earned_elec)
+        },
+        "通識": {
+            "required": ge_required,
+            "earned": earned_ge,
+            "remaining": max(0, ge_required - earned_ge),
+            "domains": domains
+        }
+    }
+    
+    transcript_data["credit_summary"] = {
+        "required_total": total_required,
+        "required_earned": required_earned,
+        "required_remaining": required_remaining,
+        "breakdown": breakdown
+    }
+    
+    return transcript_data
+
 
 def save_transcript(discord_id: str, transcript_data: dict) -> bool:
     """
@@ -75,6 +332,9 @@ def save_transcript(discord_id: str, transcript_data: dict) -> bool:
     # 更新時間戳
     tz = timezone(timedelta(hours=8))
     transcript["updated_at"] = datetime.now(tz).isoformat()
+
+    # 在保存之前先動態、精確重算學分，徹底解耦
+    transcript = recalculate_credit_progress(discord_id, transcript)
 
     user_data["transcript"] = transcript
     _save_user_data(discord_id, user_data)
@@ -101,7 +361,10 @@ def query_credit_progress(discord_id: str) -> str:
     """查詢學分進度（與畢業標準比對）"""
     transcript = get_transcript(discord_id)
     if not transcript:
-        return "❌ 您還沒有匯入成績單資料。請先使用 `/upload_transcript` 上傳。"
+        if discord_id and discord_id.startswith("tg_"):
+            return "❌ 您還沒有匯入成績單資料。請在主選單點擊「📊 上傳成績單」或直接傳送成績單 PDF。"
+        else:
+            return "❌ 您還沒有匯入成績單資料。請先使用 `/upload_transcript` 上傳。"
 
     summary = transcript.get("credit_summary", {})
     breakdown = summary.get("breakdown", {})
@@ -117,7 +380,7 @@ def query_credit_progress(discord_id: str) -> str:
     semesters = transcript.get("semesters", [])
     
     # 預載畢業門檻標準備用，以便判斷外系必修
-    rules = _load_graduation_rules()
+    rules = _load_graduation_rules(discord_id)
     dept_req_courses = set()
     if rules:
         cats = rules.get("categories", {})
@@ -264,7 +527,7 @@ def query_credit_progress(discord_id: str) -> str:
         for a in advice:
             lines.append(a)
 
-    return "\n".join(lines)
+    return utils.format_spacing("\n".join(lines))
 
 
 def query_failed_courses(discord_id: str) -> str:
@@ -288,20 +551,20 @@ def query_failed_courses(discord_id: str) -> str:
                         "grade": c.get("grade"),
                     })
         if not failed_list:
-            return "🎉 恭喜！您沒有不及格或未完成的課程！"
+            return utils.format_spacing("🎉 恭喜！您沒有不及格或未完成的課程！")
 
         lines = [f"📋 **不及格/未完成課程** — 共 {len(failed_list)} 門"]
         for c in failed_list:
             grade_str = f" ({c['grade']}分)" if c.get("grade") is not None else ""
             lines.append(f"  ❌ **{c['name']}** ({c['credits']}學分) | {c['semester']} | {c['status']}{grade_str}")
-        return "\n".join(lines)
+        return utils.format_spacing("\n".join(lines))
     else:
         if not failed:
-            return "🎉 恭喜！您沒有不及格的課程！"
+            return utils.format_spacing("🎉 恭喜！您沒有不及格的課程！")
         lines = [f"📋 **不及格課程** — 共 {len(failed)} 門"]
         for c in failed:
             lines.append(f"  ❌ {c['name']} ({c['credits']}學分) — {c['semester']}")
-        return "\n".join(lines)
+        return utils.format_spacing("\n".join(lines))
 
 
 def query_gpa(discord_id: str) -> str:
@@ -320,14 +583,14 @@ def query_gpa(discord_id: str) -> str:
         course_count = len(sem.get("courses", []))
         lines.append(f"  {year}學年 第{semester}學期：{gpa} ({course_count}門)")
 
-    return "\n".join(lines)
+    return utils.format_spacing("\n".join(lines))
 
 
 def get_transcript_context_for_llm(discord_id: str, query: str = "") -> str:
     """
     為 LLM 生成完整的成績單 context。
     不再為了節省 Token 而切割資料，直接將「整體學分分析」進度與「歷年所有修課明細」
-    一併傳給具備超大 Context Window 的 Gemini 3.1 Pro，讓 AI 擁有完整的全局視野。
+    一併傳給具備超大 Context Window 的 Gemini 3.5 Flash，讓 AI 擁有完整的全局視野。
     """
     transcript = get_transcript(discord_id)
     if not transcript:

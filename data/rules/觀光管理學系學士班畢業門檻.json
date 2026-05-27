@@ -1,0 +1,135 @@
+{
+  "_description": "觀光管理學系學士班畢業學分規則 — 114學年度入學新生適用",
+  "_source": "國立金門大學觀光管理學系課程規劃表-114學年度入學新生適用.pdf",
+  "_last_updated": "2026-05-24",
+  "department": "觀光管理學系",
+  "applicable_from": "114",
+  "total_required": 128,
+  "categories": {
+    "共同必修": {
+      "required_credits": 8,
+      "courses": [
+        { "name": "國文(一)", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "英文(一)", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "國文(二)", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "英文(二)", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "服務教育", "credits": 0, "year": 1, "semester": 2, "hours": 1, "note": "0學分必修" }
+      ]
+    },
+    "通識": {
+      "required_credits": 16,
+      "note": "依本校「學生修習通識教育課程辦法」規定"
+    },
+    "體育": {
+      "required_credits": 0,
+      "note": "依本校「體育課程實施辦法」規定"
+    },
+    "院必修": {
+      "required_credits": 6,
+      "courses": [
+        { "name": "管理學", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "計算機概論", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "經濟學", "credits": 2, "year": 1, "semester": 2 }
+      ]
+    },
+    "系必修": {
+      "required_credits": 61,
+      "note": "表頭標示系必修61學分；課程明細與表格系必修總計加總為59學分，需以系辦公告或原始課規表確認缺漏之2學分。",
+      "courses": [
+        { "name": "本國觀光資源", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "基礎日語（一）", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "觀光學", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "經濟學導論", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "世界觀光資源", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "基礎日語（二）", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "休閒遊憩概論", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "旅運經營管理", "credits": 2, "year": 2, "semester": 1 },
+        { "name": "餐飲經營管理", "credits": 2, "year": 2, "semester": 1 },
+        { "name": "觀光行政與法規", "credits": 2, "year": 2, "semester": 1 },
+        { "name": "統計學（一）", "credits": 2, "year": 2, "semester": 1 },
+        { "name": "觀光消費者行為", "credits": 2, "year": 2, "semester": 1 },
+        { "name": "觀光英語（一）", "credits": 2, "year": 2, "semester": 1 },
+        { "name": "統計學（二）", "credits": 2, "year": 2, "semester": 2 },
+        { "name": "觀光英語（二）", "credits": 2, "year": 2, "semester": 2 },
+        { "name": "領隊與導遊概論", "credits": 2, "year": 3, "semester": 1 },
+        { "name": "觀光人力資源管理", "credits": 2, "year": 3, "semester": 1 },
+        { "name": "觀光研究方法", "credits": 2, "year": 3, "semester": 1 },
+        { "name": "觀光行銷學", "credits": 2, "year": 3, "semester": 1 },
+        { "name": "觀光資源規劃與管理", "credits": 2, "year": 3, "semester": 1 },
+        { "name": "觀光事業財務管理", "credits": 2, "year": 3, "semester": 2 },
+        { "name": "觀光專題研究（一）", "credits": 2, "year": 3, "semester": 2 },
+        { "name": "觀光服務品質管理", "credits": 2, "year": 4, "semester": 1 },
+        { "name": "觀光專題研究（二）", "credits": 2, "year": 4, "semester": 1 },
+        { "name": "統計軟體應用", "credits": 2, "year": 4, "semester": 1 },
+        { "name": "專業實習", "credits": 9, "year": 4, "semester": 2 }
+      ]
+    },
+    "專業選修": {
+      "required_credits": 37,
+      "max_from_other_dept": 8,
+      "note": "包括8學分可選修非本學系所開設之課程",
+      "courses": [
+        { "name": "國際禮儀", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "兩岸旅遊政經分析", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "旅遊多媒體應用", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "觀光產業趨勢", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "初等會計學", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "文化創意產業概論", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "旅遊安全與急救常識", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "觀光休閒事業管理", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "導覽與解說概論", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "觀光會計學", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "永續觀光", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "餐飲安全與衛生管理", "credits": 2, "year": 2, "semester": 1 },
+        { "name": "導覽與解說實務", "credits": 2, "year": 2, "semester": 1 },
+        { "name": "大陸觀光市場", "credits": 2, "year": 2, "semester": 1 },
+        { "name": "海洋觀光休閒管理", "credits": 2, "year": 2, "semester": 1 },
+        { "name": "飲料與調酒實務", "credits": 2, "year": 2, "semester": 1 },
+        { "name": "全球觀光目的地", "credits": 2, "year": 2, "semester": 1 },
+        { "name": "觀光日語（一）", "credits": 2, "year": 2, "semester": 1 },
+        { "name": "文化觀光與藝術", "credits": 2, "year": 2, "semester": 2 },
+        { "name": "觀光管理策略", "credits": 2, "year": 2, "semester": 2 },
+        { "name": "旅遊銷售規劃與技巧", "credits": 2, "year": 2, "semester": 2 },
+        { "name": "主題餐飲實務", "credits": 2, "year": 2, "semester": 2 },
+        { "name": "民宿經營與管理", "credits": 2, "year": 2, "semester": 2 },
+        { "name": "餐旅服務技術", "credits": 2, "year": 2, "semester": 2 },
+        { "name": "葡萄酒知識導論", "credits": 2, "year": 2, "semester": 2 },
+        { "name": "茶與咖啡知識導論", "credits": 2, "year": 2, "semester": 2 },
+        { "name": "觀光日語（二）", "credits": 2, "year": 2, "semester": 2 },
+        { "name": "地方創生與永續發展", "credits": 2, "year": 2, "semester": 2 },
+        { "name": "客務管理與實務", "credits": 2, "year": 3, "semester": 1 },
+        { "name": "烈酒知識導論", "credits": 2, "year": 3, "semester": 1 },
+        { "name": "旅館設施規劃與設計", "credits": 2, "year": 3, "semester": 1 },
+        { "name": "航空票務管理", "credits": 2, "year": 3, "semester": 1 },
+        { "name": "節慶活動管理", "credits": 2, "year": 3, "semester": 1 },
+        { "name": "中餐烹調", "credits": 2, "year": 3, "semester": 1, "hours": 4 },
+        { "name": "旅遊業電子商務應用", "credits": 2, "year": 3, "semester": 1 },
+        { "name": "社交英文書信", "credits": 2, "year": 3, "semester": 1 },
+        { "name": "烘焙與實務", "credits": 2, "year": 3, "semester": 2, "hours": 4 },
+        { "name": "生態觀光", "credits": 2, "year": 3, "semester": 2 },
+        { "name": "房務管理與實務", "credits": 2, "year": 3, "semester": 2 },
+        { "name": "旅遊糾紛處理", "credits": 2, "year": 3, "semester": 2 },
+        { "name": "遊程規劃與設計", "credits": 2, "year": 3, "semester": 2 },
+        { "name": "航空訂位系統", "credits": 2, "year": 3, "semester": 2 },
+        { "name": "國際會議展覽規劃與管理", "credits": 2, "year": 3, "semester": 2 },
+        { "name": "導覽英文", "credits": 2, "year": 3, "semester": 2 },
+        { "name": "旅館營收管理", "credits": 2, "year": 4, "semester": 1 },
+        { "name": "觀光產業開發與投資", "credits": 2, "year": 4, "semester": 1 },
+        { "name": "博奕產業專題", "credits": 2, "year": 4, "semester": 1 },
+        { "name": "宴會管理", "credits": 2, "year": 4, "semester": 1 },
+        { "name": "互聯網與觀光應用", "credits": 2, "year": 4, "semester": 1 }
+      ]
+    }
+  },
+  "graduation_conditions": [
+    "修滿128學分",
+    "共同必修8學分",
+    "通識課程16學分",
+    "院必修6學分",
+    "系必修61學分",
+    "專業選修至少37學分（包括8學分可選修非本學系所開設之課程）",
+    "需依本校「學生修習通識教育課程辦法」修習通識課程",
+    "需依本校「體育課程實施辦法」完成體育課程要求",
+    "課程表明細之系必修課程加總為59學分，與表頭標示之系必修61學分不一致，需再以系辦或正式公告確認"
+  ]
+}

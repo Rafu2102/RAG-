@@ -16,6 +16,7 @@ import re
 import logging
 from typing import TYPE_CHECKING
 
+import config
 from .query_router import RouteResult
 
 if TYPE_CHECKING:
@@ -37,32 +38,45 @@ def _match_dept_short(meta: dict, v_list: list, content: str = "") -> bool:
     if meta_dept == "全校":
         return True
     
-    # 建立別名映射
-    aliases = {
-        "資工系": ["資訊工程學系", "資工", "CSIE"],
-        "海巡系": ["海洋與邊境管理學系", "海巡"],
-        "企管系": ["企業管理學系", "企管"],
-    }
-    
+    # 智慧展開：使用 config.DEPT_REGISTRY 進行全校科系語意對照
     for v in v_list:
         if not v: continue
-        # 展開別名
-        targets = [v] + aliases.get(v, [])
+        targets = [v]
+        
+        # 尋找與 v 匹配的系所
+        for dept_key, dept_val in config.DEPT_REGISTRY.items():
+            if (v == dept_key or 
+                v == dept_val.get("short_name") or 
+                v == dept_val.get("full_name") or 
+                v in dept_val.get("aliases", []) or 
+                v in dept_val.get("keywords", [])):
+                targets.extend(dept_val.get("aliases", []))
+                targets.append(dept_val.get("full_name", ""))
+                targets.append(dept_val.get("short_name", ""))
+                targets.append(dept_key)
+        
+        # 去除重複與空值
+        targets = list(set(t for t in targets if t))
         for t in targets:
             if t in meta_dept or meta_dept in t:
                 return True
     return False
 
 def _match_course_name_keyword(meta: dict, v_list: list, content: str = "") -> bool:
-    c_name = meta.get("course_name", "")
+    c_name = meta.get("course_name", "").lower()
     c_name_short = re.sub(r"[（(][^）)]*[）)]", "", c_name).strip()
-    return any(v == c_name_short or v == c_name or v in c_name for v in v_list)
+    return any(
+        v.lower() == c_name_short or 
+        v.lower() == c_name or 
+        v.lower() in c_name 
+        for v in v_list if v
+    )
 
 def _match_teacher(meta: dict, v_list: list, content: str = "") -> bool:
-    clean_vals = [re.sub(r"(老師|教授)$", "", v) for v in v_list]
+    clean_vals = [re.sub(r"(老師|教授)$", "", v).lower() for v in v_list]
     # 同時匹配課程的 teacher 欄位和教授資訊的 professor_name 欄位
-    teacher = meta.get("teacher", "")
-    prof_name = meta.get("professor_name", "")
+    teacher = meta.get("teacher", "").lower()
+    prof_name = meta.get("professor_name", "").lower()
     
     for cv in clean_vals:
         if not cv:
@@ -198,16 +212,44 @@ def apply_hard_metadata_filter(
     if not active_filters:
         return chunks
 
-    # 智慧豁免：精確實體查詢時，豁免 profile 注入的 grade/dept
+    # 智慧豁免：精確定量查詢時，豁免 profile 注入的 grade/dept
     exempt_keys = set()
+    
+    # 🆕 多課程跨學期旁路安全閥 (Multi-Course Temporal Bypass)
+    # 當偵測到使用者同時詢問兩門（含）以上的課程時，自動在 Python 端卸除 semester 與 academic_year 限制，
+    # 避免跨學期的課因時間不符被扣分而被誤殺。
+    ckw = active_filters.get("course_name_keyword", [])
+    is_multi_course = isinstance(ckw, list) and len(ckw) >= 2
+    if is_multi_course:
+        exempt_keys.update(["semester", "academic_year"])
+        logger.info(f"  🏷️ 多課程聯查「{ckw}」→ 啟動跨學期旁路安全閥，完全卸除 semester 與 academic_year 評分限制")
+
+    # 🆕 跨年級課表比較安全閥 (Multi-Grade Bypass Valve)
+    # 當偵測到使用者同時詢問複數年級（例如 "大一跟大二" 或 filters 中有複數年級）時，自動豁免排他性的年級過濾，防止誤殺。
+    grades = active_filters.get("grade", [])
+    is_multi_grade = False
+    if isinstance(grades, list) and len(grades) >= 2:
+        is_multi_grade = True
+    q_text = ""
+    if route_result.search_queries:
+        q_text = route_result.search_queries[0]
+    grade_kws = ["大一", "大二", "大三", "大四", "一年級", "二年級", "三年級", "四年級", "碩一", "碩二", "碩三"]
+    found_kws = [kw for kw in grade_kws if kw in q_text]
+    if len(found_kws) >= 2 or "跨年級" in q_text or "年級比較" in q_text or is_multi_grade:
+        is_multi_grade = True
+        exempt_keys.add("grade")
+        logger.info(f"  🏷️ 跨年級查詢「{found_kws}」→ 啟動跨年級課表安全閥，完全豁免 grade 評分")
+
     if "teacher" in active_filters:
         exempt_keys.update(["grade", "dept_short"])
         logger.info(f"  🏷️ 教師查詢「{active_filters['teacher']}」→ 豁免 grade + dept_short 評分")
     if "course_name_keyword" in active_filters:
-        # 【關鍵修復】不再對 course_name_keyword 自動豁免 dept_short 與 grade
+        # 【關鍵修復】不再對 course_name_keyword 自動豁免 dept_short
         # 這樣當使用者「明確指定」資工系微積分時，電機系微積分才會被成功 -100 分斬殺！
         # 若使用者只是找微積分，Router 現在不會補上 dept_short，所以也不會被誤殺。
-        logger.info(f"  🏷️ 課程名稱查詢「{active_filters['course_name_keyword']}」→ 嚴格套用系級評分機制")
+        # 額外補救：加入 grade 豁免，確保當使用者指定特定課程名稱時，能自動豁免年級排他性過濾，防跨年級誤殺。
+        exempt_keys.update(["grade"])
+        logger.info(f"  🏷️ 課程名稱查詢「{active_filters['course_name_keyword']}」→ 豁免 grade 評分，嚴格套用系級評分機制")
     if "classroom" in active_filters:
         exempt_keys.update(["grade", "dept_short"])
         logger.info(f"  🏷️ 教室查詢「{active_filters['classroom']}」→ 豁免 grade + dept_short 評分")
@@ -220,6 +262,7 @@ def apply_hard_metadata_filter(
 
     # 對每個 chunk 計算 metadata 加減分
     match_count = 0
+    penalty_factor = 0.0 if (is_multi_course or is_multi_grade) else 1.0
     for chunk in chunks:
         meta = chunk.node.metadata
         content = chunk.node.get_content()
@@ -241,23 +284,23 @@ def apply_hard_metadata_filter(
 
             if is_exclusive:
                 # 排他性條件：匹配加分，不匹配直接斬殺（-100）
-                score_delta += 2.0 if is_match else -100.0
+                score_delta += 2.0 if is_match else (-100.0 * penalty_factor)
             elif key in _HIGH_WEIGHT_KEYS:
                 # 明確實體：匹配 +5, 不匹配 -3
-                score_delta += 5.0 if is_match else -3.0
+                score_delta += 5.0 if is_match else (-3.0 * penalty_factor)
             elif key in _LOW_WEIGHT_KEYS:
                 # 背景條件：匹配 +1, 不匹配 -0.5
-                score_delta += 1.0 if is_match else -0.5
+                score_delta += 1.0 if is_match else (-0.5 * penalty_factor)
             else:
                 # 一般條件：匹配 +3, 不匹配 -2
-                score_delta += MATCH_BONUS if is_match else MISMATCH_PENALTY
+                score_delta += MATCH_BONUS if is_match else (MISMATCH_PENALTY * penalty_factor)
 
         chunk.metadata_score += score_delta
         if score_delta > 0:
             match_count += 1
 
-    # 按 metadata_score + final_score 重新排序
-    chunks.sort(key=lambda c: c.metadata_score + c.final_score, reverse=True)
+    # 移除原本尾部的 chunks.sort 排序開銷，將排序職責完全歸還給 retriever.py，
+    # 避免在此處依據尚未結算完成的 final_score 進行混亂排序。
 
     logger.info(
         f"  🏷️ Soft Metadata Scoring：{match_count}/{len(chunks)} chunks 獲得加分 "

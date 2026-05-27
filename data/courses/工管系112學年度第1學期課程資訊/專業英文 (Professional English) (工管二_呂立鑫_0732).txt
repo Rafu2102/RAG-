@@ -1,0 +1,69 @@
+國立金門大學112學年度第1學期工管系課程
+學年度：112學年度
+學期：第1學期
+課程名稱：專業英文 (Professional English)
+部別：日間部學士班
+開課班級：工管二
+學分數：3.0學分
+授課時數：3.0小時
+授課教師：呂立鑫
+必選修：必修
+教室：308工管系普通教室
+修課上限人數：60人
+上課時間：每周星期四下午第5節~第7節
+
+課程教學目標：
+1. 本課程旨在培養學生在工業工程領域具備良好的英語閱讀能力，並具備一定的聽力與翻譯能力，以及初步的口說與寫作能力。(This course is designed to prepare students with good reading skills in English for industrial engineering, a certain ability to listen and translate, and a preliminary ability to speak and write.)
+
+課程教學綱要：
+1. Real IE Value
+2. Operation Research
+3. Ergonomics
+4. Next Generation Factory Layouts
+5. Computer Integrated Manufacturing
+6. Classification of JIT Techniques
+7. Agile Manufacturing
+
+教科書資料：
+1. 書名：工業工程專業英語
+2. 出版日期：未標註
+3. 作者：王愛虎
+4. 出版社：北京理工大學出版社
+5. 版本：未標註
+
+參考書資料：
+1. 書名：工業工程專業英語
+2. 出版日期：未標註
+3. 作者：周躍進
+4. 出版社：機械工業出版社
+5. 版本：未標註
+
+※請遵守智慧財產權觀念，依著作權法規定，教科書及教材不得非法影印與使用盜版軟體。
+
+教學進度表（2023年秋季學期）：
+第1週課程 (2023/09/10─2023/09/16)：Real IE Value
+第2週課程 (2023/09/17─2023/09/23)：Moon Festival
+第3週課程 (2023/09/24─2023/09/30)：Operation Research
+第4週課程 (2023/10/01─2023/10/07)：Operation Research
+第5週課程 (2023/10/08─2023/10/14)：Ergonomics
+第6週課程 (2023/10/15─2023/10/21)：Ergonomics
+第7週課程 (2023/10/22─2023/10/28)：Next Generation Factory Layouts
+第8週課程 (2023/10/29─2023/11/04)：Next Generation Factory Layouts
+第9週課程 (2023/11/05─2023/11/11)：Computer Integrated Manufacturing
+第10週課程 (2023/11/12─2023/11/18)：Midterm Exam
+第11週課程 (2023/11/19─2023/11/25)：Computer Integrated Manufacturing
+第12週課程 (2023/11/26─2023/12/02)：Classification of JIT Techniques
+第13週課程 (2023/12/03─2023/12/09)：Classification of JIT Techniques
+第14週課程 (2023/12/10─2023/12/16)：Agile Manufacturing
+第15週課程 (2023/12/17─2023/12/23)：Agile Manufacturing
+第16週課程 (2023/12/24─2023/12/30)：Presentation
+第17週課程 (2023/12/31─2024/01/06)：Presentation
+第18週課程 (2024/01/07─2024/01/13)：Final Exam
+
+成績評定方式：
+1. 平時成績（包含隨堂測驗、課堂出席、參與度、作業與報告）佔 50% (Usual Grades (including quizzes, class attendance, participation, homework and reports) 50%)
+2. 期中考試佔 25% (Midterm Exam 25%)
+3. 期末考試佔 25% (Final Exam 25%)
+
+課堂要求：
+準時出席 (Attending On Time.)

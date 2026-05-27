@@ -1,0 +1,22 @@
+{
+    "semester": "113-2",
+    "list_info": {
+        "部別": "日間部研究所碩士班",
+        "科系": "建築學系",
+        "班級": "建築碩一",
+        "選課代碼": "0212",
+        "科目名稱": "AI生成圖像的應用探索",
+        "科目英文名": "Exploring Applications of AI-Generated Images",
+        "學分": "3.0",
+        "時數": "3.0",
+        "必/選": "選修",
+        "授課教師": "許正平",
+        "教室": "550建築節能中心",
+        "修課人數": "8",
+        "上限人數": "9",
+        "上課時間": "(二)5-7",
+        "限修備註": "",
+        "備註": ""
+    },
+    "detail_raw_text": "回上一頁\t國立金門大學\t \n \t教學綱要\t \n\n部別 : 日間部研究所碩士班\t113學年度第2學期\t列印日期 : 2026/05/24\n科目名稱 : AI生成圖像的應用探索 (Exploring Applications of AI-Generated Images)\t開課班級 : 建築碩一\t學　　分 : 3.0\t授課時數 : 3.0\n授課教師 : 許正平\t必選修 : 選修\t \t \n\n\n1.教學目標\n人工智慧（Artificial Intelligence, AI）的圖像生成能力，已在各視覺相關領域快速發展。然而，在建築設計的應用上則有待進一步地探索。本課程主要以基於 Stable Diffusion 的開源圖像生成工具 ComfyUI來進行操作與學習；相較於其他的使用者介面 (user interface)，ComfyUI是以工作流 (workflow) 的形式來呈現及運作，並可彈性的增減其中的結點 (nodes)，明晰的生成運行流程能讓同學對AI生成圖像有著系統性的認識。而在面對AI生成圖像的快速發展下，與其憂心建築設計者是否會被取代，不如更正面積極來學習與思考: 如何透過AI的協作，為設計帶來更多的可能性，成為A I時代的建築人。 \n\n\n2.教學綱要\n(1) 認識AI生成圖像\n(2) Stable Diffusion / ComfyUI介紹\n(3) ComfyUI節點與工作流架設\n(4) AI生成圖像對建築設計的協作 \n\n\n3.教科書\n1\t書名 : https://comfyui-wiki.com/en　\n出版日期 : 年 月 \n作者 : 　出版社 : 　版本 :  \n2\t書名 : https://comfyanonymous.github.io/ComfyUI_examples/　\n出版日期 : 年 月 \n作者 : 　出版社 : 　版本 :  \n3\t書名 : https://docs.comfy.org/essentials/custom_node_over\nview　\n出版日期 : 年 月 \n作者 : 　出版社 : 　版本 :  \n4\t書名 : https://www.comfy.org/　\n出版日期 : 年 月 \n作者 : 　出版社 : 　版本 :  \n\n\n無參考書資料。\n\n※請遵守智慧財產權觀念，依著作權法規定，教科書及教材不得非法影印與使用盜版軟體。\n\n5.教學進度表\n週次\t日期\t內容\t備註\n1\t\n2025/02/16─2025/02/22\n\tAI生成圖像與ComfyUI 介面導覽 \t \n2\t\n2025/02/23─2025/03/01\n\tText to Image 文生圖工作流 \t \n3\t\n2025/03/02─2025/03/08\n\tPrompt Styler 風格轉化 \t \n4\t\n2025/03/09─2025/03/15\n\tImage to Image 圖生圖工作流 \t \n5\t\n2025/03/16─2025/03/22\n\tLora 的下載及應用 \t \n6\t\n2025/03/23─2025/03/29\n\tControlNet-Canny/Depth圖像線條/深度控制 \t \n7\t\n2025/03/30─2025/04/05\n\t放假 \t \n8\t\n2025/04/06─2025/04/12\n\t期中分享 \t \n9\t\n2025/04/13─2025/04/19\n\tIP-Adapter 風格遷移 \t \n10\t\n2025/04/20─2025/04/26\n\tResize, Upscale & Adjustment 圖像品質調整 \t \n11\t\n2025/04/27─2025/05/03\n\tREMOVE & MASK \t \n12\t\n2025/05/04─2025/05/10\n\tInpaint/Outpaint 局部重繪/擴圖 \t \n13\t\n2025/05/11─2025/05/17\n\tIC-Light 打光與背景置換 \t \n14\t\n2025/05/18─2025/05/24\n\tReal-time 實時繪圖渲染 \t \n15\t\n2025/05/25─2025/05/31\n\tFlux介紹及應用 \t \n16\t\n2025/06/01─2025/06/07\n\t期末分享 \t \n17\t\n2025/06/08─2025/06/14\n\tAI生成圖像對建築設計的協作(I) \t \n18\t\n2025/06/15─2025/06/21\n\tAI生成圖像對建築設計的協作(II) \t \n\n\n6.成績評定及課堂要求\n平時成績: 40% 期中及期末報告: 60% \n上課需自帶有NVIDIA顯卡的筆電 (建議12GB以上為佳)  \n本課程人數上限8人 \n\n\n8.永續發展目標(SDGs)：\n\n\n9.大學社會責任(USR)關聯性："
+}

@@ -1,9 +1,9 @@
 # 🎓 NQU 校園智慧助理機器人 (Campus AI Assistant)
 
 > **國立金門大學資訊工程學系 · Ultimate Agentic RAG 智慧問答系統**
-> *最後更新時間：2026-04-13*
+> *最後更新時間：2026-04-13 (2026-05-27 最新核心功能全面升級)*
 
-基於 **Agentic Intent-Driven Hybrid RAG（代理式意圖驅動混合檢索增強生成）** 架構的超級校園生態系助理。全面升級採用最新的 **Gemini 3.1 Pro (主大腦)** 與 **Gemini Flash Lite (路由/決策)** 雙備援架構。搭載獨創的 **5-Step 自我修正思考鏈 (CoT)**、無上限的**全景上下文回填 (Context Backfill)** 技術，以及**原生語意職涯跨域探索**能力，提供低延遲、絕對零幻覺、高資安防護的校園問答與 Google 行事曆代管服務。
+基於 **Agentic Intent-Driven Hybrid RAG（代理式意圖驅動混合檢索增強生成）** 架構的超級校園生態系助理。全面升級採用最新的 **Gemini 3.5 Flash (主大腦)** 與 **Gemini 3.5 Flash (路由/決策)** 雙備援架構。搭載獨創的 **5-Step 自我修正思考鏈 (CoT)**、無上限的**全景上下文回填 (Context Backfill)** 技術，以及**原生語意職涯跨域探索**能力，提供低延遲、絕對零幻覺、高資安防護的校園問答與 Google 行事曆代管服務。
 
 ---
 
@@ -31,10 +31,10 @@
 | 功能 | 說明 |
 |------|------|
 | 🤖 **雙軌平台架構** | 核心邏輯解耦！完美支援 **Discord 機器人**與 **Telegram 機器人**並行運作，Telegram 實裝 Inline Keyboard 互動式防呆選單。 |
-| 🧠 **Agentic 雙腦架構** | **Gemini 3.1 Pro** 負責極深度的長文本分析與回答，**Flash Lite** 負責快決策、5 步 CoT 路由規劃、意圖判斷與防禦攔截。 |
+| 🧠 **Agentic 雙腦架構** | **Gemini 3.5 Flash** 負責極深度的長文本分析與回答，**Gemini 3.5 Flash** 負責快決策、5 步 CoT 路由規劃、意圖判斷與防禦攔截。 |
 | 🎓 **個人化學分感知** | 動態攔截成績單！詢問「我差幾學分畢業」時，系統會自動在底層注入您的**歷年成績進度 + RAG 畢業法規**，給出專屬您的量身選課建議。 |
 | 🔮 **5-Step CoT 路由** | 產生搜尋策略前，強制五階段自我詰問（意圖判定 → 條件盤點 → 跨域特判 → 防幻覺警告 → Step-Back 擴充），消滅搜尋誤判。 |
-| 🔀 **全景 Context Backfill** | 突破 RAG Top-K 限制！涉及系所級別查詢時，繞過向量檢索，將高達 225KB+ 的全系教授簡歷、實驗室與設備地圖一次性「硬派注入」主大腦。 |
+| 🔀 **全景 Context Backfill** | 突破 RAG Top-K 限制！涉及系所級別查詢時，繞過向量檢索，將高達 225 KB+ 的全系教授簡歷、實驗室與設備地圖一次性「硬派注入」主大腦。 |
 | 🌟 **Native Semantic Routing**| 棄用死板關鍵字，交由 LLM 透過語意原生輸出 `is_career_planning` 布林值，實現真正的智慧「跨域課程」探索解鎖。 |
 | 🔀 **Intent-Driven Lookup** | 首創「意圖驅動注入」，當偵測為特定意圖查詢時，直接繞過傳統 RAG 的稀釋效應，並行載入完整背景設定，保證最高精準度。 |
 | 🔀 **Multi-query RAG** | 一個問題生成 3 個搜尋查詢，提高檢索覆蓋率 |
@@ -43,7 +43,7 @@
 | 🛡️ **Zero-Hit 嚴格防爆** | Hard Filter 物理捨棄不符條件資料（含系所嚴格匹配），若無資料直接攔截，**實現零幻覺** |
 | 📊 **RRF 融合公式** | `final_score = α·RRF(Vector) + β·RRF(BM25) + γ·Metadata` |
 | 🔄 **Cross-Encoder Reranker** | bge-reranker-base 精細重排 + **甲乙班去重偏好**，Top-30 → Top-10，GPU batch=32 |
-| 📅 **多學期動態支援** | 自動檢測最新學期，支援 `114上`、`114年第1學期` 等口語化時間查詢 |
+| 📅 **多學期動態支援** | 自動檢測最新學期，支援 `114 上`、`114 年第 1 學期` 等口語化時間查詢 |
 | 🔗 **One-shot Router+Rewrite** | 合併路由分類與查詢改寫為**單次 LLM 呼叫**，省去重複載入開銷 |
 | 📅 **Google Calendar Agent** | 完整 CRUD 行事曆代理 — 支援新增/刪除/列出/修改，含週期排課、自訂事件、學校行事曆、時間定位搜尋 |
 | 📸 **Gemini Vision 課表萃取** | 支援學生直接將「選課系統截圖」發送給機器人，由 Gemini 視覺模型一秒解析複雜的 NQU 節次、授課教師與教室，並且自動轉為 JSON 實體直接循環排入 Google 日曆。 |
@@ -53,9 +53,18 @@
 | 🧠 **VRAM 死亡交叉防護** | 8B `keep_alive="5m"` 閒置 5 分鐘後自動卸載 + 3B 輕量任務 + Pipeline 後 `gc.collect()` + `torch.cuda.empty_cache()` |
 | 📜 **統一格式輸出** | 單一課程列表格式，杜絕 LLM 重複輸出和幻覺課程 |
 | 🧩 **智慧區段感知 Chunking** | 短區段（≤512 字）保持完整不切；僅超長區段啟動 SentenceSplitter |
-| ⚡ **GPU 加速 (CUDA)** | 自動偵測 GPU (PyTorch)，Reranker batch=32 壓榨 8GB VRAM |
+| ⚡ **GPU 加速 (CUDA)** | 自動偵測 GPU (PyTorch)，Reranker batch=32 壓榨 8 GB VRAM |
 | 🇹🇼 **繁中在地化與同義詞拓撲** | Regex 解碼器 + 口語翻譯蒟蒻 (禮拜二→星期二，加退選→停修)，另於 System Prompt 動態硬性注入絕對台灣時區與星期，使 相對時間 推算 100% 精準 |
 | 🔒 **必選修智慧過濾** | 自動偵測疑問句（「是必修嗎？」），避免誤設篩選條件 |
+| 🌐 **Vertex AI 企業版無金鑰 ADC** | 全面升級至 Google Cloud Vertex AI REST 企業級架構，改用應用程式預設憑證 (Application Default Credentials, ADC) 無密鑰授權，徹底消除金鑰洩露風險。 |
+| 🛡️ **連線池與退避重試** | 實作非同步 HTTP 連線池單例，優化 TCP 連續建連開銷，並內建帶有隨機抖動 (Jitter) 的指數退避重試引擎以因應 429 / 5xx 配額限制。 |
+| 🔀 **Dcard 搜尋指令與提示詞分流** | 解決 Perplexity 搜尋詞受 prompt 污染導致 0 筆搜尋結果之問題，將格式、過濾條件、保底指示及快取防禦皆移入 `system` 角色，`user` 僅保留極簡純淨搜尋詞。 |
+| 🏷️ **Dcard 搜尋口語化與詞域智慧擴充** | 搜尋時自動識別 `資工`、`電機`、`英文` 等單詞並自動擴充同義詞，提升搜尋引擎召回率；快取防禦時間戳記移入 `system` 避免干擾搜尋召回。 |
+| 🔌 **Windows 背景子進程與環境變數繼承** | 針對 Windows 環境下 `venv` 子進程 `CWD` 漂移與 `.env` 未繼承問題，重構進程啟動機制，顯式傳遞工作目錄與全域環境變數。 |
+| 📱 **Telegram HTML 連結防污染解析** | 改善 Telegram HTML 超連結解析，動態去除 Discord 專屬防預覽角括號 `<>` 與轉義 `&lt;&gt;` 字元，防止 Telegram 用戶端點擊失效。 |
+| 🎛️ **Reranker 非阻塞執行緒併發隔離** | 將本地 Cross-Encoder 推理 offload 至背景執行緒並以 `threading.Semaphore(3)` 限制併發，避免高計算量造成 asyncio 主執行緒心跳超時或中斷。 |
+| 📅 **安全 OAuth 行事曆所有權校驗** | 行事曆刪除與覆寫操作嚴格限制於機器人建立之事件，並新增 DB 覆蓋警告與所有權 (Ownership) 比對安全閥，避免誤刪私人事件。 |
+| 🔌 **FastMCP 伺服器整合** | 將核心 RAG 與 LLM 查詢、歷年課表與成績單解析曝露為 MCP 工具，啟動後支援 stdio 通訊，可掛載於 Cursor, Claude Desktop 等 MCP 用戶端。 |
 
 ---
 
@@ -67,6 +76,7 @@
 2. **雙重 Few-Shot 陷阱防護**：賦予 LLM 解析「實體豁免陷阱（單查教授但不限科系）」與「跨域探索陷阱（商管學生想學寫程式）」的精準判斷力，自動決定何時應收緊過濾器，何時應放寬到全校搜尋。
 3. **終極設備與師資注入 (Facility & Professor Injection)**：打破傳統 RAG「相關度低就被拋棄」的缺點。對教授的研究室、專業等廣泛查詢，系統會直接召喚系所底層的 `facility_info`（教學設備與空間文件）連同所有教授的履歷，全數傾倒入百萬 Token 級別的語境中盲測分析。
 4. **消除 Python-Side 判斷瓶頸**：大幅刪減 Python 端的 `any(kw in ...)` 單詞命中漏洞，將所有決策權利與護城河驗證上繳至 Gemini 核心，達到「真正的降維打擊」。
+5. **Perplexity 意圖與指令分流 (Instruction-Query Separation)**：為了解決 Perplexity Sonar Pro 會將 prompt 中的格式指令誤判為檢索關鍵字的問題，首創「搜尋詞與指令解耦」架構。`user` 訊息只傳遞純粹的 `site:dcard.tw/f/nqu {query}` 條件，而所有格式表格、篩選標準與保底文字全數收歸 `system` 角色管理，實現 100% 準確搜尋。
 
 ---
 
@@ -80,6 +90,10 @@
 4. **安全限速 (Rate Limiting)**：為 `/ask`, `/add_calendar` 等指令加上了 `@app_commands.checks.cooldown(1, 10)`，限制每 10 秒只能送出一次請求，防禦洗版與 DoS。
 5. **Prompt Injection 防範**：於字串層面轉義 XML 標籤 `< >`，並將使用者輸入框定於 `<user_question>` 標籤內，強制 LLM 忽略越權指令。
 6. **跨平台 IPC 稽核防護 (Cross-Process Audit)**：無論是從 CLI、Discord 還是 Telegram 進來的查詢，系統都會透過 IPC Server (Port 50505) 將所有互動記錄與除錯資訊發送至管理員的 `#bot_modify` 頻道。
+7. **Vertex AI 企業級 ADC 無密鑰授權**：捨棄傳統寫死於程式碼或設定檔的 API Key，全站導入 Google Cloud Vertex AI 原生憑證授權（Application Default Credentials），大幅降低資安威脅。
+8. **Reranker 執行緒併發隔離與 VRAM 釋放**：Cross-Encoder 推理在背景執行緒中非阻塞運行，配合核心 Semaphore 佇列進行硬體隔離，且於排序完畢後強制呼叫 `gc.collect()` 與 `torch.cuda.empty_cache()` 徹底釋放 VRAM。
+9. **Windows 平台子進程安全防禦**：針對背景子進程啟動時工作目錄 (CWD) 可能漂移至直譯器目錄以及 `.env` 變數無法在非 Windows cmd 下正確繼承的漏洞，顯式傳遞工作目錄與全域環境變數，保證服務穩定與金鑰安全載入。
+10. **Telegram HTML 超連結轉義清理**：自動修復 Telegram 因轉義造成的 `<URL>` 或 `&lt;URL&gt;` 語法錯誤，防止點擊網址失效或受到釣魚警告。
 
 ---
 
@@ -90,7 +104,7 @@
     │
     ▼
 ┌───────────────────────────────┐
-│  Step 1: 5-Step Agentic Router│  ← 路由式思考鏈 (Gemini Flash Lite)
+│  Step 1: 5-Step Agentic Router│  ← 路由式思考鏈 (Gemini 3.5 Flash)
 │  (query_router.py)            │     JSON Schema 強制輸出格式
 │  · 五步思考 (CoT) 防呆護城河  │     is_career_planning 原生偵測
 │  · Multi-query 擴充改寫 (×3)  │     實體豁免與職涯跨域陷阱判斷
@@ -119,7 +133,7 @@
 │  Step 3: Intent Inject  │   │
 │  & Context Backfill     │   │
 │  · 動態注入歷年成績與學分 │   │
-│  · 掛載 225KB+ 教學設備地圖│   │
+│  · 掛載 225 KB+ 教學設備地圖│   │
 │    與全系師資履歷入候選池  │   │
 └──────────┬──────────────┘   │
            ▼                  │
@@ -133,7 +147,7 @@
 ┌─────────────────────────┐   │
 │  Step 5: Ultimate Answer│   │
 │  (llm_answer.py)        │   │
-│  · Gemini 3.1 Pro 主大腦│   │
+│  · Gemini 3.5 Flash 主大腦│   │
 │  · 強推理與超大視窗盲測分析│   │
 │  · 統一格式 Markdown 輸出  │   │
 └──────────┬──────────────┘   │
@@ -147,11 +161,11 @@
 
 | 層級 | 技術 | 說明 |
 |------|------|------|
-| **生成大腦** | **Gemini 3.1 Pro** | 全新升級主核心，負責複雜課程對答推理、225KB+ Context Backfill、個人成績深度解析，以及 **Vision 高精度圖像解構** |
-| **路由小腦** | **Gemini Flash Lite** | One-shot CoT 分類、意圖解構、原生職涯規劃偵測與 Schema 強制輸出 |
+| **生成大腦** | **Gemini 3.5 Flash** | 全新升級主核心，負責複雜課程對答推理、225 KB+ Context Backfill、個人成績深度解析，以及 **Vision 高精度圖像解構** |
+| **路由小腦** | **Gemini 3.5 Flash** | One-shot CoT 分類、意圖解構、原生職涯規劃偵測與 Schema 強制輸出 |
 | **自動化代理** | Google Calendar API | 完整 CRUD、專武級 NQU N-Type 時間定位、Trigram 模糊匹配演算法、所有權防呆機制 |
 | **Embedding** | Gemini Embedding 2 Preview (3072 維) | 全面升級雲端 Embedding，Matryoshka 架構支援 128~3072 維度，batchEmbedContents 批次處理，內建 Rate Limiter (3000 RPM / 1M TPM) |
-| **Reranker** | BAAI/bge-reranker-base | Cross-Encoder，batch=32，推理後 VRAM GC + **甲乙班去重硬偏好** |
+| **Reranker** | BAAI/bge-reranker-base | Cross-Encoder，batch=32，推理後 VRAM GC + **甲乙班去重硬偏好**。在 RAG Pipeline 中**以背景非同步執行緒 (to_thread) 隔離運作**，防止 Heartbeat 逾時。 |
 | **Vector Store** | FAISS (IndexFlatIP) | 餘弦相似度 (Cosine Similarity) 快速過濾 |
 | **Keyword Search** | BM25Okapi + CKIP Tagger | 深度學習繁中分詞，領域專有名詞保護 (強制教師斷詞) |
 | **防禦機制** | Agentic Bypass / UI State / Cooldowns | 低延遲短路攔截 + 互動式 UI 狀態淨化防漏損 + 防洗版速率限制 |
@@ -165,9 +179,9 @@
 
 | 組件 | 最低需求 | 推薦配置 |
 |------|---------|---------| 
-| **GPU** | GTX 1080 (8GB) | RTX 4060 (8GB) |
-| **RAM** | 16GB | 32GB |
-| **儲存空間** | 10GB | 20GB |
+| **GPU** | GTX 1080 (8 GB) | RTX 4060 (8 GB) |
+| **RAM** | 16 GB | 32 GB |
+| **儲存空間** | 10 GB | 20 GB |
 
 ### 軟體需求
 
@@ -258,7 +272,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-> **注意**：`sentence-transformers` 會在首次執行時自動從 HuggingFace 下載 `bge-reranker-base` 模型（約 1.1GB）。
+> **注意**：`sentence-transformers` 會在首次執行時自動從 HuggingFace 下載 `bge-reranker-base` 模型（約 1.1 GB）。
 
 #### Step 5：設定 Google Calendar 功能（選填）
 
@@ -326,6 +340,29 @@ python discord_bot.py
 python telegram_bot.py
 ```
 
+### 方式四：啟動 MCP 伺服器 (FastMCP)
+
+本系統支援 Model Context Protocol (MCP)，將核心的 RAG 問答、個人成績與課表查詢曝露為 MCP 工具，讓您的 AI 編輯器（如 Cursor、Claude Desktop）直接調用：
+
+```bash
+cd "d:\AI HYBRID"
+# 啟動 MCP stdio 服務
+python mcp_server.py
+```
+
+#### Cursor / Claude Desktop 設定範例：
+```json
+{
+  "mcpServers": {
+    "nqu-campus-assistant": {
+      "command": "python",
+      "args": ["d:/AI HYBRID/mcp_server.py"],
+      "transport": "stdio"
+    }
+  }
+}
+```
+
 機器人啟動後支援以下互動方式：
 
 ### 📱 Telegram 操作介面 (NEW)
@@ -385,7 +422,7 @@ Telegram 版本全面支援豐富的互動選單，請向機器人發送 `/start
 ### `config.py` — 全域設定
 
 集中管理所有可調參數：
-- Gemini API 設定（API 金鑰, 雙腦備援模型變數，含 Timeout 與 maxOutputTokens 常數）
+- Gemini API 設定（全面遷移至 Google Cloud Vertex AI ADC 無密鑰安全授權，已移除 legacy API 金鑰與硬編碼 URL 端點，含 Timeout 與 maxOutputTokens 常數）
 - Gemini Embedding 2 Preview 雲端設定（模型名稱、維度、3072、批次大小、Rate Limit）
 - Ollama 連線設定（URL，僅用於本地 LLM 備援）
 - Reranker 模型設定（bge-reranker-base, TOP_N=10, BATCH=32）
@@ -422,7 +459,7 @@ Telegram 專屬的模組化架構，提供流暢的 Inline Keyboard 體驗，啟
 | 模組 | 職責 |
 |------|------|
 | `tg_ui_menus.py` | 負責所有 Inline Keyboard 互動選單，實裝 `_clear_all_user_states` 防護與覆蓋警告。 |
-| `tg_events.py` | 文字訊息攔截、照片解析（Gemini Vision 聯動）與檔案上傳處理。 |
+| `tg_events.py` | 文字訊息攔截、照片解析（Gemini Vision 聯動）與檔案上傳處理，並包含 Telegram HTML 連結防污染清理（自動移除角括號 `<>` 與轉義 `&lt;&gt;`）。 |
 | `tg_audit.py` | 負責將使用者的操作日誌透過 IPC (Socket) 送往 Discord。 |
 | `tg_cmd_schedule.py`| 處理課表查詢、空堂查詢等相關邏輯。 |
 | `tg_cmd_transcript.py`| 處理歷年成績單、學分進度查詢相關邏輯。 |
@@ -496,7 +533,7 @@ final_score = α × RRF_norm(vector_rank)     （語意相似度）
 
 #### `llm/llm_answer.py` — 終極 Context Backfill 黑科技
 
-- **Context Backfill (上下文全景回填)**：系統極大亮點。偵測為教授/系所大哉問時，無條件把所有的老師履歷、教學設備地圖 `facility_info` 全部灌入 Gemini 3.1 Pro 超大 Context，暴力盲測，破除 RAG Top-K 殘缺限制。
+- **Context Backfill (上下文全景回填)**：系統極大亮點。偵測為教授/系所大哉問時，無條件把所有的老師履歷、教學設備地圖 `facility_info` 全部灌入 Gemini 3.5 Flash 超大 Context，暴力盲測，破除 RAG Top-K 殘缺限制。
 - **統一格式 Prompt**：嚴謹的人設與排版格式，杜絕重複輸出與虛構課程。
 - **極速旁路閒聊**：判定為閒聊時 Bypass，1 秒回覆不佔算力。
 
@@ -523,7 +560,7 @@ final_score = α × RRF_norm(vector_rank)     （語意相似度）
 | `tools/group_manager.py` | 群組標籤操作、`groups.json` 資料庫、邀請碼產生 |
 | `tools/calendar_tool.py` | 相容性 shim — 重新匯出上述三個模組的函式 |
 | `tools/search_event_tool.py` | 學校行事曆檢索與同義詞拓撲 |
-| `tools/dcard_search_tool.py` | Dcard 金門大學版教授評價搜尋 |
+| `tools/dcard_search_tool.py` | Dcard 教授評價搜尋。全面改裝為 Perplexity 提示詞/查詢分流架構，將表格輸出格式與保底文案移入 system 提示詞，user 僅提供 site:dcard.tw/f/nqu 精準檢索語句，防範搜尋引擎受到指令詞污染；支援關鍵字詞域智慧擴充（資工/電機/英文等）。 |
 | `tools/schedule_manager.py` | 個人課表資料存取、空堂計算、學期學分統計 |
 | `tools/transcript_manager.py` | 歷年成績單解析、GPA 計算、畢業學分比對與不及格警告 |
 | `tools/ocr_engine.py` | Gemini Vision 課表/成績單圖片辨識引擎（Zero-shot 萃取 NQU 節次、教師、教室） |
@@ -542,7 +579,7 @@ CLI 互動介面，串接所有模組：
 
 ## 🔄 Pipeline 流程詳解
 
-### Step 1: Agentic 5-Step Router (Gemini Flash Lite)
+### Step 1: Agentic 5-Step Router (Gemini 3.5 Flash)
 
 ```
 輸入：「教我們線代的老師實驗室在哪？」
@@ -573,7 +610,7 @@ CLI 互動介面，串接所有模組：
 偵測為「全系教授與資源普查」意圖：
   → 強勢提取所有 `professor_info`
   → 追加提取系所地圖 `facility_info` (教學設備與空間文件)
-  → 打包 >225KB 的精純資料進入保送名單，無視原有 30 名額。
+  → 打包 >225 KB 的精純資料進入保送名單，無視原有 30 名額。
 ```
 
 ### Step 4: Reranker 重排序
@@ -586,11 +623,11 @@ Top-N 候選陣列
   → VRAM GC 釋放
 ```
 
-### Step 5: Ultimate LLM Answer (Gemini 3.1 Pro)
+### Step 5: Ultimate LLM Answer (Gemini 3.5 Flash)
 
 ```
 打包的龐大教授群資訊集 + Rerank 後的精簡課程快取 + 使用者發問
-  → 進入 Gemini 3.1 Pro 深思視窗
+  → 進入 Gemini 3.5 Flash 深思視窗
   → 進行跨節點統整（如：將「線性代數教師」比對至「該教師辦公室位置」）
   → 輸出精準回答
 ```
@@ -607,7 +644,7 @@ Top-N 候選陣列
 🤖 助理：
 📘 **深度學習** (Deep Learning)
 - 👨‍🏫 授課教師：馮玄明 | 🎓 學分：3 | 🏷️ 選修
-- ⏰ 時間地點：星期三 5~7節 @ E302
+- ⏰ 時間地點：星期三 5~7 節 @ E302
 - 💡 帶領研究生深入了解最新的 AI 模型與實作
 ```
 
@@ -639,8 +676,8 @@ Top-N 候選陣列
 
 🤖 助理 (內部運算)：
   [✓] 擷取到 `教授/研究室` 意圖。
-  [✓] 啟動 Context Backfill：滿血載入 225KB「全系教授履歷」+「教學設備與空間.txt」。
-  [✓] 交由 Gemini 3.1 Pro 盲測比對。
+  [✓] 啟動 Context Backfill：滿血載入 225 KB「全系教授履歷」+「教學設備與空間.txt」。
+  [✓] 交由 Gemini 3.5 Flash 盲測比對。
 
 🤖 助理：
 教你們**線性代數**的老師是**趙于翔**教授！
@@ -658,10 +695,10 @@ Top-N 候選陣列
 
 🤖 助理 (內部解析)：
   [✓] 意圖判定：weekly_course
-  [✓] 時間定位器：辨識為夜間部 N節 (17:30)、A節 (18:25)、B節 (19:20)
+  [✓] 時間定位器：辨識為夜間部 N 節 (17:30)、A 節 (18:25)、B 節 (19:20)
   
 🤖 助理：
-✅ 已成功將課程加入 Google Calendar，為您設定為每週重複 (共18週)！
+✅ 已成功將課程加入 Google Calendar，為您設定為每週重複 (共 18 週)！
 📌 標題：微積分 | 🕒 逢週二 17:30 ~ 20:10
 ```
 
@@ -672,7 +709,7 @@ Top-N 候選陣列
 
 🤖 助理 (內部解析)：
   [✓] 偵測到 Discord 圖片附加檔案。
-  [✓] 提交圖片給 Gemini 3.1 Pro Vision 模型，執行 Zero-shot 萃取任務。
+  [✓] 提交圖片給 Gemini 3.5 Flash Vision 模型，執行 Zero-shot 萃取任務。
   [✓] 解析出四門課程的完整 JSON 結構（含名稱、教師、星期、節次）。
 
 🤖 助理：
@@ -691,7 +728,7 @@ Top-N 候選陣列
 🧑‍🎓 你：謝謝你！你真的很厲害！
 
 🤖 助理 (內部狀態)：
-  [✓] Flash Lite 偵測無檢索需求，直接觸發 Bypass (< 1.5s)。
+  [✓] Gemini 3.5 Flash 偵測無檢索需求，直接觸發 Bypass (< 1.5s)。
   
 🤖 助理：
 謝謝你的誇獎！身為金大的校園助理，這是我應該做的！如果有遇到選課、找教室或是排行事曆的問題，隨時可以 Tag 我喔！😎
@@ -711,7 +748,7 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 # 主力 Pro 模型 URL（複雜解答、Context Backfill、Vision OCR）
 GEMINI_API_URL = f"https://...models/gemini-3.1-pro-preview:generateContent?key={GEMINI_API_KEY}"
 
-# 高速 Flash Lite 模型 URL（五步 CoT 路由、閒聊 Bypass）
+# 高速 Gemini 3.5 Flash 模型 URL（五步 CoT 路由、閒聊 Bypass）
 GEMINI_FAST_API_URL = f"https://...models/gemini-3.1-flash-lite-preview:generateContent?key={GEMINI_API_KEY}"
 ```
 
@@ -719,11 +756,11 @@ GEMINI_FAST_API_URL = f"https://...models/gemini-3.1-flash-lite-preview:generate
 
 | 模組 | 模型等級 | 負責任務 |
 |------|------|------|
-| `llm_answer.py` | 🔴 Pro | 分析多達 200KB 的回填資料、回答艱深選課策略 |
+| `llm_answer.py` | 🔴 Pro | 分析多達 200 KB 的回填資料、回答艱深選課策略 |
 | `llm_calendar.py` | 🔴 Pro | 日曆增/刪/改查指令的 JSON 結構提取 |
-| `query_router.py` | 🟢 Flash Lite | 高速運算 5-Step CoT 分析、擴充搜尋字串 |
-| `llm_calendar.py`| 🟢 Flash Lite | 極速解析相對時間（如：下週五 N 節） |
-| `llm_answer.py` | 🟢 Flash Lite | 閒聊 Bypass 答覆 |
+| `query_router.py` | 🟢 Gemini 3.5 Flash | 高速運算 5-Step CoT 分析、擴充搜尋字串 |
+| `llm_calendar.py`| 🟢 Gemini 3.5 Flash | 極速解析相對時間（如：下週五 N 節） |
+| `llm_answer.py` | 🟢 Gemini 3.5 Flash | 閒聊 Bypass 答覆 |
 
 ### Hybrid Fusion 權重
 
@@ -738,16 +775,16 @@ HYBRID_GAMMA = 0.2   # γ — Metadata 匹配（增大提升結構化過濾）
 ### Retriever / Reranker 參數
 
 ```python
-RETRIEVER_TOP_K = 30      # 59門課（跨學期），semester filter 先篩出 ~30，30 chunks 足夠
+RETRIEVER_TOP_K = 30      # 59 門課（跨學期），semester filter 先篩出 ~30，30 chunks 足夠
 RERANKER_TOP_N = 10       # 精選 10 個高品質 chunk（星期二有 9 門課，需足夠容量）
-RERANKER_BATCH_SIZE = 32  # GPU batch size（bge-reranker-base ≈1.1GB，8GB VRAM 穩定跑 32 批次）
+RERANKER_BATCH_SIZE = 32  # GPU batch size（bge-reranker-base ≈1.1 GB，8 GB VRAM 穩定跑 32 批次）
 ```
 
 ### Chunk 設定
 
 ```python
-CHUNK_SIZE = 512          # 讓 5/6 區段保持完整不被切分
-CHUNK_OVERLAP = 50        # 超長區段切分時保持上下文連貫
+CHUNK_SIZE = 1536         # (最新升級：原為 512，現已擴大至 1536 以確保 18 週進度表完整包含)
+CHUNK_OVERLAP = 128       # (最新升級：原為 50，現已擴大至 128 以保持上下文完美連續)
 ```
 
 ---
@@ -773,7 +810,7 @@ d:\AI HYBRID\
 ├── main.py                     # 主 Pipeline（CLI 介面 + 短路防爆攔截 + VRAM GC）
 ├── discord_bot.py              # Discord Bot 啟動入口（32 行，匯入 bot/ 子模組）
 ├── telegram_bot.py             # 🚧 Telegram Bot 啟動入口（Beta，開發中）
-├── run_all.py                  # 🚀 雙平台統一啟動器（Beta，Discord + Telegram 同時運行）
+├── run_all.py                  # 🚀 雙平台統一啟動器。重構 Windows 子行程啟動機制，顯式指定 CWD=PROJECT_ROOT 並主動傳遞親代環境變數（含 OPENROUTER_API_KEY 等），徹底避免 CWD 漂移至虛擬環境內部目錄與環境變數遺漏問題。
 ├── mcp_server.py               # MCP Server 入口
 ├── utils.py                    # 共用工具函式（smart_split_message 等）
 ├── nlp_utils.py                # CKIP Tagger 繁中分詞工具
@@ -812,7 +849,7 @@ d:\AI HYBRID\
 │   └── reranker.py             # Cross-Encoder (甲乙班去重偏好) 與 GC
 │
 ├── llm/                        # 🧠 大腦生成模組
-│   ├── llm_answer.py           # 終極大腦：處理 225KB+ Context Backfill 與防幻覺輸出
+│   ├── llm_answer.py           # 終極大腦：處理 225 KB+ Context Backfill 與防幻覺輸出
 │   ├── llm_calendar.py         # NQU 特化行事曆引擎 (完備支援夜間部 N-Type 節次)
 │   └── date_utils.py           # 基層時間轉換與對標物件
 │
@@ -850,5 +887,5 @@ d:\AI HYBRID\
 ---
 
 <p align="center">
-  Built with ❤️ using Gemini 3.1 Pro + FAISS + Agentic RAG
+  Built with ❤️ using Gemini 3.5 Flash + FAISS + Agentic RAG
 </p>

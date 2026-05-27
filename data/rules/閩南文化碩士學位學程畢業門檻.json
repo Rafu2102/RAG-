@@ -1,0 +1,64 @@
+{
+  "_description": "閩南文化碩士學位學程碩士班畢業學分規則 — 114學年度入學學生適用",
+  "_source": "114學年課程規劃表_page-0001.jpg, 114學年課程規劃表_page-0002.jpg",
+  "_last_updated": "2026-05-26",
+  "department": "閩南文化碩士學位學程",
+  "applicable_from": "114",
+  "total_required": 39,
+  "categories": {
+    "共同必修": {
+      "required_credits": 0,
+      "courses": [
+        { "name": "校園學術倫理教育課程", "credits": 0, "year": 1, "semester": 1 }
+      ]
+    },
+    "院必修": {
+      "required_credits": 0,
+      "courses": []
+    },
+    "專業必修": {
+      "required_credits": 18,
+      "courses": [
+        { "name": "閩文化與文學專題", "credits": 3, "year": 1, "semester": 1 },
+        { "name": "質性研究與論文寫作", "credits": 3, "year": 1, "semester": 2 },
+        { "name": "閩南語研究專題", "credits": 0, "year": 1, "semester": 2 },
+        { "name": "社會學專題", "credits": 3, "year": 2, "semester": 1 },
+        { "name": "閩南史料選讀", "credits": 3, "year": 2, "semester": 2 },
+        { "name": "學位論文", "credits": 6, "year": 2, "semester": 2 }
+      ]
+    },
+    "專業選修": {
+      "required_credits": 21,
+      "max_from_other_dept": 6,
+      "note": "包括6學分可選修非本學系所開設之課程",
+      "courses": [
+        { "name": "文化資產保存與地方創生", "credits": 3, "year": 1, "semester": 1 },
+        { "name": "海外華人與僑鄉研究專題", "credits": 3, "year": 1, "semester": 1 },
+        { "name": "數位工具與方法的人文應用", "credits": 3, "year": 1, "semester": 1 },
+        { "name": "民間信仰專題", "credits": 3, "year": 1, "semester": 1 },
+        { "name": "博物館史", "credits": 3, "year": 1, "semester": 1 },
+        { "name": "族群關係與認同專題", "credits": 3, "year": 1, "semester": 2 },
+        { "name": "宗族研究專題", "credits": 3, "year": 1, "semester": 2 },
+        { "name": "數位博物館", "credits": 3, "year": 1, "semester": 2 },
+        { "name": "文創產業與循環經濟專題", "credits": 3, "year": 1, "semester": 2 },
+        { "name": "閩南地方社會研究專題", "credits": 3, "year": 1, "semester": 2 },
+        { "name": "文化產業與政策專題", "credits": 3, "year": 1, "semester": 2 },
+        { "name": "文化產業與實務專題", "credits": 3, "year": 2, "semester": 1 },
+        { "name": "閩南海洋貿易史", "credits": 3, "year": 2, "semester": 1 },
+        { "name": "東(南)亞史", "credits": 3, "year": 2, "semester": 1 },
+        { "name": "全球化與移民專題", "credits": 3, "year": 2, "semester": 1 },
+        { "name": "海外華文文學專題", "credits": 3, "year": 2, "semester": 2 },
+        { "name": "世界文化遺產專題", "credits": 3, "year": 2, "semester": 2 },
+        { "name": "藝術與社會專題", "credits": 3, "year": 2, "semester": 2 },
+        { "name": "博物館與文化治理專題", "credits": 3, "year": 2, "semester": 2 },
+        { "name": "文化研究專題", "credits": 3, "year": 2, "semester": 2 }
+      ]
+    }
+  },
+  "graduation_conditions": [
+    "本學位學程至少須修滿39學分(含學位論文6學分)方得畢業。",
+    "選修課程可承認本校其他碩士班課程6學分或簽訂合作交流學校之碩士班課程9學分。",
+    "學生已通過閩南語能力中高級檢定，得免修必修課程「閩南語研究專題」。",
+    "研究生須於申請學位考試當學期修習學位論文。"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+    "semester": "113-2",
+    "list_info": {
+        "部別": "日間部學士班",
+        "科系": "土木與工程管理學系",
+        "班級": "土木二",
+        "選課代碼": "0184",
+        "科目名稱": "工程數學(二)",
+        "科目英文名": "Engineering Mathematics II",
+        "學分": "3.0",
+        "時數": "3.0",
+        "必/選": "選修",
+        "授課教師": "陳春木",
+        "教室": "E103教室(理工大樓)",
+        "修課人數": "15",
+        "上限人數": "60",
+        "上課時間": "(二)5-7",
+        "限修備註": "",
+        "備註": ""
+    },
+    "detail_raw_text": "回上一頁\t國立金門大學\t \n \t教學綱要\t \n\n部別 : 日間部學士班\t113學年度第2學期\t列印日期 : 2026/05/24\n科目名稱 : 工程數學(二) (Engineering Mathematics II)\t開課班級 : 土木二\t學　　分 : 3.0\t授課時數 : 3.0\n授課教師 : 陳春木\t必選修 : 選修\t \t \n\n\n1.教學目標\n1. 幫助學生了解應用於工程相關領域的數學理論及方法 2. 訓練學生具備讀懂工程相關領域研究報告的數學能力 3. 培養學生進行獨立研究的進階數學能力 \n\n\n2.教學綱要\n1. 複習微積分的基礎理論\n2. 複習常微分方程式（ODE）的常用解法\n3. 介紹線性代數（Linear Algebra）\n4. 介紹向量及張量微分學（Vector and Tensor Calculus）\n5. 介紹傅立葉分析（Fourier Analysis)及偏微分方程式（PDE）\n6. 介紹複變函數論（Complex Analysis) \n\n\n3.教科書\n1\t書名 : 工程數學　\n出版日期 : 2018年 12月 \n作者 : 劉明昌　出版社 : 文笙書局　版本 :  \n\n\n4.參考書\n1\t書名 : Advanced Engineering Mathematics　出版日期 : 2018年 01月 \n作者 : Erwin Kreyszig　出版社 : Wiley　版本 : 10 \n\n※請遵守智慧財產權觀念，依著作權法規定，教科書及教材不得非法影印與使用盜版軟體。\n\n5.教學進度表\n週次\t日期\t內容\t備註\n1\t\n2025/02/16─2025/02/22\n\t複習微積分的基礎理論 \tReview Calculus. Differentiation. Integration. Taylor Series. Wolfram Alpha. \n2\t\n2025/02/23─2025/03/01\n\t複習常微分方程式（ODE）的常用解法 \t1st-order ODE, 2nd-order ODE, Higher-order ODE \n3\t\n2025/03/02─2025/03/08\n\t複習常微分方程式（ODE）的常用解法 \tPower Series and Laplace Transforms. Concept of Green Functions. \n4\t\n2025/03/09─2025/03/15\n\t介紹線性代數 \tMatrices and Vectors. Determinants and Jacobians \n5\t\n2025/03/16─2025/03/22\n\t介紹線性代數 \tLinear Systems and Eigenvalue Problems. \n6\t\n2025/03/23─2025/03/29\n\t介紹向量微分學 \tVector Calculus \n7\t\n2025/03/30─2025/04/05\n\t介紹向量微分學 \tVector Integrals \n8\t\n2025/04/06─2025/04/12\n\t介紹張量分析 \tTensor Algebra and Tensor Analysis \n9\t\n2025/04/13─2025/04/19\n\t期中評量 \tOpen-Book Exam \n10\t\n2025/04/20─2025/04/26\n\t介紹傅立葉分析 \tFourier series, Fourier Integral, Orthogonal Functions \n11\t\n2025/04/27─2025/05/03\n\t介紹傅立葉分析 \tFourier Cosine and Sines Transforms \n12\t\n2025/05/04─2025/05/10\n\t偏微分方程式（PDE） \tWave Equations. Solutions of Wave Equations. \n13\t\n2025/05/11─2025/05/17\n\t偏微分方程式（PDE） \tHeat Equations. Solutions of Heat Equations. \n14\t\n2025/05/18─2025/05/24\n\t介紹複變函數論 \tComplex Numbers, Complex Differentiation/Integration \n15\t\n2025/05/25─2025/05/31\n\t介紹複變函數論 \tPotential Theory and Its Applications \n16\t\n2025/06/01─2025/06/07\n\t期末評量 \tOpen-Book Exam \n17\t\n2025/06/08─2025/06/14\n\t彈性教學 \t論文研讀及心得報告 \n18\t\n2025/06/15─2025/06/21\n\t彈性教學 \t論文研讀及心得報告 \n\n\n6.成績評定及課堂要求\n課後作業佔學期總成績百分之三十。期中考佔學期成績百分之三十。期末考佔學期成績百分之四十。考試範圍為上課所教授的內容。 \n每堂課點名 每缺席超過5堂 期末扣5分 \n無須上過工數（一） \n\n\n8.永續發展目標(SDGs)：SDG4 優質教育、SDG9 工業化、創新及基礎建設\n\n\n9.大學社會責任(USR)關聯性：低"
+}

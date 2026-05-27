@@ -1,0 +1,127 @@
+{
+  "_description": "建築學系學士班畢業學分規則 — 113學年度入學新生適用",
+  "_source": "109_-112學士20241212_page-0001.jpg",
+  "_last_updated": "2026-05-26",
+  "department": "建築學系",
+  "applicable_from": "113",
+  "total_required": 158,
+  "categories": {
+    "共同必修": {
+      "required_credits": 8,
+      "courses": [
+        { "name": "國文(一)", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "英文(一)", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "服務教育", "credits": 0, "year": 1, "semester": 1 },
+        { "name": "國文(二)", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "英文(二)", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "服務教育", "credits": 0, "year": 1, "semester": 2 }
+      ]
+    },
+    "通識": {
+      "required_credits": 16,
+      "note": "依本校「學生修習通識教育課程辦法」規定"
+    },
+    "體育": {
+      "required_credits": 0,
+      "note": "依本校「體育課程實施辦法」規定"
+    },
+    "院必修": {
+      "required_credits": 4,
+      "courses": [
+        { "name": "社會科學概論", "credits": 2, "year": 2, "semester": 1 },
+        { "name": "當代文藝思潮", "credits": 2, "year": 2, "semester": 2 }
+      ]
+    },
+    "系必修": {
+      "required_credits": 95,
+      "courses": [
+        { "name": "建築設計(一)", "credits": 6, "year": 1, "semester": 1 },
+        { "name": "建築圖學(一)", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "建築設計(二)", "credits": 6, "year": 1, "semester": 2 },
+        { "name": "建築圖學(二)", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "建築設計(三)", "credits": 6, "year": 2, "semester": 1 },
+        { "name": "世界建築史", "credits": 2, "year": 2, "semester": 1 },
+        { "name": "結構學", "credits": 2, "year": 2, "semester": 1 },
+        { "name": "建築設計(四)", "credits": 6, "year": 2, "semester": 2 },
+        { "name": "電腦輔助製圖建構(一)", "credits": 2, "year": 2, "semester": 2 },
+        { "name": "建築構造與施工(一)", "credits": 2, "year": 2, "semester": 2 },
+        { "name": "近代建築史", "credits": 2, "year": 2, "semester": 2 },
+        { "name": "建築設計(五)", "credits": 6, "year": 3, "semester": 1 },
+        { "name": "建築構造與施工(二)", "credits": 2, "year": 3, "semester": 1 },
+        { "name": "敷地計畫", "credits": 2, "year": 3, "semester": 1 },
+        { "name": "建築物理與環境", "credits": 2, "year": 3, "semester": 1 },
+        { "name": "建築設計(六)", "credits": 6, "year": 3, "semester": 2 },
+        { "name": "建築計畫", "credits": 2, "year": 3, "semester": 2 },
+        { "name": "建築結構系統", "credits": 2, "year": 3, "semester": 2 },
+        { "name": "專業實習", "credits": 9, "year": 4, "semester": 1 },
+        { "name": "建築設計(七)", "credits": 6, "year": 4, "semester": 2 },
+        { "name": "建築法規", "credits": 2, "year": 4, "semester": 2 },
+        { "name": "都市計劃概論", "credits": 2, "year": 4, "semester": 2 },
+        { "name": "建築設計(八)", "credits": 6, "year": 5, "semester": 1 },
+        { "name": "都市設計概論", "credits": 2, "year": 5, "semester": 1 },
+        { "name": "建築師實務", "credits": 2, "year": 5, "semester": 1 },
+        { "name": "建築設計(九)", "credits": 6, "year": 5, "semester": 2 }
+      ]
+    },
+    "專業選修": {
+      "required_credits": 35,
+      "max_from_other_dept": 6,
+      "note": "包括6學分可選修非本學系所開設之專業課程",
+      "courses": [
+        { "name": "素描", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "建築概論", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "靜力學", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "媒材實作", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "進階素描", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "環境生態學", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "材料力學", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "電腦輔助製圖基礎", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "環境行為學", "credits": 2, "year": 2, "semester": 1 },
+        { "name": "計算機概論", "credits": 2, "year": 2, "semester": 1 },
+        { "name": "電腦輔助製圖建構基礎", "credits": 2, "year": 2, "semester": 1 },
+        { "name": "建築表現法", "credits": 2, "year": 2, "semester": 1 },
+        { "name": "景觀建築與規劃", "credits": 2, "year": 2, "semester": 1 },
+        { "name": "建築元素解析", "credits": 2, "year": 2, "semester": 2 },
+        { "name": "傳統建築測繪", "credits": 2, "year": 2, "semester": 2 },
+        { "name": "建築意念傳達", "credits": 2, "year": 2, "semester": 2 },
+        { "name": "都市空間與建築藝術", "credits": 2, "year": 2, "semester": 2 },
+        { "name": "電腦輔助製圖建構(二)", "credits": 2, "year": 3, "semester": 1 },
+        { "name": "建築文化與歷史調查", "credits": 2, "year": 3, "semester": 1 },
+        { "name": "日本建築都市導讀", "credits": 2, "year": 3, "semester": 1 },
+        { "name": "設計方法", "credits": 2, "year": 3, "semester": 1 },
+        { "name": "都市發展與型態", "credits": 2, "year": 3, "semester": 2 },
+        { "name": "中國建築史", "credits": 2, "year": 3, "semester": 2 },
+        { "name": "環境控制系統", "credits": 2, "year": 3, "semester": 2 },
+        { "name": "歷史建築保存再利用", "credits": 2, "year": 3, "semester": 2 },
+        { "name": "空間資源調查與地理資訊系統", "credits": 2, "year": 3, "semester": 2 },
+        { "name": "建築細部大樣", "credits": 2, "year": 3, "semester": 2 },
+        { "name": "施工估價", "credits": 2, "year": 4, "semester": 2 },
+        { "name": "建築節能設計實務", "credits": 2, "year": 4, "semester": 2 },
+        { "name": "數位影像與設計表現", "credits": 2, "year": 4, "semester": 2 },
+        { "name": "聚落保存", "credits": 2, "year": 4, "semester": 2 },
+        { "name": "生態建築專題", "credits": 2, "year": 4, "semester": 2 },
+        { "name": "文化與軍事地景調查實務", "credits": 3, "year": 5, "semester": 1 },
+        { "name": "文化資產保存專題", "credits": 3, "year": 5, "semester": 1 },
+        { "name": "建築專案專題", "credits": 3, "year": 5, "semester": 1 },
+        { "name": "建築資訊模型專題", "credits": 3, "year": 5, "semester": 1 },
+        { "name": "世界遺產專題", "credits": 3, "year": 5, "semester": 1 },
+        { "name": "台閩建築史", "credits": 3, "year": 5, "semester": 1 },
+        { "name": "元宇宙建築設計", "credits": 3, "year": 5, "semester": 1 },
+        { "name": "文化細部創作", "credits": 4, "year": 5, "semester": 1 },
+        { "name": "近代都市與建築文化專題", "credits": 3, "year": 5, "semester": 1 },
+        { "name": "AI生成圖像的應用探索", "credits": 3, "year": 5, "semester": 1 },
+        { "name": "建築歷史與文化遺產專題", "credits": 3, "year": 5, "semester": 2 },
+        { "name": "聚落保存與社區營造專題", "credits": 3, "year": 5, "semester": 2 },
+        { "name": "城鄉規劃專題", "credits": 3, "year": 5, "semester": 2 }
+      ]
+    }
+  },
+  "graduation_conditions": [
+    "畢業總學分158學分。通識課程16學分（由通識中心規劃），共同必修8學分，專業必修（含院必修4學分及系必修95學分）99學分，選修至少35學分（包括6學分可選修非本系所開設之專業課程）。",
+    "表列選修科目為預定科目，將視實際需要而調整。",
+    "各年級建築設計為分組教學，並且為擋修限制之課程。",
+    "第5學年建築設計(八)、建築設計(九)為整學年度之畢業設計課程，如建築設計(九)未通過者，次學年須隨同修讀建築設計(八)。",
+    "院必修課程不受學年限制，只需於修業期限內完成即可。",
+    "本系專業實習課程9學分；專業實習課程先修科目相關規定，請詳見國立金門大學建築學系專業實習要點。"
+  ]
+}

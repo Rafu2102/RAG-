@@ -1,0 +1,86 @@
+國立金門大學114學年度第2學期資工系課程
+學年度：114學年度
+學期：第2學期
+課程名稱：資訊科技英文導論 (English for Information Technology)
+部別：日間部學士班
+開課班級：資工一
+學分數：3.0學分
+授課時數：3.0小時
+授課教師：李錫捷
+必選修：必修
+教室：E320多媒體實驗室
+修課上限人數：60人
+上課時間：每周星期一下午第5節~第7節
+
+課程教學目標：
+1. 透過簡短且具吸引力的影片課程、動手實作的字彙與文法練習，以及互動式閱讀與聽力活動，培養所需的語言技能。每門課程皆專注於實用英語，使學生準備好與團隊協作、管理任務、提供建議並參與線上科技社群。在課程結束時，學生將能更好地在國際資訊科技環境中分享想法、解決問題並取得成功。
+
+課程教學綱要：
+1. 在實際的IT場景中練習英語，包括網路安全、軟體開發、AI提示工程（AI prompting）、數據分析、DevOps、品質保證（Quality Assurance）、機器學習、專案管理、技術支援、UX/UI設計、社群管理以及遊戲設計。
+主要單元包含：
+- English for IT: Describing and Comparing
+- English for IT: Advice and Time
+- English for IT: Needs and Responsibilities
+- English for IT: People and Quantities
+
+教科書資料：
+1. 書名：cisco.netacad.net
+2. 出版日期：未標註
+3. 作者：未標註
+4. 出版社：未標註
+5. 版本：未標註
+
+參考書資料：
+1-1. 書名：Computers - Information Technology in Perspective
+1-2. 出版日期：未標註
+1-3. 作者：Larry Long and Nancy Long
+1-4. 出版社：Pearson Prentice Hall
+1-5. 版本：未標註
+
+2-1. 書名：Computer Science: An Overview
+2-2. 出版日期：未標註
+2-3. 作者：J. Glenn Brookshear
+2-4. 出版社：Pearson Education, Inc.
+2-5. 版本：未標註
+
+3-1. 書名：Oxford English for Information Technology
+3-2. 出版日期：未標註
+3-3. 作者：Eric H. Glendinning and John McEwan
+3-4. 出版社：Oxford University Press
+3-5. 版本：未標註
+
+4-1. 書名：Infotech - English for Computer Users
+4-2. 出版日期：未標註
+4-3. 作者：Santiago Remacha Esteras
+4-4. 出版社：Cambridge University Express
+4-5. 版本：未標註
+
+※請遵守智慧財產權觀念，依著作權法規定，教科書及教材不得非法影印與使用盜版軟體。
+
+教學進度表（2026年春季學期）：
+第1週課程 (2026/02/22─2026/02/28)：Improving Performance
+第2週課程 (2026/03/01─2026/03/07)：Your Digital Helpers
+第3週課程 (2026/03/08─2026/03/14)：Your Digital Thinkers
+第4週課程 (2026/03/15─2026/03/21)：Monitoring a Project
+第5週課程 (2026/03/22─2026/03/28)：Working Together
+第6週課程 (2026/03/29─2026/04/04)：Progress Updates
+第7週課程 (2026/04/05─2026/04/11)：Improving Collaboration
+第8週課程 (2026/04/12─2026/04/18)：Midterm Exam
+第9週課程 (2026/04/19─2026/04/25)：Watching it Work
+第10週課程 (2026/04/26─2026/05/02)：Workflow in Action
+第11週課程 (2026/05/03─2026/05/09)：Understanding Good Quality
+第12週課程 (2026/05/10─2026/05/16)：Basic Describing and Comparing
+第13週課程 (2026/05/17─2026/05/23)：Better Tools, Better Results
+第14週課程 (2026/05/24─2026/05/30)：Make Life Easier and Ask the Right Questions
+第15週課程 (2026/05/31─2026/06/06)：Key Terms
+第16週課程 (2026/06/07─2026/06/13)：Final Exam
+第17週課程 (2026/06/14─2026/06/20)：彈性補充教學(自主學習、探究與實作)
+第18週課程 (2026/06/21─2026/06/27)：彈性補充教學(自主學習、探究與實作)
+
+成績評定方式：
+1. 課堂測驗與作業 (Quiz/HWs)：35%
+2. 期中考 (Midterm)：30%
+3. 期末考 (Final)：35%
+
+課堂要求：
+無詳細課堂要求說明

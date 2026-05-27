@@ -17,6 +17,7 @@ bot/ui_utils.py — Discord UI 安全基底元件
    → interaction_check 驗證使用者身份
 """
 
+import asyncio
 import logging
 import discord  # type: ignore
 
@@ -162,3 +163,65 @@ async def safe_defer(interaction: discord.Interaction, *, ephemeral: bool = True
     except (discord.NotFound, discord.HTTPException) as e:
         logger.debug(f"safe_defer 失敗: {e}")
     return False
+
+
+async def safe_send_parts_interaction(interaction: discord.Interaction, parts: list[str]):
+    """安全地發送 Discord 斜線指令多段訊息，具備 Rate Limit 防禦與重試機制"""
+    for idx, part in enumerate(parts):
+        if idx > 0:
+            # 主動延遲以避開 429 限制
+            await asyncio.sleep(0.5)
+            
+        for attempt in range(3):
+            try:
+                await interaction.followup.send(part)
+                break
+            except discord.HTTPException as e:
+                if e.status == 429:
+                    wait_secs = 2.0
+                    try:
+                        # 嘗試自回應中提取精確 retry_after
+                        retry_after = getattr(e, "response", {}).get("retry_after", 2.0)
+                        wait_secs = float(retry_after) + 0.5
+                    except Exception:
+                        pass
+                    logger.warning(f"⚠️ [Discord Interaction] 觸發 429 頻率限制，等待 {wait_secs} 秒後重試...")
+                    await asyncio.sleep(wait_secs)
+                    continue
+                else:
+                    logger.error(f"❌ [Discord Interaction] 發送第 {idx} 段失敗: {e}")
+                    break
+        else:
+            logger.error(f"🚨 [Discord Interaction] 該段訊息經過 3 次重試後依然發送失敗，跳過此段以保護其餘訊息！")
+
+
+async def safe_send_parts_message(message: discord.Message, parts: list[str]):
+    """安全地發送 Discord 頻道/私訊多段訊息，具備 Rate Limit 防禦與重試機制"""
+    for idx, part in enumerate(parts):
+        if idx > 0:
+            # 主動延遲以避開 429 限制
+            await asyncio.sleep(0.5)
+            
+        for attempt in range(3):
+            try:
+                if idx == 0:
+                    await message.reply(part)
+                else:
+                    await message.channel.send(part)
+                break
+            except discord.HTTPException as e:
+                if e.status == 429:
+                    wait_secs = 2.0
+                    try:
+                        retry_after = getattr(e, "response", {}).get("retry_after", 2.0)
+                        wait_secs = float(retry_after) + 0.5
+                    except Exception:
+                        pass
+                    logger.warning(f"⚠️ [Discord Message] 觸發 429 頻率限制，等待 {wait_secs} 秒後重試...")
+                    await asyncio.sleep(wait_secs)
+                    continue
+                else:
+                    logger.error(f"❌ [Discord Message] 發送第 {idx} 段失敗: {e}")
+                    break
+        else:
+            logger.error(f"🚨 [Discord Message] 該段訊息經過 3 次重試後依然發送失敗，跳過此段以保護其餘訊息！")

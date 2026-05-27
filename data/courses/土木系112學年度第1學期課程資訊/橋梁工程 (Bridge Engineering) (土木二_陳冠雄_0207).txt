@@ -1,0 +1,59 @@
+國立金門大學112學年度第1學期土木系課程
+學年度：112學年度
+學期：第1學期
+課程名稱：橋梁工程 (Bridge Engineering)
+部別：日間部學士班
+開課班級：土木二
+學分數：3.0學分
+授課時數：3.0小時
+授課教師：陳冠雄
+必選修：選修
+教室：E103教室(理工大樓)
+修課上限人數：60人
+上課時間：每周星期三下午第5節~第7節
+
+課程教學目標：
+1. The objective of this course is to provide a design methodology in cable-stayed bridges.
+
+課程教學綱要：
+1. A cable-stayed bridge is a bridge that consists of one or more columns (normally referred to as towers or pylons), with cables supporting the bridge deck. There are two major classes of cable-stayed bridges: In a harp design, the cables are made nearly parallel by attaching them to various points on the tower(s) so that the height of attachment of each cable on the tower is similar to the distance from the tower along the roadway to its lower attachment. In a fan design, the cables all connect to or pass over the top of the tower(s). Compared to other bridge types, the cable-stayed is optimal for spans longer than typically seen in cantilever bridges, and shorter than those typically requiring a suspension bridge. This is the range in which cantilever spans would rapidly grow heavier if they were lengthened, and in which suspension cabling does not get more economical, were the span to be shortened.
+
+教科書資料：
+1. 書名：Journal papers
+2. 出版日期：未標註
+3. 作者：未標註
+4. 出版社：未標註
+5. 版本：未標註
+
+參考書資料：
+無參考書
+
+※請遵守智慧財產權觀念，依著作權法規定，教科書及教材不得非法影印與使用盜版軟體。
+
+教學進度表（2023年秋季學期）：
+第1週課程 (2023/09/10─2023/09/16)：1 History of bridges part 1
+第2週課程 (2023/09/17─2023/09/23)：1 History of bridges part 2
+第3週課程 (2023/09/24─2023/09/30)：2 Comparison with suspension bridge
+第4週課程 (2023/10/01─2023/10/07)：2 Comparison with suspension bridge
+第5週課程 (2023/10/08─2023/10/14)：3.1 Side-span cable-stayed bridge
+第6週課程 (2023/10/15─2023/10/21)：3.2 Cantilever-span cable-stayed bridge
+第7週課程 (2023/10/22─2023/10/28)：3.3 Multiple-span cable-stayed bridge
+第8週課程 (2023/10/29─2023/11/04)：3.4 Extradosed bridge
+第9週課程 (2023/11/05─2023/11/11)：3.5 Cable-stayed cradle-system bridge
+第10週課程 (2023/11/12─2023/11/18)：4.1 Self anchored suspension bridge
+第11週課程 (2023/11/19─2023/11/25)：5 Notable cable-stayed bridges
+第12週課程 (2023/11/26─2023/12/02)：Bridge to Russky Island
+第13週課程 (2023/12/03─2023/12/09)：Surgut Bridge
+第14週課程 (2023/12/10─2023/12/16)：Bandra Worli Sea-Link
+第15週課程 (2023/12/17─2023/12/23)：Luling Bridge
+第16週課程 (2023/12/24─2023/12/30)：Centennial Bridge
+第17週課程 (2023/12/31─2024/01/06)：Kap Shui Mun Bridge
+第18週課程 (2024/01/07─2024/01/13)：Leonard P. Zakim Bunker Hill Memorial Bridge
+
+成績評定方式：
+1. 平常成績：40%
+2. 期中考成績：30%
+3. 期末考成績：30%
+
+課堂要求：
+課堂練習、作業成績

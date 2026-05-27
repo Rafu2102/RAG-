@@ -25,7 +25,7 @@ async def process_transcript_upload(update: Update, context: ContextTypes.DEFAUL
 
     # ── 圖片 OCR ──
     if update.message.photo:
-        progress = await update.message.reply_text("⏳ Gemini 3.1 Pro 正在辨識成績單...\n請稍候約 15-30 秒 🔍")
+        progress = await update.message.reply_text("⏳ Gemini 3.5 Flash 正在辨識成績單...\n請稍候約 15-30 秒 🔍")
         try:
             photo = update.message.photo[-1]
             file = await photo.get_file()
@@ -100,7 +100,7 @@ async def process_transcript_upload(update: Update, context: ContextTypes.DEFAUL
             return
 
         if is_pdf:
-            progress = await update.message.reply_text("⏳ Gemini 3.1 Pro 正在辨識成績單 PDF...\n📄 PDF 會先轉為高畫質圖片再辨識，約需 15-30 秒 🔍")
+            progress = await update.message.reply_text("⏳ Gemini 3.5 Flash 正在辨識成績單 PDF...\n📄 PDF 會先轉為高畫質圖片再辨識，約需 15-30 秒 🔍")
             try:
                 import tempfile
                 from pathlib import Path as _Path

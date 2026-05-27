@@ -1,0 +1,72 @@
+國立金門大學113學年度第2學期土木系課程
+學年度：113學年度
+學期：第2學期
+課程名稱：工程數學(二) (Engineering Mathematics II)
+部別：日間部學士班
+開課班級：土木二
+學分數：3.0學分
+授課時數：3.0小時
+授課教師：陳春木
+必選修：選修
+教室：E103教室(理工大樓)
+修課上限人數：60人
+上課時間：每周星期二下午第5節~第7節
+
+課程教學目標：
+1. 幫助學生了解應用於工程相關領域的數學理論及方法
+2. 訓練學生具備讀懂工程相關領域研究報告的數學能力
+3. 培養學生進行獨立研究的進階數學能力
+
+課程教學綱要：
+1. 複習微積分的基礎理論
+2. 複習常微分方程式（ODE）的常用解法
+3. 介紹線性代數（Linear Algebra）
+4. 介紹向量及張量微分學（Vector and Tensor Calculus）
+5. 介紹傅立葉分析（Fourier Analysis）及偏微分方程式（PDE）
+6. 介紹複變函數論（Complex Analysis）
+
+教科書資料：
+1. 書名：工程數學
+2. 出版日期：2018年 12月
+3. 作者：劉明昌
+4. 出版社：文笙書局
+5. 版本：未標註
+
+參考書資料：
+1. 書名：Advanced Engineering Mathematics
+2. 出版日期：2018年 01月
+3. 作者：Erwin Kreyszig
+4. 出版社：Wiley
+5. 版本：10
+
+※請遵守智慧財產權觀念，依著作權法規定，教科書及教材不得非法影印與使用盜版軟體。
+
+教學進度表（2025年春季學期）：
+第1週課程 (2025/02/16─2025/02/22)：複習微積分的基礎理論 (Review Calculus. Differentiation. Integration. Taylor Series. Wolfram Alpha.)
+第2週課程 (2025/02/23─2025/03/01)：複習常微分方程式（ODE）的常用解法 (1st-order ODE, 2nd-order ODE, Higher-order ODE)
+第3週課程 (2025/03/02─2025/03/08)：複習常微分方程式（ODE）的常用解法 (Power Series and Laplace Transforms. Concept of Green Functions.)
+第4週課程 (2025/03/09─2025/03/15)：介紹線性代數 (Matrices and Vectors. Determinants and Jacobians)
+第5週課程 (2025/03/16─2025/03/22)：介紹線性代數 (Linear Systems and Eigenvalue Problems.)
+第6週課程 (2025/03/23─2025/03/29)：介紹向量微分學 (Vector Calculus)
+第7週課程 (2025/03/30─2025/04/05)：介紹向量微分學 (Vector Integrals)
+第8週課程 (2025/04/06─2025/04/12)：介紹張量分析 (Tensor Algebra and Tensor Analysis)
+第9週課程 (2025/04/13─2025/04/19)：期中評量 (Open-Book Exam)
+第10週課程 (2025/04/20─2025/04/26)：介紹傅立葉分析 (Fourier series, Fourier Integral, Orthogonal Functions)
+第11週課程 (2025/04/27─2025/05/03)：介紹傅立葉分析 (Fourier Cosine and Sines Transforms)
+第12週課程 (2025/05/04─2025/05/10)：偏微分方程式（PDE） (Wave Equations. Solutions of Wave Equations.)
+第13週課程 (2025/05/11─2025/05/17)：偏微分方程式（PDE） (Heat Equations. Solutions of Heat Equations.)
+第14週課程 (2025/05/18─2025/05/24)：介紹複變函數論 (Complex Numbers, Complex Differentiation/Integration)
+第15週課程 (2025/05/25─2025/05/31)：介紹複變函數論 (Potential Theory and Its Applications)
+第16週課程 (2025/06/01─2025/06/07)：期末評量 (Open-Book Exam)
+第17週課程 (2025/06/08─2025/06/14)：彈性教學 (論文研讀及心得報告)
+第18週課程 (2025/06/15─2025/06/21)：彈性教學 (論文研讀及心得報告)
+
+成績評定方式：
+1. 課後作業佔學期總成績百分之三十。
+2. 期中考佔學期成績百分之三十。
+3. 期末考佔學期成績百分之四十。
+4. 考試範圍為上課所教授的內容。
+
+課堂要求：
+每堂課點名。每缺席超過5堂，期末扣5分。
+修課學生無須上過工程數學（一）。

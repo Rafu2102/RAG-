@@ -1,3 +1,4 @@
+import os
 import re
 import json
 import requests  # NOTE: 僅 generate_academic_event_answer 仍直接使用 (multi-turn payload)
@@ -10,16 +11,15 @@ from tools.search_event_tool import search_academic_events
 
 logger = logging.getLogger(__name__)
 
-# NQU 節次對應時間表 (依據金門大學一般作息)
 NQU_PERIOD_START = {
     1: "08:10", 2: "09:10", 3: "10:10", 4: "11:10",
     5: "13:30", 6: "14:30", 7: "15:30", 8: "16:30",
-    9: "17:30", 10: "18:30", 11: "19:30", 12: "20:30"
+    9: "17:30", 10: "18:30", 11: "19:20", 12: "20:10", 13: "21:00"
 }
 NQU_PERIOD_END = {
     1: "09:00", 2: "10:00", 3: "11:00", 4: "12:00",
     5: "14:20", 6: "15:20", 7: "16:20", 8: "17:20",
-    9: "18:20", 10: "19:20", 11: "20:20", 12: "21:20"
+    9: "18:20", 10: "19:15", 11: "20:05", 12: "20:55", 13: "21:45"
 }
 
 
@@ -38,7 +38,7 @@ def get_next_weekday(day_of_week: int) -> datetime:
         
     return today + timedelta(days=days_ahead)
 
-def extract_calendar_intent(query: str) -> dict:
+async def extract_calendar_intent(query: str) -> dict:
     """僅負責透過 Gemini 判斷使用者的行事曆意圖 (不涉及 RAG 或建立 API)"""
     from llm.date_utils import normalize_chinese_datetime
     
@@ -125,8 +125,8 @@ def extract_calendar_intent(query: str) -> dict:
 
     try:
         logger.info("📅 正在呼叫 Gemini Flash-Lite 判斷加入行事曆的精確意圖...")
-        from llm.gemini_client import call_gemini_json, GeminiAPIError
-        res_data = call_gemini_json(
+        from llm.gemini_client import a_call_gemini_json, GeminiAPIError
+        res_data = await a_call_gemini_json(
             intent_prompt,
             schema=gemini_schema,
             model="fast",
@@ -202,7 +202,7 @@ def _extract_date_from_schedule(chunks: list, keyword: str) -> dict | None:
     return None
 
 # === 上課時間字串解析 (使用 Gemini) ===
-def _parse_schedule_string(schedule_str: str) -> list[dict]:
+async def _parse_schedule_string(schedule_str: str) -> list[dict]:
     if not schedule_str or schedule_str == "?":
         return []
         
@@ -216,11 +216,11 @@ def _parse_schedule_string(schedule_str: str) -> list[dict]:
 ## 節次對照表（金門大學）
 第1節 08:10-09:00、第2節 09:10-10:00、第3節 10:10-11:00、第4節 11:10-12:00
 第5節 13:30-14:20、第6節 14:30-15:20、第7節 15:30-16:20、第8節 16:30-17:20
-第N節(晚) 18:30-19:20、第10節 19:25-20:15、第11節 20:20-21:10、第12節 21:15-22:05
+第9節(晚/N) 17:30-18:20、第10節 18:30-19:15、第11節 19:20-20:05、第12節 20:10-20:55、第13節 21:00-21:45
 
 請擷取出每一個時段的：
 1. day_of_week: 星期幾 (1=星期一, 2=星期二... 7=星期日)
-2. start_period: 開始節次 (如第5節則為 5，第N節則為 9)
+2. start_period: 開始節次 (如第5節則為 5，第9節/第N節則為 9)
 3. end_period: 結束節次 (如有波浪號如 5~7 則 end 為 7，否則同 start)
 
 ℹ️ 注意：如果看到「第N節」，請將 N 視為第 9 節（晚間第一節）。
@@ -246,8 +246,8 @@ def _parse_schedule_string(schedule_str: str) -> list[dict]:
     }
 
     try:
-        from llm.gemini_client import call_gemini_json, GeminiAPIError
-        data = call_gemini_json(
+        from llm.gemini_client import a_call_gemini_json, GeminiAPIError
+        data = await a_call_gemini_json(
             prompt,
             schema=schedule_schema,
             model="fast",
@@ -289,16 +289,16 @@ def _handle_remove(discord_id: str, e_name: str, start_dt: str | None, target_da
     return result["message"]
 
 def _handle_list(discord_id: str, target_date: str | None, start_dt: str | None, end_dt: str | None) -> str:
+    import tools.calendar_api as cal_api
     # 優先處理大範圍區間查詢 (只要有 start_dt 就算)
     if start_dt:
         if not end_dt:
             # 容錯處理：如果 LLM 沒有給 end_dt，優先檢查 target_date 是否可以作為終點
             from datetime import timedelta
-            from tools.calendar_api import _parse_dt
-            s_dt = _parse_dt(start_dt)
+            s_dt = cal_api._parse_dt(start_dt)
             
             if target_date and str(target_date).lower() not in ("null", "none"):
-                e_dt = _parse_dt(target_date) + timedelta(days=1)
+                e_dt = cal_api._parse_dt(target_date) + timedelta(days=1)
                 if e_dt > s_dt:
                     end_dt = e_dt.strftime('%Y-%m-%dT%H:%M:%S')
                     
@@ -308,13 +308,12 @@ def _handle_list(discord_id: str, target_date: str | None, start_dt: str | None,
             
         logger.info(f"📅 執行行事曆列出：大範圍區間 {start_dt} ~ {end_dt}")
         def _to_rfc(s):
-            from tools.calendar_api import _parse_dt, _to_utc_rfc3339
-            return _to_utc_rfc3339(_parse_dt(s))
-        result = list_calendar_events(discord_id=discord_id, time_min_str=_to_rfc(start_dt), time_max_str=_to_rfc(end_dt))
+            return cal_api._to_utc_rfc3339(cal_api._parse_dt(s))
+        result = cal_api.list_calendar_events(discord_id=discord_id, time_min_str=_to_rfc(start_dt), time_max_str=_to_rfc(end_dt))
         date_desc = f"{start_dt.split('T')[0]} 到 {end_dt.split('T')[0]}"
     elif target_date:
         logger.info(f"📅 執行行事曆列出：指定單日 {target_date}")
-        result = list_calendar_events(discord_id=discord_id, target_date=target_date)
+        result = cal_api.list_calendar_events(discord_id=discord_id, target_date=target_date)
         date_desc = target_date
     else:
         # User didn't specify dates, check their query context
@@ -322,20 +321,19 @@ def _handle_list(discord_id: str, target_date: str | None, start_dt: str | None,
         tz = timezone(timedelta(hours=8))
         now = datetime.now(tz)
         if start_dt and "T" in start_dt: # Passed "past" as implicit start?
-            from tools.calendar_api import _parse_dt, _to_utc_rfc3339
-            s_dt = _parse_dt(start_dt)
+            s_dt = cal_api._parse_dt(start_dt)
             if s_dt < now:
                 days = -30
-                result = list_calendar_events(discord_id=discord_id, days=days)
+                result = cal_api.list_calendar_events(discord_id=discord_id, days=days)
                 date_desc = "過去 30 天"
             else:
                 days = 7
-                result = list_calendar_events(discord_id=discord_id, days=days)
+                result = cal_api.list_calendar_events(discord_id=discord_id, days=days)
                 date_desc = f"未來 {days} 天"
         else:
             days = 7
             logger.info(f"📅 執行行事曆列出：未來預設 {days} 天")
-            result = list_calendar_events(discord_id=discord_id, days=days)
+            result = cal_api.list_calendar_events(discord_id=discord_id, days=days)
             date_desc = f"未來 {days} 天"
     
     if result["status"] == "success" and result["events"]:
@@ -357,12 +355,13 @@ def _handle_list(discord_id: str, target_date: str | None, start_dt: str | None,
         return result["message"]
 
 def _handle_update(discord_id: str, intent_data: dict, e_name: str, start_dt: str, target_date: str) -> str:
+    import tools.calendar_api as cal_api
     new_title = intent_data.get("event_name", "") # 如果使用者要改名
     new_start = start_dt # 新的開始時間
     new_end = intent_data.get("end_dt") # 新的結束時間
     
     logger.info(f"📅 執行行事曆修改：尋找「{e_name}」於日期「{target_date}」，新時間為 {new_start}")
-    result = update_calendar_event(
+    result = cal_api.update_calendar_event(
         discord_id=discord_id, keyword=e_name,
         target_date=target_date,
         new_title=new_title if new_title and new_title != "*" else None,
@@ -373,8 +372,10 @@ def _handle_update(discord_id: str, intent_data: dict, e_name: str, start_dt: st
         return f"{result['message']}\n🔗 連結：{result['htmlLink']}"
     return result["message"]
 
-def execute_calendar_action(query: str, intent_data: dict, retrieved_chunks: list | None = None, discord_id: str | None = None) -> str:
+import asyncio
+async def execute_calendar_action(query: str, intent_data: dict, retrieved_chunks: list | None = None, discord_id: str | None = None) -> str:
     """根據已經判斷出的意圖資料，實際執行 Google Calendar API 的增刪操作"""
+    import tools.calendar_api as cal_api
     action_type = intent_data.get("action_type", "add")
     intent_type = intent_data.get("intent_type", "weekly_course")
     e_name = intent_data.get("event_name", query)
@@ -398,15 +399,15 @@ def execute_calendar_action(query: str, intent_data: dict, retrieved_chunks: lis
     try:
         # === [流程 0a] 刪除行事曆事件 ===
         if action_type == "remove":
-            return _handle_remove(discord_id, e_name, start_dt, target_date, intent_type=intent_type)
+            return await asyncio.to_thread(_handle_remove, discord_id, e_name, start_dt, target_date, intent_type=intent_type)
         
         # === [流程 0b] 列出行事曆事件 ===
         if action_type == "list":
-            return _handle_list(discord_id, target_date, start_dt, intent_data.get("end_dt"))
+            return await asyncio.to_thread(_handle_list, discord_id, target_date, start_dt, intent_data.get("end_dt"))
         
         # === [流程 0c] 修改行事曆事件 ===
         if action_type == "update":
-            return _handle_update(discord_id, intent_data, e_name, start_dt, target_date)
+            return await asyncio.to_thread(_handle_update, discord_id, intent_data, e_name, start_dt, target_date)
     
     except ValueError as e:
         # get_service() 會在 token 無效時 raise ValueError
@@ -451,7 +452,7 @@ def execute_calendar_action(query: str, intent_data: dict, retrieved_chunks: lis
                         break
             
             if schedule_str and schedule_str != "?":
-                schedules = _parse_schedule_string(schedule_str)
+                schedules = await _parse_schedule_string(schedule_str)
                 if schedules:
                     sched = schedules[0]
                     day_of_week = sched.get("day_of_week")
@@ -459,8 +460,7 @@ def execute_calendar_action(query: str, intent_data: dict, retrieved_chunks: lis
                     end_p = sched.get("end_period")
                     
                     if day_of_week is not None and start_p is not None and end_p is not None:
-                        from tools.calendar_api import _parse_dt
-                        dt = _parse_dt(start_dt)
+                        dt = cal_api._parse_dt(start_dt)
                         
                         days_ahead = day_of_week - dt.isoweekday()
                         if days_ahead < 0:
@@ -494,7 +494,8 @@ def execute_calendar_action(query: str, intent_data: dict, retrieved_chunks: lis
         schedule_keyword = intent_data.get("schedule_keyword", "期中考")
         event_title = f"[{schedule_keyword}] {course_name}"
         
-        result = create_calendar_event(
+        result = await asyncio.to_thread(
+            cal_api.create_calendar_event,
             discord_id=discord_id,
             title=event_title,
             start=start_dt,
@@ -528,16 +529,16 @@ def execute_calendar_action(query: str, intent_data: dict, retrieved_chunks: lis
             logger.info(f"📅 無具體時間但有 target_date={target_date}，視為全天事件")
         
         # 若有 start 但沒 end，自動 +2 小時（或全天事件）
-        if e_start and not e_end:
-            try:
-                from tools.calendar_api import _parse_dt
-                _s = _parse_dt(e_start)
-                if _s.hour == 0 and _s.minute == 0:
-                    e_end = e_start  # 全天事件，start == end
-                else:
-                    e_end = (_s + timedelta(hours=2)).strftime('%Y-%m-%dT%H:%M:%S')
-            except Exception:
-                e_end = e_start
+        if e_start:
+            if not e_end:
+                try:
+                    _s = cal_api._parse_dt(e_start)
+                    if _s.hour == 0 and _s.minute == 0:
+                        e_end = e_start  # 全天事件，start == end
+                    else:
+                        e_end = (_s + timedelta(hours=2)).strftime('%Y-%m-%dT%H:%M:%S')
+                except Exception:
+                    e_end = e_start
         
         # === 【3. 缺漏資訊反問機制】 ===
         if intent_data.get("is_time_missing") and action_type == "add":
@@ -550,7 +551,7 @@ def execute_calendar_action(query: str, intent_data: dict, retrieved_chunks: lis
         if e_start and e_end:
             final_title = title if title.startswith("[") else f"[自訂] {title}"
             logger.info(f"📅 執行自訂時間事件建立：{final_title} {e_start} ~ {e_end}")
-            result = create_calendar_event(discord_id=discord_id, title=final_title, start=e_start, end=e_end)
+            result = await asyncio.to_thread(cal_api.create_calendar_event, discord_id=discord_id, title=final_title, start=e_start, end=e_end)
             if result["status"] == "success":
                 is_all_day = "T00:00:00" in e_start
                 start_display = e_start.split('T')[0] if is_all_day else f"{e_start.split('T')[0]} {e_start.split('T')[1][:5]}"
@@ -576,7 +577,7 @@ def execute_calendar_action(query: str, intent_data: dict, retrieved_chunks: lis
                 
     # [流程 B] 學校既定事件
     elif intent_type == "academic_event":
-        academic_events = search_academic_events(query)
+        academic_events = await asyncio.to_thread(search_academic_events, query)
         if academic_events:
             event = academic_events[0]
             event_title = event.get("title", "")
@@ -585,7 +586,7 @@ def execute_calendar_action(query: str, intent_data: dict, retrieved_chunks: lis
             
             logger.info(f"📅 執行學校事件建立：{event_title} {iso_start} ~ {iso_end}")
             try:
-                result = create_calendar_event(discord_id=discord_id, title=f"[金大] {event_title}", start=iso_start, end=iso_end)
+                result = await asyncio.to_thread(cal_api.create_calendar_event, discord_id=discord_id, title=f"[金大] {event_title}", start=iso_start, end=iso_end)
                 if result["status"] == "success":
                     display_date = iso_start.split("T")[0]
                     e_date_end = iso_end.split("T")[0]
@@ -612,16 +613,19 @@ def execute_calendar_action(query: str, intent_data: dict, retrieved_chunks: lis
         from tools.schedule_manager import get_schedule, PERIOD_TIME_MAP
         
         try:
-            schedule = get_schedule(discord_id)
+            schedule = await asyncio.to_thread(get_schedule, discord_id)
             if not schedule or "courses" not in schedule:
-                return "❌ 我找不到您的課表資料喔！請先使用 `/upload_schedule`（或附加快捷鍵）上傳課表截圖。"
+                if discord_id and discord_id.startswith("tg_"):
+                    return "❌ 我找不到您的課表資料喔！請在主選單點擊「📅 上傳課表」或直接傳送課表圖片。"
+                else:
+                    return "❌ 我找不到您的課表資料喔！請先使用 `/upload_schedule`（或附加快捷鍵）上傳課表截圖。"
             
             courses = schedule["courses"]
             if not courses:
                 return "⚠️ 您的課表內目前沒有任何課程資料。"
             
             # 尋找 events.json 中的開學日，以做為 18 週循環的精準起點
-            events_path = config.DATA_DIR + "/events.json"
+            events_path = os.path.join(config.DATA_DIR, "events.json")
             semester_start_date = None
             try:
                 with open(events_path, "r", encoding="utf-8") as f:
@@ -693,7 +697,8 @@ def execute_calendar_action(query: str, intent_data: dict, retrieved_chunks: lis
                     for exd in exdates:
                         recurrence_rules.append(f"EXDATE;TZID=Asia/Taipei:{exd.replace('-', '').replace(':', '')}")
             
-                result = create_calendar_event(
+                result = await asyncio.to_thread(
+                    cal_api.create_calendar_event,
                     discord_id=discord_id,
                     title=event_title,
                     start=iso_start,
@@ -739,91 +744,92 @@ def execute_calendar_action(query: str, intent_data: dict, retrieved_chunks: lis
     
     # 使用 helper 函數解析上課時間
     logger.info(f"📅 呼叫 Gemini 解析行事曆時間: {schedule_str}")
-    schedules = _parse_schedule_string(schedule_str)
+    schedules = await _parse_schedule_string(schedule_str)
 
     if not schedules:
         return f"😅 解析失敗：【{course_name}】雖然有上課時間字串 ({schedule_str})，但我無法辨識其內容，無法為您加到行事曆。"
          
-        event_title = f"[課程] {course_name} ({teacher})"
+    event_title = f"[課程] {course_name} ({teacher})"
+
+    success_count = 0
+    failure_count = 0
+    last_success_link = ""
+    last_error_msg = ""
+    skipped_holidays = 0
+
+    for sched in schedules:
+        day_of_week = sched.get("day_of_week")
+        start_p = sched.get("start_period")
+        end_p = sched.get("end_period")
     
-        success_count = 0
-        failure_count = 0
-        last_success_link = ""
-        last_error_msg = ""
-        skipped_holidays = 0
+        if day_of_week is None or start_p is None or end_p is None:
+            continue
     
-        for sched in schedules:
-            day_of_week = sched.get("day_of_week")
-            start_p = sched.get("start_period")
-            end_p = sched.get("end_period")
-        
-            if day_of_week is None or start_p is None or end_p is None:
-                continue
-        
-            # 組裝 IsoFormat 日期
-            target_date = get_next_weekday(day_of_week)
-            date_str = target_date.strftime("%Y-%m-%d")
-        
-            start_time_str = NQU_PERIOD_START.get(start_p, "08:10")
-            end_time_str = NQU_PERIOD_END.get(end_p, "09:00")
-        
-            iso_start = f"{date_str}T{start_time_str}:00"
-            iso_end = f"{date_str}T{end_time_str}:00"
-        
-            # 【強化】生成 EXDATE 以跳過國定假日
-            exdates = []
-            from datetime import date as _date
-            for week_i in range(18):
-                event_date = target_date + timedelta(weeks=week_i)
-                date_str_check = event_date.strftime("%Y-%m-%d")
-                if date_str_check in config.HOLIDAYS:
-                    exdates.append(f"{date_str_check}T{start_time_str}:00")
-                    skipped_holidays += 1
-                    logger.info(f"🎌 跳過國定假日：{date_str_check} ({course_name})")
-        
-            recurrence_rules = ["RRULE:FREQ=WEEKLY;COUNT=18"]
-            if exdates:
-                for exd in exdates:
-                    recurrence_rules.append(f"EXDATE;TZID=Asia/Taipei:{exd.replace('-', '').replace(':', '')}")
-        
-            logger.info(f"📅 準備呼叫 Google API：{event_title} {iso_start} ~ {iso_end} (週期：18週)")
-        
-            # 呼叫 Google API
-            result = create_calendar_event(
-                discord_id=discord_id,
-                title=event_title,
-                start=iso_start,
-                end=iso_end,
-                recurrence=recurrence_rules
-            )
-        
-            if result["status"] == "success":
-                success_count = success_count + 1
-                last_success_link = result['htmlLink']
-            elif result["status"] == "exists":
-                success_count = success_count + 1
-                last_success_link = result['htmlLink']
-            else:
-                failure_count = failure_count + 1
-                last_error_msg = result.get('message', '未知錯誤')
+        # 組裝 IsoFormat 日期
+        target_date = get_next_weekday(day_of_week)
+        date_str = target_date.strftime("%Y-%m-%d")
     
-        if success_count > 0:
-            holiday_msg = f"\n🎌 已自動跳過 {skipped_holidays} 個國定假日的上課時段" if skipped_holidays > 0 else ""
-            return (
-                f"✅ 已成功將課程加入 Google Calendar，為您設定為**每週重複 (共18週)**！\n"
-                f"📌 課程：{course_name}\n"
-                f"🕒 共新增了 {success_count} 個上課時段\n"
-                f"🔗 前往查看行事曆：{last_success_link}"
-                + holiday_msg
-                + (f"\n❌ (部分時段失敗: {last_error_msg})" if failure_count > 0 else "")
-            )
+        start_time_str = NQU_PERIOD_START.get(start_p, "08:10")
+        end_time_str = NQU_PERIOD_END.get(end_p, "09:00")
+    
+        iso_start = f"{date_str}T{start_time_str}:00"
+        iso_end = f"{date_str}T{end_time_str}:00"
+    
+        # 【強化】生成 EXDATE 以跳過國定假日
+        exdates = []
+        from datetime import date as _date
+        for week_i in range(18):
+            event_date = target_date + timedelta(weeks=week_i)
+            date_str_check = event_date.strftime("%Y-%m-%d")
+            if date_str_check in config.HOLIDAYS:
+                exdates.append(f"{date_str_check}T{start_time_str}:00")
+                skipped_holidays += 1
+                logger.info(f"🎌 跳過國定假日：{date_str_check} ({course_name})")
+    
+        recurrence_rules = ["RRULE:FREQ=WEEKLY;COUNT=18"]
+        if exdates:
+            for exd in exdates:
+                recurrence_rules.append(f"EXDATE;TZID=Asia/Taipei:{exd.replace('-', '').replace(':', '')}")
+    
+        logger.info(f"📅 準備呼叫 Google API：{event_title} {iso_start} ~ {iso_end} (週期：18週)")
+    
+        # 呼叫 Google API
+        result = await asyncio.to_thread(
+            cal_api.create_calendar_event,
+            discord_id=discord_id,
+            title=event_title,
+            start=iso_start,
+            end=iso_end,
+            recurrence=recurrence_rules
+        )
+    
+        if result["status"] == "success":
+            success_count = success_count + 1
+            last_success_link = result['htmlLink']
+        elif result["status"] == "exists":
+            success_count = success_count + 1
+            last_success_link = result['htmlLink']
         else:
-            return f"❌ 建立失敗：{last_error_msg}"
+            failure_count = failure_count + 1
+            last_error_msg = result.get('message', '未知錯誤')
+
+    if success_count > 0:
+        holiday_msg = f"\n🎌 已自動跳過 {skipped_holidays} 個國定假日的上課時段" if skipped_holidays > 0 else ""
+        return (
+            f"✅ 已成功將課程加入 Google Calendar，為您設定為**每週重複 (共18週)**！\n"
+            f"📌 課程：{course_name}\n"
+            f"🕒 共新增了 {success_count} 個上課時段\n"
+            f"🔗 前往查看行事曆：{last_success_link}"
+            + holiday_msg
+            + (f"\n❌ (部分時段失敗: {last_error_msg})" if failure_count > 0 else "")
+        )
+    else:
+        return f"❌ 建立失敗：{last_error_msg}"
             
 
 
 
-def generate_academic_event_answer(query: str, events: list) -> str:
+async def generate_academic_event_answer(query: str, events: list) -> str:
     """
     單純查詢學校行事曆事件時，由 Python 預先格式化 + LLM 高品質呈現。
 
@@ -930,7 +936,6 @@ def generate_academic_event_answer(query: str, events: list) -> str:
             {"role": "user", "parts": [{"text": user_prompt}]},
         ],
         "generationConfig": {
-            "temperature": 1.0,
             "maxOutputTokens": config.GEMINI_SHORT_MAX_TOKENS,
             "thinkingConfig": {
                 "thinkingLevel": "low"
@@ -939,13 +944,15 @@ def generate_academic_event_answer(query: str, events: list) -> str:
     }
 
     try:
-        response = requests.post(
-            config.GEMINI_FAST_API_URL,
-            json=payload,
+        from llm.gemini_client import a_call_gemini
+        text = await a_call_gemini(
+            prompt=payload["contents"],
+            model="fast",
+            thinking="low",
+            max_tokens=config.GEMINI_SHORT_MAX_TOKENS,
             timeout=config.GEMINI_FLASH_TIMEOUT,
         )
-        response.raise_for_status()
-        return response.json().get("candidates", [{}])[0].get("content", {}).get("parts", [{}])[0].get("text", "").strip()
+        return text
     except Exception as e:
         logger.error(f"Academic Event LLM 發生錯誤: {e}")
         # Fallback 回覆（使用 Python 格式化的版本，保證可用）

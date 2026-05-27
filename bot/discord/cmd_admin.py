@@ -23,7 +23,7 @@ from bot import (
 from rag.index_manager import load_and_index
 from rag.query_router import init_known_registry
 from tools.auth import get_targeted_users
-from tools.group_manager import create_group, list_all_groups
+from tools.group_manager import create_group, list_all_groups, get_all_groups_detail, get_group_members, get_group_info
 from bot.discord.cmd_groups import GroupInviteView
 from bot.discord.audit import send_audit_log
 import bot as _bot  # 用於更新 global 狀態
@@ -104,6 +104,7 @@ async def safe_broadcast_engine(
     interaction_channel: discord.TextChannel = None,
     file_url: str = None,
     file_name: str = None,
+    invite_group: str = None,
 ):
     """背景安全發送引擎，具備速率保護、錯誤統計與終端機 Log。"""
     import aiohttp  # type: ignore
@@ -126,13 +127,24 @@ async def safe_broadcast_engine(
 
     for i, uid in enumerate(target_ids, 1):
         try:
-            user = await client.fetch_user(int(uid))
+            # 【優化】先查快取，沒有才打 API，拯救 API 速率限制
+            user = client.get_user(int(uid)) or await client.fetch_user(int(uid))
+            
+            # 【新功能】若有指定，附帶群組邀請按鈕
+            view = GroupInviteView(invite_group) if invite_group else None
+
             if file_bytes:
                 import io
                 file_obj = discord.File(io.BytesIO(file_bytes), filename=file_name or "attachment")
-                await user.send(embed=embed, file=file_obj)
+                if view:
+                    await user.send(embed=embed, file=file_obj, view=view)
+                else:
+                    await user.send(embed=embed, file=file_obj)
             else:
-                await user.send(embed=embed)
+                if view:
+                    await user.send(embed=embed, view=view)
+                else:
+                    await user.send(embed=embed)
             success_count += 1
             logger.info(f"  📨 [{i}/{len(target_ids)}] ✅ 發送成功 → {user.display_name} ({uid})")
         except discord.Forbidden:
@@ -191,14 +203,16 @@ async def group_name_autocomplete(interaction: discord.Interaction, current: str
     title="📌 廣播標題 (可選填，預設為「系統公告」)",
     attachment="📎 附件檔案 (可選填，直接上傳)",
     dept="目標科系 (不填=全校)", grade="目標年級 (不填=全系)",
-    group="目標群組標籤 (不填=不限群組)"
+    group="目標群組標籤 (不填=不限群組)",
+    invite_group="🎁 [新功能] 在公告下方附加「一鍵加入群組」按鈕 (填群組名稱)"
 )
-@app_commands.autocomplete(group=group_name_autocomplete)
+@app_commands.autocomplete(group=group_name_autocomplete, invite_group=group_name_autocomplete)
 async def slash_admin_broadcast(
     interaction: discord.Interaction,
     message: str = None, title: str = None,
     attachment: discord.Attachment = None,
     dept: str = None, grade: str = None, group: str = None,
+    invite_group: str = None,
 ):
     if not ADMIN_DISCORD_IDS or str(interaction.user.id) not in ADMIN_DISCORD_IDS:
         try:
@@ -220,8 +234,8 @@ async def slash_admin_broadcast(
     # ⚡ 嘗試 defer（若 GPU 忙碌可能失敗）
     deferred = await _safe_defer(interaction, ephemeral=True)
 
-    # 篩選目標使用者
-    targets = get_targeted_users(dept, grade, group)
+    # 【優化】將同步硬碟 I/O 丟入背景執行緒，徹底避免凍結主事件迴圈
+    targets = await asyncio.to_thread(get_targeted_users, dept, grade, group)
     target_ids = [t["discord_id"] for t in targets]
 
     if not target_ids:
@@ -263,9 +277,13 @@ async def slash_admin_broadcast(
     )
     embed.set_footer(text=f"來自 NQU 校園智慧助理 | 發送者: {interaction.user.display_name}")
     embed.set_thumbnail(url=interaction.user.display_avatar.url)
+    
+    if invite_group:
+        # 自動建立或確保群組存在
+        create_group(invite_group, str(interaction.user.id), interaction.user.display_name)
 
     client.loop.create_task(
-        safe_broadcast_engine(interaction.user, target_ids, embed, interaction.channel, file_url, file_name)
+        safe_broadcast_engine(interaction.user, target_ids, embed, interaction.channel, file_url, file_name, invite_group)
     )
 
 
@@ -342,66 +360,7 @@ async def slash_admin_dm(
         await _send_reply(interaction, f"❌ 發生錯誤：{e}", deferred)
 
 
-# =========================================================================
-# 🏷️ /admin_invite (批量邀請)
-# =========================================================================
-
-@tree.command(name="admin_invite", description="🏷️ [管理員專用] 邀請學生加入特定標籤群組 (支援一次最多5人)")
-@app_commands.default_permissions(administrator=True)
-@app_commands.describe(
-    group_name="群組名稱 (可快選或輸入新群組)",
-    user1="要邀請的學生 1", user2="要邀請的學生 2 (可選)",
-    user3="要邀請的學生 3 (可選)", user4="要邀請的學生 4 (可選)",
-    user5="要邀請的學生 5 (可選)",
-)
-@app_commands.autocomplete(group_name=group_name_autocomplete)
-async def slash_admin_invite(
-    interaction: discord.Interaction, group_name: str, user1: discord.User,
-    user2: discord.User = None, user3: discord.User = None,
-    user4: discord.User = None, user5: discord.User = None,
-):
-    if not ADMIN_DISCORD_IDS or str(interaction.user.id) not in ADMIN_DISCORD_IDS:
-        try:
-            await interaction.response.send_message("🚫 抱歉，這是管理員專用指令喔！", ephemeral=True)
-        except discord.NotFound:
-            pass
-        return
-
-    deferred = await _safe_defer(interaction, ephemeral=True)
-    invite_code = create_group(group_name, str(interaction.user.id), interaction.user.display_name)
-
-    target_users = [u for u in [user1, user2, user3, user4, user5] if u is not None]
-    success_list, fail_list = [], []
-
-    for target_user in target_users:
-        try:
-            embed = discord.Embed(
-                title="💌 系統群組邀請",
-                description=(
-                    f"您好！管理員 **{interaction.user.display_name}** 邀請您加入：\n\n"
-                    f"### 🏷️ 「{group_name}」\n\n"
-                    f"加入後，您將能接收到該群組的專屬重要通知。\n請問您是否同意加入？"
-                ),
-                color=discord.Color.purple(), timestamp=discord.utils.utcnow()
-            )
-            embed.set_footer(text="NQU 校園智慧助理 · 群組管理系統")
-            embed.set_thumbnail(url=interaction.user.display_avatar.url)
-            view = GroupInviteView(group_name)
-            await target_user.send(embed=embed, view=view)
-            success_list.append(target_user.display_name)
-        except discord.Forbidden:
-            fail_list.append(f"{target_user.display_name} (私訊關閉)")
-        except Exception as e:
-            fail_list.append(f"{target_user.display_name} ({e})")
-        await asyncio.sleep(0.3)
-
-    result_msg = f"📋 邀請結果：群組「**{group_name}**」| 邀請碼：`{invite_code}`\n"
-    if success_list:
-        result_msg += f"\n✅ 成功發送 ({len(success_list)} 人)：{', '.join(success_list)}"
-    if fail_list:
-        result_msg += f"\n❌ 發送失敗 ({len(fail_list)} 人)：{', '.join(fail_list)}"
-    result_msg += f"\n\n🔗 分享邀請碼給學生，他們可使用 `/join_group code:{invite_code}` 加入！"
-    await _send_reply(interaction, result_msg, deferred)
+# 🗑️ (移除舊版僵化的 /admin_invite 指令，已由廣播按鈕完全取代)
 
 
 # =========================================================================
@@ -438,3 +397,121 @@ async def slash_admin_invite_code(interaction: discord.Interaction, group_name: 
                 f"{interaction.user.mention} ✅ 群組「**{group_name}**」的邀請碼：**`{invite_code}`**"
             )
     logger.info(f"🔗 邀請碼產生 | {interaction.user.display_name} | 群組={group_name} 邀請碼={invite_code}")
+
+
+# =========================================================================
+# 📋 /admin_groups — 群組總覽與成員查詢
+# =========================================================================
+
+@tree.command(name="admin_groups", description="📋 [管理員專用] 查看所有群組與成員名單")
+@app_commands.default_permissions(administrator=True)
+@app_commands.describe(
+    group_name="指定查詢某一群組的成員明細 (不填=顯示所有群組總覽)"
+)
+@app_commands.autocomplete(group_name=group_name_autocomplete)
+async def slash_admin_groups(
+    interaction: discord.Interaction,
+    group_name: str = None,
+):
+    if not ADMIN_DISCORD_IDS or str(interaction.user.id) not in ADMIN_DISCORD_IDS:
+        try:
+            await interaction.response.send_message("🚫 抱歉，這是管理員專用指令喔！", ephemeral=True)
+        except discord.NotFound:
+            pass
+        return
+
+    deferred = await _safe_defer(interaction, ephemeral=True)
+
+    if group_name:
+        # ── 查詢特定群組的成員明細 ──
+        info = await asyncio.to_thread(get_group_info, group_name)
+        if not info:
+            await _send_reply(interaction, f"❌ 群組「**{group_name}**」不存在。", deferred)
+            return
+
+        members = await asyncio.to_thread(get_group_members, group_name)
+
+        embed = discord.Embed(
+            title=f"🏷️ 群組明細：{group_name}",
+            color=discord.Color.purple(),
+            timestamp=discord.utils.utcnow(),
+        )
+        embed.add_field(name="🔑 邀請碼", value=f"`{info.get('invite_code', '?')}`", inline=True)
+        embed.add_field(name="👤 建立者", value=info.get("creator_name", "?"), inline=True)
+        embed.add_field(name="👥 成員數", value=str(len(members)), inline=True)
+
+        if members:
+            member_lines = []
+            for i, m in enumerate(members, 1):
+                nick = m.get("nickname") or "未設定暱稱"
+                dept = m.get("department", "?")
+                grade = m.get("grade", "?")
+                cls = f" {m['class_group']}班" if m.get("class_group") else ""
+                member_lines.append(
+                    f"`{i}.` <@{m['discord_id']}> — {nick}\n"
+                    f"　　{dept} {grade}年級{cls}"
+                )
+            # Discord Embed field 上限 1024 字元，若太長分段
+            chunk = ""
+            chunk_idx = 1
+            for line in member_lines:
+                if len(chunk) + len(line) + 1 > 1000:
+                    embed.add_field(name=f"📜 成員名單 ({chunk_idx})", value=chunk, inline=False)
+                    chunk = ""
+                    chunk_idx += 1
+                chunk += line + "\n"
+            if chunk:
+                label = "📜 成員名單" if chunk_idx == 1 else f"📜 成員名單 ({chunk_idx})"
+                embed.add_field(name=label, value=chunk, inline=False)
+        else:
+            embed.add_field(name="📜 成員名單", value="_（目前沒有任何成員）_", inline=False)
+
+        embed.set_footer(text="NQU 校園智慧助理 · 群組管理系統")
+        if deferred:
+            await interaction.followup.send(embed=embed, ephemeral=True)
+        elif interaction.channel:
+            await interaction.channel.send(embed=embed)
+
+    else:
+        # ── 顯示所有群組總覽 ──
+        all_groups = await asyncio.to_thread(get_all_groups_detail)
+
+        if not all_groups:
+            await _send_reply(interaction, "📋 目前還沒有建立任何群組。\n使用 `/admin_invite_code` 來建立第一個群組吧！", deferred)
+            return
+
+        embed = discord.Embed(
+            title="📋 群組管理總覽",
+            description=f"系統中共有 **{len(all_groups)}** 個群組",
+            color=discord.Color.blue(),
+            timestamp=discord.utils.utcnow(),
+        )
+
+        for g in all_groups:
+            member_preview = ""
+            if g["members"]:
+                names = [m.get("nickname") or f"<@{m['discord_id']}>" for m in g["members"][:5]]
+                member_preview = "、".join(names)
+                if len(g["members"]) > 5:
+                    member_preview += f"…等 {len(g['members'])} 人"
+            else:
+                member_preview = "_（無成員）_"
+
+            created = g.get("created_at", "?")[:10]  # 只取日期
+            embed.add_field(
+                name=f"🏷️ {g['name']}",
+                value=(
+                    f"👥 成員：{g['member_count']} 人\n"
+                    f"🔑 邀請碼：`{g['invite_code']}`\n"
+                    f"👤 建立者：{g['creator_name']}\n"
+                    f"📅 建立日期：{created}\n"
+                    f"📜 名單：{member_preview}"
+                ),
+                inline=False,
+            )
+
+        embed.set_footer(text="使用 /admin_groups group_name:群組名 查看成員明細")
+        if deferred:
+            await interaction.followup.send(embed=embed, ephemeral=True)
+        elif interaction.channel:
+            await interaction.channel.send(embed=embed)

@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
 """
-tools/ocr_engine.py — Gemini 3.1 Pro Vision OCR 引擎
-=====================================================
-使用 Gemini 3.1 Pro 的多模態能力，將課表截圖 / 成績單 PDF
+tools/ocr_engine.py — Gemini 3.1 Pro Preview Vision OCR 引擎
+============================================================
+使用 Gemini 3.1 Pro Preview 的旗艦多模態能力，將課表截圖 / 成績單 PDF
 辨識為結構化 JSON，格式完全對齊現有的 token.json schema。
 
-設計原則：
-    - temperature = 1.0（Gemini 3 官方建議，推理能力已針對預設值最佳化）
+設計原則（遵循 Gemini 3 官方開發者指南 https://ai.google.dev/gemini-api/docs/gemini-3）：
+    - temperature = 1.0（Gemini 3 強烈建議維持預設值，低於 1.0 可能導致迴圈或效能降低）
+    - thinkingLevel = "high"（啟用最高深度思考，提升密集表格與數值精度）
     - responseMimeType = "application/json"（強制 JSON 輸出）
     - responseSchema = 嚴格定義（鎖死在正確格式裡）
-    - media_resolution：圖片用 high (1120 tokens)，PDF 用 medium (560 tokens)
+    - media_resolution：圖片用 high (1120 tokens)，PDF 用 medium (560 tokens，品質已飽和）
     - 圖片在前、指令在後（Gemini Best Practice）
 """
 
@@ -358,37 +359,38 @@ async def ocr_schedule(image_bytes_list: list[bytes], mime_types: list[str] | No
                 "data": base64.b64encode(img_bytes).decode("utf-8"),
             }
         })
-    parts.append({"text": SCHEDULE_OCR_PROMPT})
+    current_year_info = (
+        f"\n\n【重要！目前學期資訊】\n"
+        f"當前系統時間為 {config.CURRENT_ACADEMIC_YEAR} 學年度第 {config.CURRENT_SEMESTER} 學期。\n"
+        f"除非截圖上有「極度明確」標示其他學期，否則 academic_year 強制填 '{config.CURRENT_ACADEMIC_YEAR}'，"
+        f"semester 強制填 '{config.CURRENT_SEMESTER}'。"
+    )
+    parts.append({"text": SCHEDULE_OCR_PROMPT + current_year_info})
 
     payload = {
-        "contents": [{"parts": parts}],
+        "contents": {"role": "user", "parts": parts},
         "generationConfig": {
-            "temperature": 1.0,
             "maxOutputTokens": config.GEMINI_PRO_MAX_TOKENS,
             "responseMimeType": "application/json",
             "responseSchema": SCHEDULE_SCHEMA,
-            "mediaResolution": "media_resolution_high",
+            "mediaResolution": "MEDIA_RESOLUTION_HIGH",
             "thinkingConfig": {
                 "thinkingLevel": "high"
             }
         }
     }
 
-    logger.info(f"📷 課表 OCR | 送出 {len(image_bytes_list)} 張圖片至 Gemini 3.1 Pro...")
+    logger.info(f"📷 課表 OCR | 送出 {len(image_bytes_list)} 張圖片至 Gemini 3.1 Pro Preview (thinkingLevel=high)...")
 
     try:
-        import asyncio
-        import re
+        from llm.gemini_client import a_call_gemini_raw
 
-        response = await asyncio.to_thread(
-            requests.post,
-            config.GEMINI_API_URL,
-            json=payload,
+        # 使用 gemini_client 的非同步 a_call_gemini_raw 呼叫 Vertex AI 上的 gemini-3.1-pro-preview
+        result_text = await a_call_gemini_raw(
+            model_name="gemini-3.1-pro-preview",
+            payload=payload,
             timeout=config.GEMINI_OCR_TIMEOUT,
         )
-        response.raise_for_status()
-        
-        result_text = response.json().get("candidates", [{}])[0].get("content", {}).get("parts", [{}])[0].get("text", "")
         
         # 使用 json_repair 強力修復 LLM 各種奇葩格式
         import json_repair
@@ -442,8 +444,22 @@ def enrich_schedule_with_course_db(schedule_data: dict, all_nodes) -> dict:
 
     # ── 建立課程查找索引：{ 課名: { credits, type, teacher, ... } } ──
     course_db = {}
+    
+    # 取出 OCR 辨識出的目標學期（若無則 Fallback 為目前系統最新學期）
+    import config
+    target_year = str(schedule_data.get("academic_year", config.CURRENT_ACADEMIC_YEAR)).strip()
+    target_sem = str(schedule_data.get("semester", config.CURRENT_SEMESTER)).strip()
+    logger.info(f"🔍 鎖定 RAG 資料庫比對範圍：{target_year} 學年第 {target_sem} 學期")
+
     for node in all_nodes:
         meta = node.metadata
+        
+        # 排除非目標學期的課程資料，防止拿去年舊課表的資料來覆蓋
+        node_year = str(meta.get("academic_year", "")).strip()
+        node_sem = str(meta.get("semester", "")).strip()
+        if node_year != target_year or node_sem != target_sem:
+            continue
+
         cname = meta.get("course_name", "")
         section = meta.get("section", "")
 
@@ -593,6 +609,10 @@ async def ocr_transcript(
             processed_bytes_list.append(file_bytes)
             processed_mime_types.append(mime)
 
+    # PDF 用 medium、圖片用 high（官方建議）。經過 PyMuPDF 轉換後此處多半為 False (image/png)
+    is_pdf = any("pdf" in m for m in processed_mime_types)
+    media_res = "MEDIA_RESOLUTION_MEDIUM" if is_pdf else "MEDIA_RESOLUTION_HIGH"
+
     # 組裝 multimodal parts
     parts = []
     for p_bytes, p_mime in zip(processed_bytes_list, processed_mime_types):
@@ -613,14 +633,9 @@ async def ocr_transcript(
 
     parts.append({"text": TRANSCRIPT_OCR_PROMPT + extra_context})
 
-    # PDF 用 medium、圖片用 high（官方建議）。經過 PyMuPDF 轉換後此處多半為 False (image/png)
-    is_pdf = any("pdf" in m for m in processed_mime_types)
-    media_res = "media_resolution_medium" if is_pdf else "media_resolution_high"
-
     payload = {
-        "contents": [{"parts": parts}],
+        "contents": {"role": "user", "parts": parts},
         "generationConfig": {
-            "temperature": 1.0,
             "maxOutputTokens": config.GEMINI_PRO_MAX_TOKENS,
             "responseMimeType": "application/json",
             "responseSchema": TRANSCRIPT_SCHEMA,
@@ -631,22 +646,17 @@ async def ocr_transcript(
         }
     }
 
-    logger.info(f"📊 成績單 OCR | 送出 {len(file_bytes_list)} 個檔案至 Gemini 3.1 Pro (media_resolution={media_res})...")
+    logger.info(f"📊 成績單 OCR | 送出 {len(file_bytes_list)} 個檔案至 Gemini 3.1 Pro Preview (media_resolution={media_res}, thinkingLevel=high)...")
 
     try:
-        import asyncio
-        import re
+        from llm.gemini_client import a_call_gemini_raw
 
-        # 1. 使用 asyncio.to_thread 避免長達 90 秒的同步請求卡死 Discord Heartbeat
-        response = await asyncio.to_thread(
-            requests.post,
-            config.GEMINI_API_URL,
-            json=payload,
+        # 使用 gemini_client 的非同步 a_call_gemini_raw 呼叫 Vertex AI 上的 gemini-3.1-pro-preview
+        result_text = await a_call_gemini_raw(
+            model_name="gemini-3.1-pro-preview",
+            payload=payload,
             timeout=config.GEMINI_OCR_TIMEOUT,
         )
-        response.raise_for_status()
-        
-        result_text = response.json().get("candidates", [{}])[0].get("content", {}).get("parts", [{}])[0].get("text", "")
         
         # 使用 json_repair 強力修復 LLM 各種奇葩格式 (尾隨逗號、漏引號、換行壞掉等)
         import json_repair
@@ -667,18 +677,6 @@ async def ocr_transcript(
         semesters = result.get("semesters", [])
         total_courses = sum(len(s.get("courses", [])) for s in semesters)
         logger.info(f"✅ 成績單 OCR 完成 | {len(semesters)} 學期, {total_courses} 門課")
-
-        # 後處理：補充 required_remaining
-        cs = result.get("credit_summary", {})
-        if "required_remaining" not in cs or cs["required_remaining"] == 0:
-            total = cs.get("required_total", 130)
-            earned = cs.get("required_earned", 0)
-            cs["required_remaining"] = max(0, total - earned)
-
-        # 後處理：確保 breakdown 的 remaining 正確
-        for cat_name, cat_data in cs.get("breakdown", {}).items():
-            if isinstance(cat_data, dict) and "remaining" not in cat_data:
-                cat_data["remaining"] = max(0, cat_data.get("required", 0) - cat_data.get("earned", 0))
 
         return result
 

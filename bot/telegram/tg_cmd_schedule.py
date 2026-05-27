@@ -27,7 +27,7 @@ async def process_schedule_upload(update: Update, context: ContextTypes.DEFAULT_
 
     # ── 圖片 OCR ──
     if update.message.photo:
-        progress = await update.message.reply_text("⏳ Gemini 3.1 Pro 正在辨識課表截圖...\n請稍候約 10-20 秒 🔍")
+        progress = await update.message.reply_text("⏳ Gemini 3.5 Flash 正在辨識課表截圖...\n請稍候約 10-20 秒 🔍")
         try:
             photo = update.message.photo[-1]
             file = await photo.get_file()
@@ -138,7 +138,7 @@ def _build_schedule_preview(schedule_data: dict, courses: list, total_credits: i
         "",
     ]
 
-    for day in range(1, 6):
+    for day in range(1, 8):
         day_courses = [c for c in courses if c.get("day") == day]
         if day_courses:
             lines.append(f"📅 {DAY_NAMES.get(day, '')}：")
@@ -158,11 +158,28 @@ async def cmd_my_schedule(update: Update, context: ContextTypes.DEFAULT_TYPE):
     from datetime import datetime, timezone, timedelta
     tg_id = get_tg_user_id(update.effective_chat.id)
     tz = timezone(timedelta(hours=8))
+    
+    # 預設使用今天星期幾，若有傳入參數則使用參數
     day = datetime.now(tz).isoweekday()
-    if day > 5:
-        await update.message.reply_text("🎉 今天是假日，沒有課！\n💡 使用 /start → 我的課表 查詢其他天")
-        return
+    if context.args:
+        arg = context.args[0]
+        # 支援阿拉伯數字 1-7
+        if arg.isdigit() and 1 <= int(arg) <= 7:
+            day = int(arg)
+        else:
+            # 支援中文星期幾
+            cn_map = {"一": 1, "二": 2, "三": 3, "四": 4, "五": 5, "六": 6, "日": 7, "天": 7}
+            for k, v in cn_map.items():
+                if k in arg:
+                    day = v
+                    break
+
     result = query_day_schedule(tg_id, day)
+    
+    # 動態週末保底：若為週末且查詢結果包含「沒有課程」（或「沒有課」），才友善提示；否則若真的有排課就直接顯示
+    if day > 5 and ("沒有課" in result or "無課程" in result or "未排課" in result):
+        result = f"今天是假日（{DAY_NAMES.get(day)}），目前您的課表中沒有排課喔！🌴"
+
     await update.message.reply_text(result)
 
 

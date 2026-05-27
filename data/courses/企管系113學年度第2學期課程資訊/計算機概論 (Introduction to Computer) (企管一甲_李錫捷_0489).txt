@@ -1,0 +1,88 @@
+國立金門大學113學年度第2學期企管系課程
+學年度：113學年度
+學期：第2學期
+課程名稱：計算機概論 (Introduction to Computer)
+部別：日間部學士班
+開課班級：企管一甲
+學分數：2.0學分
+授課時數：2.0小時
+授課教師：李錫捷
+必選修：必修
+教室：E101呂慶安演講廳
+修課上限人數：160人
+上課時間：每周星期一下午第5節~第6節
+
+課程教學目標：
+1. This course presents an introductory survey of computer science.
+
+課程教學綱要：
+1. Introduction
+2. Introduction to Personal Computer Hardware
+3. PC Assembly
+4. Advanced Computer Hardware
+5. Preventive Maintenance and Troubleshooting
+6. Networking Concepts
+7. Applied Networking
+8. Laptops and Other Mobile Devices
+9. Printers
+10. Virtualization and Cloud Computing
+11. Windows Installation and Configuration
+12. Mobile, Linux, and macOS Operating System
+13. Security
+14. IT Professionals
+
+教科書資料：
+1. 書名：Cisco IT Essentials Online Course
+2. 出版日期：未標註
+3. 作者：Cisco
+4. 出版社：未標註
+5. 版本：V7.01
+
+參考書資料：
+1-1. 書名：Computer - Information Technology in Perspective
+1-2. 出版日期：未標註
+1-3. 作者：Larry Long and Nancy Long
+1-4. 出版社：Pearson Education
+1-5. 版本：未標註
+
+2-1. 書名：Computer Science: An Overview
+2-2. 出版日期：未標註
+2-3. 作者：J. Glenn Brookshear
+2-4. 出版社：Pearson Education, Inc.
+2-5. 版本：未標註
+
+3-1. 書名：Foundataion of Computer Science
+3-2. 出版日期：未標註
+3-3. 作者：Behrouz Forouzan and Firouz Mosharraf
+3-4. 出版社：Cengage Learning
+3-5. 版本：未標註
+
+※請遵守智慧財產權觀念，依著作權法規定，教科書及教材不得非法影印與使用盜版軟體。
+
+教學進度表（2025年春季學期）：
+第1週課程 (2025/02/16─2025/02/22)：Introduction
+第2週課程 (2025/02/23─2025/03/01)：Introduction to Personal Computer Hardware
+第3週課程 (2025/03/02─2025/03/08)：PC Assembly
+第4週課程 (2025/03/09─2025/03/15)：Advanced Computer Hardware
+第5週課程 (2025/03/16─2025/03/22)：Preventive Maintenance and Troubleshooting
+第6週課程 (2025/03/23─2025/03/29)：Networking Concepts
+第7週課程 (2025/03/30─2025/04/05)：Applied Networking
+第8週課程 (2025/04/06─2025/04/12)：Midterm Examination
+第9週課程 (2025/04/13─2025/04/19)：Laptops and Other Mobile Devices
+第10週課程 (2025/04/20─2025/04/26)：Printers
+第11週課程 (2025/04/27─2025/05/03)：Virtualization and Cloud Computing
+第12週課程 (2025/05/04─2025/05/10)：Windows Installation and Configuration
+第13週課程 (2025/05/11─2025/05/17)：Mobile, Linux, and macOS Operating System
+第14週課程 (2025/05/18─2025/05/24)：Security
+第15週課程 (2025/05/25─2025/05/31)：The IT Professional
+第16週課程 (2025/06/01─2025/06/07)：Final Examination
+第17週課程 (2025/06/08─2025/06/14)：彈性補充教學(自主學習、探究與實作)
+第18週課程 (2025/06/15─2025/06/21)：彈性補充教學(自主學習、探究與實作)
+
+成績評定方式：
+1. Quizzes/Homework/Participation: 35%
+2. Midterm: 30%
+3. Final: 35%
+
+課堂要求：
+無詳細課堂要求說明

@@ -1,0 +1,56 @@
+國立金門大學114學年度第1學期學分班課程
+學年度：114學年度
+學期：第1學期
+課程名稱：金融科技導論 (Introduction to FinTech)
+部別：學分班
+開課班級：學分班
+學分數：3.0學分
+授課時數：3.0小時
+授課教師：蔡宗憲
+必選修：選修
+教室：
+修課上限人數：30人
+上課時間：每周星期三上午第2節~第4節
+備註：AI聯盟衛星課程 /臺灣大學：張智星老師授課/線上課程/授課語言：中文 / 同步考試時間為2025 /12/17 9:10~12:10 由教務長負責打成績
+
+課程教學目標：
+1. 金融科技(Financial Technology, FinTech)是目前全球金融業與科技業的焦點,它所引發的破壞式創新,正挑戰既有金融服務的供給方式和消費行為。本課程由資工、數學教授群共同開設,旨在釐清 FinTech 本質、相關的創新科技、以及關鍵的趨勢。同時我們也會在課程當中邀請相關學者專家進行演講,並在金融機構(或金融科技新創公司)的協助之下完成期末的AI程式競賽。
+
+課程教學綱要：
+1. 無詳細課程教學綱要說明
+
+教科書資料：
+無教科書
+
+參考書資料：
+無參考書
+
+※請遵守智慧財產權觀念，依著作權法規定，教科書及教材不得非法影印與使用盜版軟體。
+
+教學進度表（2025年秋季學期）：
+第1週課程 (2025/09/14─2025/09/20)：Intro to the course
+第2週課程 (2025/09/21─2025/09/27)：Math for fintech
+第3週課程 (2025/09/28─2025/10/04)：Technical indicators, quantitative trading, backtest, dynamic programming
+第4週課程 (2025/10/05─2025/10/11)：Intro to bitcoin and blockchain
+第5週課程 (2025/10/12─2025/10/18)：Hash function and elliptic curve digital signature algorithm (ECDSA)
+第6週課程 (2025/10/19─2025/10/25)：Portfolio optimization
+第7週課程 (2025/10/26─2025/11/01)：Ethereum and Other Blockchain/Cryptocurrency
+第8週課程 (2025/11/02─2025/11/08)：Performance indices, feature selection for ML
+第9週課程 (2025/11/09─2025/11/15)：Missing data imputation in ML
+第10週課程 (2025/11/16─2025/11/22)：Imbalanced dataset, cost-sensitive classification
+第11週課程 (2025/11/23─2025/11/29)：Advanced Functions and Post-Quantum Cryptography for Blockchain
+第12週課程 (2025/11/30─2025/12/06)：Intro to the final project
+第13週課程 (2025/12/07─2025/12/13)：Invited talk by guest speaker
+第14週課程 (2025/12/14─2025/12/20)：Invited talk by guest speaker
+第15週課程 (2025/12/21─2025/12/27)：AI/ML applications in finance
+第16週課程 (2025/12/28─2026/01/03)：Heads-up for final project
+第17週課程 (2026/01/04─2026/01/10)：彈性補充教學(自主學習、探究與實作)
+第18週課程 (2026/01/11─2026/01/17)：彈性補充教學(自主學習、探究與實作)
+
+成績評定方式：
+1. 作業 (Homework): 約佔 30%
+2. 期末專案 (Term project): 約佔 35%
+3. 期末考試 (Final exam): 約佔 35%
+
+課堂要求：
+無詳細課堂要求說明

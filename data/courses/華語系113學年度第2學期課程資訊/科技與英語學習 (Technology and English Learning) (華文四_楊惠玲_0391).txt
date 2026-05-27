@@ -1,0 +1,66 @@
+國立金門大學113學年度第2學期華語系課程
+學年度：113學年度
+學期：第2學期
+課程名稱：科技與英語學習 (Technology and English Learning)
+部別：日間部學士班
+開課班級：華文四
+學分數：2.0學分
+授課時數：2.0小時
+授課教師：楊惠玲
+必選修：選修
+教室：I103-1圖資電腦教室
+修課上限人數：60人
+上課時間：每周星期一下午第9節~晚上第10節
+備註：該課程為全英授課
+
+課程教學目標：
+1. The arrangement of this course aims to enhance students' literacy and proficiency in foreign languages, helping them grasp the trends of future society through the latest technology. Thus, this course integrates modern technology and AI tools into the process of English language learning, focusing on enhancing students' linguistic proficiency and technical skills. Through a structured weekly curriculum, students will explore various AI applications and tools that support their language acquisition, creative expressions, and effective communications.
+
+課程教學綱要：
+1. Students will progressively work with practical tools like text and speech generators, image-to-text software, and AI music generators. These technologies will enable students to improve their English language abilities while fostering creativity and critical thinking.
+2. Hands-on activities such as creating lesson plans, using language assessment tools, and participating in group presentations will prepare students for real-world applications of their skills.
+3. The course also includes interactive outings that blend social engagement with creative writing, allowing students to collaborate and enhance their communication and teamwork skills. By the end of the course, students will have developed a strong foundation in both technology use and English communication, equipped with the knowledge and tools to apply their learning beyond the classroom.
+
+教科書資料：
+1. 書名：teacher tailor-made materials
+2. 出版日期：未標註
+3. 作者：未標註
+4. 出版社：未標註
+5. 版本：未標註
+
+參考書資料：
+1. 書名：ChatGPT光速英語學習法：下達精確指令，提升學習效率 (韓蔚笙譯)
+2. 出版日期：2024年
+3. 作者：Park, J.
+4. 出版社：EZ叢書館
+5. 版本：未標註
+
+※請遵守智慧財產權觀念，依著作權法規定，教科書及教材不得非法影印與使用盜版軟體。
+
+教學進度表（2025年春季學期）：
+第1週課程 (2025/02/16─2025/02/22)：AI in language learning
+第2週課程 (2025/02/23─2025/03/01)：Ethical challenges in AI
+第3週課程 (2025/03/02─2025/03/08)：text to text
+第4週課程 (2025/03/09─2025/03/15)：Recommended apps
+第5週課程 (2025/03/16─2025/03/22)：assessment (quiz 1)
+第6週課程 (2025/03/23─2025/03/29)：Outing 1 (prep for final presentations)
+第7週課程 (2025/03/30─2025/04/05)：(Spring Break)
+第8週課程 (2025/04/06─2025/04/12)：Text to speech/ Speech to text
+第9週課程 (2025/04/13─2025/04/19)：Text to image/ Image to text
+第10週課程 (2025/04/20─2025/04/26)：assessment (quiz 2)
+第11週課程 (2025/04/27─2025/05/03)：Outing 2 (prep for final presentations)
+第12週課程 (2025/05/04─2025/05/10)：Recommended podcasts
+第13週課程 (2025/05/11─2025/05/17)：Learning materials design
+第14週課程 (2025/05/18─2025/05/24)：lesson plans
+第15週課程 (2025/05/25─2025/05/31)：Language assessment tools
+第16週課程 (2025/06/01─2025/06/07)：final evalu (student presentations)
+第17週課程 (2025/06/08─2025/06/14)：Flexible Teaching (Teacher-student conferencing between wk12 and wk13)
+第18週課程 (2025/06/15─2025/06/21)：Flexible Teaching (Teacher-student conferencing between wk14 and wk15)
+
+成績評定方式：
+1. 課堂參與 (participation)：40%
+2. 測驗 (quizzes)：30%
+3. 期末專案 (final project)：30%
+
+課堂要求：
+無詳細課堂要求說明

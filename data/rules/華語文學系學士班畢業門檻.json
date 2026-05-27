@@ -1,0 +1,146 @@
+{
+  "_description": "華語文學系學士班畢業學分規則 — 113學年度入學新生適用",
+  "_source": "華文_page-0001.jpg",
+  "_last_updated": "2026-05-26",
+  "department": "華語文學系",
+  "applicable_from": "113",
+  "total_required": 128,
+  "categories": {
+    "共同必修": {
+      "required_credits": 8,
+      "courses": [
+        { "name": "國文(一)", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "英文(一)", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "服務教育", "credits": 0, "year": 1, "semester": 1 },
+        { "name": "國文(二)", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "英文(二)", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "服務教育", "credits": 0, "year": 1, "semester": 2 }
+      ]
+    },
+    "通識": {
+      "required_credits": 16,
+      "note": "依本校「學生修習通識教育課程辦法」規定。"
+    },
+    "體育": {
+      "required_credits": 0,
+      "note": "依本校「體育課程實施辦法」規定。"
+    },
+    "院必修": {
+      "required_credits": 4,
+      "courses": [
+        { "name": "社會科學概論", "credits": 2, "year": 2, "semester": 1 },
+        { "name": "當代文藝思潮", "credits": 2, "year": 2, "semester": 2 }
+      ]
+    },
+    "系必修": {
+      "required_credits": 32,
+      "courses": [
+        { "name": "文字學", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "文學概論", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "現代文學史", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "語言學概論", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "國學導讀", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "華語語音學", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "中國文學史(一)", "credits": 2, "year": 2, "semester": 1 },
+        { "name": "華語文教學導論", "credits": 2, "year": 2, "semester": 1 },
+        { "name": "中國文學史(二)", "credits": 2, "year": 2, "semester": 2 },
+        { "name": "華語文教材教法", "credits": 2, "year": 2, "semester": 2 },
+        { "name": "第二語言習得", "credits": 2, "year": 2, "semester": 2 },
+        { "name": "中國思想史(一)", "credits": 2, "year": 3, "semester": 1 },
+        { "name": "華語文課程設計", "credits": 2, "year": 3, "semester": 1 },
+        { "name": "華語語法學", "credits": 2, "year": 3, "semester": 1 },
+        { "name": "中國思想史(二)", "credits": 2, "year": 3, "semester": 2 },
+        { "name": "專題書寫", "credits": 2, "year": 3, "semester": 2 }
+      ]
+    },
+    "專業選修": {
+      "required_credits": 68,
+      "max_from_other_dept": 12,
+      "note": "包括12學分可選修非本學系所開設之課程；第二外語採計上限為16學分",
+      "tracks": {
+        "第二外語": {
+          "courses": [
+            { "name": "第二外語-日文(一)", "credits": 2, "year": 2, "semester": 1 },
+            { "name": "第二外語-日文(二)", "credits": 2, "year": 2, "semester": 2 },
+            { "name": "第二外語-日文(三)", "credits": 2, "year": 3, "semester": 1 },
+            { "name": "第二外語-日文(四)", "credits": 2, "year": 3, "semester": 2 },
+            { "name": "進階越南語會話", "credits": 2, "year": 4, "semester": 1 },
+            { "name": "越南語基礎閱讀寫作", "credits": 2, "year": 4, "semester": 2 }
+          ]
+        },
+        "一般專業選修": {
+          "courses": [
+            { "name": "詩經", "credits": 2, "year": 1, "semester": 1 },
+            { "name": "古典散文選讀", "credits": 2, "year": 1, "semester": 1 },
+            { "name": "時事英文", "credits": 2, "year": 1, "semester": 1 },
+            { "name": "當代戲曲", "credits": 2, "year": 1, "semester": 1 },
+            { "name": "東南亞華語文學文化", "credits": 2, "year": 1, "semester": 1 },
+            { "name": "華語詞彙學", "credits": 2, "year": 1, "semester": 1 },
+            { "name": "實務軟體操作與AI應用", "credits": 2, "year": 1, "semester": 1 },
+            { "name": "傳記文學", "credits": 2, "year": 1, "semester": 2 },
+            { "name": "現代文學選讀", "credits": 2, "year": 1, "semester": 2 },
+            { "name": "詩詞鑑賞及習作", "credits": 2, "year": 1, "semester": 2 },
+            { "name": "古典小說選讀", "credits": 2, "year": 1, "semester": 2 },
+            { "name": "漢字教學理論與實務", "credits": 2, "year": 1, "semester": 2 },
+            { "name": "學術資料檢索與利用", "credits": 2, "year": 1, "semester": 2 },
+            { "name": "書法習作", "credits": 2, "year": 1, "semester": 2 },
+            { "name": "諸子選讀(一)", "credits": 2, "year": 2, "semester": 1 },
+            { "name": "台灣文學史", "credits": 2, "year": 2, "semester": 1 },
+            { "name": "兒童文學", "credits": 2, "year": 2, "semester": 1 },
+            { "name": "漢語閱讀教學", "credits": 2, "year": 2, "semester": 1 },
+            { "name": "電子書製作", "credits": 2, "year": 2, "semester": 1 },
+            { "name": "數位典藏與數位敘事", "credits": 2, "year": 2, "semester": 1 },
+            { "name": "數位華語文教學", "credits": 2, "year": 2, "semester": 1 },
+            { "name": "諸子選讀(二)", "credits": 2, "year": 2, "semester": 2 },
+            { "name": "兒童華語教學", "credits": 2, "year": 2, "semester": 2 },
+            { "name": "華語文教育國際推展", "credits": 2, "year": 2, "semester": 2 },
+            { "name": "華語教學英文", "credits": 2, "year": 2, "semester": 2 },
+            { "name": "數位人文工具", "credits": 2, "year": 2, "semester": 2 },
+            { "name": "語言與文化", "credits": 2, "year": 2, "semester": 2 },
+            { "name": "聲韻學", "credits": 2, "year": 2, "semester": 2 },
+            { "name": "台灣語言入門", "credits": 2, "year": 2, "semester": 2 },
+            { "name": "海外華文文學", "credits": 2, "year": 3, "semester": 1 },
+            { "name": "語料庫與教學應用", "credits": 2, "year": 3, "semester": 1 },
+            { "name": "華語寫作教學", "credits": 2, "year": 3, "semester": 1 },
+            { "name": "修辭學", "credits": 2, "year": 3, "semester": 1 },
+            { "name": "社會語言學", "credits": 2, "year": 3, "semester": 1 },
+            { "name": "華語文教材編寫", "credits": 2, "year": 3, "semester": 1 },
+            { "name": "程式設計入門", "credits": 2, "year": 3, "semester": 1 },
+            { "name": "虛擬實境與語言學習", "credits": 2, "year": 3, "semester": 1 },
+            { "name": "華人社會與文化", "credits": 2, "year": 3, "semester": 1 },
+            { "name": "語言表達與文化溝通", "credits": 2, "year": 3, "semester": 2 },
+            { "name": "民俗學", "credits": 2, "year": 3, "semester": 2 },
+            { "name": "影視文學與人生", "credits": 2, "year": 3, "semester": 2 },
+            { "name": "文言文教學", "credits": 2, "year": 3, "semester": 2 },
+            { "name": "華語教學演練", "credits": 2, "year": 3, "semester": 2 },
+            { "name": "閩南語", "credits": 2, "year": 3, "semester": 2 },
+            { "name": "報導文學", "credits": 2, "year": 3, "semester": 2 },
+            { "name": "機器人輔助語言學習", "credits": 2, "year": 3, "semester": 2 },
+            { "name": "專業華語教學實務", "credits": 2, "year": 3, "semester": 2 },
+            { "name": "專題討論", "credits": 2, "year": 3, "semester": 2 },
+            { "name": "語篇分析", "credits": 2, "year": 4, "semester": 1 },
+            { "name": "禮記", "credits": 2, "year": 4, "semester": 1 },
+            { "name": "華語社會與教育", "credits": 2, "year": 4, "semester": 1 },
+            { "name": "應用寫作實務", "credits": 2, "year": 4, "semester": 1 },
+            { "name": "四書選讀", "credits": 2, "year": 4, "semester": 1 },
+            { "name": "史記", "credits": 2, "year": 4, "semester": 1 },
+            { "name": "語言與認知", "credits": 2, "year": 4, "semester": 1 },
+            { "name": "進階實習(一)", "credits": 2, "year": 4, "semester": 1 },
+            { "name": "漢語語言學", "credits": 2, "year": 4, "semester": 2 },
+            { "name": "訓詁學", "credits": 2, "year": 4, "semester": 2 },
+            { "name": "華語文測驗與評量", "credits": 2, "year": 4, "semester": 2 },
+            { "name": "論文寫作實務", "credits": 2, "year": 4, "semester": 2 },
+            { "name": "進階實習(二)", "credits": 2, "year": 4, "semester": 2 },
+            { "name": "飲食文學與旅行書寫", "credits": 2, "year": 4, "semester": 2 },
+            { "name": "左傳", "credits": 2, "year": 4, "semester": 2 },
+            { "name": "數位傳播實務", "credits": 2, "year": 4, "semester": 2 }
+          ]
+        }
+      }
+    }
+  },
+  "graduation_conditions": [
+    "學生必須修畢共同必修課程8學分，通識課程16學分，院必修4學分，系必修32學分，專業選修至少68學分(包括12學分可選修非本學系所開設之專業課程；第二外語採計上限為16學分)，始得畢業，畢業學分最低為128學分，且須通過「本校學生英文及資訊能力畢業門檻及輔導辦法」及本系學生畢業規定始可畢業。",
+    "本系英文能力畢業門檻辦法另訂，詳如本系官網公佈之法規條文。"
+  ]
+}

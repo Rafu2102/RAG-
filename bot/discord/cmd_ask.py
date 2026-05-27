@@ -15,11 +15,12 @@ import discord  # type: ignore
 from discord import app_commands  # type: ignore
 
 import bot as _bot
-from bot import tree, logger, bot_ready, gpu_semaphore, get_user_memory
+from bot import tree, logger, bot_ready, get_user_memory
 from main import rag_pipeline
 from tools.auth import get_user_profile
 from tools.dcard_search_tool import search_dcard_professor, search_nqu_news, search_campus_info
 from utils import smart_split_message
+from bot.discord.ui_utils import safe_send_parts_interaction
 
 
 # =========================================================================
@@ -32,38 +33,36 @@ from utils import smart_split_message
 async def slash_ask(interaction: discord.Interaction, question: str):
     await interaction.response.defer()
     
-    if not bot_ready.is_set():
-        await interaction.followup.send("⏳ 機器人正在啟動中，請稍後再試！")
-        return
-    
+    # 🆕 雙進程無重啟熱重載監控 (Hot Reload Alignment)
+    from rag.index_manager import check_and_reload_index_if_needed
+    nodes, faiss_idx, bm25_idx, has_changed = check_and_reload_index_if_needed(
+        _bot.global_nodes, _bot.global_faiss, _bot.global_bm25
+    )
+    if has_changed:
+        _bot.global_nodes = nodes
+        _bot.global_faiss = faiss_idx
+        _bot.global_bm25 = bm25_idx
+        logger.info("⚡ [Discord] 偵測到索引已在磁碟更新，/ask 內存已同步完成熱更新！")
+
     discord_id = str(interaction.user.id)
     user_profile = get_user_profile(discord_id)
     memory = get_user_memory(int(discord_id))  # 每位學生獨立記憶
 
     try:
-        try:
-            _bot.active_gpu_requests += 1
-            if _bot.active_gpu_requests > 1:
-                await interaction.followup.send(f"💬 前方還有 {_bot.active_gpu_requests - 1} 位同學在排隊，請稍等喔！")
-            
-            async with gpu_semaphore:
-                logger.info(f"🚀 GPU 取得 | {interaction.user.display_name} 開始處理問題：{str(question)[:40]}")
-                
-                answer = await asyncio.to_thread(
-                    rag_pipeline, question,
-                    _bot.global_nodes, _bot.global_faiss, _bot.global_bm25,
-                    memory, False, user_profile, discord_id
-                )
-        finally:
-            _bot.active_gpu_requests -= 1
+        logger.info(f"🚀 開始處理問題：{str(question)[:40]} | 使用者：{interaction.user.display_name}")
+        
+        answer = await rag_pipeline(
+            question,
+            _bot.global_nodes, _bot.global_faiss, _bot.global_bm25,
+            memory, False, user_profile, discord_id
+        )
         
         nick = user_profile.get("nickname", "") if user_profile else ""
         name_tag = f"{nick} " if nick else ""
         logger.info(f"✅ /ask 回答完成 | 使用者：{interaction.user.display_name} | 問題：{str(question)[:50]} | 回答長度：{len(answer)} 字")
         final_reply = f"**👤 {name_tag}你問：** {question}\n\n**🤖 助理回答：**\n{answer}"
         parts = smart_split_message(final_reply)
-        for part in parts:
-            await interaction.followup.send(part)
+        await safe_send_parts_interaction(interaction, parts)
         
     except Exception as e:
         logger.exception(f"❌ /ask 錯誤 | 使用者：{interaction.user.display_name} | 問題：{str(question)[:50]}")
@@ -87,39 +86,37 @@ async def slash_ask_error(interaction: discord.Interaction, error: app_commands.
 async def slash_add_calendar(interaction: discord.Interaction, event: str):
     await interaction.response.defer()
     
-    if not bot_ready.is_set():
-        await interaction.followup.send("⏳ 機器人正在啟動中，請稍後再試！")
-        return
-    
+    # 🆕 雙進程無重啟熱重載監控 (Hot Reload Alignment)
+    from rag.index_manager import check_and_reload_index_if_needed
+    nodes, faiss_idx, bm25_idx, has_changed = check_and_reload_index_if_needed(
+        _bot.global_nodes, _bot.global_faiss, _bot.global_bm25
+    )
+    if has_changed:
+        _bot.global_nodes = nodes
+        _bot.global_faiss = faiss_idx
+        _bot.global_bm25 = bm25_idx
+        logger.info("⚡ [Discord] 偵測到索引已在磁碟更新，/add_calendar 內存已同步完成熱更新！")
+
     discord_id = str(interaction.user.id)
     user_profile = get_user_profile(discord_id)
     memory = get_user_memory(int(discord_id))
     augmented_query = f"{event} 幫我加到行事曆"
 
     try:
-        try:
-            _bot.active_gpu_requests += 1
-            if _bot.active_gpu_requests > 1:
-                await interaction.followup.send(f"💬 前方還有 {_bot.active_gpu_requests - 1} 位同學在排隊，請稍等喔！")
-            
-            async with gpu_semaphore:
-                logger.info(f"🚀 GPU 取得 | {interaction.user.display_name} 開始處理行事曆：{str(event)[:40]}")
-                
-                answer = await asyncio.to_thread(
-                    rag_pipeline, augmented_query,
-                    _bot.global_nodes, _bot.global_faiss, _bot.global_bm25,
-                    memory, False, user_profile, discord_id
-                )
-        finally:
-            _bot.active_gpu_requests -= 1
+        logger.info(f"🚀 開始處理行事曆：{str(event)[:40]} | 使用者：{interaction.user.display_name}")
+        
+        answer = await rag_pipeline(
+            augmented_query,
+            _bot.global_nodes, _bot.global_faiss, _bot.global_bm25,
+            memory, False, user_profile, discord_id
+        )
         
         nick = user_profile.get("nickname", "") if user_profile else ""
         name_tag = f"{nick} " if nick else ""
         logger.info(f"✅ /add_calendar 回答完成 | 使用者：{interaction.user.display_name} | 事件：{str(event)[:50]} | 回答長度：{len(answer)} 字")
         final_reply = f"**👤 {name_tag}你要求加入行事曆：** {event}\n\n**🤖 助理回報：**\n{answer}"
         parts = smart_split_message(final_reply)
-        for part in parts:
-            await interaction.followup.send(part)
+        await safe_send_parts_interaction(interaction, parts)
         
     except Exception as e:
         logger.exception(f"❌ /add_calendar 錯誤 | 使用者：{interaction.user.display_name} | 事件：{str(event)[:50]}")
@@ -145,11 +142,10 @@ async def slash_dcard_search(interaction: discord.Interaction, query: str):
     
     try:
         logger.info(f"🔍 /dcard_search | 使用者：{interaction.user.display_name} | 關鍵字：{query}")
-        result = await asyncio.to_thread(search_dcard_professor, query)
+        result = await search_dcard_professor(query)
         
         parts = smart_split_message(str(result))
-        for part in parts:
-            await interaction.followup.send(part)
+        await safe_send_parts_interaction(interaction, parts)
         logger.info(f"✅ /dcard_search 完成 | 關鍵字：{query} | 回答長度：{len(result)} 字")
     except Exception as e:
         logger.exception(f"❌ /dcard_search 錯誤 | 關鍵字：{query}")
@@ -175,11 +171,10 @@ async def slash_nqu_news(interaction: discord.Interaction, query: str):
     
     try:
         logger.info(f"🏛️ /nqu_news | 使用者：{interaction.user.display_name} | 關鍵字：{query}")
-        result = await asyncio.to_thread(search_nqu_news, query)
+        result = await search_nqu_news(query)
         
         parts = smart_split_message(str(result))
-        for part in parts:
-            await interaction.followup.send(part)
+        await safe_send_parts_interaction(interaction, parts)
         logger.info(f"✅ /nqu_news 完成 | 關鍵字：{query} | 回答長度：{len(result)} 字")
     except Exception as e:
         logger.exception(f"❌ /nqu_news 錯誤 | 關鍵字：{query}")
@@ -206,11 +201,10 @@ async def slash_search(interaction: discord.Interaction, query: str):
     try:
         logger.info(f"🔗 /search | 使用者：{interaction.user.display_name} | 關鍵字：{query}")
         await interaction.followup.send(f"🔍 正在同時搜尋**金大官網** + **Dcard 金門大學版**，並由 AI 總結中... 請稍候 ☕")
-        result = await asyncio.to_thread(search_campus_info, query)
+        result = await search_campus_info(query)
         
         parts = smart_split_message(str(result))
-        for part in parts:
-            await interaction.followup.send(part)
+        await safe_send_parts_interaction(interaction, parts)
         logger.info(f"✅ /search 完成 | 關鍵字：{query} | 回答長度：{len(result)} 字")
     except Exception as e:
         logger.exception(f"❌ /search 錯誤 | 關鍵字：{query}")

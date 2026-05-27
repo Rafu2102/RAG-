@@ -1,0 +1,57 @@
+國立金門大學112學年度第1學期電機系課程
+學年度：112學年度
+學期：第1學期
+課程名稱：工程數學(一) (Engineering Mathematics I)
+部別：日間部學士班
+開課班級：電機二甲
+學分數：3.0學分
+授課時數：3.0小時
+授課教師：伍添祿
+必選修：必修
+教室：E202教室(理工大樓)
+修課上限人數：60人
+上課時間：每周星期三上午第2節~第4節
+
+課程教學目標：
+1. 工程數學是工程相關系科的重要基礎課程，不僅是學生學習專業科目的基礎，更是學生進一步研究不可或缺的必備工具。本課程教授學生面對一個工程問題時如何對問題作合理的假設，以簡化問題，再依據適當的定律建立數學模型。在數學模型建立後，即可藉由數學工具求解，最後再依據得到的解，對該問題加以驗證。
+
+課程教學綱要：
+1. 本課程涵蓋範圍包括：微分方程、拉普拉斯轉換與傅立葉轉換
+
+教科書資料：
+1. 書名：ADVANCED ENGINEERING MATHEMATICS
+2. 出版日期：未標註
+3. 作者：Peter V. O’Neil
+4. 出版社：東華書局
+5. 版本：未標註
+
+參考書資料：
+無
+
+※請遵守智慧財產權觀念，依著作權法規定，教科書及教材不得非法影印與使用盜版軟體。
+
+教學進度表（2023年秋季學期）：
+第1週課程 (2023/09/10─2023/09/16)：First-order Differential Equations
+第2週課程 (2023/09/17─2023/09/23)：First-order Differential Equations
+第3週課程 (2023/09/24─2023/09/30)：First-order Differential Equations
+第4週課程 (2023/10/01─2023/10/07)：First-order Differential Equations
+第5週課程 (2023/10/08─2023/10/14)：Higher(Second) order Linear Differential Equation
+第6週課程 (2023/10/15─2023/10/21)：Higher(Second) order Linear Differential Equation
+第7週課程 (2023/10/22─2023/10/28)：Higher(Second) order Linear Differential Equation
+第8週課程 (2023/10/29─2023/11/04)：Higher(Second) order Linear Differential Equation
+第9週課程 (2023/11/05─2023/11/11)：Middle Exam.
+第10週課程 (2023/11/12─2023/11/18)：The Laplace Transform
+第11週課程 (2023/11/19─2023/11/25)：The Laplace Transform
+第12週課程 (2023/11/26─2023/12/02)：The Inverse Laplace Transform
+第13週課程 (2023/12/03─2023/12/09)：The Orthogonal Function
+第14週課程 (2023/12/10─2023/12/16)：The Fourier series
+第15週課程 (2023/12/17─2023/12/23)：Fourier Sine and Cosine Series
+第16週課程 (2023/12/24─2023/12/30)：The Fourier Integrals
+第17週課程 (2023/12/31─2024/01/06)：The Fourier Transform
+第18週課程 (2024/01/07─2024/01/13)：Final Exam.
+
+成績評定方式：
+1. 第一次段考25%, 第二次段考25%, 第參三次段考25%, 平時成績25%
+
+課堂要求：
+準時上課並作筆記

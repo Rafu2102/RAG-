@@ -41,8 +41,8 @@ class TTLMemoryCache:
             del self.cache[k]
 
 user_memories = TTLMemoryCache(maxsize=500, ttl_seconds=3600)
-gpu_semaphore = asyncio.Semaphore(1)
-active_gpu_requests = 0
+# 【GPU 佇列排程】已移除舊有全域鎖，改由 Reranker 執行細粒度鎖保護
+
 
 def get_user_memory(user_id: int) -> ConversationMemory:
     """取得特定 Telegram 使用者的對話記憶"""

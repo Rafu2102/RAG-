@@ -1,0 +1,70 @@
+國立金門大學113學年度第1學期長照系課程
+學年度：113學年度
+學期：第1學期
+課程名稱：高齡福祉科技 (Gerotechnology)
+部別：日間部學士班
+開課班級：長照四
+學分數：2.0學分
+授課時數：2.0小時
+授課教師：朱僑麗
+必選修：必修
+教室：D201長照系普通教室
+修課上限人數：45人
+上課時間：每周星期一下午第7節~第8節
+
+課程教學目標：
+1. This is an undergraduate-level introduction to the field of living e-technology, assistant and aging. This class will provide a focus on selected issues that currently characterize this field. The course will introduce the issue of physical and mental aging, the application of high technology on aging process, and the concept of design for older people. Our goal for this class is to help you understand the basic concepts and theoretical perspectives which have directed the high technology application.
+
+課程教學綱要：
+1. This is an undergraduate-level introduction to the field of living e-technology, assistant and aging. This class will provide a focus on selected issues that currently characterize this field. The course will introduce the issue of physical and mental aging, the application of high technology on aging process, and the concept of design for older people. Our goal for this class is to help you understand the basic concepts and theoretical perspectives which have directed the high technology application.
+
+教科書資料：
+無教科書
+
+參考書資料：
+1. 書名：老年心理學 從心理科學看成功老化
+2. 出版日期：未標註
+3. 作者：程千芳
+4. 出版社：雙葉
+5. 版本：未標註
+
+※請遵守智慧財產權觀念，依著作權法規定，教科書及教材不得非法影印與使用盜版軟體。
+
+教學進度表（2024年秋季學期）：
+第1週課程 (2024/09/08─2024/09/14)：課程介紹，課程要求
+第2週課程 (2024/09/15─2024/09/21)：正向老化與心理健康、知覺系統老化
+第3週課程 (2024/09/22─2024/09/28)：失智症、阿茲海默症、語言溝通問題
+第4週課程 (2024/09/29─2024/10/05)：睡眠、情感情緒、疼痛處理
+第5週課程 (2024/10/06─2024/10/12)：成功老化與復原力、老化性格與習性 (本週課程於9/23日補課)
+第6週課程 (2024/10/13─2024/10/19)：活躍老化概念、健康指標
+第7週課程 (2024/10/20─2024/10/26)：活躍老化--社會安全與住宅安全
+第8週課程 (2024/10/27─2024/11/02)：人生轉折與老人需求
+第9週課程 (2024/11/03─2024/11/09)：社會連結
+第10週課程 (2024/11/10─2024/11/16)：連結斷裂
+第11週課程 (2024/11/17─2024/11/23)：連結設計、以人為中心的創新設計
+第12週課程 (2024/11/24─2024/11/30)：分組設計報告競賽
+第13週課程 (2024/12/01─2024/12/07)：分組設計報告競賽
+第14週課程 (2024/12/08─2024/12/14)：分組設計報告競賽
+第15週課程 (2024/12/15─2024/12/21)：分組設計報告競賽
+第16週課程 (2024/12/22─2024/12/28)：分組設計競賽評分、學期檢討
+第17週課程 (2024/12/29─2025/01/04)：自主學習 (輔具原理與分類)
+第18週課程 (2025/01/05─2025/01/11)：自主學習 (輔具原理與分類)
+
+成績評定方式：
+1. 期末報告：50%
+2. 出席率：50%
+
+課堂要求：
+本課程要求同學能將高齡福祉科技與相關應用結合，課堂中會引介並要求同學參考或學習以下相關數位工具、軟體應用及設計案例：
+1. 手機App的應用與線上製作平台：
+- App設計應用參考網站：https://www.kocpc.com.tw/archives/1507
+- 免費自製手機App體驗（iBuildApp）：http://www.techbang.com/posts/10611-programming-free-experience-homemade-mobile-app-app-designers-use-ibuildapp-promotion-pchome-200-skills
+2. Android系統App開發（使用App Inventor 2 軟體與手機應用）：
+- App Inventor 2 學習網站：http://www.appinventor.tw/ai2
+- App Inventor 手機連結：http://www.appinventor.tw/phone
+3. Apple iOS系統開發軟體：
+- 認識與應用 Swift 軟體
+4. 免費 3D 虛擬空間室內設計軟體：
+- 線上室內設計DIY工具參考：http://www.funbugi.com/%E5%AE%A4%E5%85%A7%E8%A8%AD%E8%A8%88diy-10%E5%80%8B%E8%B6%85%E5%A5%BD%E7%94%A8%E7%9A%84%E5%85%8D%E8%B2%BB3d%E8%99%9B%E6%93%AC%E7%A9%BA%E9%96%93%E5%AE%A4%E5%85%A7%E8%A8%AD%E8%A8%88%E8%BB%9F%E9%AB%94/
+5. 創意設計案例探討：
+- 學習與觀察經典創意設計案例（如：皮卡自行車、月亮燈、迴紋針等之設計理念與應用）

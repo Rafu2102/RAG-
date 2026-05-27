@@ -1,0 +1,65 @@
+國立金門大學112學年度第1學期資工系課程
+學年度：112學年度
+學期：第1學期
+課程名稱：作業系統 (Operating System)
+部別：日間部學士班
+開課班級：資工三
+學分數：3.0學分
+授課時數：3.0小時
+授課教師：馮玄明
+必選修：必修
+教室：I101圖資電腦教室
+修課上限人數：85人
+上課時間：每周星期一上午第2節~第4節
+
+課程教學目標：
+1. Introduces the general topic of operating systems and a handful of important concepts (multiprogramming, time sharing, distributed system, and so on).
+
+課程教學綱要：
+1. Process Management
+2. Memory Management
+3. Storage Management
+4. Protection and Security
+5. Distributed Systems
+
+教科書資料：
+1. 書名：OPERATING SYSTEM CONCEPTS
+2. 出版日期：未標註
+3. 作者：SILBERSCHATZ
+4. 出版社：東華書局代理
+5. 版本：未標註
+
+參考書資料：
+1. 書名：自訂教材
+2. 出版日期：未標註
+3. 作者：未標註
+4. 出版社：未標註
+5. 版本：未標註
+
+※請遵守智慧財產權觀念，依著作權法規定，教科書及教材不得非法影印與使用盜版軟體。
+
+教學進度表（2023年秋季學期）：
+第1週課程 (2023/09/10─2023/09/16)：Introduction
+第2週課程 (2023/09/17─2023/09/23)：Operating-System Structures
+第3週課程 (2023/09/24─2023/09/30)：Processes & Threads
+第4週課程 (2023/10/01─2023/10/07)：CPU Scheduling & Process Synchronization
+第5週課程 (2023/10/08─2023/10/14)：Main Memory & Virtual Memory
+第6週課程 (2023/10/15─2023/10/21)：1st test
+第7週課程 (2023/10/22─2023/10/28)：File-System Interface & File-System Implementation
+第8週課程 (2023/10/29─2023/11/04)：Mass-Storage Structure & I/O Systems
+第9週課程 (2023/11/05─2023/11/11)：Middle Exam
+第10週課程 (2023/11/12─2023/11/18)：Protection
+第11週課程 (2023/11/19─2023/11/25)：Security
+第12週課程 (2023/11/26─2023/12/02)：Distributed System Structure
+第13週課程 (2023/12/03─2023/12/09)：Distributed File System
+第14週課程 (2023/12/10─2023/12/16)：Distributed Coordination
+第15週課程 (2023/12/17─2023/12/23)：2nd test
+第16週課程 (2023/12/24─2023/12/30)：Real-Time Systems
+第17週課程 (2023/12/31─2024/01/06)：Multimedia Systems
+第18週課程 (2024/01/07─2024/01/13)：Final Exam
+
+成績評定方式：
+1. 平時 40% 期中 30% 期末 30%
+
+課堂要求：
+準時上課

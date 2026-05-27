@@ -1,0 +1,167 @@
+{
+  "_description": "資訊工程學系學士班畢業學分規則 — 112學年度入學新生適用",
+  "_source": "大學部課程規劃表-112學年度入學_page-0001.jpg",
+  "_last_updated": "2026-05-26",
+  "department": "資訊工程學系",
+  "applicable_from": "112",
+  "total_required": 130,
+  "categories": {
+    "共同必修": {
+      "required_credits": 8,
+      "courses": [
+        { "name": "國文(一)", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "英文(一)", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "服務教育", "credits": 0, "year": 1, "semester": 1 },
+        { "name": "國文(二)", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "英文(二)", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "服務教育", "credits": 0, "year": 1, "semester": 2 }
+      ]
+    },
+    "通識": {
+      "required_credits": 16,
+      "note": "依本校「學生修習通識教育課程辦法」規定"
+    },
+    "體育": {
+      "required_credits": 0,
+      "note": "依本校「體育課程實施辦法」規定"
+    },
+    "院必修": {
+      "required_credits": 6,
+      "courses": [
+        { "name": "微積分(一)", "credits": 3, "year": 1, "semester": 1 },
+        { "name": "計算機概論", "credits": 3, "year": 1, "semester": 1 }
+      ]
+    },
+    "系必修": {
+      "required_credits": 51,
+      "courses": [
+        { "name": "程式設計", "credits": 3, "year": 1, "semester": 1 },
+        { "name": "數位邏輯", "credits": 3, "year": 1, "semester": 1 },
+        { "name": "多媒體概論", "credits": 3, "year": 1, "semester": 1 },
+        { "name": "線性代數", "credits": 3, "year": 1, "semester": 2 },
+        { "name": "程式設計進階", "credits": 3, "year": 1, "semester": 2 },
+        { "name": "資訊網路", "credits": 3, "year": 1, "semester": 2 },
+        { "name": "網頁設計", "credits": 3, "year": 1, "semester": 2 },
+        { "name": "資訊科技英文導讀", "credits": 3, "year": 1, "semester": 2 },
+        { "name": "計算機結構", "credits": 3, "year": 2, "semester": 1 },
+        { "name": "資料庫系統管理", "credits": 3, "year": 2, "semester": 1 },
+        { "name": "電路學", "credits": 3, "year": 2, "semester": 1 },
+        { "name": "系統程式", "credits": 3, "year": 2, "semester": 2 },
+        { "name": "資料結構", "credits": 3, "year": 2, "semester": 2 },
+        { "name": "離散數學", "credits": 3, "year": 2, "semester": 2 },
+        { "name": "作業系統", "credits": 3, "year": 3, "semester": 1 },
+        { "name": "專題製作(一)", "credits": 3, "year": 3, "semester": 1 },
+        { "name": "專題製作(二)", "credits": 3, "year": 3, "semester": 2 }
+      ]
+    },
+    "專業選修": {
+      "required_credits": 49,
+      "max_from_other_dept": 12,
+      "note": "包括12學分可選修非本學系所開設之課程",
+      "tracks": {
+        "一般選修": {
+          "courses": [
+            { "name": "套裝軟體認證", "credits": 2, "year": 1, "semester": 1 },
+            { "name": "電腦輔助電路設計與模擬", "credits": 3, "year": 1, "semester": 1 },
+            { "name": "電腦應用軟體認證", "credits": 3, "year": 1, "semester": 2 },
+            { "name": "數位邏輯實習", "credits": 3, "year": 1, "semester": 2 },
+            { "name": "微積分(二)", "credits": 3, "year": 1, "semester": 2 },
+            { "name": "資訊科技認證", "credits": 2, "year": 2, "semester": 1 },
+            { "name": "智慧型行動裝置軟體設計", "credits": 3, "year": 2, "semester": 1 },
+            { "name": "程式與數學", "credits": 3, "year": 2, "semester": 1 },
+            { "name": "iOS程式設計", "credits": 3, "year": 2, "semester": 2 },
+            { "name": "多媒體程式設計", "credits": 3, "year": 2, "semester": 2 },
+            { "name": "機率與統計", "credits": 3, "year": 3, "semester": 1 },
+            { "name": "演算法", "credits": 3, "year": 3, "semester": 1 },
+            { "name": "遊戲程式設計", "credits": 3, "year": 3, "semester": 1 },
+            { "name": "多媒體應用軟體", "credits": 3, "year": 3, "semester": 1 },
+            { "name": "行動科技與生活", "credits": 2, "year": 3, "semester": 2 },
+            { "name": "VR科技應用導論", "credits": 2, "year": 3, "semester": 2 },
+            { "name": "多媒體整合", "credits": 3, "year": 3, "semester": 2 },
+            { "name": "專題研究(一)", "credits": 2, "year": 4, "semester": 1 },
+            { "name": "工程倫理", "credits": 3, "year": 4, "semester": 1 },
+            { "name": "校外專業實習(一)", "credits": 4, "year": 4, "semester": 1 },
+            { "name": "國際資訊證照導論", "credits": 2, "year": 4, "semester": 1 },
+            { "name": "雲端資訊認證", "credits": 2, "year": 4, "semester": 1 },
+            { "name": "專題製作(三)", "credits": 3, "year": 4, "semester": 1 },
+            { "name": "微粒子分析應用", "credits": 2, "year": 4, "semester": 1 },
+            { "name": "芳療健康促進與實務應用", "credits": 2, "year": 4, "semester": 1 },
+            { "name": "智慧淨零碳排與AI應用", "credits": 3, "year": 4, "semester": 1 },
+            { "name": "專題研究(二)", "credits": 2, "year": 4, "semester": 2 },
+            { "name": "企業實務培訓", "credits": 3, "year": 4, "semester": 2 },
+            { "name": "校外專業實習(二)", "credits": 4, "year": 4, "semester": 2 },
+            { "name": "島嶼永續與智慧淨零應用", "credits": 3, "year": 4, "semester": 2 }
+          ]
+        },
+        "網路技術與應用選修": {
+          "courses": [
+            { "name": "TCP/IP協定", "credits": 3, "year": 2, "semester": 1 },
+            { "name": "網站設計進階", "credits": 3, "year": 2, "semester": 1 },
+            { "name": "Linux作業系統實務", "credits": 3, "year": 2, "semester": 2 },
+            { "name": "伺服器架設", "credits": 3, "year": 3, "semester": 1 },
+            { "name": "區塊鏈實務與安全", "credits": 3, "year": 3, "semester": 1 },
+            { "name": "Linux系統自動化運維", "credits": 3, "year": 3, "semester": 2 },
+            { "name": "互動式網頁程式設計", "credits": 3, "year": 3, "semester": 2 },
+            { "name": "微電網整合實務", "credits": 3, "year": 4, "semester": 1 },
+            { "name": "資訊安全與隱私", "credits": 3, "year": 4, "semester": 1 },
+            { "name": "計算機網路", "credits": 3, "year": 4, "semester": 1 },
+            { "name": "電腦網路安全概論", "credits": 3, "year": 4, "semester": 1 },
+            { "name": "無線網路", "credits": 3, "year": 4, "semester": 1 },
+            { "name": "網路模擬與分析", "credits": 3, "year": 4, "semester": 2 },
+            { "name": "雲端運算", "credits": 3, "year": 4, "semester": 2 },
+            { "name": "電腦網路安全實務", "credits": 3, "year": 4, "semester": 2 },
+            { "name": "資訊與網路安全概論", "credits": 3, "year": 4, "semester": 2 }
+          ]
+        },
+        "人工智慧選修": {
+          "courses": [
+            { "name": "現代程式語言", "credits": 3, "year": 2, "semester": 1 },
+            { "name": "演算法與資料分析", "credits": 3, "year": 2, "semester": 2 },
+            { "name": "資料處理實務", "credits": 3, "year": 2, "semester": 2 },
+            { "name": "科學計算", "credits": 3, "year": 3, "semester": 1 },
+            { "name": "人工智慧導論", "credits": 3, "year": 3, "semester": 1 },
+            { "name": "人工智慧", "credits": 3, "year": 3, "semester": 2 },
+            { "name": "商業數據分析應用", "credits": 3, "year": 3, "semester": 2 },
+            { "name": "機器學習", "credits": 3, "year": 3, "semester": 2 },
+            { "name": "人工智慧實務", "credits": 3, "year": 3, "semester": 2 },
+            { "name": "資料科學", "credits": 3, "year": 4, "semester": 1 },
+            { "name": "深度學習概論", "credits": 3, "year": 4, "semester": 1 },
+            { "name": "模式識別", "credits": 3, "year": 4, "semester": 1 },
+            { "name": "影像處理", "credits": 3, "year": 4, "semester": 1 },
+            { "name": "大型語言模型導論", "credits": 3, "year": 4, "semester": 1 },
+            { "name": "計算式智慧", "credits": 3, "year": 4, "semester": 2 },
+            { "name": "深度學習", "credits": 3, "year": 4, "semester": 2 },
+            { "name": "人工智慧代理導論", "credits": 3, "year": 4, "semester": 2 }
+          ]
+        },
+        "智慧物聯網選修": {
+          "courses": [
+            { "name": "單晶片原理應用", "credits": 3, "year": 2, "semester": 1 },
+            { "name": "電腦硬體裝修", "credits": 3, "year": 2, "semester": 1 },
+            { "name": "微電腦數位實習", "credits": 3, "year": 3, "semester": 1 },
+            { "name": "嵌入式系統概論", "credits": 3, "year": 3, "semester": 1 },
+            { "name": "嵌入式微處理機系統", "credits": 3, "year": 3, "semester": 2 },
+            { "name": "機器人控制入門", "credits": 3, "year": 3, "semester": 2 },
+            { "name": "物聯網智慧應用", "credits": 3, "year": 4, "semester": 1 },
+            { "name": "互動式程式設計", "credits": 3, "year": 4, "semester": 1 },
+            { "name": "硬體描述語言程式設計與模擬", "credits": 3, "year": 4, "semester": 1 },
+            { "name": "智慧型機器人", "credits": 3, "year": 4, "semester": 2 },
+            { "name": "樹莓派實務與應用", "credits": 3, "year": 4, "semester": 2 }
+          ]
+        },
+        "TAICA選修": {
+          "courses": [
+            { "name": "生成式AI文字與圖像生成原理與實務", "credits": 3, "year": 4, "semester": 1 },
+            { "name": "基礎程式設計(C++)", "credits": 3, "year": 4, "semester": 1 },
+            { "name": "機器導航與探索", "credits": 3, "year": 4, "semester": 2 },
+            { "name": "生成式人工智慧的人文導論", "credits": 3, "year": 4, "semester": 2 }
+          ]
+        }
+      }
+    }
+  },
+  "graduation_conditions": [
+    "本系畢業學分最低為130學分，學生必須修畢共同必修課程24學分(共同科目8學分，通識16學分)、專業必修57學分(含院必修6學分)、專業選修至少49學分(包括12學分可選修非本學系所開設之專業課程)，且學生須通過「本校學生英文及資訊能力畢業門檻及輔導辦法」相關規定始可畢業。",
+    "本系要求112入學者須於大學四年中取得本系表列之任一資訊相關專業證照方可畢業。"
+  ]
+}

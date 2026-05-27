@@ -1,0 +1,90 @@
+國立金門大學113學年度第2學期資工系課程
+學年度：113學年度
+學期：第2學期
+課程名稱：機器導航與探索 (Robotic Navigation and Exploration)
+部別：日間部學士班
+開課班級：資工四
+學分數：3.0學分
+授課時數：3.0小時
+授課教師：王建鈞
+必選修：選修
+教室：E319數位系統應用實驗
+修課上限人數：15人
+上課時間：每周星期一晚上第10節~第12節
+備註：AI聯盟衛星課程；學碩合開課程；主開學校清華大學/ 胡敏君；協同老師：王建鈞；同步遠距上課時間：每週一 18:30~21:20
+
+課程教學目標：
+1. 本課程旨在教授機器導航與探索之理論與實務。即時追蹤與地圖建置部分包含機率模型與相機模型等理論基礎，也包含基於深度學習之RGB-based 的3DSLAM方法。場景理解的部分包含機器學習的基本概念，再帶到深度學習的技術與目前的物件偵測與語意切割技術。動作控制的部分則包含路徑規劃與導航演算法，並帶入強化學習的概念來引導行進的路徑。
+
+課程教學綱要：
+1. 本課程模組分為三個主要的部分，分別為即時追蹤與地圖建置(SLAM)、基於機器學習之場景理解(Scene Understanding)與探索導航的動作控制(Action Control)。
+
+教科書資料：
+1. 書名：Reinforcement Learning: An Introduction, Second Edition, MIT Press
+2. 出版日期：2018年
+3. 作者：Richard S. Sutton and Andrew G. Barto
+4. 出版社：Cambridge, MA
+5. 版本：未標註
+
+參考書資料：
+1-1. 書名：Reinforcement Learning: An Introduction, Second Edition, MIT Press
+1-2. 出版日期：2018年
+1-3. 作者：Richard S. Sutton and Andrew G. Barto
+1-4. 出版社：Cambridge, MA,
+1-5. 版本：未標註
+
+2-1. 書名：Probabilistic Robotics(Intelligent Robotics and Autonomous Agents series)
+2-2. 出版日期：2005年
+2-3. 作者：Sebastian Thrun, Wolfram Burgard, and Dieter Fox
+2-4. 出版社：Probabilistic Robotics
+2-5. 版本：未標註
+
+3-1. 書名：Machine Learning: A Probabilistic Perspective.
+3-2. 出版日期：2012年
+3-3. 作者：Kevin Murphy
+3-4. 出版社：MIT Press,
+3-5. 版本：未標註
+
+4-1. 書名：Probabilistic Graphical Models: Principles and Techniques
+4-2. 出版日期：2009年
+4-3. 作者：Daphne Koller and Nir Friedman
+4-4. 出版社：1st Edition
+4-5. 版本：未標註
+
+5-1. 書名：Deep Learning.
+5-2. 出版日期：2016年
+5-3. 作者：Ian Goodfellow, Yoshua Bengio and Aaron Courville
+5-4. 出版社：MIT Press,
+5-5. 版本：未標註
+
+※請遵守智慧財產權觀念，依著作權法規定，教科書及教材不得非法影印與使用盜版軟體。
+
+教學進度表（2025年春季學期）：
+第1週課程 (2025/02/17─2025/02/23)：Introduction to Robotic Navigation and Exploration
+第2週課程 (2025/02/24─2025/03/02)：Kinematic Model and Path Tracking Control /* Control System Basics* PID Control* Basic Kinematic Model* Differential Drive Vehicle* Pure Pursuit Control* Kinematic Bicycle Model
+第3週課程 (2025/03/03─2025/03/09)：Motion Planning / * Motion Planning Introduction* Path Planning* Curve Interpolation* Trajectory Planning* Path Planning
+第4週課程 (2025/03/10─2025/03/16)：Reinforcement Learning (I) / * MDP* Value Function* Bellman Equation* Reinforcement Learning
+第5週課程 (2025/03/17─2025/03/23)：Reinforcement Learning (II) / * Q-Learning / Sarsa / DQN* Policy Gradient / Actor-Critic
+第6週課程 (2025/03/24─2025/03/30)：Project Environment Building (I)
+第7週課程 (2025/03/31─2025/04/06)：Project Environment Building (I)
+第8週課程 (2025/04/07─2025/04/13)：Project Environment Building (III)
+第9週課程 (2025/04/14─2025/04/20)：SLAM Back-end (I) / * State Estimation and SLAM Problem* Probability Theory and Bayes Filter* Kalman Filter / Extended Kalman Filter
+第10週課程 (2025/04/21─2025/04/27)：SLAM Back-end (II) / * Graph based Optimization * Graph Optimization for 2D SLAM (Bundle Adjustment)
+第11週課程 (2025/04/28─2025/05/04)：3D SLAM (I) / * Feature Descriptor* Multi-view Geometry* Lie Group & Lie Algebra
+第12週課程 (2025/05/05─2025/05/11)：3D SLAM (II) / * 3D SLAM: ORB-SLAM* Direct Method* DNN-based SLAM
+第13週課程 (2025/05/12─2025/05/18)：3D Embodied Agent
+第14週課程 (2025/05/19─2025/05/25)：Paper Presentation (I)
+第15週課程 (2025/05/26─2025/06/01)：Paper Presentation (II)
+第16週課程 (2025/06/02─2025/06/08)：Project Presentation & Demo
+第17週課程 (2025/06/09─2025/06/15)：彈性補充教學(自主學習、探究與實作)
+第18週課程 (2025/06/16─2025/06/22)：彈性補充教學(自主學習、探究與實作)
+
+成績評定方式：
+1. 作業佔 60% (包含4次作業，每次各佔15%)。
+2. 論文閱讀報告佔 10%。
+3. 自走車期末專題(含實作、書面報告、口頭報告)佔 30%。
+
+課堂要求：
+1. 學生須自備具GPU顯卡之電腦。
+2. 本課程期末專題採分組開發，為避免影響同組修課同學之權益，請認真參與。
+3. 建議學生需已修過Python程式設計、影像處理、深度學習。

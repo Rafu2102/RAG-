@@ -1,0 +1,22 @@
+{
+    "semester": "114-2",
+    "list_info": {
+        "部別": "日間部研究所碩士班",
+        "科系": "電機工程學系",
+        "班級": "電機碩一",
+        "選課代碼": "0053",
+        "科目名稱": "類比積體電路設計與模擬",
+        "科目英文名": "Analog Integrated Circuits: Design and Simulation",
+        "學分": "3.0",
+        "時數": "3.0",
+        "必/選": "選修",
+        "授課教師": "陳俊達",
+        "教室": "E223軟體與模擬實驗室",
+        "修課人數": "18",
+        "上限人數": "30",
+        "上課時間": "(二)8-10",
+        "限修備註": "",
+        "備註": ""
+    },
+    "detail_raw_text": "回上一頁\t國立金門大學\t \n \t教學綱要\t \n\n部別 : 日間部研究所碩士班\t114學年度第2學期\t列印日期 : 2026/05/24\n科目名稱 : 類比積體電路設計與模擬 (Analog Integrated Circuits: Design and Simulation)\t開課班級 : 電機碩一\t學　　分 : 3.0\t授課時數 : 3.0\n授課教師 : 陳俊達\t必選修 : 選修\t \t \n\n\n1.教學目標\n使用HSPICE軟體了解並熟習類比積體電路之原理與設計，使學生掌握積體電路設計之基本方法，進而知道電路的特性受到電路的何者參數改變，以達到電路的修改而滿足規格的需求。 \n\n\n2.教學綱要\n1.introduction & Professional Ethics\n2.MOSFET DC Ids vs Vds characteristic Curve\n3.Common-Source Common-Drain Common-Gate Amplifier\n4.Current Source and Current Mirror\n5.Differential Amplifier\n6.Two-Stage OPAMP \n\n\n3.教科書\n3\t書名 : CMOS電路模擬與設計　\n出版日期 : 年 月 \n作者 : 鍾文耀、鄭美珠　出版社 : 全華圖書　版本 :  \n4\t書名 : HSpice-積體電路設計分析與模擬導論　\n出版日期 : 年 月 \n作者 : 蕭培墉、吳孟賢　出版社 : 東華　版本 :  \n\n\n4.參考書\n1\t書名 : Analog Integrated Circuit Design　出版日期 : 年 月 \n作者 : David A. Johns　出版社 : John Wiley & Sons　版本 :  \n2\t書名 : Design of Analog CMOS Integrated Circuits　出版日期 : 年 月 \n作者 : Behzad Razavi　出版社 : McGRAW-HILL　版本 :  \n3\t書名 : SOC聯盟開發教材　出版日期 : 年 月 \n作者 : 　出版社 : 　版本 :  \n\n※請遵守智慧財產權觀念，依著作權法規定，教科書及教材不得非法影印與使用盜版軟體。\n\n5.教學進度表\n週次\t日期\t內容\t備註\n1\t\n2026/02/22─2026/02/28\n\t介紹現今發展情形與工程專業倫理 \t \n2\t\n2026/03/01─2026/03/07\n\tMOSFET HSPICE直流分析 \t \n3\t\n2026/03/08─2026/03/14\n\tMOSFET HSPICE直流分析 \t \n4\t\n2026/03/15─2026/03/21\n\tCommon-Source Amplifier HSPICE 模擬 \t \n5\t\n2026/03/22─2026/03/28\n\tCommon-Drain Amplifier HSPICE 模擬 \t \n6\t\n2026/03/29─2026/04/04\n\tCommon-Gate Amplifier HSPICE 模擬 \t \n7\t\n2026/04/05─2026/04/11\n\tCurrent Source and Current Mirror HSPICE 模擬 \t \n8\t\n2026/04/12─2026/04/18\n\tCurrent Source and Current Mirror HSPICE 模擬 \t \n9\t\n2026/04/19─2026/04/25\n\t期中考 \t \n10\t\n2026/04/26─2026/05/02\n\tCurrent Source and Current Mirror HSPICE 模擬 \t \n11\t\n2026/05/03─2026/05/09\n\tDifferential Amplifier HSPICE 模擬 \t \n12\t\n2026/05/10─2026/05/16\n\tDifferential Amplifier HSPICE 模擬 \t \n13\t\n2026/05/17─2026/05/23\n\tDifferential Amplifier HSPICE 模擬 \t \n14\t\n2026/05/24─2026/05/30\n\tDifferential Amplifier HSPICE 模擬 \t \n15\t\n2026/05/31─2026/06/06\n\tTwo-Stage OPAMP HSPICE 模擬 \t \n16\t\n2026/06/07─2026/06/13\n\tTwo-Stage OPAMP HSPICE 模擬 \t \n17\t\n2026/06/14─2026/06/20\n\t線上學習 \t \n18\t\n2026/06/21─2026/06/27\n\t線上學習 \t \n\n\n6.成績評定及課堂要求\n考試20% 出席及平常成績 10％作業 70％ \n \n \n\n\n8.永續發展目標(SDGs)：SDG4 優質教育\n\n\n9.大學社會責任(USR)關聯性：高"
+}

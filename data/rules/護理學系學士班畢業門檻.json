@@ -1,0 +1,112 @@
+{
+  "_description": "護理學系學士班畢業學分規則 — 114學年度入學新生適用",
+  "_source": "國立金門大學護理學系114學年度入學課程規劃表.pdf",
+  "_last_updated": "2026-05-24",
+  "department": "護理學系",
+  "applicable_from": "114",
+  "total_required": 133,
+  "categories": {
+    "共同必修": {
+      "required_credits": 8,
+      "note": "共同必修總計24學分，其中包含通識課程16學分；此處列出國文與英文共同必修8學分。",
+      "courses": [
+        { "name": "國文(一)", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "英文(一)", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "國文(二)", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "英文(二)", "credits": 2, "year": 1, "semester": 2 }
+      ]
+    },
+    "通識": {
+      "required_credits": 16,
+      "note": "依本校「學生修習通識教育課程辦法」規定。"
+    },
+    "體育": {
+      "required_credits": 0,
+      "note": "依本校「體育課程實施辦法」規定。"
+    },
+    "院必修": {
+      "required_credits": 3,
+      "courses": [
+        { "name": "心理學", "credits": 3, "year": 1, "semester": 1 }
+      ]
+    },
+    "系必修": {
+      "required_credits": 84,
+      "note": "專業必修87學分包含院必修3學分與系必修84學分。",
+      "courses": [
+        { "name": "解剖學暨實驗", "credits": 3, "year": 1, "semester": 1 },
+        { "name": "有機與生化概論", "credits": 3, "year": 1, "semester": 1 },
+        { "name": "護理學導論", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "人類發展暨實驗", "credits": 3, "year": 1, "semester": 1 },
+        { "name": "生理學暨實驗", "credits": 3, "year": 1, "semester": 2 },
+        { "name": "微生物與免疫學暨實驗", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "營養學", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "病理學", "credits": 2, "year": 2, "semester": 1 },
+        { "name": "藥理學", "credits": 3, "year": 2, "semester": 1 },
+        { "name": "基本護理學暨實驗", "credits": 4, "year": 2, "semester": 1 },
+        { "name": "基本護理學實習", "credits": 2, "year": 2, "semester": 2 },
+        { "name": "身體檢查與評估暨實驗", "credits": 3, "year": 2, "semester": 2 },
+        { "name": "內外科護理學I", "credits": 3, "year": 2, "semester": 2 },
+        { "name": "內外科護理學II", "credits": 3, "year": 2, "semester": 2 },
+        { "name": "內外科護理學實驗", "credits": 1, "year": 2, "semester": 2 },
+        { "name": "生物統計", "credits": 2, "year": 2, "semester": 2 },
+        { "name": "內外科護理學I實習", "credits": 3, "year": 3, "semester": 1 },
+        { "name": "內外科護理學II實習", "credits": 3, "year": 3, "semester": 1 },
+        { "name": "社區衛生護理學", "credits": 3, "year": 3, "semester": 1 },
+        { "name": "護理研究概論", "credits": 2, "year": 3, "semester": 1 },
+        { "name": "精神衛生護理學", "credits": 3, "year": 3, "semester": 1 },
+        { "name": "兒科護理學", "credits": 3, "year": 3, "semester": 2 },
+        { "name": "護理行政概論", "credits": 2, "year": 3, "semester": 2 },
+        { "name": "產科護理學", "credits": 3, "year": 3, "semester": 2 },
+        { "name": "社區衛生護理學實習", "credits": 3, "year": 3, "semester": 2 },
+        { "name": "精神衛生護理學實習", "credits": 3, "year": 3, "semester": 2 },
+        { "name": "產科護理學實習", "credits": 3, "year": 4, "semester": 1 },
+        { "name": "綜合臨床護理學實習I", "credits": 3, "year": 4, "semester": 1 },
+        { "name": "兒科護理學實習", "credits": 3, "year": 4, "semester": 1 },
+        { "name": "護理行政實習", "credits": 2, "year": 4, "semester": 1 },
+        { "name": "護理專業問題研討", "credits": 2, "year": 4, "semester": 2 },
+        { "name": "綜合臨床護理學實習II", "credits": 2, "year": 4, "semester": 2 }
+      ]
+    },
+    "專業選修": {
+      "required_credits": 22,
+      "max_from_other_dept": 2,
+      "offered_credits_total_from_table": 44,
+      "note": "至少修習22學分，其中包括2學分可選修非本學系所開設之專業課程。表列專業選修課程為課程規劃表所列預定課程。",
+      "courses": [
+        { "name": "健康行為與健康促進", "credits": 2, "year": 1, "semester": 1, "note": "表格列於一年級上學期，但專業選修小計列為0；建議人工確認學期或小計。" },
+        { "name": "偏鄉醫療政策概論", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "金門文化與醫療", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "教學原理與教學法", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "人文護理", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "壓力與調適", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "英文醫護術語", "credits": 2, "year": 2, "semester": 1 },
+        { "name": "護理報告撰寫與應用", "credits": 2, "year": 2, "semester": 1 },
+        { "name": "泛文化健康照護", "credits": 2, "year": 2, "semester": 1 },
+        { "name": "臨床檢驗判讀", "credits": 2, "year": 2, "semester": 2 },
+        { "name": "英文病歷與文獻閱讀", "credits": 2, "year": 2, "semester": 2 },
+        { "name": "安寧緩和護理", "credits": 2, "year": 3, "semester": 1 },
+        { "name": "護理倫理與法規", "credits": 2, "year": 3, "semester": 1 },
+        { "name": "實證護理概論", "credits": 2, "year": 3, "semester": 2 },
+        { "name": "急重症護理學概論", "credits": 2, "year": 3, "semester": 2 },
+        { "name": "復健護理學", "credits": 2, "year": 3, "semester": 2 },
+        { "name": "國際護理選習", "credits": 5, "year": 4, "semester": 1 },
+        { "name": "綜合基礎醫學", "credits": 3, "year": 4, "semester": 2 },
+        { "name": "綜合護理學I", "credits": 3, "year": 4, "semester": 2 },
+        { "name": "綜合護理學II", "credits": 3, "year": 4, "semester": 2 }
+      ]
+    }
+  },
+  "graduation_conditions": [
+    "修滿133學分。",
+    "共同必修8學分。",
+    "通識課程16學分。",
+    "專業必修87學分，其中院必修3學分、系必修84學分。",
+    "專業選修至少22學分，包括2學分可選修非本學系所開設之專業課程。",
+    "須依「國立金門大學學生英文及資訊能力畢業門檻及輔導辦法」通過英文及資訊能力畢業門檻。",
+    "本表適用於114學年度入學新生。"
+  ],
+  "data_quality_notes": [
+    "課程規劃表之專業選修小計列為44學分；逐列課程若將「健康行為與健康促進」列為一年級上學期2學分，明細加總會較小計多2學分，建議後續以系所公告確認該課程學期或是否列入小計。"
+  ]
+}

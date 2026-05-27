@@ -1,0 +1,22 @@
+{
+    "semester": "113-2",
+    "list_info": {
+        "部別": "日間部研究所碩士班",
+        "科系": "資訊工程學系",
+        "班級": "資工碩一",
+        "選課代碼": "0143",
+        "科目名稱": "計算式智慧",
+        "科目英文名": "Computational Intelligence",
+        "學分": "3.0",
+        "時數": "3.0",
+        "必/選": "選修",
+        "授課教師": "趙于翔",
+        "教室": "E322嵌入式實驗室",
+        "修課人數": "13",
+        "上限人數": "30",
+        "上課時間": "(四)5-7",
+        "限修備註": "",
+        "備註": ""
+    },
+    "detail_raw_text": "回上一頁\t國立金門大學\t \n \t教學綱要\t \n\n部別 : 日間部研究所碩士班\t113學年度第2學期\t列印日期 : 2026/05/24\n科目名稱 : 計算式智慧 (Computational Intelligence)\t開課班級 : 資工碩一\t學　　分 : 3.0\t授課時數 : 3.0\n授課教師 : 趙于翔\t必選修 : 選修\t \t \n\n\n1.教學目標\n本課程以人工智慧技術為主軸開始介紹，從傳統的專家系統、模糊理論、演化式計算等演算法介紹，延伸至各種常見的類神經網路模型，深入至目前最熱門的深度學習技術，學習適合入門使用的深度學習框架，並實際演練所學演算法之案例使用。 \n\n\n2.教學綱要\n1. 專家系統 & 模糊理論\n2. 演化式計算 & 最佳化演算法\n3. 圖樣識別 & 機器學習\n4. 類神經網路 & 深度學習\n5. 自然語言 & 擴散式模型 \n\n\n3.教科書\n1\t書名 : 機器學習：類神經網路、模糊系統以及基因演算法則　\n出版日期 : 2004年 11月 \n作者 : 蘇木春、張孝德　出版社 : 全華圖書　版本 : 修訂二版 \n2\t書名 : TensorFlow+Keras深度學習人工智慧實務應用　\n出版日期 : 2017年 06月 \n作者 : 林大貴　出版社 : 博碩　版本 :  \n\n\n無參考書資料。\n\n※請遵守智慧財產權觀念，依著作權法規定，教科書及教材不得非法影印與使用盜版軟體。\n\n5.教學進度表\n週次\t日期\t內容\t備註\n1\t\n2025/02/16─2025/02/22\n\tIntroduction to Computational Intelligence \t \n2\t\n2025/02/23─2025/03/01\n\tPython, TensorFlow, Keras \t \n3\t\n2025/03/02─2025/03/08\n\tGoogle Colab \t \n4\t\n2025/03/09─2025/03/15\n\tExpert System and Fuzzy System \t \n5\t\n2025/03/16─2025/03/22\n\tEvolutionary Computation and Optimization Algorithms \t \n6\t\n2025/03/23─2025/03/29\n\tPattern Recognition \t \n7\t\n2025/03/30─2025/04/05\n\tMachine Learning \t \n8\t\n2025/04/06─2025/04/12\n\tNeural Networks — perceptrons and MLP \t \n9\t\n2025/04/13─2025/04/19\n\tMidterm Exam \t \n10\t\n2025/04/20─2025/04/26\n\tNeural Networks — Supervised and Unsupervised Learning \t \n11\t\n2025/04/27─2025/05/03\n\tDeep Learning — MLP, CNN, RNN \t \n12\t\n2025/05/04─2025/05/10\n\tData Augmentation \t \n13\t\n2025/05/11─2025/05/17\n\tTransfer Learning \t \n14\t\n2025/05/18─2025/05/24\n\tDeep Learning — NLP \t \n15\t\n2025/05/25─2025/05/31\n\tDeep Learning — Generative AI \t \n16\t\n2025/06/01─2025/06/07\n\tFinal Exam \t \n17\t\n2025/06/08─2025/06/14\n\tSelf-directed Learning \t \n18\t\n2025/06/15─2025/06/21\n\tSelf-directed Learning \t \n\n\n6.成績評定及課堂要求\n期中30%、期末30%、平時40% \n \n \n\n\n8.永續發展目標(SDGs)：\n\n\n9.大學社會責任(USR)關聯性："
+}

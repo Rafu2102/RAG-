@@ -8,7 +8,7 @@ bot/cmd_schedule.py — 課表匯入與查詢指令
 - /my_free (查詢空堂)
 - /my_credits (查詢學分摘要)
 
-OCR 引擎：Gemini 3.1 Pro Vision（structured output）
+OCR 引擎：Gemini 3.5 Flash（structured output）
 """
 
 import json
@@ -143,7 +143,7 @@ def _build_schedule_success_embed(schedule_data: dict, courses: list, total_cred
         color=discord.Color.green(),
         timestamp=discord.utils.utcnow(),
     )
-    for day in range(1, 6):
+    for day in range(1, 8):
         day_courses = [c for c in courses if c.get("day") == day]
         if day_courses:
             day_text = "\n".join([
@@ -184,7 +184,7 @@ def _build_schedule_preview_embed(schedule_data: dict) -> discord.Embed:
             ])
             embed.add_field(name=f"📅 {DAY_NAMES.get(day, f'星期{day}')}", value=day_text, inline=False)
 
-    embed.set_footer(text="🤖 由 Gemini 3.1 Pro Vision 辨識 | 若有錯誤請取消重傳或改用 JSON")
+    embed.set_footer(text="🤖 由 Gemini 3.5 Flash 辨識 | 若有錯誤請取消重傳或改用 JSON")
     return embed
 
 
@@ -230,7 +230,7 @@ async def slash_upload_schedule(
 
             # 呼叫 OCR 引擎
             from tools.ocr_engine import ocr_schedule, enrich_schedule_with_course_db
-            await interaction.followup.send("⏳ **Gemini 3.1 Pro 正在辨識您的課表截圖...**\n請稍候約 10-20 秒 🔍", ephemeral=True)
+            await interaction.followup.send("⏳ **Gemini 3.5 Flash 正在辨識您的課表截圖...**\n請稍候約 10-20 秒 🔍", ephemeral=True)
 
             schedule_data = await ocr_schedule(
                 image_bytes_list=[image_bytes],
@@ -278,7 +278,7 @@ async def slash_upload_schedule(
 # =========================================================================
 
 @tree.command(name="my_schedule", description="📋 查詢您的課表 (可指定星期幾)")
-@app_commands.describe(day="星期幾 (1=一, 2=二, ..., 5=五)，不填=今天")
+@app_commands.describe(day="星期幾 (1=一, 2=二, ..., 7=日)，不填=今天")
 async def slash_my_schedule(interaction: discord.Interaction, day: int = 0):
     discord_id = str(interaction.user.id)
 
@@ -286,17 +286,17 @@ async def slash_my_schedule(interaction: discord.Interaction, day: int = 0):
         tz = timezone(timedelta(hours=8))
         now = datetime.now(tz)
         day = now.isoweekday()
-        if day > 5:
-            await interaction.response.send_message(
-                "🎉 今天是假日，沒有課！\n💡 可以用 `/my_schedule day:1` 查詢星期一的課表", ephemeral=True
-            )
-            return
 
     if day < 1 or day > 7:
         await interaction.response.send_message("❌ 請輸入 1-7（1=星期一）", ephemeral=True)
         return
 
     result = query_day_schedule(discord_id, day)
+    
+    # 動態週末保底：若為週末且查詢結果包含「沒有課程」（或「沒有課」），才友善提示；否則若真的有排課就直接顯示
+    if day > 5 and ("沒有課" in result or "無課程" in result or "未排課" in result):
+        result = f"今天是假日（{DAY_NAMES.get(day)}），目前您的課表中沒有排課喔！🌴"
+
     await interaction.response.send_message(result, ephemeral=True)
 
 

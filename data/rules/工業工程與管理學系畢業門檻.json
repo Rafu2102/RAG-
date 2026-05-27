@@ -1,0 +1,114 @@
+{
+  "_description": "工管系畢業學分規則 — 114學年度入學新生適用",
+  "_source": "774506490_page-0001.jpg",
+  "_last_updated": "2026-05-26",
+  "department": "工業工程與管理學系",
+  "applicable_from": "114",
+  "total_required": 129,
+  "categories": {
+    "共同必修": {
+      "required_credits": 8,
+      "courses": [
+        { "name": "國文(一)", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "英文(一)", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "國文(二)", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "英文(二)", "credits": 2, "year": 1, "semester": 2 }
+      ]
+    },
+    "通識": {
+      "required_credits": 16,
+      "note": "依本校「學生修習通識教育課程辦法」規定"
+    },
+    "體育": {
+      "required_credits": 0,
+      "note": "依本校「體育課程實施辦法」規定，0學分必修"
+    },
+    "院必修": {
+      "required_credits": 6,
+      "courses": [
+        { "name": "管理學", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "計算機概論", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "經濟學", "credits": 2, "year": 1, "semester": 2 }
+      ]
+    },
+    "系必修": {
+      "required_credits": 63,
+      "courses": [
+        { "name": "微積分(一)", "credits": 3, "year": 1, "semester": 1 },
+        { "name": "設計與工程圖學", "credits": 3, "year": 1, "semester": 1 },
+        { "name": "工業工程概論", "credits": 3, "year": 1, "semester": 1 },
+        { "name": "微積分(二)", "credits": 3, "year": 1, "semester": 2 },
+        { "name": "程式語言", "credits": 3, "year": 1, "semester": 2 },
+        { "name": "服務與製造概論", "credits": 3, "year": 1, "semester": 2 },
+        { "name": "會計學", "credits": 3, "year": 1, "semester": 2 },
+        { "name": "工程數學(一)", "credits": 3, "year": 2, "semester": 1 },
+        { "name": "動作與時間研究", "credits": 3, "year": 2, "semester": 1 },
+        { "name": "專業英文", "credits": 3, "year": 2, "semester": 1 },
+        { "name": "線性代數", "credits": 3, "year": 2, "semester": 1 },
+        { "name": "作業研究", "credits": 3, "year": 2, "semester": 2 },
+        { "name": "生產計畫與管制", "credits": 3, "year": 2, "semester": 2 },
+        { "name": "工程統計(一)", "credits": 3, "year": 2, "semester": 2 },
+        { "name": "工程材料", "credits": 3, "year": 2, "semester": 2 },
+        { "name": "品質管理", "credits": 3, "year": 3, "semester": 1 },
+        { "name": "設施規劃", "credits": 3, "year": 3, "semester": 1 },
+        { "name": "人因工程", "credits": 3, "year": 3, "semester": 1 },
+        { "name": "系統模擬", "credits": 3, "year": 3, "semester": 2 },
+        { "name": "實務專題(一)", "credits": 3, "year": 3, "semester": 2 },
+        { "name": "實務專題(二)", "credits": 3, "year": 4, "semester": 1 }
+      ]
+    },
+    "專業選修": {
+      "required_credits": 36,
+      "max_from_other_dept": 9,
+      "note": "包括9學分可選修非本學系所開設之課程。",
+      "tracks": {
+        "專業選修課程": {
+          "courses": [
+            { "name": "資訊安全與倫理", "credits": 2, "year": 1, "semester": 1 },
+            { "name": "人工智慧概論", "credits": 2, "year": 1, "semester": 1 },
+            { "name": "行銷管理", "credits": 2, "year": 1, "semester": 2 },
+            { "name": "心理學", "credits": 2, "year": 1, "semester": 2 },
+            { "name": "成本會計", "credits": 3, "year": 2, "semester": 1 },
+            { "name": "客戶關係管理", "credits": 2, "year": 2, "semester": 1 },
+            { "name": "資料結構", "credits": 2, "year": 2, "semester": 1 },
+            { "name": "服務系統設計", "credits": 3, "year": 2, "semester": 2 },
+            { "name": "財務管理", "credits": 2, "year": 2, "semester": 2 },
+            { "name": "工業安全", "credits": 2, "year": 2, "semester": 2 },
+            { "name": "資料庫管理系統", "credits": 3, "year": 2, "semester": 2 },
+            { "name": "作業研究應用", "credits": 3, "year": 3, "semester": 1 },
+            { "name": "專案管理", "credits": 3, "year": 3, "semester": 1 },
+            { "name": "企業資源規劃", "credits": 3, "year": 3, "semester": 1 },
+            { "name": "供應鏈管理概論", "credits": 3, "year": 3, "semester": 1 },
+            { "name": "電子商務", "credits": 3, "year": 3, "semester": 1 },
+            { "name": "物聯網實務應用", "credits": 3, "year": 3, "semester": 1 },
+            { "name": "網路程式與應用", "credits": 3, "year": 3, "semester": 1 },
+            { "name": "田口方法", "credits": 3, "year": 3, "semester": 2 },
+            { "name": "六標準差", "credits": 3, "year": 3, "semester": 2 },
+            { "name": "精實生產", "credits": 3, "year": 3, "semester": 2 },
+            { "name": "決策分析", "credits": 3, "year": 3, "semester": 2 },
+            { "name": "服務創新與管理", "credits": 3, "year": 3, "semester": 2 },
+            { "name": "資料探勘", "credits": 3, "year": 3, "semester": 2 },
+            { "name": "半導體製程概論", "credits": 3, "year": 3, "semester": 2 },
+            { "name": "全面品質管理", "credits": 3, "year": 4, "semester": 1 },
+            { "name": "可靠度工程", "credits": 3, "year": 4, "semester": 1 },
+            { "name": "永續工程與管理", "credits": 3, "year": 4, "semester": 1 },
+            { "name": "製造策略與規劃", "credits": 3, "year": 4, "semester": 1 },
+            { "name": "機器學習", "credits": 3, "year": 4, "semester": 1 },
+            { "name": "專業實習(一)", "credits": 3, "year": 4, "semester": 1 },
+            { "name": "科技管理", "credits": 3, "year": 4, "semester": 2 },
+            { "name": "自動化製造系統", "credits": 3, "year": 4, "semester": 2 },
+            { "name": "雲端與數位內容管理", "credits": 3, "year": 4, "semester": 2 },
+            { "name": "證照專題", "credits": 3, "year": 4, "semester": 2 },
+            { "name": "專業實習(二)", "credits": 3, "year": 4, "semester": 2 }
+          ]
+        }
+      }
+    }
+  },
+
+  "graduation_conditions": [
+    "修滿至少129學分（含共同必修8學分、通識16學分、院必修6學分、系必修63學分、專業選修36學分）",
+    "須通過「本校學生英文及資訊能力畢業門檻及輔導辦法」",
+    "符合本系學生畢業規定（如實務專題或專業實習相關開設準則規定）"
+  ]
+}

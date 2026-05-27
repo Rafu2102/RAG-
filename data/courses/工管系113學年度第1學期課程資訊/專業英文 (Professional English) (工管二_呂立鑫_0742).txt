@@ -1,0 +1,69 @@
+國立金門大學113學年度第1學期工管系課程
+學年度：113學年度
+學期：第1學期
+課程名稱：專業英文 (Professional English)
+部別：日間部學士班
+開課班級：工管二
+學分數：3.0學分
+授課時數：3.0小時
+授課教師：呂立鑫
+必選修：必修
+教室：308工管系普通教室
+修課上限人數：60人
+上課時間：每周星期二上午第2節~第4節
+
+課程教學目標：
+1. This course is designed to prepare students with good reading skills in English for industrial engineering, a certain ability to listen and translate, and a preliminary ability to speak and write.
+
+課程教學綱要：
+1. Real IE Value
+2. Operation Research
+3. Ergonomics
+4. Next Generation Factory Layouts
+5. Computer Integrated Manufacturing
+6. Classification of JIT Techniques
+7. Agile Manufacturing
+
+教科書資料：
+1. 書名：工業工程專業英語
+2. 出版日期：未標註
+3. 作者：王愛虎
+4. 出版社：北京理工大學出版社
+5. 版本：未標註
+
+參考書資料：
+1. 書名：工業工程專業英語
+2. 出版日期：未標註
+3. 作者：周躍進
+4. 出版社：機械工業出版社
+5. 版本：未標註
+
+※請遵守智慧財產權觀念，依著作權法規定，教科書及教材不得非法影印與使用盜版軟體。
+
+教學進度表（2024年秋季學期）：
+第1週課程 (2024/09/08─2024/09/14)：Real IE Value
+第2週課程 (2024/09/15─2024/09/21)：Operation Research
+第3週課程 (2024/09/22─2024/09/28)：Moon Festival
+第4週課程 (2024/09/29─2024/10/05)：Operation Research
+第5週課程 (2024/10/06─2024/10/12)：Ergonomics
+第6週課程 (2024/10/13─2024/10/19)：Ergonomics
+第7週課程 (2024/10/20─2024/10/26)：Next Generation Factory Layouts
+第8週課程 (2024/10/27─2024/11/02)：Next Generation Factory Layouts
+第9週課程 (2024/11/03─2024/11/09)：Computer Integrated Manufacturing
+第10週課程 (2024/11/10─2024/11/16)：Midterm Exam
+第11週課程 (2024/11/17─2024/11/23)：Computer Integrated Manufacturing
+第12週課程 (2024/11/24─2024/11/30)：Classification of JIT Techniques
+第13週課程 (2024/12/01─2024/12/07)：Classification of JIT Techniques
+第14週課程 (2024/12/08─2024/12/14)：Agile Manufacturing
+第15週課程 (2024/12/15─2024/12/21)：Agile Manufacturing
+第16週課程 (2024/12/22─2024/12/28)：Final Exam
+第17週課程 (2024/12/29─2025/01/04)：Presentation
+第18週課程 (2025/01/05─2025/01/11)：Presentation
+
+成績評定方式：
+1. Usual Grades (including quizzes, class attendance, participation, homework and reports) 50%
+2. Midterm Exam 25%
+3. Final Exam 25%
+
+課堂要求：
+Attending On Time.

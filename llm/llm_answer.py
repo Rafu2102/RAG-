@@ -3,7 +3,7 @@
 llm_answer.py — LLM 回答生成模組（核心 RAG 回答）
 =====================================================
 負責：
-1. 使用 Gemini 3.1 Pro 生成 RAG 回答
+1. 使用 Gemini 3.5 Flash 生成 RAG 回答
 2. Answer Grounding：回答必須引用資料來源
 3. Conversation Memory：支援多輪對話（保留最近 N 輪）
 4. Context 重組（教授 backfill、課程過濾、學期感知）
@@ -21,13 +21,29 @@ from dataclasses import dataclass, field
 
 import config
 from rag.retriever import RetrievedChunk
-from llm.gemini_client import call_gemini_with_fallback, GeminiAPIError
+from llm.gemini_client import a_call_gemini_with_fallback, call_gemini_with_fallback, GeminiAPIError
 from llm.prompts import (
     SYSTEM_RULES_PROMPT, USER_CONTEXT_PROMPT,
     SYSTEM_RULES_PROFESSOR_PROMPT, USER_CONTEXT_PROFESSOR_PROMPT,
 )
 
 logger = logging.getLogger(__name__)
+
+
+def _trim_string_user(content: str) -> str:
+    """使用者訊息實體字串長度物理強行截斷防禦（User 限制 1000 字）"""
+    if len(content) > 1000:
+        return content[:1000] + " ... [因篇幅過長，已為 LLM 進行語意最佳化省略] ..."
+    return content
+
+
+def _trim_string_assistant(content: str) -> str:
+    """助理訊息實體字串長度物理強行截斷防禦（Assistant 限制 1200 字，高於此值時採用雙端智慧裁切）"""
+    if len(content) > 1200:
+        prefix = content[:800]
+        suffix = content[-300:]
+        return f"{prefix}\n... [因篇幅過長，已為 LLM 進行智慧雙端裁切最佳化] ...\n{suffix}"
+    return content
 
 
  # =============================================================================.Value -replace '=', [char]0x2550 
@@ -58,12 +74,12 @@ class ConversationMemory:
 
     def add_user_message(self, content: str):
         """新增使用者訊息"""
-        self.history.append({"role": "user", "content": content})
+        self.history.append({"role": "user", "content": _trim_string_user(content)})
         self._trim()
 
     def add_assistant_message(self, content: str):
         """新增助理回覆"""
-        self.history.append({"role": "assistant", "content": content})
+        self.history.append({"role": "assistant", "content": _trim_string_assistant(content)})
         self._trim()
 
     def get_history(self) -> list[dict]:
@@ -75,18 +91,26 @@ class ConversationMemory:
         self.history.clear()
 
     def get_formatted_history(self) -> str:
-        """取得格式化的對話歷史字串"""
+        """取得格式化的對話歷史字串，並啟用完美平衡點智慧裁切以防 Token 積壓"""
         if not self.history:
             return "無先前對話"
 
         lines = []
         for msg in self.history:
             role = "使用者" if msg["role"] == "user" else "助理"
-            # 截斷過長的訊息
-            # content = msg["content"][:300]  # 暫時解除字數限制（外接 API 不吃本地記憶體）
-            content = msg["content"]
-            # if len(msg["content"]) > 300:  # 暫時解除（配合上方解除）
-            #     content += "..."
+            content = msg.get("content", "")
+
+            if msg["role"] == "user":
+                # 使用者訊息限制為 1000 個字元
+                if len(content) > 1000:
+                    content = content[:1000] + " ... [因篇幅過長，已為 LLM 進行語意最佳化省略] ..."
+            else:
+                # 助理訊息限制為 1200 個字元，高於此值時採用雙端智慧裁切（前 800 字元 + 後 300 字元）
+                if len(content) > 1200:
+                    prefix = content[:800]
+                    suffix = content[-300:]
+                    content = f"{prefix}\n... [因篇幅過長，已為 LLM 進行智慧雙端裁切最佳化] ...\n{suffix}"
+
             lines.append(f"{role}：{content}")
         return "\n".join(lines)
 
@@ -173,7 +197,7 @@ def _format_schedule_for_llm(discord_id: str) -> str:
 
         lines = [f"📅【學生本學期個人課表】（{year}學年度 第{sem}學期，共 {total_credits} 學分）"]
 
-        for day in range(1, 6):
+        for day in range(1, 8):
             day_str = str(day)
             day_name = DAY_NAMES.get(day, f"星期{day}")
             day_courses = timetable.get(day_str, {})
@@ -221,11 +245,68 @@ def _format_schedule_for_llm(discord_id: str) -> str:
         return ""
 
 
+def _build_all_depts_required_courses_context() -> str:
+    """
+    從 data/rules/ 目錄中讀取並解析所有科系的畢業門檻 JSON 檔案，
+    提取出各科系官方規定的「必修課程（共同必修 + 院必修 + 系必修）」清冊。
+    """
+    import os
+    import glob
+    import json
+    
+    rules_dir = os.path.join(config.PROJECT_ROOT, "data", "rules")
+    json_files = glob.glob(os.path.join(rules_dir, "*.json"))
+    
+    lines = [
+        "🚨【國立金門大學全校各系所官方畢業門檻 — 必修課程科目總覽】🚨",
+        "以下為校內各學術科系官方畢業規章所定義的『必修課程（含共同必修、院必修與系必修）』清單，這是最權威的必修課依據："
+    ]
+    
+    for filepath in json_files:
+        try:
+            with open(filepath, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            
+            dept_name = data.get("department", "未知系所")
+            if "碩士" in dept_name or "學程" in dept_name:
+                continue # 排除碩士班與學程，專注在學士班科系
+                
+            required_courses = []
+            categories = data.get("categories", {})
+            for cat_name in ["共同必修", "院必修", "系必修"]:
+                cat_data = categories.get(cat_name, {})
+                if isinstance(cat_data, dict):
+                    courses = cat_data.get("courses", [])
+                    for c in courses:
+                        cname = c.get("name")
+                        credits = c.get("credits")
+                        if cname:
+                            # 格式：課程名稱(學分)
+                            required_courses.append(f"{cname}({credits}學分)")
+            
+            if required_courses:
+                # 去重並保持順序
+                seen = set()
+                unique_reqs = []
+                for c in required_courses:
+                    if c not in seen:
+                        seen.add(c)
+                        unique_reqs.append(c)
+                lines.append(f"🎓【{dept_name}】官方必修科目：")
+                lines.append(f"   {', '.join(unique_reqs)}")
+                
+        except Exception as e:
+            continue
+            
+    lines.append("\n⚠️ 請注意：當使用者詢問『什麼科系/哪些科系的必修是某門課（如微積分、國文、英文、計算機概論）』或要求統計必選修數量時，你應參考此官方必修名冊進行全局分析與對照，確保回答 100% 準確且無任何科系遺漏！")
+    return "\n".join(lines)
+
+
  # =============================================================================.Value -replace '=', [char]0x2550 
 # 🤖 LLM Answer 主函式
  # =============================================================================.Value -replace '=', [char]0x2550 
 
-def generate_answer(
+async def generate_answer(
     query: str,
     chunks: list[RetrievedChunk],
     memory: ConversationMemory,
@@ -235,7 +316,7 @@ def generate_answer(
     discord_id: str = None,
 ) -> AnswerResult:
     """
-    使用 Gemini 3.1 Pro 根據檢索結果生成 RAG 回答。
+    使用 Gemini 3.5 Flash 根據檢索結果生成 RAG 回答。
 
     結合：
     - 檢索到的 Top-5 chunks 作為 context
@@ -276,8 +357,17 @@ def generate_answer(
         max_score = max(c.final_score for c in chunks)
         if max_score > 0.5:
             # 精確課程查詢（有 course_name_keyword）用更嚴格的門檻，削減不相關課程
-            has_course_name = bool(route_result and route_result.metadata_filters.get("course_name_keyword"))
-            threshold_ratio = 0.40 if has_course_name else 0.25
+            ckw = route_result.metadata_filters.get("course_name_keyword") if route_result else None
+            is_multi_course = isinstance(ckw, list) and len(ckw) >= 2
+            
+            if is_multi_course:
+                # 雙重/多重課程聯查：顯著放寬相對門檻以防弱勢課程區段被誤殺
+                threshold_ratio = 0.15
+            elif ckw:
+                threshold_ratio = 0.40
+            else:
+                threshold_ratio = 0.25
+
             relative_threshold = max_score * threshold_ratio
             original_count = len(chunks)
             chunks = [c for c in chunks if c.final_score >= relative_threshold]
@@ -311,7 +401,10 @@ def generate_answer(
     if intent == "professor_info" and chunks:
         teacher_name = ""
         if route_result and route_result.metadata_filters.get("teacher"):
-            teacher_name = _re.sub(r"(老師|教授)$", "", route_result.metadata_filters["teacher"]).strip()
+            t_val = route_result.metadata_filters["teacher"]
+            t_str = t_val[0] if (isinstance(t_val, list) and t_val) else t_val
+            t_str = t_str if isinstance(t_str, str) else ""
+            teacher_name = _re.sub(r"(老師|教授)$", "", t_str).strip()
         
         # 🔑 核心修復：分類收集 chunk，以便處理沒有老師名字的情況
         prof_chunks_by_name = {}  # { "柯志亨": [chunk1, chunk2...] }
@@ -351,7 +444,7 @@ def generate_answer(
             for c in chunks:
                 cn = c.node.metadata.get("course_name", "")
                 t = c.node.metadata.get("teacher", "")
-                if cn and t and (course_kw and course_kw in cn):
+                if cn and t and (course_kw and (any(k in cn for k in course_kw if k) if isinstance(course_kw, list) else course_kw in cn)):
                     teacher_name = _re.sub(r"(老師|教授)$", "", t).strip()
                     if "," in teacher_name:
                         teacher_name = teacher_name.split(",")[0].strip()
@@ -363,7 +456,7 @@ def generate_answer(
                 for n in all_nodes:
                     cn = n.metadata.get("course_name", "")
                     t = n.metadata.get("teacher", "")
-                    if cn and t and n.metadata.get("section") == "basic_info" and course_kw in cn:
+                    if cn and t and n.metadata.get("section") == "basic_info" and (any(k in cn for k in course_kw if k) if isinstance(course_kw, list) else course_kw in cn):
                         teacher_name = _re.sub(r"(老師|教授)$", "", t).strip()
                         if "," in teacher_name:
                             teacher_name = teacher_name.split(",")[0].strip()
@@ -490,6 +583,7 @@ def generate_answer(
                 f"---"
             )
             sources.append({
+                "course_name": f"👨‍🏫 {pn}",
                 "course": f"👨‍🏫 {pn}",
                 "section": "professor_info",
                 "teacher": pn,
@@ -533,7 +627,9 @@ def generate_answer(
                                     f"---\n📄 授課課程：{cn} (教室: {n.metadata.get('classroom', '未註明教室')} | 時間: {n.metadata.get('schedule', '未註明時間')} | 必選修: {n.metadata.get('required_or_elective', '?')})\n{n.get_content()}\n---"
                                 )
                                 sources.append({
-                                    "course": cn, "section": "basic_info",
+                                    "course_name": cn,
+                                    "course": cn,
+                                    "section": "basic_info",
                                     "teacher": teacher, "score": 8.0,
                                     "source_file": n.metadata.get("source_file", ""),
                                 })
@@ -555,7 +651,9 @@ def generate_answer(
                         f"---\n📄 授課課程：{cn} (教室: {c.node.metadata.get('classroom', '未註明教室')} | 時間: {c.node.metadata.get('schedule', '未註明時間')} | 必選修: {c.node.metadata.get('required_or_elective', '?')})\n{c.node.get_content()}\n---"
                     )
                     sources.append({
-                        "course": cn, "section": sec,
+                        "course_name": cn,
+                        "course": cn,
+                        "section": sec,
                         "teacher": teacher, "score": c.final_score,
                         "source_file": c.node.metadata.get("source_file", ""),
                     })
@@ -620,6 +718,77 @@ def generate_answer(
             "source_file": meta.get("source_file", ""),
         })
 
+    # 🆕 意圖驅動 Context 增強：通識課程全覽打包注入，實現全局性大數據分析推薦
+    is_tongshi = False
+    if route_result and route_result.metadata_filters.get("dept_short") == "通識中心":
+        is_tongshi = True
+
+    if is_tongshi and all_nodes:
+        # 1. 取得目標學年與學期
+        target_year = route_result.metadata_filters.get("academic_year") or "114"
+        target_sem = route_result.metadata_filters.get("semester") or "2"
+        
+        # 2. 從 all_nodes 中提取符合本學期通識中心開課的所有 basic_info 節點
+        tongshi_courses = []
+        seen_tongshi = set()
+        for node in all_nodes:
+            meta = getattr(node, "metadata", {})
+            if meta.get("section") != "basic_info":
+                continue
+            
+            node_year = meta.get("academic_year")
+            node_sem = meta.get("semester")
+            node_dept = meta.get("dept_short")
+            
+            if node_year == target_year and node_sem == target_sem and node_dept == "通識中心":
+                cname = meta.get("course_name", "")
+                cteacher = meta.get("teacher", "")
+                key = (cname, cteacher)
+                if key not in seen_tongshi:
+                    seen_tongshi.add(key)
+                    tongshi_courses.append(meta)
+        
+        if tongshi_courses:
+            # 3. 組裝成精緻的名冊總覽
+            lines = [
+                f"🚨【國立金門大學 {target_year}學年度第{target_sem}學期 — 全校通識課程名冊總覽】🚨",
+                f"本學期通識教育中心共開出 {len(tongshi_courses)} 門不同的通識課程。以下為所有通識課程的名單（包含課名與授課教師）："
+            ]
+            for idx, c in enumerate(sorted(tongshi_courses, key=lambda x: x.get("course_name", ""))):
+                lines.append(f"  {idx+1}. {c.get('course_name')} ｜ 👩‍🏫 授課教師：{c.get('teacher')} ｜ 🎓 {c.get('credits')}學分 ｜ ⏰ {c.get('schedule', '未註明時間')}")
+            
+            lines.append("⚠️ 請注意：以上名單為本學期開出的『所有』通識課程。在給出推薦時，你應參考此名冊進行『全局性分析』，選出最新穎、最有趣、最實用、或評分良好的課程，並結合學生的空堂進行客製化推薦！")
+            
+            # 4. 作為額外 context_item 注入
+            tongshi_context_item = "\n".join(lines)
+            context_items.append(
+                f"---\n"
+                f"📄 本學期全校通識課程名冊總覽\n"
+                f"{tongshi_context_item}\n"
+                f"---"
+            )
+            logger.info(f"  🎯 通識 Context 增強：成功打包並注入本學期 {len(tongshi_courses)} 門全量通識課程名冊！")
+
+    # 🆕 意圖驅動 Context 增強：全校各科系必修大清冊打包注入，解決跨科系必修查詢遺漏 Bug
+    is_asking_all_depts_required = False
+    query_lower = query.lower()
+    intent = route_result.query_type if route_result else "course_info"
+    if "必修" in query_lower and any(kw in query_lower for kw in ["科系", "系所", "哪些系", "哪幾系", "什麼系", "什麼科系", "哪些科系"]):
+        is_asking_all_depts_required = True
+    elif intent == "policy_rules" and "必修" in query_lower:
+        is_asking_all_depts_required = True
+
+    if is_asking_all_depts_required:
+        required_courses_context = _build_all_depts_required_courses_context()
+        if required_courses_context:
+            context_items.append(
+                f"---\n"
+                f"📄 全校各科系官方必修科目總覽名冊\n"
+                f"{required_courses_context}\n"
+                f"---"
+            )
+            logger.info("  🎯 必修課 Context 增強：成功打包並注入全校各科系官方必修課程名冊！")
+
     context = "\n\n".join(context_items) if context_items else "（無相關資料）"
 
     unique_courses = set()
@@ -638,6 +807,7 @@ def generate_answer(
         user_prompt = USER_CONTEXT_PROFESSOR_PROMPT.format(
             context=context,
             question=safe_query,
+            current_term=current_term
         )
     else:
         system_prompt = SYSTEM_RULES_PROMPT
@@ -685,15 +855,19 @@ def generate_answer(
     # 這是為了防止模型在某些硬體或設定下直接忽略 system role
     combined_prompt = f"{system_prompt}\n\n====================\n\n{history_str}{user_info_str}{user_prompt}"
 
-    # ── 動態 thinkingLevel：職涯規劃用 high，其餘用 medium ──
-    thinking_level = "high" if is_career_planning else "medium"
+    # ── 根據複雜度動態調整思考程度 (Thinking Level) ──
+    # 職涯大範圍探索 (is_career_planning) 或 複雜的修課畢業法規對齊 (policy_rules) 設為 high，其餘一律使用 medium。
+    if is_career_planning or intent == "policy_rules":
+        thinking_level = "high"
+    else:
+        thinking_level = "medium"
     
     logger.info(f"  🧠 Thinking Level: {thinking_level} (intent={intent}, career={is_career_planning})")
 
     # ── 呼叫 Gemini API（含 429 自動降級） ──
     try:
-        logger.info(f"🤖 呼叫 Gemini 生成回答 (傳送 {len(combined_prompt)} 字元)...")
-        answer = call_gemini_with_fallback(
+        logger.info(f"🤖 呼叫 Gemini 生成回答 (傳送 {len(combined_prompt)} 字元，包含 {len(chunks)} 個 chunks)...")
+        answer = await a_call_gemini_with_fallback(
             combined_prompt,
             thinking=thinking_level,
         )
@@ -740,15 +914,17 @@ def format_sources(sources: list[dict]) -> str:
     seen = set()
     unique_sources = []
     for s in sources:
-        key = f"{s['course_name']}_{s['section']}"
+        cname = s.get("course_name", s.get("course", "❓"))
+        key = f"{cname}_{s['section']}"
         if key not in seen:
             seen.add(key)
             unique_sources.append(s)
 
     lines = ["\n📚 資料來源："]
     for i, s in enumerate(unique_sources, 1):
+        cname = s.get("course_name", s.get("course", "❓"))
         teacher_str = f"（{s['teacher']}）" if s.get("teacher") else ""
-        lines.append(f"  {i}. 【{s['course_name']}】{s['section']}{teacher_str}")
+        lines.append(f"  {i}. 【{cname}】{s['section']}{teacher_str}")
 
     return "\n".join(lines)
 

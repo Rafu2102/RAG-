@@ -1,0 +1,61 @@
+國立金門大學112學年度第1學期資工系課程
+學年度：112學年度
+學期：第1學期
+課程名稱：電腦網路安全概論 (Introduction to Computer and Network Security)
+部別：日間部學士班
+開課班級：資工四
+學分數：3.0學分
+授課時數：3.0小時
+授課教師：洪晟峯
+必選修：選修
+教室：E321電腦網路實驗室
+修課上限人數：60人
+上課時間：每周星期六上午第2節~下午第7節
+備註：此門課程申請彈性授課，逢單週上課。
+
+課程教學目標：
+1. 以培育具備資安素養與能力之學生以及對資安有興趣之學生為目的，使學生能夠在理論與實務兼備下，能夠參與相關資安競賽與研習課程活動。
+
+課程教學綱要：
+1. 教導學生整合網路資安相關知識，介紹不同種類的網路攻擊與安全應用及了解相關攻擊手法。
+
+教科書資料：
+1. 書名：Cryptography and Network Security: Principles and Practice
+2. 出版日期：未標註
+3. 作者：未標註
+4. 出版社：未標註
+5. 版本：ISBN 9780134444284(hbk.)
+
+參考書資料：
+無參考書
+
+※請遵守智慧財產權觀念，依著作權法規定，教科書及教材不得非法影印與使用盜版軟體。
+
+教學進度表（2023年秋季學期）：
+第1週課程 (2023/09/10─2023/09/16)：Syllabus
+第2週課程 (2023/09/17─2023/09/23)：Introducing Computer and Network Security
+第3週課程 (2023/09/24─2023/09/30)：Access Control Methodologies
+第4週課程 (2023/10/01─2023/10/07)：General Security Principles and Practices
+第5週課程 (2023/10/08─2023/10/14)：The Business of Security
+第6週課程 (2023/10/15─2023/10/21)：Cryptographic Technologies
+第7週課程 (2023/10/22─2023/10/28)：experiment
+第8週課程 (2023/10/29─2023/11/04)：experiment
+第9週課程 (2023/11/05─2023/11/11)：Midterm (G)
+第10週課程 (2023/11/12─2023/11/18)：Securing TCP/IP
+第11週課程 (2023/11/19─2023/11/25)：Handling Security Incidents
+第12週課程 (2023/11/26─2023/12/02)：Firewall Security
+第13週課程 (2023/12/03─2023/12/09)：Operating System Security
+第14週課程 (2023/12/10─2023/12/16)：Intrusion Detection Systems and Practices
+第15週課程 (2023/12/17─2023/12/23)：System Security Scanning and Discovery
+第16週課程 (2023/12/24─2023/12/30)：experiment
+第17週課程 (2023/12/31─2024/01/06)：experiment
+第18週課程 (2024/01/07─2024/01/13)：Final (P)
+
+成績評定方式：
+1. 實作 (Practice)：40%
+2. 期中團體專題 (Midterm (Group Project))：25%
+3. 期末個人專題 (Final (Personal Project))：30%
+4. 額外加分項目 (Bonus)：5%
+
+課堂要求：
+無詳細課堂要求說明

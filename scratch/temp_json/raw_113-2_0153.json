@@ -1,0 +1,22 @@
+{
+    "semester": "113-2",
+    "list_info": {
+        "部別": "日間部學士班",
+        "科系": "資訊工程學系",
+        "班級": "資工二",
+        "選課代碼": "0153",
+        "科目名稱": "資料結構",
+        "科目英文名": "Data Structure",
+        "學分": "3.0",
+        "時數": "3.0",
+        "必/選": "必修",
+        "授課教師": "馮玄明",
+        "教室": "I102圖資電腦教室",
+        "修課人數": "44",
+        "上限人數": "60",
+        "上課時間": "(一)5-7",
+        "限修備註": "",
+        "備註": ""
+    },
+    "detail_raw_text": "回上一頁\t國立金門大學\t \n \t教學綱要\t \n\n部別 : 日間部學士班\t113學年度第2學期\t列印日期 : 2026/05/24\n科目名稱 : 資料結構 (Data Structure)\t開課班級 : 資工二\t學　　分 : 3.0\t授課時數 : 3.0\n授課教師 : 馮玄明\t必選修 : 必修\t \t \n\n\n1.教學目標\nLearn the real concept of data structure Learn the detail codeing skill \n\n\n2.教學綱要\n(1)Data structure concept discription\n(2)code demonstration\n \n\n\n3.教科書\n1\t書名 : Data Structures: A Pseudocode Approach with C 2/e　\n出版日期 : 年 月 \n作者 : Gilberg/Forouzan　出版社 : 　版本 :  \n2\t書名 : 資料結構：使用Python　\n出版日期 : 年 月 \n作者 : 蔡明志　出版社 : 碁峰　版本 :  \n\n\n無參考書資料。\n\n※請遵守智慧財產權觀念，依著作權法規定，教科書及教材不得非法影印與使用盜版軟體。\n\n5.教學進度表\n週次\t日期\t內容\t備註\n1\t\n2025/02/16─2025/02/22\n\tIntroduction to Data structure \t \n2\t\n2025/02/23─2025/03/01\n\tCh2-(1)Explain the difference between iteration and recursion\nch2-(2)Design a recursive algorithm\nDetermine when an recursion is an appropriate solution\nch2-(3)Write simple recursive functions \t \n3\t\n2025/03/02─2025/03/08\n\tCh3-(1)Explain the design, use, and operation of a stack\nCh3-(2)Implement a stack using a linked list structure\nCh3-(3) Understand the operation of the stack ADT\nCh3-(4) Write application programs using the stack ADT\n \t \n4\t\n2025/03/09─2025/03/15\n\tCh3-(5) Discuss reversing data, parsing, postponing and backtracking\nCh4-(1)Explain the design, use, and operation of a queue\nCh4-(2)Implement a queue using a linked list structure\nCh4-(3)Understand the operation of the queue ADT \t \n5\t\n2025/03/16─2025/03/22\n\tCh4-(4) Write application programs using the queue ADT\nCh4-(5)Explain categorizing data and queue simulation \t \n6\t\n2025/03/23─2025/03/29\n\tCh5-1 Explain the design, use, and operation of a linear list\nCh5-2 Implement a linear list using a linked list structure \t \n7\t\n2025/03/30─2025/04/05\n\tCh5-3 Understand the operation of the linear list ADT\nCh5-4 Write application programs using the linear list ADT\nCh5-5 Design and implement different link-list structures \t \n8\t\n2025/04/06─2025/04/12\n\tMiddle Exam \t \n9\t\n2025/04/13─2025/04/19\n\tCh6-1 Understand and use basic tree terminology and concepts\nCh6-2 Recognize and define the basic attributes of a binary tree\nCh6-3 Process trees using depth-first and breadth-first traversals\nCh6-4 Parse expressions using a binary tree \t \n10\t\n2025/04/20─2025/04/26\n\tCh6-5 Design and implement Huffman trees\nCh6-6 Understand the basic use and processing of general trees\nCH7-1 Create and implement binary search trees\nCH7-2 Understand the operation of the binary search tree ADT \t \n11\t\n2025/04/27─2025/05/03\n\tCH7-3 Write application programs using the binary search tree ADT\nCH7-4 Design and implement a list using a BST\nCH7-5 Design and implement threaded trees\nCh8-1 Explain the differences between a BST and an AVL tree \t \n12\t\n2025/05/04─2025/05/10\n\tCh8-2 Insert, delete, and process nodes in an AVL tree\nCh8-3 Understand the operation of the AVL tree ADT\nCh8-4 Write application programs using an AVL tree\n \t \n13\t\n2025/05/11─2025/05/17\n\tCh9-1 Define and implement heap structures\nCh9-2 Understand the operation and use of the heap ADT\nCh9-3 Design and implement selection applications using a heap\nCh9-4 Design and implement priority queues using a heap \t \n14\t\n2025/05/18─2025/05/24\n\tCh10-1 Define and discuss multiway tree structures\nCh10-2 Understand the operation and use of the B-tree ADT\nCh10-3 Discuss the use and implementation of simplified B-trees\nCh10-4 Compare and contrast B-trees, B*trees, and T+trees \t \n15\t\n2025/05/25─2025/05/31\n\tCh10-5 Discuss the design and use a lexical search trees (Tries)\nCh11-1 Understand and use basic graph terminology and concepts\nCh11-2 Define and discuss basic graph and network structures\nCh11-3 Design and implement graph and network applications \t \n16\t\n2025/06/01─2025/06/07\n\tFinal Exam\n \t \n17\t\n2025/06/08─2025/06/14\n\tOnline Self-Directed Learning \t線上自主學習 \n18\t\n2025/06/15─2025/06/21\n\tOnline Self-Directed Learning \t線上自主學習 \n\n\n6.成績評定及課堂要求\n30% 期中考 30% 期末考 40% 平時(上課,作業, 小考) \n請勿吵鬧 \n \n\n\n8.永續發展目標(SDGs)：\n\n\n9.大學社會責任(USR)關聯性："
+}

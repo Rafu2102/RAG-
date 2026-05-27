@@ -1,0 +1,143 @@
+{
+  "_description": "土木與工程管理學系學士班畢業學分規則 — 112學年度入學新生適用",
+  "_source": "土木與工程管理學系學士班課程規劃表112.3.8_page-0004.jpg",
+  "_last_updated": "2026-05-26",
+  "department": "土木與工程管理學系",
+  "applicable_from": "112",
+  "total_required": 131,
+  "categories": {
+    "共同必修": {
+      "required_credits": 8,
+      "courses": [
+        { "name": "國文(一)", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "英文(一)", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "服務教育", "credits": 0, "year": 1, "semester": 1 },
+        { "name": "國文(二)", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "英文(二)", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "服務教育", "credits": 0, "year": 1, "semester": 2 }
+      ]
+    },
+    "通識": {
+      "required_credits": 16,
+      "note": "依本校「學生修習通識教育課程辦法」規定"
+    },
+    "體育": {
+      "required_credits": 0,
+      "note": "依本校「體育課程實施辦法」規定"
+    },
+    "院必修": {
+      "required_credits": 6,
+      "courses": [
+        { "name": "微積分(一)", "credits": 3, "year": 1, "semester": 1 },
+        { "name": "計算機概論", "credits": 3, "year": 1, "semester": 2 }
+      ]
+    },
+    "系必修": {
+      "required_credits": 65,
+      "courses": [
+        { "name": "測量學", "credits": 3, "year": 1, "semester": 1 },
+        { "name": "測量實習", "credits": 1, "year": 1, "semester": 1 },
+        { "name": "工程材料", "credits": 3, "year": 1, "semester": 1 },
+        { "name": "普通物理學", "credits": 3, "year": 1, "semester": 1 },
+        { "name": "工程圖學(一)", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "微積分(二)", "credits": 3, "year": 1, "semester": 2 },
+        { "name": "工程力學", "credits": 4, "year": 1, "semester": 2 },
+        { "name": "工程數學(一)", "credits": 3, "year": 2, "semester": 1 },
+        { "name": "混凝土試驗", "credits": 1, "year": 2, "semester": 1 },
+        { "name": "工程地質學", "credits": 3, "year": 2, "semester": 1 },
+        { "name": "材料力學", "credits": 4, "year": 2, "semester": 1 },
+        { "name": "結構學(一)", "credits": 3, "year": 2, "semester": 2 },
+        { "name": "土壤力學", "credits": 3, "year": 2, "semester": 2 },
+        { "name": "土壤力學試驗", "credits": 1, "year": 2, "semester": 2 },
+        { "name": "流體力學", "credits": 3, "year": 2, "semester": 2 },
+        { "name": "營建管理", "credits": 3, "year": 3, "semester": 1 },
+        { "name": "鋼筋混凝土(一)", "credits": 3, "year": 3, "semester": 1 },
+        { "name": "基礎工程", "credits": 3, "year": 3, "semester": 1 },
+        { "name": "鋼筋混凝土(二)", "credits": 3, "year": 3, "semester": 2 },
+        { "name": "契約與規範", "credits": 3, "year": 3, "semester": 2 },
+        { "name": "工程估價與實習", "credits": 3, "year": 3, "semester": 2 },
+        { "name": "施工計劃與品質管理", "credits": 4, "year": 4, "semester": 1 },
+        { "name": "頂石課程(一)", "credits": 3, "year": 4, "semester": 1 }
+      ]
+    },
+    "專業選修": {
+      "required_credits": 36,
+      "max_from_other_dept": 4,
+      "note": "包括4學分可選修非本系所開設之專業課程",
+      "courses": [
+        { "name": "土木工程概論", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "島嶼學", "credits": 3, "year": 1, "semester": 1 },
+        { "name": "工程測量", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "專案管理概論", "credits": 3, "year": 2, "semester": 1 },
+        { "name": "地理資訊系統概論", "credits": 3, "year": 2, "semester": 1 },
+        { "name": "建築系統概論", "credits": 3, "year": 2, "semester": 1 },
+        { "name": "運輸工程", "credits": 3, "year": 2, "semester": 1 },
+        { "name": "程式設計", "credits": 3, "year": 2, "semester": 1 },
+        { "name": "全球衛星定位系統", "credits": 3, "year": 2, "semester": 1 },
+        { "name": "橋梁工程", "credits": 3, "year": 2, "semester": 1 },
+        { "name": "鋼結構設計", "credits": 3, "year": 2, "semester": 2 },
+        { "name": "工程倫理", "credits": 2, "year": 2, "semester": 2 },
+        { "name": "工程經濟", "credits": 3, "year": 2, "semester": 2 },
+        { "name": "工程數學(二)", "credits": 3, "year": 2, "semester": 2 },
+        { "name": "施工法(一)", "credits": 3, "year": 2, "semester": 2 },
+        { "name": "建築防火", "credits": 3, "year": 2, "semester": 2 },
+        { "name": "建築資訊模型", "credits": 3, "year": 2, "semester": 2 },
+        { "name": "景觀生態學", "credits": 3, "year": 3, "semester": 1 },
+        { "name": "結構學(二)", "credits": 3, "year": 3, "semester": 1 },
+        { "name": "建築資訊模型專案", "credits": 3, "year": 3, "semester": 1 },
+        { "name": "工程圖學(二)", "credits": 2, "year": 3, "semester": 1 },
+        { "name": "基礎施工", "credits": 3, "year": 3, "semester": 1 },
+        { "name": "營建工程設計實務", "credits": 3, "year": 3, "semester": 1 },
+        { "name": "中等土壤力學", "credits": 3, "year": 3, "semester": 1 },
+        { "name": "施工法(二)", "credits": 3, "year": 3, "semester": 1 },
+        { "name": "坡地開發工程", "credits": 3, "year": 3, "semester": 2 },
+        { "name": "道路生態學", "credits": 3, "year": 3, "semester": 2 },
+        { "name": "防災概論", "credits": 3, "year": 3, "semester": 2 },
+        { "name": "結構矩陣分析", "credits": 3, "year": 3, "semester": 2 },
+        { "name": "監工實務", "credits": 3, "year": 3, "semester": 2 },
+        { "name": "土木工程設計實務", "credits": 3, "year": 3, "semester": 2 },
+        { "name": "智慧型運輸系統", "credits": 3, "year": 3, "semester": 2 },
+        { "name": "測量平差法", "credits": 3, "year": 3, "semester": 2 },
+        { "name": "房屋結構設計", "credits": 3, "year": 4, "semester": 1 },
+        { "name": "大地工程數值分析", "credits": 3, "year": 4, "semester": 1 },
+        { "name": "生態工程", "credits": 3, "year": 4, "semester": 1 },
+        { "name": "專題討論(一)", "credits": 1, "year": 4, "semester": 1 },
+        { "name": "深開挖施工", "credits": 3, "year": 4, "semester": 1 },
+        { "name": "預力混凝土", "credits": 3, "year": 4, "semester": 1 },
+        { "name": "水文學", "credits": 3, "year": 4, "semester": 1 },
+        { "name": "下水道管線工程", "credits": 3, "year": 4, "semester": 1 },
+        { "name": "計算機在土木工程之應用", "credits": 3, "year": 4, "semester": 1 },
+        { "name": "價值管理", "credits": 3, "year": 4, "semester": 1 },
+        { "name": "人工智慧在土木工程的應用(一)", "credits": 3, "year": 4, "semester": 1 },
+        { "name": "結構動力學", "credits": 3, "year": 4, "semester": 1 },
+        { "name": "測量總實習", "credits": 1, "year": 4, "semester": 1 },
+        { "name": "營建專案探討", "credits": 3, "year": 4, "semester": 1 },
+        { "name": "消防工程設計", "credits": 3, "year": 4, "semester": 1 },
+        { "name": "頂石課程(二)", "credits": 3, "year": 4, "semester": 2 },
+        { "name": "專業實習", "credits": 3, "year": 4, "semester": 2 },
+        { "name": "岩石力學概論", "credits": 3, "year": 4, "semester": 2 },
+        { "name": "水利工程", "credits": 3, "year": 4, "semester": 2 },
+        { "name": "勞工安全衛生", "credits": 3, "year": 4, "semester": 2 },
+        { "name": "專題討論(二)", "credits": 1, "year": 4, "semester": 2 },
+        { "name": "軌道工程", "credits": 3, "year": 4, "semester": 2 },
+        { "name": "基礎設計", "credits": 3, "year": 4, "semester": 2 },
+        { "name": "土木工程實務", "credits": 3, "year": 4, "semester": 2 },
+        { "name": "高等鋼筋混凝土", "credits": 3, "year": 4, "semester": 2 },
+        { "name": "航空攝影測量", "credits": 3, "year": 4, "semester": 2 },
+        { "name": "大地測量學", "credits": 3, "year": 4, "semester": 2 },
+        { "name": "風險管理", "credits": 3, "year": 4, "semester": 2 },
+        { "name": "人工智慧在土木工程的應用(二)", "credits": 3, "year": 4, "semester": 2 },
+        { "name": "工程統計", "credits": 3, "year": 4, "semester": 2 },
+        { "name": "遙感探測導論", "credits": 3, "year": 4, "semester": 2 },
+        { "name": "系統創新導論", "credits": 3, "year": 4, "semester": 2 },
+        { "name": "空間資訊導論", "credits": 3, "year": 4, "semester": 2 }
+      ]
+    }
+  },
+  "graduation_conditions": [
+    "本系所有2學分3鐘點課程，皆為講授2鐘點2學分、實作1鐘點0學分。",
+    "學生必須修畢共同必修課程8學分、通識課程16學分、院專業必修6學分、系專業必修65學分、專業選修至少36學分(包括4學分可選修非本系所開設之專業課程)，始得畢業，畢業學分最低為131學分。",
+    "本校日間部學生需通過「學生英文及資訊能力畢業門檻及輔導辦法」相關規定始可畢業。",
+    "四年級下學期「頂石課程(二)」與「專業實習」，二門課需擇一門修課。"
+  ]
+}

@@ -19,7 +19,8 @@ from bot import client, AUDIT_CHANNEL_ID
 logger = logging.getLogger("discord_bot")
 
 # Bot 擁有者 ID — 此 ID 的問答不會被發送到監控頻道（避免自己測試被洗版）
-OWNER_DISCORD_ID = os.getenv("OWNER_DISCORD_ID", "660039552836042752")
+_raw_owners = os.getenv("OWNER_DISCORD_ID", "660039552836042752")
+OWNER_DISCORD_IDS = {uid.strip() for uid in _raw_owners.split(",") if uid.strip()}
 
 # Debug Log 專用頻道 ID（完整 pipeline log）
 DEBUG_LOG_CHANNEL_ID = os.getenv("DEBUG_LOG_CHANNEL_ID", "1480089837079101553")
@@ -50,7 +51,7 @@ async def _get_audit_channel() -> discord.TextChannel | None:
             ch = client.get_channel(int(AUDIT_CHANNEL_ID))
             if ch and isinstance(ch, discord.TextChannel):
                 _audit_channel_cache = ch
-                logger.info(f"📋 審計頻道已綁定 (ID 模式): #{ch.name} (ID: {ch.id})")
+                logger.debug(f"📋 審計頻道已綁定 (ID 模式): #{ch.name} (ID: {ch.id})")
                 return ch
         except (ValueError, TypeError):
             pass
@@ -62,8 +63,8 @@ async def _get_audit_channel() -> discord.TextChannel | None:
             for keyword in _CHANNEL_NAME_KEYWORDS:
                 if keyword.lower() in ch_name:
                     _audit_channel_cache = channel
-                    logger.info(f"📋 審計頻道已綁定 (名稱匹配): #{channel.name} (ID: {channel.id})")
-                    logger.info(f"   💡 建議在 .env 加上 AUDIT_CHANNEL_ID={channel.id} 以確保穩定偵測")
+                    logger.debug(f"📋 審計頻道已綁定 (名稱匹配): #{channel.name} (ID: {channel.id})")
+                    logger.debug(f"   💡 建議在 .env 加上 AUDIT_CHANNEL_ID={channel.id} 以確保穩定偵測")
                     return channel
     
     # 方法 3：找不到就列出所有可用頻道供管理員參考
@@ -71,7 +72,7 @@ async def _get_audit_channel() -> discord.TextChannel | None:
     for guild in client.guilds:
         all_channels.extend([f"#{c.name} (ID: {c.id})" for c in guild.text_channels[:20]])
     
-    logger.warning(
+    logger.debug(
         f"📋 找不到監控頻道！請在 .env 加入 AUDIT_CHANNEL_ID=<頻道ID>\n"
         f"   可用的文字頻道：{', '.join(all_channels[:10])}"
     )
@@ -89,7 +90,7 @@ async def _get_debug_channel() -> discord.TextChannel | None:
             ch = client.get_channel(int(DEBUG_LOG_CHANNEL_ID))
             if ch and isinstance(ch, discord.TextChannel):
                 _debug_channel_cache = ch
-                logger.info(f"📋 Debug Log 頻道已綁定: #{ch.name} (ID: {ch.id})")
+                logger.debug(f"📋 Debug Log 頻道已綁定: #{ch.name} (ID: {ch.id})")
                 return ch
         except (ValueError, TypeError):
             pass
@@ -116,11 +117,13 @@ async def send_audit_dm(
     user_profile: dict = None,
 ):
     """將學生的問答紀錄發送到監控頻道。Bot 擁有者的問答會被跳過。"""
-    # 跳過 Bot 擁有者（避免自己測試洗版）
-    if str(student.id) == OWNER_DISCORD_ID:
-        logger.info(f"📋 跳過審計（Bot 擁有者）：{student.display_name}")
-        return
+    # ⚠️ 暫時關閉問答監控功能，若需重新啟用，請將下方 return 這行註解或刪除
+    # return
     
+    # 檢查提問者是否為 Bot 擁有者之一 (避免自己測試洗版)
+    if str(student.id) in OWNER_DISCORD_IDS:
+        return
+        
     audit_channel = await _get_audit_channel()
     if not audit_channel:
         return
@@ -148,9 +151,9 @@ async def send_audit_dm(
 
     try:
         await audit_channel.send(embed=audit_embed)
-        logger.info(f"📋 審計 Log 已發送到 #{audit_channel.name} | 學生={student.display_name} 來源={source}")
+        logger.debug(f"📋 審計 Log 已發送到 #{audit_channel.name} | 學生={student.display_name} 來源={source}")
     except Exception as e:
-        logger.error(f"📋 審計 Log 發送失敗: {e}")
+        logger.debug(f"📋 審計 Log 發送失敗: {e}")
 
 
 # =========================================================================
@@ -168,14 +171,10 @@ async def send_audit_log(
     發送一般審計紀錄到監控頻道。
     
     用途：廣播完成、管理員操作、群組變更、系統事件等。
-    
-    Args:
-        title: 審計 Embed 標題
-        description: 說明文字
-        color: Embed 顏色（預設為 blurple）
-        fields: [(name, value, inline), ...] 額外欄位
-        admin_user: 操作的管理員（可選，用於顯示頭貼）
     """
+    # ⚠️ 暫時關閉事件監控功能，若需重新啟用，請將下方 return 這行註解或刪除
+    # return
+
     audit_channel = await _get_audit_channel()
     if not audit_channel:
         return
@@ -196,7 +195,7 @@ async def send_audit_log(
     try:
         await audit_channel.send(embed=embed)
     except Exception as e:
-        logger.error(f"📋 審計 Log 發送失敗: {e}")
+        logger.debug(f"📋 審計 Log 發送失敗: {e}")
 
 
 # =========================================================================
@@ -215,6 +214,13 @@ async def send_debug_log(
     將完整的 pipeline log 發送到 Debug 頻道，供開發者偵錯。
     包含：Router 結果、搜尋關鍵字、檢索分數、LLM 回答等完整流程。
     """
+    # ⚠️ 暫時關閉偵錯監控功能，若需重新啟用，請將下方 return 這行註解或刪除
+    # return
+
+    # 檢查提問者是否為 Bot 擁有者之一 (避免自己測試洗版)
+    if str(student.id) in OWNER_DISCORD_IDS:
+        return
+
     debug_channel = await _get_debug_channel()
     if not debug_channel:
         return
@@ -242,7 +248,7 @@ async def send_debug_log(
 
     try:
         await debug_channel.send(embed=embed)
-        logger.info(f"🔧 Debug Log 已發送到 #{debug_channel.name}")
+        logger.debug(f"🔧 Debug Log 已發送到 #{debug_channel.name}")
     except discord.HTTPException as e:
         # Embed 太長時改用純文字發送
         if e.status == 400:
@@ -254,10 +260,10 @@ async def send_debug_log(
                     f"```\n{pipeline_log[:1800]}\n```"
                 )
                 await debug_channel.send(text_msg)
-                logger.info(f"🔧 Debug Log (純文字模式) 已發送到 #{debug_channel.name}")
+                logger.debug(f"🔧 Debug Log (純文字模式) 已發送到 #{debug_channel.name}")
             except Exception as e2:
-                logger.error(f"🔧 Debug Log 發送失敗 (fallback): {e2}")
+                logger.debug(f"🔧 Debug Log 發送失敗 (fallback): {e2}")
         else:
-            logger.error(f"🔧 Debug Log 發送失敗: {e}")
+            logger.debug(f"🔧 Debug Log 發送失敗: {e}")
     except Exception as e:
-        logger.error(f"🔧 Debug Log 發送失敗: {e}")
+        logger.debug(f"🔧 Debug Log 發送失敗: {e}")

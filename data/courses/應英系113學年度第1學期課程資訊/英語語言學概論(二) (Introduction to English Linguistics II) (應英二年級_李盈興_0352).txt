@@ -1,0 +1,116 @@
+國立金門大學113學年度第1學期應英系課程
+學年度：113學年度
+學期：第1學期
+課程名稱：英語語言學概論(二) (Introduction to English Linguistics II)
+部別：日間部學士班
+開課班級：應英二年級
+學分數：2.0學分
+授課時數：2.0小時
+授課教師：李盈興
+必選修：必修
+教室：426陳篤漢講堂
+修課上限人數：60人
+上課時間：每周星期四上午第3節~第4節
+
+課程教學目標：
+1. This course is designed for students who are no linguists yet, but who will need some familiarity with the fundamentals of linguistic knowledge in order to help them practice their profession in the future. This includes specialties in such fields as anthropology, composition, education, English as a second language (ESL), experimental phonetics, folklore, foreign languages, literature, psychology, speech-language pathology (語言病理學), reading, and technical and business communication. Since this is an introductory course, students are oriented to “do” linguistics or “analyze” languages with a focus on English data, supplemented with Mandarin data. Student will thus review what they have already known or acquire the new patterns of both languages from a linguistic perspective. The course is organized as follows. The first half of the course covers the theoretic areas of pragmatics, semantics, syntax, morphology, and phonology, respectively. Once students have a basic understanding of these areas, they will have little trouble mastering the applied areas that overlap with their own field of specialization. The second half convers the applied areas that are the most important to the greatest number of neighboring fields: language processing, language variation, language change, first-language acquisition, second-language acquisition, written language, and the neurology of language.
+
+課程教學綱要：
+1. The content of this semester contains:
+- Phonetics: the physical dimensions of speech sounds
+- Phonology: the psychological system of speech sounds
+- Language acquisition: how human beings acquire their mother tongues
+- Psycholinguistics: how language is mentally represented and processed
+- Language variation: how language differs across social domains
+- Language change: how language changes over time
+- Writing systems: how human beings use written forms to express language
+
+教科書資料：
+1. 書名：Language Files: Materials for an Introduction to Language and Linguistics (12th Edition).
+2. 出版日期：2016年
+3. 作者：The Department of Linguistics at the Ohio State University.
+4. 出版社：Ohio State University Press.
+5. 版本：12
+
+參考書資料：
+1-1. 書名：Psychology of Language (5th Edition).
+1-2. 出版日期：未標註
+1-3. 作者：Carroll, David. W.
+1-4. 出版社：Cengage Learning.
+1-5. 版本：未標註
+
+2-1. 書名：A Course in Linguistics.
+2-2. 出版日期：未標註
+2-3. 作者：Chung, Raung.-Fu.
+2-4. 出版社：Taipei: Cosmos Culture.
+2-5. 版本：未標註
+
+3-1. 書名：An Introduction to Language (11th Edition).
+3-2. 出版日期：未標註
+3-3. 作者：Fromkin, V., Rodman, R., & Hyams, N.
+3-4. 出版社：Wadsworth Cengage Learning.
+3-5. 版本：未標註
+
+4-1. 書名：English for Language and Linguistics in Higher Education studies.
+4-2. 出版日期：未標註
+4-3. 作者：Maning, A.
+4-4. 出版社：Garnet Education.
+4-5. 版本：未標註
+
+5-1. 書名：Contemporary Linguistics: An Introduction (7th Edition).
+5-2. 出版日期：未標註
+5-3. 作者：O'Grady, W. , Archibald, J. , Aronoff, M., & Rees-Miller, J.
+5-4. 出版社：Bedford/St. Martin's.
+5-5. 版本：未標註
+
+6-1. 書名：Linguistics for Non-Linguists: A Primer with Exercises (5th Edition).
+6-2. 出版日期：未標註
+6-3. 作者：Parker, F. & Riley, K.
+6-4. 出版社：Pearson New International Edition.
+6-5. 版本：未標註
+
+7-1. 書名：The Study of Language (5th Edition).
+7-2. 出版日期：未標註
+7-3. 作者：Yule, G.
+7-4. 出版社：Cambridge University Press.
+7-5. 版本：未標註
+
+8-1. 書名：英語語言學概論 [Introduction to English Linguistics]。
+8-2. 出版日期：未標註
+8-3. 作者：余光雄
+8-4. 出版社：台北：書林。
+8-5. 版本：未標註
+
+9-1. 書名：當代語言學概論 [Introduction to Modern Linguistics]。
+9-2. 出版日期：未標註
+9-3. 作者：鍾榮富
+9-4. 出版社：台北：五南文化。
+9-5. 版本：未標註
+
+※請遵守智慧財產權觀念，依著作權法規定，教科書及教材不得非法影印與使用盜版軟體。
+
+教學進度表（2024年秋季學期）：
+第1週課程 (2024/09/08─2024/09/14)：Phonetics
+第2週課程 (2024/09/15─2024/09/21)：Phonetics
+第3週課程 (2024/09/22─2024/09/28)：Phonetics
+第4週課程 (2024/09/29─2024/10/05)：Phonology
+第5週課程 (2024/10/06─2024/10/12)：Phonology
+第6週課程 (2024/10/13─2024/10/19)：[Review Test]
+第7週課程 (2024/10/20─2024/10/26)：Phonology
+第8週課程 (2024/10/27─2024/11/02)：[Midterm Exam]
+第9週課程 (2024/11/03─2024/11/09)：Language acquisition
+第10週課程 (2024/11/10─2024/11/16)：Language acquisition
+第11週課程 (2024/11/17─2024/11/23)：Language acquisition
+第12週課程 (2024/11/24─2024/11/30)：Language variation
+第13週課程 (2024/12/01─2024/12/07)：Language variation
+第14週課程 (2024/12/08─2024/12/14)：[Group Presentations]/[Review Test]
+第15週課程 (2024/12/15─2024/12/21)：Language variation
+第16週課程 (2024/12/22─2024/12/28)：[Final Exam]
+第17週課程 (2024/12/29─2025/01/04)：[Wrap-up]
+第18週課程 (2025/01/05─2025/01/11)：[Wrap-up]
+
+成績評定方式：
+1. Evaluations: (1) Midterm Exam 30%; (2) Final Exam 30%; (3) Reviews*2= 20%; (4) Presentation 10%; (5) Attendance 10%.
+
+課堂要求：
+Requirements: Students are required to prepare the weekly materials before they come to class. Students should participate in the midterm exam, final exam, group presentation, and two in-class quizzes. The teacher will check the attendance; those who are absent or come late will lose 1 score from the final grades for each time. Students should also show respect to others in the class by not talking aloud, not wandering from the seats, and not surfing the Internet on their smartphones. They should understand and be responsible for their grades.

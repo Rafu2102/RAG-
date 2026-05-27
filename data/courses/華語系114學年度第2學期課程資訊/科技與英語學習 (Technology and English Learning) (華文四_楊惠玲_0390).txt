@@ -1,0 +1,65 @@
+國立金門大學114學年度第2學期華語系課程
+學年度：114學年度
+學期：第2學期
+課程名稱：科技與英語學習 (Technology and English Learning)
+部別：日間部學士班
+開課班級：華文四
+學分數：2.0學分
+授課時數：2.0小時
+授課教師：楊惠玲
+必選修：選修
+教室：I103-1圖資電腦教室
+修課上限人數：60人
+上課時間：每周星期一下午第9節~晚上第10節
+
+課程教學目標：
+1. The arrangement of this course aims to enhance students' literacy and proficiency in foreign languages, helping them grasp the trends of future society through the latest technology. Thus, this course integrates modern technology and AI tools into the process of English language learning, focusing on enhancing students' linguistic proficiency and technical skills. Through a structured weekly curriculum, students will explore various AI applications and tools that support their language acquisition, creative expressions, and effective communications.
+
+課程教學綱要：
+1. Students will progressively work with practical tools like text and speech generators, image-to-text software, and AI music generators. These technologies will enable students to improve their English language abilities while fostering creativity and critical thinking.
+2. Hands-on activities such as creating lesson plans, using language assessment tools, and participating in group presentations will prepare students for real-world applications of their skills.
+3. The course also includes interactive outings that blend social engagement with creative writing, allowing students to collaborate and enhance their communication and teamwork skills. By the end of the course, students will have developed a strong foundation in both technology use and English communication, equipped with the knowledge and tools to apply their learning beyond the classroom.
+
+教科書資料：
+1. 書名：teacher tailor-made materials
+2. 出版日期：未標註
+3. 作者：未標註
+4. 出版社：未標註
+5. 版本：未標註
+
+參考書資料：
+1. 書名：Park, J.
+2. 出版日期：未標註
+3. 作者：ChatGPT光速英語學習法：下達精確指令，提升學習效率 (韓蔚笙譯)
+4. 出版社：EZ叢書館
+5. 版本：未標註
+
+※請遵守智慧財產權觀念，依著作權法規定，教科書及教材不得非法影印與使用盜版軟體。
+
+教學進度表（2026年春季學期）：
+第1週課程 (2026/02/22─2026/02/28)：AI in language learning
+第2週課程 (2026/03/01─2026/03/07)：Ethical challenges in AI
+第3週課程 (2026/03/08─2026/03/14)：text to text
+第4週課程 (2026/03/15─2026/03/21)：Recommended apps (quiz 1)
+第5週課程 (2026/03/22─2026/03/28)：assessment
+第6週課程 (2026/03/29─2026/04/04)：guided learning
+第7週課程 (2026/04/05─2026/04/11)：(Spring Break)
+第8週課程 (2026/04/12─2026/04/18)：Text to speech/ Speech to text
+第9週課程 (2026/04/19─2026/04/25)：assessment (quiz 2)
+第10週課程 (2026/04/26─2026/05/02)：Outing (prep for final presentations)
+第11週課程 (2026/05/03─2026/05/09)：Text to image/ Image to text
+第12週課程 (2026/05/10─2026/05/16)：Recommended podcasts
+第13週課程 (2026/05/17─2026/05/23)：assessment (quiz 3)
+第14週課程 (2026/05/24─2026/05/30)：final project (student presentations)
+第15週課程 (2026/05/31─2026/06/06)：final project (student presentations)
+第16週課程 (2026/06/07─2026/06/13)：final reflection
+第17週課程 (2026/06/14─2026/06/20)：Flexible Teaching (Teacher-student conferencing between wk12 and wk13)
+第18週課程 (2026/06/21─2026/06/27)：Flexible Teaching (Teacher-student conferencing between wk14 and wk15)
+
+成績評定方式：
+1. participation 40%
+2. quizzes 30%
+3. final project 30%
+
+課堂要求：
+無詳細課堂要求說明

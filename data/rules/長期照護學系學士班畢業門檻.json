@@ -1,0 +1,144 @@
+{
+  "_description": "長期照護學系學士班畢業學分規則 — 114學年度入學新生適用",
+  "_source": "114學年度入學課程規劃表1140604_page-0001.jpg",
+  "_last_updated": "2026-05-26",
+  "department": "長期照護學系",
+  "applicable_from": "114",
+  "total_required": 128,
+  "categories": {
+    "共同必修": {
+      "required_credits": 8,
+      "courses": [
+        { "name": "國文(一)", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "英文(一)", "credits": 2, "year": 1, "semester": 1 },
+        { "name": "國文(二)", "credits": 2, "year": 1, "semester": 2 },
+        { "name": "英文(二)", "credits": 2, "year": 1, "semester": 2 }
+      ]
+    },
+    "通識": {
+      "required_credits": 16,
+      "note": "依本校「學生修習通識教育課程辦法」規定"
+    },
+    "體育": {
+      "required_credits": 0,
+      "note": "依本校「體育課程實施辦法」規定"
+    },
+    "院必修": {
+      "required_credits": 3,
+      "courses": [
+        { "name": "心理學", "credits": 3, "year": 1, "semester": 1 }
+      ]
+    },
+    "系必修": {
+      "required_credits": 60,
+      "tracks": {
+        "長照經營管理模組": {
+          "courses": [
+            { "name": "管理學", "credits": 3, "year": 1, "semester": 1 },
+            { "name": "長期照護管理概論", "credits": 3, "year": 1, "semester": 2 },
+            { "name": "專業英文", "credits": 2, "year": 2, "semester": 1 },
+            { "name": "長期照護行銷管理", "credits": 2, "year": 2, "semester": 2 },
+            { "name": "健康照護專案衛教", "credits": 2, "year": 2, "semester": 2 },
+            { "name": "長期照護品質管理", "credits": 2, "year": 3, "semester": 2 },
+            { "name": "高齡福祉科技", "credits": 2, "year": 4, "semester": 1 },
+            { "name": "長期照護專案管理暨實務討論", "credits": 2, "year": 4, "semester": 2 }
+          ]
+        },
+        "長照實務模組": {
+          "courses": [
+            { "name": "解剖生理學", "credits": 2, "year": 1, "semester": 2 },
+            { "name": "老人照顧技術與實作", "credits": 2, "year": 2, "semester": 1 },
+            { "name": "老人學", "credits": 2, "year": 2, "semester": 1 },
+            { "name": "專業實習(一)", "credits": 1, "year": 2, "semester": 2 },
+            { "name": "老人健康與保健", "credits": 2, "year": 2, "semester": 2 },
+            { "name": "居家照護實務", "credits": 2, "year": 3, "semester": 1 },
+            { "name": "社區長期照護", "credits": 2, "year": 3, "semester": 1 },
+            { "name": "研究方法", "credits": 3, "year": 3, "semester": 1 },
+            { "name": "實習指引(一)", "credits": 1, "year": 3, "semester": 1 },
+            { "name": "實習指引(二)", "credits": 1, "year": 3, "semester": 2 },
+            { "name": "資源連結與溝通協調", "credits": 2, "year": 4, "semester": 1 },
+            { "name": "臨終關懷", "credits": 2, "year": 4, "semester": 1 },
+            { "name": "專業實習(二)", "credits": 4, "year": 4, "semester": 1 },
+            { "name": "個案管理與照護計畫", "credits": 2, "year": 4, "semester": 2 }
+          ]
+        },
+        "健康促進與政策模組": {
+          "courses": [
+            { "name": "公共衛生概論", "credits": 2, "year": 1, "semester": 1 },
+            { "name": "健康照護體系", "credits": 2, "year": 1, "semester": 2 },
+            { "name": "生物統計學(一)", "credits": 2, "year": 2, "semester": 1 },
+            { "name": "健康保險概論", "credits": 2, "year": 2, "semester": 1 },
+            { "name": "社區衛生保健", "credits": 2, "year": 2, "semester": 2 },
+            { "name": "衛生政策與法規", "credits": 2, "year": 3, "semester": 1 },
+            { "name": "醫學倫理", "credits": 2, "year": 3, "semester": 1 }
+          ]
+        }
+      }
+    },
+    "專業選修": {
+      "required_credits": 41,
+      "max_from_other_dept": 8,
+      "note": "包括8學分可選修非本學系所開設之課",
+      "tracks": {
+        "長照經營管理模組": {
+          "courses": [
+            { "name": "經濟學", "credits": 2, "year": 1, "semester": 1 },
+            { "name": "部門與健康事業溝通論", "credits": 2, "year": 1, "semester": 2 },
+            { "name": "(非)營利組織概論", "credits": 2, "year": 1, "semester": 2 },
+            { "name": "老人住宅概論", "credits": 2, "year": 2, "semester": 1 },
+            { "name": "健康資訊學概論", "credits": 2, "year": 2, "semester": 1 },
+            { "name": "長期照護基本商文用語", "credits": 2, "year": 2, "semester": 2 },
+            { "name": "長期照護機構專案管理", "credits": 2, "year": 3, "semester": 1 },
+            { "name": "長期照護財務管理", "credits": 2, "year": 3, "semester": 1 },
+            { "name": "長期照護人力資源管理", "credits": 2, "year": 3, "semester": 2 },
+            { "name": "長期照護專案規劃與策略管理", "credits": 2, "year": 3, "semester": 2 },
+            { "name": "長期照護文獻導讀", "credits": 2, "year": 3, "semester": 2 },
+            { "name": "長期照護專題製作", "credits": 2, "year": 3, "semester": 2 },
+            { "name": "問題分析與決策", "credits": 2, "year": 4, "semester": 1 },
+            { "name": "長期照護績效與評估", "credits": 2, "year": 4, "semester": 2 },
+            { "name": "專案團隊實務運作", "credits": 2, "year": 4, "semester": 2 },
+            { "name": "就業選習", "credits": 3, "year": 4, "semester": 2 }
+          ]
+        },
+        "長照實務模組": {
+          "courses": [
+            { "name": "照顧服務綜論", "credits": 2, "year": 1, "semester": 1 },
+            { "name": "生物健康產業概論", "credits": 2, "year": 1, "semester": 1 },
+            { "name": "老人營養學", "credits": 2, "year": 1, "semester": 2 },
+            { "name": "長照見習(一)", "credits": 1, "year": 1, "semester": 2 },
+            { "name": "身心障礙福利服務", "credits": 2, "year": 2, "semester": 1 },
+            { "name": "老人藥物學", "credits": 2, "year": 2, "semester": 1 },
+            { "name": "長照見習(二)", "credits": 1, "year": 2, "semester": 1 },
+            { "name": "老人周全健康評估", "credits": 2, "year": 2, "semester": 2 },
+            { "name": "進階照顧技術", "credits": 2, "year": 2, "semester": 2 },
+            { "name": "銀髮族與食品健康", "credits": 2, "year": 3, "semester": 1 },
+            { "name": "失智症照護", "credits": 2, "year": 3, "semester": 2 },
+            { "name": "活動方案設計與評估", "credits": 2, "year": 3, "semester": 2 },
+            { "name": "銀髮族與科技運用", "credits": 2, "year": 3, "semester": 2 },
+            { "name": "專業團隊實務運作(督導)", "credits": 2, "year": 4, "semester": 1 },
+            { "name": "全人健康照護", "credits": 2, "year": 4, "semester": 1 }
+          ]
+        },
+        "健康促進與政策模組": {
+          "courses": [
+            { "name": "醫藥社會學", "credits": 2, "year": 1, "semester": 2 },
+            { "name": "環境衛生學", "credits": 2, "year": 1, "semester": 2 },
+            { "name": "人口與老化", "credits": 2, "year": 1, "semester": 2 },
+            { "name": "生物統計學(二)", "credits": 3, "year": 2, "semester": 1 },
+            { "name": "預防醫學", "credits": 2, "year": 2, "semester": 1 },
+            { "name": "職業安全衛生管理", "credits": 2, "year": 3, "semester": 1 },
+            { "name": "健康經濟學", "credits": 2, "year": 3, "semester": 1 },
+            { "name": "流行病學", "credits": 2, "year": 3, "semester": 2 },
+            { "name": "健康促進與衛生教育", "credits": 2, "year": 4, "semester": 1 },
+            { "name": "衛生行政", "credits": 2, "year": 4, "semester": 1 }
+          ]
+        }
+      }
+    }
+  },
+  "graduation_conditions": [
+    "修滿至少128學分（含共同必修8學分、通識16學分、院必修3學分、系必修60學分、專業選修41學分，包括8學分可選修非本學系所開設之專業課程）",
+    "須通過「本校學生英文及資訊能力畢業門檻及輔導辦法」相關規定",
+    "本系專業實習課程，包含二年級之專業實習(一) (1學分)及四年級上學期專業實習(二) (4學分，暑期實習320小時)，合計5學分；專業實習課程先修科目相關規定，請詳見國立金門大學長期照護學系專業實習要點。"
+  ]
+}

@@ -54,7 +54,7 @@ def _ensure_loaded():
 # ---------------------------------------------------------------------------
 
 @mcp.tool()
-def query_campus_info(question: str, department: str = "", grade: str = "") -> str:
+async def query_campus_info(question: str, department: str = "", grade: str = "") -> str:
     """
     透過 NQU 校園助理的 RAG 系統查詢總合校園資訊。
     支援查詢：課程大綱、成績評定方式、上課時間、系所規定、教授資訊、行事曆等。
@@ -83,7 +83,7 @@ def query_campus_info(question: str, department: str = "", grade: str = "") -> s
         
     try:
         # 呼叫底層代理執行 (Query Router -> Hybrid Search -> Reranker -> Gemini LLM Response)
-        answer = rag_pipeline(
+        answer = await rag_pipeline(
             question=question,
             nodes=ServerState.nodes,
             faiss_index=ServerState.faiss_idx,

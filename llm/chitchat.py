@@ -8,11 +8,12 @@ llm/chitchat.py — 非 RAG 生成函式集合
   - generate_web_search_answer()     — 聯網搜尋
 """
 
+import time
 import logging
 from datetime import datetime
 
 import config
-from llm.gemini_client import call_gemini, call_gemini_with_fallback, GeminiAPIError
+from llm.gemini_client import a_call_gemini, call_gemini, call_gemini_with_fallback, GeminiAPIError
 
 logger = logging.getLogger(__name__)
 
@@ -21,8 +22,8 @@ logger = logging.getLogger(__name__)
 # 💬 閒聊回應
 # ═══════════════════════════════════════════════════════════════
 
-def generate_chitchat_answer(question: str, memory, user_profile: dict | None = None):
-    """處理日常閒聊，完全跳過 RAG 檢索。
+async def generate_chitchat_answer(question: str, memory, user_profile: dict | None = None):
+    """處理日常閒聊，完全跳過 RAG 檢送。
 
     Args:
         question: 使用者問題。
@@ -54,8 +55,9 @@ def generate_chitchat_answer(question: str, memory, user_profile: dict | None = 
 2. 適當使用黑客或學生的 Emoji（例如 💻、🔥、☕、🐛、Bug）。
 3. 回應完之後，熱情地引導使用者詢問課程或教授相關的問題（例如：「遇到修課 Bug 了嗎？有什麼我可以幫你 query 的課程資訊嗎？」）。
 4. 絕對不可以輸出「助理：」或「對話歷史」等標籤。
-5. 【禁止捏造】：閒聊模式下你手上沒有任何課程/教授/校園資料，絕對不可以編造任何校園相關事實。如果使用者在閒聊中夾帶課程問題（例如「順便問一下微積分幾學分」），請引導他用正式提問讓系統幫他查詢。
+5. 【禁止捏造】：閒聊模式下你手上沒有任何課程/教授/校園資料，絕對不可以編造 any 校園相關事實。如果使用者在閒聊中夾帶課程問題（例如「順便問一下微積分幾學分」），請引導他用正式提問讓系統幫他查詢。
 6. 【語氣一致性】：保持金門在地大學生的輕鬆感，可以偶爾提到金門的風獅爺、高粱、或離島生活的梗。
+7. 【絕對禁止使用 LaTeX】：你的回答會在 Discord/Telegram 中顯示，絕對禁止使用任何 LaTeX 數學公式格式（如 $6% \\sim 8%$）來包裹數字或範圍，一律使用普通純文字（如 6% ~ 8%）。
 
 ## 對話歷史：
 {memory.get_history()}
@@ -64,15 +66,18 @@ def generate_chitchat_answer(question: str, memory, user_profile: dict | None = 
 {question}
 """
 
-    logger.info("🤖 呼叫 Gemini Flash Lite 進行閒聊回應...")
+    logger.info("🤖 呼叫 Gemini 3.5 Flash 進行閒聊回應...")
+    start_t = time.time()
 
     try:
-        answer_text = call_gemini(
+        answer_text = await a_call_gemini(
             chitchat_prompt,
             model="fast",
             thinking="low",
             max_tokens=config.GEMINI_SHORT_MAX_TOKENS,
         )
+        elapsed = time.time() - start_t
+        logger.info(f"✅ 閒聊回應生成成功 ({len(answer_text)} 字) - 耗時 {elapsed:.2f}s")
     except GeminiAPIError as e:
         logger.error(f"❌ 閒聊回應生成失敗: {e}")
         answer_text = "哈囉！我現在 CPU 有點過載，有什麼我可以幫你查詢的課程或教授資訊嗎？💻"
@@ -84,7 +89,7 @@ def generate_chitchat_answer(question: str, memory, user_profile: dict | None = 
 # 📋 個人資料包裝
 # ═══════════════════════════════════════════════════════════════
 
-def generate_personal_info_answer(question: str, raw_data: str, info_type: str) -> str:
+async def generate_personal_info_answer(question: str, raw_data: str, info_type: str) -> str:
     """將使用者的個人課表或成績單，以學長姐的口吻包裝成友善對話。
 
     Args:
@@ -125,9 +130,10 @@ def generate_personal_info_answer(question: str, raw_data: str, info_type: str) 
    - 計算平均分數時必須精確，不可四捨五入到整數
    - 低於 60 分的科目要特別標注提醒
    - 如果使用者問「我被當幾科」，請精確列出所有不及格科目
+   - 【絕對禁止使用 LaTeX】：絕對禁止使用任何 LaTeX 數學公式格式（如 $6% \\sim 8%$）來包裹數字或範圍，一律使用普通純文字。
 """
     try:
-        return call_gemini(prompt, thinking="medium")
+        return await a_call_gemini(prompt, thinking="medium")
     except GeminiAPIError as e:
         logger.error(f"❌ Personal LLM Wrapper 發生錯誤: {e}")
         return raw_data  # 退回原始字串
@@ -137,7 +143,7 @@ def generate_personal_info_answer(question: str, raw_data: str, info_type: str) 
 # 🌐 聯網搜尋
 # ═══════════════════════════════════════════════════════════════
 
-def generate_web_search_answer(question: str, memory):
+async def generate_web_search_answer(question: str, memory):
     """處理校外知識與即時資訊，啟動 Google Search Grounding 聯網搜尋。
 
     Args:
@@ -149,11 +155,14 @@ def generate_web_search_answer(question: str, memory):
     """
     from llm.llm_answer import AnswerResult  # 避免循環匯入
 
-    logger.info("🌐 啟動 Google Search Grounding 聯網搜尋 (Gemini 3.1 Pro)...")
+    logger.info("🌐 啟動 Google Search Grounding 聯網搜尋 (Gemini 3.5 Flash)...")
 
     web_prompt = f"""你是博學多聞的「國立金門大學（NQU）資工系全能學長/學姐」。
 使用者問了一個超出校園範圍的一般性、即時性或科技知識問題（例如新聞、美食、論文或專有名詞）。
 請使用你的 Google 搜尋能力與深度思考找出前沿資訊，並綜合彙整後，用親切、專業、充滿熱情的學長姐語氣回答。
+
+【重要排版規範】
+- **絕對禁止使用任何 LaTeX 數學公式格式**（例如使用 $ 包裹數字、百分比或範圍，如 $6% \\sim 8%$ 或是 \\text{...} 語法）！你的回答會在不支援數學公式渲染的 Discord/Telegram 中顯示。所有數值、百分比與範圍一律使用普通純文字（如 6% ~ 8% 或 4.5 到 5.5 km/h）表示。
 
 【對話歷史】：
 {memory.get_formatted_history()}
@@ -163,7 +172,7 @@ def generate_web_search_answer(question: str, memory):
 """
 
     try:
-        answer_text = call_gemini(
+        answer_text = await a_call_gemini(
             web_prompt,
             thinking="high",
             tools=[{"google_search": {}}],

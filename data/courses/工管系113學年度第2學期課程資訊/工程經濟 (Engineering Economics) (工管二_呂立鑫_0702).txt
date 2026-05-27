@@ -1,0 +1,70 @@
+國立金門大學113學年度第2學期工管系課程
+學年度：113學年度
+學期：第2學期
+課程名稱：工程經濟 (Engineering Economics)
+部別：日間部學士班
+開課班級：工管二
+學分數：3.0學分
+授課時數：3.0小時
+授課教師：呂立鑫
+必選修：必修
+教室：308工管系普通教室
+修課上限人數：60人
+上課時間：每周星期二上午第2節~第4節
+
+課程教學目標：
+1. This course aims to introduce economic decision-making issues related to engineering, allowing engineers to integrate engineering practice features and economic analysis principles into the engineering projects in the design, manufacturing and distribution processes of the product lifecycle. The cost is quantified to determine whether the capital investment required for this project is worthwhile.
+
+課程教學綱要：
+1. Understanding Money and Its Management.
+2. Evaluating Business and Engineering Assets.
+3. Development of Project Cash Flow.
+4. Special Topics in Engineering Economics.
+
+教科書資料：
+1. 書名：Fundamentals of Engineering Economics 3/e (ISBN: 9780273772910)
+2. 出版日期：未標註
+3. 作者：Chan S. Park
+4. 出版社：Pearson Education Limited
+5. 版本：未標註
+
+參考書資料：
+1-1. 書名：工程經濟(Fundamentals of Engineering Economics 3/e)
+1-2. 出版日期：未標註
+1-3. 作者：編譯：邱垂昱、馮炳勳，原著：Chan S. Park
+1-4. 出版社：台灣培生教育出版
+1-5. 版本：未標註
+
+2-1. 書名：工程經濟學(Engineering Economy 16/e)
+2-2. 出版日期：未標註
+2-3. 作者：編譯：李克聰、原著：Sullivan, Wicks, Koelling
+2-4. 出版社：台灣培生教育出版
+2-5. 版本：未標註
+
+※請遵守智慧財產權觀念，依著作權法規定，教科書及教材不得非法影印與使用盜版軟體。
+
+教學進度表（2025年春季學期）：
+第1週課程 (2025/02/16─2025/02/22)：Engineering Economic Decisions
+第2週課程 (2025/02/23─2025/03/01)：Time Value of Money
+第3週課程 (2025/03/02─2025/03/08)：Time Value of Money
+第4週課程 (2025/03/09─2025/03/15)：Understanding Money Management
+第5週課程 (2025/03/16─2025/03/22)：Equivalence Calculations under Inflation
+第6週課程 (2025/03/23─2025/03/29)：Present-Worth Analysis
+第7週課程 (2025/03/30─2025/04/05)：4/1 Holiday
+第8週課程 (2025/04/06─2025/04/12)：Midterm Exam
+第9週課程 (2025/04/13─2025/04/19)：Annual Equivalence Analysis
+第10週課程 (2025/04/20─2025/04/26)：Rate-of-Return Analysis
+第11週課程 (2025/04/27─2025/05/03)：Benefit—Cost Analysis
+第12週課程 (2025/05/04─2025/05/10)：Accounting for Depreciation and Income Taxes
+第13週課程 (2025/05/11─2025/05/17)：Accounting for Depreciation and Income Taxes
+第14週課程 (2025/05/18─2025/05/24)：Replacement Decisions
+第15週課程 (2025/05/25─2025/05/31)：Replacement Decisions
+第16週課程 (2025/06/01─2025/06/07)：Final Exam
+第17週課程 (2025/06/08─2025/06/14)：Total review
+第18週課程 (2025/06/15─2025/06/21)：Total review
+
+成績評定方式：
+1. Usual Grades (including quizzes, class attendance, participation, homework and reports) 50%，Midterm Exam 25%，Final Exam 25%。（平時成績包含小考、上課出席、課堂參與、作業與報告佔50%，期中考佔25%，期末考佔25%）
+
+課堂要求：
+準時出席（Attending On Time.）

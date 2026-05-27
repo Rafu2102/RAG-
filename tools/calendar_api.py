@@ -108,21 +108,28 @@ def _get_event_source_tag(ev: dict) -> str | None:
     )
 
 def find_duplicate_event(service, calendar_id: str, title: str, time_min: str, time_max: str) -> dict | None:
-    """防呆：在指定的區間尋找是否已經有來源為 NQU_agent 的同樣標題行程"""
-    resp = service.events().list(
-        calendarId=calendar_id,
-        timeMin=time_min,
-        timeMax=time_max,
-        singleEvents=True,
-        orderBy="startTime",
-        maxResults=100,
-    ).execute()
+    """防呆：在指定的區間尋找是否已經有來源為 NQU_agent 的同樣標題行程 (支援分頁與 maxResults=250)"""
+    page_token = None
+    while True:
+        resp = service.events().list(
+            calendarId=calendar_id,
+            timeMin=time_min,
+            timeMax=time_max,
+            singleEvents=True,
+            orderBy="startTime",
+            maxResults=250,
+            pageToken=page_token
+        ).execute()
 
-    for ev in resp.get("items", []):
-        if ev.get("summary") != title:
-            continue
-        if _get_event_source_tag(ev) == BOT_SOURCE_TAG:
-            return ev
+        for ev in resp.get("items", []):
+            if ev.get("summary") != title:
+                continue
+            if _get_event_source_tag(ev) == BOT_SOURCE_TAG:
+                return ev
+        
+        page_token = resp.get("nextPageToken")
+        if not page_token:
+            break
 
     return None
 
@@ -154,8 +161,14 @@ def create_calendar_event(discord_id: str, title: str, start: str, end: str, cal
         else:
             end_date = end_date + timedelta(days=1)
 
-        time_min = _to_utc_rfc3339(datetime.combine(start_date, datetime.min.time(), tzinfo=TAIPEI_TZ))
-        time_max = _to_utc_rfc3339(datetime.combine(end_date, datetime.min.time(), tzinfo=TAIPEI_TZ))
+        if recurrence:
+            # 重複事件：擴大重複判定的時間跨度至 130 天 (整個學期)
+            # 以防止第一週因放假/停課不同而重複建立系列行程
+            time_min = _to_utc_rfc3339(datetime.combine(start_date - timedelta(days=1), datetime.min.time(), tzinfo=TAIPEI_TZ))
+            time_max = _to_utc_rfc3339(datetime.combine(start_date + timedelta(days=130), datetime.min.time(), tzinfo=TAIPEI_TZ))
+        else:
+            time_min = _to_utc_rfc3339(datetime.combine(start_date, datetime.min.time(), tzinfo=TAIPEI_TZ))
+            time_max = _to_utc_rfc3339(datetime.combine(end_date, datetime.min.time(), tzinfo=TAIPEI_TZ))
 
         dup = find_duplicate_event(service, calendar_id, title, time_min, time_max)
         if dup:
@@ -178,8 +191,14 @@ def create_calendar_event(discord_id: str, title: str, start: str, end: str, cal
         if end_dt <= start_dt:
             end_dt = start_dt + timedelta(hours=1)
 
-        time_min = _to_utc_rfc3339(start_dt)
-        time_max = _to_utc_rfc3339(end_dt)
+        if recurrence:
+            # 重複事件：擴大重複判定的時間跨度至 130 天 (整個學期)
+            # 以防止第一週因放假/停課不同而重複建立系列行程
+            time_min = _to_utc_rfc3339(start_dt - timedelta(days=1))
+            time_max = _to_utc_rfc3339(start_dt + timedelta(days=130))
+        else:
+            time_min = _to_utc_rfc3339(start_dt)
+            time_max = _to_utc_rfc3339(end_dt)
 
         dup = find_duplicate_event(service, calendar_id, title, time_min, time_max)
         if dup:
@@ -239,6 +258,7 @@ def delete_calendar_events(discord_id: str, keyword: str, calendar_id: str = "pr
             is_wild = (keyword == "*")
             is_clear = (keyword == "__CLEAR_ALL__")
             
+            deleted_recurring_ids = set()
             for ev in resp.get("items", []):
                 if _get_event_source_tag(ev) != BOT_SOURCE_TAG:
                     s_count += 1
@@ -248,9 +268,25 @@ def delete_calendar_events(discord_id: str, keyword: str, calendar_id: str = "pr
                 if not is_wild and not is_clear and not _title_matches_keyword(ev_title, keyword):
                     continue
                 
-                service.events().delete(calendarId=calendar_id, eventId=ev["id"]).execute()
-                d_titles.add(ev_title or "未知事件")
-                d_count += 1
+                rec_id = ev.get("recurringEventId")
+                if rec_id and not target_date and not target_time:
+                    # 如果是重複事件的一部分，且沒有指定特定日期/時間，代表要刪除整個系列
+                    if rec_id not in deleted_recurring_ids:
+                        try:
+                            service.events().delete(calendarId=calendar_id, eventId=rec_id).execute()
+                            deleted_recurring_ids.add(rec_id)
+                            d_titles.add(ev_title or "未知事件")
+                            d_count += 1
+                        except Exception as delete_err:
+                            logger.warning(f"刪除重複事件主系列 {rec_id} 失敗: {delete_err}")
+                else:
+                    # 單一事件，或者指定了特定日期/時間（只刪除該單一實例）
+                    try:
+                        service.events().delete(calendarId=calendar_id, eventId=ev["id"]).execute()
+                        d_titles.add(ev_title or "未知事件")
+                        d_count += 1
+                    except Exception as delete_err:
+                        logger.warning(f"刪除事件 {ev['id']} 失敗: {delete_err}")
                 
                 if is_wild:
                     logger.warning(f"⚠️ keyword 為通配符 *，僅刪除第一筆匹配事件以防止誤刪")

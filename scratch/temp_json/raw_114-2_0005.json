@@ -1,0 +1,22 @@
+{
+    "semester": "114-2",
+    "list_info": {
+        "部別": "學分班",
+        "科系": "學分班",
+        "班級": "學分班",
+        "選課代碼": "0005",
+        "科目名稱": "機器導航與探索",
+        "科目英文名": "Robotic Navigation and Exploration",
+        "學分": "3.0",
+        "時數": "3.0",
+        "必/選": "選修",
+        "授課教師": "王建鈞",
+        "教室": "",
+        "修課人數": "11",
+        "上限人數": "30",
+        "上課時間": "(一)10-12",
+        "限修備註": "",
+        "備註": "AI聯盟衛星課程 /清華大學：胡敏君老師授課/線上課程/授課語言：中文 /建議學生需已修過Python程式設計、影像處理、深度學習相關課程。學生須自備具GPU顯卡之電腦。本課程期末專題採分組開發，為避免影響同組修課同學之權益，本課程不接受期中退選，請謹慎評估可投"
+    },
+    "detail_raw_text": "回上一頁\t國立金門大學\t \n \t教學綱要\t \n\n部別 : 學分班\t114學年度第2學期\t列印日期 : 2026/05/24\n科目名稱 : 機器導航與探索 (Robotic Navigation and Exploration)\t開課班級 : 學分班\t學　　分 : 3.0\t授課時數 : 3.0\n授課教師 : 王建鈞\t必選修 : 選修\t \t \n\n\n1.教學目標\n即時追蹤與地圖建置部分包含機率模型與相機模型等理論基礎，也包含基於深度學習之RGB-based 的3DSLAM方法。場景理解的部分包含機器學習的基本概念，再帶到深度學習的技術與 目前的物件偵測與語意切割技術。動作控制的部分則包含路徑規劃與導航演算法，並帶 入強化學習的概念來引導行進的路徑。課程要求 ：1.學生須自備具GPU顯卡之電腦。2.本課程期末專題採分組開發，為避免影響同組修課同學之權益 \n\n\n2.教學綱要\n本課程模組分為三個主要的部分，分別為即時追蹤與地圖建置(SLAM)、基於機器學習之場景理解(Scene Understanding)與探索導航的動作控制(Action Control)。 \n\n\n3.教科書\n1\t書名 : Reinforcement Learning: An Introduction, Second E\ndition, MIT Press　\n出版日期 : 2018年 月 \n作者 : Richard S.Richard S. Sutton and Andrew G. Barto　出版社 : Cambridge, MA　版本 :  \n\n\n4.參考書\n1\t書名 : Reinforcement Learning: An Introduction, Second Edition, MIT Press　出版日期 : 年 月 \n作者 : Richard S. Sutton and Andrew G. Barto　出版社 : Cambridge, MA,　版本 :  \n2\t書名 : Probabilistic Robotics(Intelligent Robotics and Autonomous Agents series)　出版日期 : 年 月 \n作者 : Sebastian Thrun, Wolfram Burgard, and Dieter Fox　出版社 : Probabilistic Robotics　版本 :  \n3\t書名 : Machine Learning: A Probabilistic Perspective.　出版日期 : 年 月 \n作者 : Kevin Murphy　出版社 : MIT Press,　版本 :  \n4\t書名 : Probabilistic Graphical Models: Principles and Techniques　出版日期 : 年 月 \n作者 : Daphne Koller and Nir Friedman　出版社 : 1st Edition　版本 :  \n5\t書名 : Deep Learning.　出版日期 : 年 月 \n作者 : Ian Goodfellow, Yoshua Bengio and Aaron Courville　出版社 : MIT Press,　版本 :  \n\n※請遵守智慧財產權觀念，依著作權法規定，教科書及教材不得非法影印與使用盜版軟體。\n\n5.教學進度表\n週次\t日期\t內容\t備註\n1\t\n2026/02/22─2026/02/28\n\tIntroduction to Robotic Navigation and\nExploration \t \n2\t\n2026/03/01─2026/03/07\n\tKinematic Model and Path Tracking Control /* Control System Basics* PID Control* Basic Kinematic Model* Differential Drive Vehicle* Pure Pursuit Control* Kinematic Bicycle Model \tLab 1 \n3\t\n2026/03/08─2026/03/14\n\tMotion Planning / * Motion Planning Introduction* Path Planning* Curve Interpolation* Trajectory Planning* Path Planning \tLab 2 \n4\t\n2026/03/15─2026/03/21\n\tReinforcement Learning (I) / * MDP* Value Function* Bellman Equation* Reinforcement Learning \t \n5\t\n2026/03/22─2026/03/28\n\tReinforcement Learning (II) / * Q-Learning / Sarsa / DQN* Policy Gradient / Actor-Critic \t \n6\t\n2026/03/29─2026/04/04\n\tProject Environment Building (I) \tLab3 \n7\t\n2026/04/05─2026/04/11\n\tProject Environment Building (I) \tLab4 \n8\t\n2026/04/12─2026/04/18\n\tProject Environment Building (III) \tLab5\n \n9\t\n2026/04/19─2026/04/25\n\tSLAM Back-end (I) / * State Estimation and SLAM Problem* Probability Theory and Bayes Filter* Kalman Filter / Extended Kalman Filter \t \n10\t\n2026/04/26─2026/05/02\n\tSLAM Back-end (II) / * Graph based Optimization * Graph Optimization for 2D SLAM (Bundle\nAdjustment) \t \n11\t\n2026/05/03─2026/05/09\n\t3D SLAM (I) / * Feature Descriptor* Multi-view Geometry* Lie Group & Lie Algebra \t \n12\t\n2026/05/10─2026/05/16\n\t3D SLAM (II) / * 3D SLAM: ORB-SLAM* Direct Method* DNN-based SLAM \t \n13\t\n2026/05/17─2026/05/23\n\t3D Embodied Agent \t \n14\t\n2026/05/24─2026/05/30\n\tPaper Presentation (I) \t \n15\t\n2026/05/31─2026/06/06\n\tPaper Presentation (II) \t \n16\t\n2026/06/07─2026/06/13\n\tProject Presentation & Demo \t \n\n\n6.成績評定及課堂要求\n作業: 60% (15% for each HW) 論文閱讀報告(10%) 自走車期末專題(含實作、書面報告、口頭報告): 30% \n建議學生需已修過Python程式設計、影像處理、深度學習。 \n \n\n\n8.永續發展目標(SDGs)：SDG4 優質教育、SDG17 多元夥伴關係\n\n\n9.大學社會責任(USR)關聯性：高"
+}

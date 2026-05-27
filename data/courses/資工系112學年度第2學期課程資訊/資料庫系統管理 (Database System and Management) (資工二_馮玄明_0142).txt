@@ -1,0 +1,64 @@
+國立金門大學112學年度第2學期資工系課程
+學年度：112學年度
+學期：第2學期
+課程名稱：資料庫系統管理 (Database System and Management)
+部別：日間部學士班
+開課班級：資工二
+學分數：3.0學分
+授課時數：3.0小時
+授課教師：馮玄明
+必選修：必修
+教室：I101圖資電腦教室
+修課上限人數：85人
+上課時間：每周星期一下午第5節~第7節
+
+課程教學目標：
+1. Database design and management concept
+2. Familiar with database platform
+
+課程教學綱要：
+1. Introduction BACKGROUND
+2. THE RELATIONAL MODEL AND LANGUAGES
+3. DATABASE ANALYSIS AND DESIGN
+4. METHODOLOGY in database
+
+教科書資料：
+1. 書名：Database System -A practical approach to design, implementation, and Management
+2. 出版日期：未標註
+3. 作者：Thomas Connoly & Carolyn Begg
+4. 出版社：Pearson
+5. 版本：未標註
+
+參考書資料：
+無
+
+※請遵守智慧財產權觀念，依著作權法規定，教科書及教材不得非法影印與使用盜版軟體。
+
+教學進度表（2024年春季學期）：
+第1週課程 (2024/02/18─2024/02/24)：Introduction to Databases 資料庫簡介
+第2週課程 (2024/02/25─2024/03/02)：Database Environment structure 資料庫環境架構
+第3週課程 (2024/03/03─2024/03/09)：Database Architecture and the web 資料庫架構與Web
+第4週課程 (2024/03/10─2024/03/16)：The Relational Model 關聯式資料模型
+第5週課程 (2024/03/17─2024/03/23)：Relational Algebra and Relational Calculus 關聯式代數與計算
+第6週課程 (2024/03/24─2024/03/30)：SQL: Data Manipulation SQL數據操作
+第7週課程 (2024/03/31─2024/04/06)：SQL: Data Definition SQL資料定義
+第8週課程 (2024/04/07─2024/04/13)：Advance SQL 進階SQL
+第9週課程 (2024/04/14─2024/04/20)：middle Exam 期中考
+第10週課程 (2024/04/21─2024/04/27)：Query-by-Example 實例查詢
+第11週課程 (2024/04/28─2024/05/04)：Database Analysis and the Case Study 資料庫分析和案例研究
+第12週課程 (2024/05/05─2024/05/11)：Entity-Relationship Modeling 實體關係建模
+第13週課程 (2024/05/12─2024/05/18)：Enhanced Entity-Relationship Modeling 進階實體關係建模
+第14週課程 (2024/05/19─2024/05/25)：Normalization 標準化
+第15週課程 (2024/05/26─2024/06/01)：Advanced Normalization 進階標準化
+第16週課程 (2024/06/02─2024/06/08)：Conceptual Databases Design 資料庫設計
+第17週課程 (2024/06/09─2024/06/15)：Final EXAM 期末
+第18週課程 (2024/06/16─2024/06/22)：Final Reports 期末報告
+
+成績評定方式：
+1. 期中成績 (Middle)：30%
+2. 期末成績 (Final)：40%
+3. 其他/報告 (Other/reports)：30%
+4. 申請安心就學方案的學生成績可依規定另外計算
+
+課堂要求：
+無詳細課堂要求說明

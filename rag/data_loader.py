@@ -31,7 +31,7 @@ from rank_bm25 import BM25Okapi
 # 【全域 HTTP 連線池】Gemini Cloud API 專用，TCP 連線復用 + 自動重試
 _gemini_session = requests.Session()
 _retries = Retry(total=3, backoff_factor=0.5, status_forcelist=[500, 502, 503, 504])
-_gemini_session.mount('https://', HTTPAdapter(max_retries=_retries, pool_connections=20, pool_maxsize=20))
+_gemini_session.mount('https://', HTTPAdapter(max_retries=_retries, pool_connections=50, pool_maxsize=50))
 
 from llama_index.core import Document, Settings
 from llama_index.core.node_parser import SentenceSplitter
@@ -40,6 +40,11 @@ from llama_index.core.schema import TextNode
 import config
 
 logger = logging.getLogger(__name__)
+
+
+# ── 全校科系官方名稱與簡稱對照表（已重構為 Unified Config Registry） ──
+# 統一使用 config.DEPT_REGISTRY 管理科系對照，消除重複與不一致隱患。
+
 
 
 # =============================================================================
@@ -68,6 +73,7 @@ def parse_course_file(filepath: str) -> dict:
     department = extract(r"部別：(.+?)(?:\r?\n)", content)
     grade_class = extract(r"開課班級：(.+?)(?:\r?\n)", content)
     credits = extract(r"學分數：(.+?)(?:\r?\n)", content)
+    hours = extract(r"授課時數：(.+?)(?:\r?\n)", content)
     teacher = extract(r"授課教師：(.+?)(?:\r?\n)", content)
     required = extract(r"必選修：(.+?)(?:\r?\n)", content)
     classroom = extract(r"教室：(.+?)(?:\r?\n)", content)
@@ -84,7 +90,7 @@ def parse_course_file(filepath: str) -> dict:
     if "通識" in grade_class:
         grade = "通識"  # 通識課不適用年級概念
     else:
-        grade_match = re.search(r"(碩[一二三]|[一二三四五])", grade_class)
+        grade_match = re.search(r"(碩[一二三]|博[一二三]|[一二三四五])", grade_class)
         if grade_match:
             grade = grade_match.group(1)
     
@@ -108,46 +114,26 @@ def parse_course_file(filepath: str) -> dict:
     # ── 推斷進修部 ──
     is_evening = "進修" in grade_class or "進修" in department
 
-    # ── 推斷系所簡稱（從資料夾名稱或檔案路徑智慧偵測）──
-    # 完整科系對照表：資料夾名稱關鍵字 → dept_short
-    _DEPT_FOLDER_PATTERNS = {
-        # 理工學院
-        "資工": "資工系", "資訊工程": "資工系",
-        "電機": "電機系", "電機工程": "電機系",
-        "土木": "土木系", "工程管理": "土木系",
-        "食品": "食品系", "食品科學": "食品系",
-        # 管理學院
-        "企管": "企管系", "企業管理": "企管系",
-        "觀光": "觀光系", "觀光管理": "觀光系",
-        "運休": "運休系", "運動與休閒": "運休系",
-        "工管": "工管系", "工業工程": "工管系",
-        # 人文社會學院
-        "國際": "國際系", "大陸事務": "國際系",
-        "建築": "建築系",
-        "海邊": "海邊系", "海洋與邊境": "海邊系", "邊境管理": "海邊系",
-        "應英": "應英系", "應用英語": "應英系",
-        "華語": "華語系", "華語文": "華語系",
-        "都景": "都景系", "都市計畫": "都景系", "景觀": "都景系",
-        # 健康護理學院
-        "護理": "護理系",
-        "長照": "長照系", "長期照護": "長照系",
-        "社工": "社工系", "社會工作": "社工系",
-        # 通識
-        "通識": "通識中心",
-    }
-    
-    def _detect_dept_from_path(fpath: str) -> str:
-        """從檔案路徑（含資料夾名稱）偵測科系簡稱"""
-        # 優先用較長關鍵字匹配（避免「工」匹配到不相關的系）
-        sorted_patterns = sorted(_DEPT_FOLDER_PATTERNS.keys(), key=len, reverse=True)
-        for kw in sorted_patterns:
+    # ── 推斷系所簡稱與官方全稱（從資料夾名稱或檔案路徑智慧偵測）──
+    def _detect_dept_from_path(fpath: str) -> tuple[str, str]:
+        """從檔案路徑（含資料夾名稱）偵測科系官方全稱與簡稱"""
+        # 根據 keywords 長度由長到短排序，以防短詞誤配
+        kw_pairs = []
+        for dept_key, info in config.DEPT_REGISTRY.items():
+            for kw in info.get("keywords", []):
+                kw_pairs.append((kw, dept_key))
+        
+        kw_pairs_sorted = sorted(kw_pairs, key=lambda x: len(x[0]), reverse=True)
+        for kw, dept_key in kw_pairs_sorted:
             if kw in fpath:
-                return _DEPT_FOLDER_PATTERNS[kw]
-        return "未知"
+                dept_info = config.DEPT_REGISTRY[dept_key]
+                return dept_info["full_name"], dept_info["short_name"]
+        return "未知科系", "未知系"
     
-    dept_short = _detect_dept_from_path(filepath)
+    dept_full, dept_short = _detect_dept_from_path(filepath)
     if "研究所" in department or "碩士" in department:
         dept_short = dept_short.replace("系", "碩") if "系" in dept_short else dept_short + "碩"
+
 
     # ── 各區段文字提取 ──
     def extract_section(start_pattern: str, end_patterns: list, text: str) -> str:
@@ -166,7 +152,7 @@ def parse_course_file(filepath: str) -> dict:
         "syllabus": (r"課程教學綱要：\s*\r?\n", [r"\r?\n\s*\r?\n\s*教科書資料", r"教科書資料"]),
         "textbooks": (r"教科書資料：\s*\r?\n", [r"\r?\n\s*\r?\n\s*參考書資料", r"參考書資料"]),
         "references": (r"參考書資料：\s*\r?\n?", [r"\r?\n\s*\r?\n\s*(?:※|教學進度表)", r"※請遵守", r"教學進度表"]),
-        "schedule_table": (r"教學進度表.+?：\s*\r?\n", [r"\r?\n\s*\r?\n\s*成績評定", r"成績評定"]),
+        "schedule_table": (r"教學進度表.*?：\s*\r?\n", [r"\r?\n\s*\r?\n\s*成績評定", r"成績評定"]),
         "grading": (r"成績評定方式：\s*\r?\n", [r"\r?\n\s*\r?\n\s*課堂要求", r"課堂要求"]),
         "requirements_text": (r"課堂要求：\s*\r?\n", [r"\r?\n\s*\r?\n\s*$"])
     }
@@ -180,12 +166,15 @@ def parse_course_file(filepath: str) -> dict:
     metadata = {
         "course_name": course_name,
         "department": department,
+        "dept_full": dept_full,
         "dept_short": dept_short,
         "grade_class": grade_class,
+
         "grade": grade,
         "class_group": class_group,
         "is_evening": is_evening,
         "credits": credits,
+        "hours": hours,
         "teacher": teacher,
         "required_or_elective": required,
         "classroom": classroom,
@@ -195,6 +184,7 @@ def parse_course_file(filepath: str) -> dict:
         "semester": semester_raw,
         "source_file": os.path.basename(filepath),
         "ge_domain": ge_domain,  # 通識主題領域：人文/社會/自然/""
+        "note": note_raw,
     }
 
     objectives = sections_raw.get("objectives")
@@ -206,6 +196,7 @@ def parse_course_file(filepath: str) -> dict:
     requirements_text = sections_raw.get("requirements_text")
 
     ge_domain_line = f"- **通識主題領域**：{ge_domain}\n" if ge_domain else ""
+    note_line = f"- **備註**：{note_raw}\n" if note_raw else ""
     sections = {
         "basic_info": (
             f"# 課程基本資訊\n"
@@ -213,11 +204,13 @@ def parse_course_file(filepath: str) -> dict:
             f"- **部別**：{department}\n"
             f"- **開課班級**：{grade_class}\n"
             f"- **學分數**：{credits}\n"
+            f"- **授課時數**：{hours}\n"
             f"- **授課教師**：{teacher}\n"
             f"- **必選修**：{required}\n"
             f"- **教室**：{classroom}\n"
             f"- **上課時間**：{schedule}\n"
             f"- **修課上限人數**：{max_students}\n"
+            f"{note_line}"
             f"{ge_domain_line}"
         ),
         "objectives": (
@@ -320,33 +313,26 @@ def build_nodes_from_courses(data_dir: str) -> list[TextNode]:
                 grade = metadata.get("grade", "未知")
                 req = metadata.get("required_or_elective", "未知")
                 ge_dom = metadata.get("ge_domain", "")
+                academic_year = metadata.get("academic_year", "0")
+                semester = metadata.get("semester", "0")
+                time_prefix = f"學期：{academic_year}學年度第{semester}學期 | " if academic_year != "0" and semester != "0" else ""
                 if ge_dom:
-                    prefix = f"[課程：{course_name} | 教師：{teacher} | 通識領域：{ge_dom} | 屬性：{req} | 區段：{section_name}]\n"
+                    prefix = f"[{time_prefix}課程：{course_name} | 教師：{teacher} | 通識領域：{ge_dom} | 屬性：{req} | 區段：{section_name}]\n"
                 else:
-                    prefix = f"[課程：{course_name} | 教師：{teacher} | 年級：{grade}年級 | 屬性：{req} | 區段：{section_name}]\n"
+                    prefix = f"[{time_prefix}課程：{course_name} | 教師：{teacher} | 年級：{grade}年級 | 屬性：{req} | 區段：{section_name}]\n"
                 
                 # 【優化 2】智慧區段感知 Chunking
-                # 短區段（≤ CHUNK_SIZE）保持完整不切；只對超長區段（schedule_table）啟動 SentenceSplitter
-                if len(section_text) <= config.CHUNK_SIZE:
-                    # 區段完整性保護：直接作為單一 Node
-                    node = TextNode(
-                        text=prefix + section_text,
-                        metadata=full_metadata,
-                    )
-                    node.excluded_embed_metadata_keys = list(full_metadata.keys())
-                    all_nodes.append(node)
-                else:
-                    # 超長區段（如進度表）才使用 SentenceSplitter 切分
-                    doc = Document(
-                        text=section_text,
-                        metadata={}, 
-                    )
-                    nodes = splitter.get_nodes_from_documents([doc])
-                    for n in nodes:
-                        n.set_content(prefix + n.get_content())
-                        n.metadata = full_metadata
-                        n.excluded_embed_metadata_keys = list(full_metadata.keys())
-                    all_nodes.extend(nodes)
+                # 全面交由 SentenceSplitter 依據 Token 進行切分，避免字數與 Token 單位混用導致的大小失控
+                doc = Document(
+                    text=section_text,
+                    metadata={}, 
+                )
+                nodes = splitter.get_nodes_from_documents([doc])
+                for n in nodes:
+                    n.set_content(prefix + n.get_content())
+                    n.metadata = full_metadata
+                    n.excluded_embed_metadata_keys = list(full_metadata.keys())
+                all_nodes.extend(nodes)
 
             logger.info(f"  ✅ {filename} → {sum(1 for s in sections.values() if s.strip())} 個區段")
 
@@ -392,6 +378,39 @@ def build_nodes_from_dept_info(professors_dir: str, dept_info_dir: str) -> list[
     for dir_name, dir_path, dtype in target_dirs:
         if not os.path.isdir(dir_path):
             continue
+
+        # 從 dir_name 智慧偵測科系資訊（基於統一的 config.DEPT_REGISTRY）
+        department, dept_short = "未知科系", "未知系"
+        dept_patterns = {}
+        for k, info in config.DEPT_REGISTRY.items():
+            short_name = info["short_name"]
+            full_name = info["full_name"]
+            dept_patterns[short_name] = (full_name, short_name)
+            dept_patterns[full_name] = (full_name, short_name)
+            for alias in info.get("aliases", []):
+                dept_patterns[alias] = (full_name, short_name)
+            for kw in info.get("keywords", []):
+                dept_patterns[kw] = (full_name, short_name)
+
+        sorted_kws = sorted(dept_patterns.keys(), key=len, reverse=True)
+        for kw in sorted_kws:
+            if kw in dir_name:
+                department, dept_short = dept_patterns[kw]
+                break
+
+
+        # 若無匹配則啟動模糊防呆 Fallback 機制
+        if department == "未知科系":
+            dept_match = re.search(r"([^系所]{2,}(?:系|所))", dir_name)
+            if dept_match:
+                dept_short = dept_match.group(1)
+            else:
+                clean_name = re.sub(r"(?:教授資訊|系所資訊|簡介|系所)$", "", dir_name)
+                if not clean_name.endswith("系") and not clean_name.endswith("所") and not clean_name.endswith("中心"):
+                    dept_short = clean_name + "系"
+                else:
+                    dept_short = clean_name
+            department = dept_short
 
         for fname in sorted(os.listdir(dir_path)):
             if not fname.endswith(".txt"):
@@ -460,23 +479,19 @@ def build_nodes_from_dept_info(professors_dir: str, dept_info_dir: str) -> list[
                             "category": category,
                             "professor_name": prof_name,
                             "source_file": fname,
-                            "department": "資訊工程學系",
-                            "dept_short": "資工系",
+                            "department": department,
+                            "dept_short": dept_short,
                         }
-                        prefix = f"[資工系教授資訊 | 教授：{prof_name} | Email：{email_str} | 電話：{phone_str}]\n"
+                        prefix = f"[{dept_short}教授資訊 | 教授：{prof_name} | Email：{email_str} | 電話：{phone_str}]\n"
 
-                        if len(sec) <= config.CHUNK_SIZE:
-                            node = TextNode(text=prefix + sec, metadata=metadata)
-                            node.excluded_embed_metadata_keys = list(metadata.keys())
-                            all_nodes.append(node)
-                        else:
-                            doc = Document(text=sec, metadata={})
-                            chunks = splitter.get_nodes_from_documents([doc])
-                            for c in chunks:
-                                c.set_content(prefix + c.get_content())
-                                c.metadata = metadata
-                                c.excluded_embed_metadata_keys = list(metadata.keys())
-                            all_nodes.extend(chunks)
+                        # 全面交由 SentenceSplitter 依據 Token 進行切分
+                        doc = Document(text=sec, metadata={})
+                        chunks = splitter.get_nodes_from_documents([doc])
+                        for c in chunks:
+                            c.set_content(prefix + c.get_content())
+                            c.metadata = metadata
+                            c.excluded_embed_metadata_keys = list(metadata.keys())
+                        all_nodes.extend(chunks)
 
                         logger.info(f"  👨‍🏫 {prof_name} → 已建立 Node")
 
@@ -486,10 +501,10 @@ def build_nodes_from_dept_info(professors_dir: str, dept_info_dir: str) -> list[
                         "info_type": info_type,
                         "category": category,
                         "source_file": fname,
-                        "department": "資訊工程學系",
-                        "dept_short": "資工系",
+                        "department": department,
+                        "dept_short": dept_short,
                     }
-                    prefix = f"[資工系{category}]\n"
+                    prefix = f"[{dept_short}{category}]\n"
 
                     # 嘗試按「【...】」或「一、二、三...」分段
                     if re.search(r"【.+?】", content):
@@ -526,9 +541,33 @@ def build_nodes_from_dept_info(professors_dir: str, dept_info_dir: str) -> list[
 # 📜 建立 獨立規則 JSON Nodes (如畢業門檻)
 # =============================================================================
 
+def _format_course(c) -> str:
+    """格式化課程資訊（支援 dict 與 str 混合結構）"""
+    if isinstance(c, dict):
+        c_name = c.get('name', '未命名課程')
+        c_cred = c.get('credits', '?')
+        c_hours = f" ({c['hours']}小時)" if "hours" in c else ""
+        
+        # 組合修課時間標籤
+        c_time = []
+        if "year" in c: 
+            c_time.append(f"大{c['year']}")
+        if "semester" in c: 
+            c_time.append(f"第{c['semester']}學期")
+        time_str = f" [{', '.join(c_time)}]" if c_time else ""
+        
+        c_note = f" (備註: {c['note']})" if "note" in c else ""
+        return f"{c_name} ({c_cred}學分{c_hours}){time_str}{c_note}"
+    elif isinstance(c, str):
+        return c
+    else:
+        return str(c)
+
 def build_nodes_from_rules(rules_dir: str) -> list[TextNode]:
     """將 data/rules 目錄下的 JSON 規則轉換為 Nodes"""
     all_nodes = []
+    splitter = SentenceSplitter(chunk_size=config.CHUNK_SIZE, chunk_overlap=config.CHUNK_OVERLAP)
+
     if not os.path.isdir(rules_dir):
         logger.info("未找到任何規則目錄")
         return all_nodes
@@ -568,21 +607,25 @@ def build_nodes_from_rules(rules_dir: str) -> list[TextNode]:
                     for d_name, d_data in cat_data["domains"].items():
                         lines.append(f"- {d_name}領域：至少 {d_data.get('min_credits', 0)} 學分")
                 
+                # 外系學分上限 (如專業選修可承認外系學分)
+                if "max_from_other_dept" in cat_data:
+                    lines.append(f"- 【注意】可承認外系(所)學分上限：{cat_data['max_from_other_dept']} 學分")
+
                 # 處理 courses (必修/選修)
                 if "courses" in cat_data:
                     c_list = cat_data["courses"]
-                    if c_list and isinstance(c_list[0], dict):
+                    if c_list:
                         for c in c_list:
-                            lines.append(f"- {c.get('name')} ({c.get('credits', '?')}學分)")
-                    elif c_list and isinstance(c_list[0], str):
-                        lines.append(f"- 可選課程：{', '.join(c_list)}")
+                            lines.append(f"- {_format_course(c)}")
                 
                 # 處理 tracks (專業選修分組)
                 if "tracks" in cat_data:
                     for t_name, t_data in cat_data["tracks"].items():
                         lines.append(f"### {t_name}")
                         t_courses = t_data.get("courses", [])
-                        lines.append(f"- 包含課程：{', '.join(t_courses)}\n")
+                        if t_courses:
+                            c_strs = [_format_course(c) for c in t_courses]
+                            lines.append(f"- 包含課程：{', '.join(c_strs)}\n")
                         
             # 畢業條件
             conds = data.get("graduation_conditions", [])
@@ -595,6 +638,7 @@ def build_nodes_from_rules(rules_dir: str) -> list[TextNode]:
             prefix = f"[{dept} {desc}]\n"
             
             is_grad = "graduation" in fname.lower() or "畢業" in fname
+            
             metadata = {
                 "info_type": "graduation_rules" if is_grad else "policy_rules",
                 "category": "畢業門檻與修業規定" if is_grad else "系統規章",
@@ -602,9 +646,14 @@ def build_nodes_from_rules(rules_dir: str) -> list[TextNode]:
                 "source_file": fname
             }
             
-            node = TextNode(text=prefix + text_content, metadata=metadata)
-            node.excluded_embed_metadata_keys = list(metadata.keys())
-            all_nodes.append(node)
+            # 全面交由 SentenceSplitter 依據 Token 進行切分，確保超長規章不會引發長度錯誤
+            doc = Document(text=text_content, metadata={})
+            chunks = splitter.get_nodes_from_documents([doc])
+            for c in chunks:
+                c.set_content(prefix + c.get_content())
+                c.metadata = metadata
+                c.excluded_embed_metadata_keys = list(metadata.keys())
+            all_nodes.extend(chunks)
             logger.info(f"  ✅ 規則檔 {fname} → 已建立 Node")
             
         except Exception as e:
@@ -668,6 +717,72 @@ _rate_limiter = _GeminiRateLimiter(
     tpm=config.EMBEDDING_RATE_LIMIT_TPM,
 )
 
+# ── Numpy Embedding 快取管理器 ──
+_cache_lock = threading.Lock()
+_cache_loaded = False
+_cache_keys_list = []  # 儲存所有 hash_key，索引對應 _cache_values_array 中的列
+_cache_keys_set = set() # 快速查詢用
+_cache_values_array = None # np.ndarray of shape (N, 3072)
+_CACHE_KEYS_PATH = os.path.join(config.INDEX_DIR, "embeddings_cache_keys.pkl")
+_CACHE_VALUES_PATH = os.path.join(config.INDEX_DIR, "embeddings_cache_values.npy")
+
+def _load_embeddings_cache():
+    global _cache_loaded, _cache_keys_list, _cache_keys_set, _cache_values_array
+    if _cache_loaded:
+        return
+    with _cache_lock:
+        if _cache_loaded:
+            return
+        if os.path.exists(_CACHE_KEYS_PATH) and os.path.exists(_CACHE_VALUES_PATH):
+            try:
+                with open(_CACHE_KEYS_PATH, "rb") as f:
+                    _cache_keys_list = pickle.load(f)
+                _cache_keys_set = set(_cache_keys_list)
+                _cache_values_array = np.load(_CACHE_VALUES_PATH)
+                if len(_cache_keys_list) != len(_cache_values_array):
+                    logger.warning(f"⚠️ 快取長度不一致：金鑰 {len(_cache_keys_list)} 筆 vs 向量 {_cache_values_array.shape[0]} 筆。重建全新快取。")
+                    _cache_keys_list = []
+                    _cache_keys_set = set()
+                    _cache_values_array = np.empty((0, config.EMBEDDING_DIMENSION), dtype=np.float32)
+                else:
+                    logger.info(f"💾 已載入 Numpy Embedding 快取，共 {len(_cache_keys_list)} 筆記錄")
+            except Exception as e:
+                logger.warning(f"⚠️ 載入 Numpy Embedding 快取失敗，重建全新快取：{e}")
+                _cache_keys_list = []
+                _cache_keys_set = set()
+                _cache_values_array = np.empty((0, config.EMBEDDING_DIMENSION), dtype=np.float32)
+        else:
+            _cache_keys_list = []
+            _cache_keys_set = set()
+            _cache_values_array = np.empty((0, config.EMBEDDING_DIMENSION), dtype=np.float32)
+        _cache_loaded = True
+
+def _save_embeddings_cache():
+    global _cache_keys_list, _cache_values_array
+    with _cache_lock:
+        if _cache_values_array is None:
+            return
+        tmp_keys = f"{_CACHE_KEYS_PATH}.{os.getpid()}.tmp"
+        tmp_vals = f"{_CACHE_VALUES_PATH}.{os.getpid()}.tmp.npy"
+        try:
+            os.makedirs(os.path.dirname(_CACHE_KEYS_PATH), exist_ok=True)
+            # 寫入 keys pkl
+            with open(tmp_keys, "wb") as f:
+                pickle.dump(_cache_keys_list, f)
+            os.replace(tmp_keys, _CACHE_KEYS_PATH)
+            # 寫入 values npy
+            np.save(tmp_vals, _cache_values_array)
+            os.replace(tmp_vals, _CACHE_VALUES_PATH)
+            logger.info(f"💾 已持久化 Numpy Embedding 快取：{len(_cache_keys_list)} 筆記錄")
+        except Exception as e:
+            logger.error(f"❌ 儲存 Numpy Embedding 快取失敗：{e}")
+        finally:
+            for p in (tmp_keys, tmp_vals):
+                if os.path.exists(p):
+                    try:
+                        os.remove(p)
+                    except Exception:
+                        pass
 
 def gemini_embed(
     texts: list[str],
@@ -676,24 +791,18 @@ def gemini_embed(
 ) -> np.ndarray:
     """
     使用 Gemini Embedding 2 Preview API 產生 embedding 向量。
-
-    原生支援 task_type 非對稱檢索優化：
-    - 建索引時：task_type="RETRIEVAL_DOCUMENT"
-    - 查詢時：task_type="RETRIEVAL_QUERY"
+    支援本地端 Numpy 高效快取，避免重複 API 請求。
 
     Args:
         texts: 文字列表
         task_type: Gemini 任務類型
-            - "RETRIEVAL_DOCUMENT"：建索引用（最大化文件語意表示）
-            - "RETRIEVAL_QUERY"：查詢用（最大化查詢意圖理解）
-            - "SEMANTIC_SIMILARITY"：語意相似度
-            - "CLASSIFICATION"：分類
-            - "CLUSTERING"：聚類
-        output_dimensionality: 輸出向量維度（128~3072，None=使用 config 預設值）
+        output_dimensionality: 輸出向量維度
 
     Returns:
         numpy array of shape (len(texts), embedding_dim)
     """
+    global _cache_keys_list, _cache_keys_set, _cache_values_array
+
     if not texts:
         logger.warning("  ⚠️ gemini_embed 收到空列表，直接返回 empty array")
         return np.array([], dtype=np.float32).reshape(0, config.EMBEDDING_DIMENSION)
@@ -701,70 +810,139 @@ def gemini_embed(
     if output_dimensionality is None:
         output_dimensionality = config.EMBEDDING_DIMENSION
 
-    url = f"{config.GEMINI_EMBEDDING_API_URL}:batchEmbedContents?key={config.GEMINI_API_KEY}"
-    batch_size = config.EMBEDDING_BATCH_SIZE  # Gemini batchEmbedContents 最大 100 筆
-    model_name = f"models/{config.GEMINI_EMBEDDING_MODEL}"
-    all_embeddings: list[list[float]] = []
+    # 1. 確保載入快取
+    _load_embeddings_cache()
+    
+    # 2. 計算每筆 text 的快取 key
+    keys = []
+    for text in texts:
+        h = hashlib.sha256(f"{task_type}:{output_dimensionality}:{text}".encode("utf-8")).hexdigest()
+        keys.append(h)
+        
+    # 3. 檢查哪些 key 在快取中
+    missing_indices = []
+    missing_texts = []
+    
+    # 用於對齊回傳結果的陣列
+    embeddings_res = np.empty((len(texts), output_dimensionality), dtype=np.float32)
+    
+    with _cache_lock:
+        key_to_idx = {k: i for i, k in enumerate(_cache_keys_list)}
+        
+    for idx, key in enumerate(keys):
+        if key in key_to_idx:
+            # 快取命中，直接從 numpy 陣列拷貝向量到對應位置（加上邊界安全檢查）
+            idx_in_arr = key_to_idx[key]
+            if _cache_values_array is not None and idx_in_arr < len(_cache_values_array):
+                embeddings_res[idx] = _cache_values_array[idx_in_arr]
+            else:
+                missing_indices.append(idx)
+                missing_texts.append(texts[idx])
+        else:
+            missing_indices.append(idx)
+            missing_texts.append(texts[idx])
+            
+    if missing_texts:
+        logger.info(f"  🔍 Embedding 快取：命中 {len(texts) - len(missing_texts)} 筆 · 未命中 {len(missing_texts)} 筆")
+        
+        # 4. 對未命中的 texts 進行 Embedding 計算
+        from llm.gemini_client import get_gcp_auth_info
+        import os
+        from concurrent.futures import ThreadPoolExecutor
 
-    for i in range(0, len(texts), batch_size):
-        batch = texts[i:i + batch_size]
+        batch_size = config.EMBEDDING_BATCH_SIZE
 
-        # 預估 token 數（粗略：中文 1 字 ≈ 2 tokens，英文 1 word ≈ 1 token）
-        estimated_tokens = sum(len(t) * 2 for t in batch)
-        _rate_limiter.wait_if_needed(estimated_tokens)
-
-        # 建構 batchEmbedContents 請求
-        requests_body = []
-        for text in batch:
-            # 【重要防呆】Gemini API 遇到純空字串 ("" 或只含空白) 會直接回傳 400 Bad Request，導致整個 batch 掛掉
-            # 為了保證長度對齊 FAISS，遇到空字串時自動補上一個預設詞
-            safe_text = text.strip()
-            if not safe_text:
-                safe_text = "[EMPTY_CONTENT]"
-
-            req = {
-                "model": model_name,
-                "content": {"parts": [{"text": safe_text}]},
-                "taskType": task_type,
-                "outputDimensionality": output_dimensionality,
+        for i in range(0, len(missing_texts), batch_size):
+            batch = missing_texts[i:i + batch_size]
+            token, project_id = get_gcp_auth_info()
+            headers = {
+                "Authorization": f"Bearer {token}",
+                "Content-Type": "application/json; charset=utf-8"
             }
-            requests_body.append(req)
 
-        payload = {"requests": requests_body}
+            def _embed_single(text_to_embed: str) -> list[float]:
+                safe_text = text_to_embed.strip()
+                if not safe_text:
+                    safe_text = "[EMPTY_CONTENT]"
+                _rate_limiter.wait_if_needed(len(safe_text) * 2)
 
-        # 指數退避重試
-        for attempt in range(config.EMBEDDING_MAX_RETRIES):
-            try:
-                response = _gemini_session.post(
-                    url,
-                    json=payload,
-                    timeout=120.0,
-                )
-
-                if response.status_code == 429:
-                    wait = 2 ** attempt * 5  # 5s, 10s, 20s
-                    logger.warning(f"  ⚠️ Gemini API 429 (Rate Limited)，等待 {wait}s 後重試 (attempt {attempt+1}/{config.EMBEDDING_MAX_RETRIES})...")
-                    _time.sleep(wait)
-                    continue
-
-                response.raise_for_status()
-                result = response.json()
-                batch_embeddings = [item["values"] for item in result["embeddings"]]
-                all_embeddings.extend(batch_embeddings)
-                break  # 成功，跳出重試迴圈
-
-            except requests.exceptions.RequestException as e:
-                if attempt < config.EMBEDDING_MAX_RETRIES - 1:
-                    wait = 2 ** attempt * 2  # 2s, 4s, 8s
-                    logger.warning(f"  ⚠️ Gemini Embedding API 錯誤：{e}，{wait}s 後重試 (attempt {attempt+1})...")
-                    _time.sleep(wait)
+                if task_type == "RETRIEVAL_DOCUMENT":
+                    formatted_text = f"title: none | text: {safe_text}"
+                elif task_type == "RETRIEVAL_QUERY":
+                    formatted_text = f"task: search result | query: {safe_text}"
+                elif task_type == "SEMANTIC_SIMILARITY":
+                    formatted_text = f"task: sentence similarity | query: {safe_text}"
+                elif task_type == "CLASSIFICATION":
+                    formatted_text = f"task: classification | query: {safe_text}"
+                elif task_type == "CLUSTERING":
+                    formatted_text = f"task: clustering | query: {safe_text}"
                 else:
-                    logger.error(f"  ❌ Gemini Embedding API 最終失敗（{config.EMBEDDING_MAX_RETRIES} 次重試後放棄）：{e}")
-                    raise
+                    formatted_text = safe_text
 
-        logger.info(f"  Embedding 進度：{min(i + batch_size, len(texts))}/{len(texts)} ({task_type})")
+                single_url = f"https://aiplatform.us.rep.googleapis.com/v1/projects/{project_id}/locations/us/publishers/google/models/{config.GEMINI_EMBEDDING_MODEL}:embedContent"
+                single_payload = {
+                    "content": {
+                        "parts": [{"text": formatted_text}]
+                    },
+                    "outputDimensionality": output_dimensionality
+                }
 
-    return np.array(all_embeddings, dtype=np.float32)
+                for attempt in range(config.EMBEDDING_MAX_RETRIES):
+                    try:
+                        response = _gemini_session.post(
+                            single_url,
+                            json=single_payload,
+                            headers=headers,
+                            timeout=120.0,
+                        )
+                        if response.status_code == 429:
+                            wait = 2 ** attempt * 5
+                            logger.warning(f"  ⚠️ Gemini API 429 (Rate Limited)，等待 {wait}s 後重試 (attempt {attempt+1}/{config.EMBEDDING_MAX_RETRIES})...")
+                            _time.sleep(wait)
+                            continue
+                        response.raise_for_status()
+                        result = response.json()
+                        return result["embedding"]["values"]
+                    except requests.exceptions.RequestException as e:
+                        if attempt < config.EMBEDDING_MAX_RETRIES - 1:
+                            wait = 2 ** attempt * 2
+                            logger.warning(f"  ⚠️ Gemini Embedding API 錯誤：{e}，{wait}s 後重試 (attempt {attempt+1})...")
+                            _time.sleep(wait)
+                        else:
+                            logger.error(f"  ❌ Gemini Embedding API 單筆最終失敗（{config.EMBEDDING_MAX_RETRIES} 次重試後放棄）：{e}")
+                            raise
+                raise RuntimeError("重試次數超出上限")
+
+            max_workers = min(len(batch), 50)
+            with ThreadPoolExecutor(max_workers=max_workers) as executor:
+                futures = [executor.submit(_embed_single, text) for text in batch]
+                batch_embeddings = [future.result() for future in futures]
+
+            # 轉為 numpy array 進行快速合併
+            batch_emb_arr = np.array(batch_embeddings, dtype=np.float32)
+            
+            with _cache_lock:
+                if len(_cache_keys_list) == 0:
+                    _cache_values_array = batch_emb_arr
+                else:
+                    _cache_values_array = np.vstack([_cache_values_array, batch_emb_arr])
+                    
+                for offset, text in enumerate(batch):
+                    missing_idx = missing_indices[i + offset]
+                    key = keys[missing_idx]
+                    _cache_keys_list.append(key)
+                    _cache_keys_set.add(key)
+                    # 寫入要回傳的陣列中
+                    embeddings_res[missing_idx] = batch_emb_arr[offset]
+            
+            # 【增量持久化】立刻寫入磁碟，以防中途斷電或斷網
+            _save_embeddings_cache()
+            
+            logger.info(f"  Embedding 進度：{min(i + batch_size, len(missing_texts))}/{len(missing_texts)} ({task_type})")
+    else:
+        logger.debug(f"  🔍 Embedding 快取：全部命中，直接由快取讀取 {len(texts)} 筆向量")
+
+    return embeddings_res
 
 
 def gemini_embed_query(text: str) -> np.ndarray:

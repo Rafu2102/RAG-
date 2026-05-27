@@ -1,0 +1,75 @@
+國立金門大學113學年度第1學期資工系課程
+學年度：113學年度
+學期：第1學期
+課程名稱：人工智慧導論 (Introduction to Artificial Intelligence)
+部別：日間部學士班
+開課班級：資工三
+學分數：3.0學分
+授課時數：3.0小時
+授課教師：李錫捷
+必選修：選修
+教室：E320多媒體實驗室
+修課上限人數：60人
+上課時間：每周星期三上午第2節~第4節
+
+課程教學目標：
+1. This course will introduce modern Data Mining knowledge with hands on experiences. A variety of AI or data mining programs will be introduced and used in the class with a focus on WEKA.
+
+課程教學綱要：
+1. I. Introduction to WEKA
+2. II. Introduction to Data Mining
+3. III. Deep Learning with TensorFlow+Keras
+
+教科書資料：
+1. 書名：Data Mining - Practical Machine Learning Tools and Techniques Ian H. Witten, Eibe Frank, Mark A. Hall, and Christopher J. Pal Morgan Kaufmann (an imprint of Elsevier)
+2. 出版日期：未標註
+3. 作者：Ian H. Witten, Eibe Frank, Mark A. Hall, and Christopher J. Pal
+4. 出版社：Morgan Kaufmann (an imprint of Elsevier)
+5. 版本：未標註
+
+參考書資料：
+1-1. 書名：人工智慧實務
+1-2. 出版日期：未標註
+1-3. 作者：謝政勳、廖先洲，李聯旺編譯
+1-4. 出版社：全華
+1-5. 版本：未標註
+
+2-1. 書名：TensorFlow+Keras深度學習人工智慧實務應用
+2-2. 出版日期：未標註
+2-3. 作者：林大貴
+2-4. 出版社：博碩
+2-5. 版本：未標註
+
+3-1. 書名：Data Mining - Practical Machine Learning Tools and Techniques
+3-2. 出版日期：未標註
+3-3. 作者：Ian H. Witten, Eibe Frank, Mark A. Hall, and Christopher J. Pal
+3-4. 出版社：Morgan Kaufmann (an imprint of Elsevier)
+3-5. 版本：未標註
+
+※請遵守智慧財產權觀念，依著作權法規定，教科書及教材不得非法影印與使用盜版軟體。
+
+教學進度表（2024年秋季學期）：
+第1週課程 (2024/09/08─2024/09/14)：Introduction to AI, Data Mining
+第2週課程 (2024/09/15─2024/09/21)：Getting started with Weka
+第3週課程 (2024/09/22─2024/09/28)：Evaluation
+第4週課程 (2024/09/29─2024/10/05)：Simple classifiers
+第5週課程 (2024/10/06─2024/10/12)：More classifiers
+第6週課程 (2024/10/13─2024/10/19)：Putting it all together
+第7週課程 (2024/10/20─2024/10/26)：Exploring Weka's interfaces, and working with big data
+第8週課程 (2024/10/27─2024/11/02)：Midterm Project
+第9週課程 (2024/11/03─2024/11/09)：Exploring the Experimenter
+第10週課程 (2024/11/10─2024/11/16)：Classification rules, association rules, and clustering
+第11週課程 (2024/11/17─2024/11/23)：Selecting attributes and counting the cost
+第12週課程 (2024/11/24─2024/11/30)：Neural networks, learning curves, and performance optimization
+第13週課程 (2024/12/01─2024/12/07)：Time series forecasting
+第14週課程 (2024/12/08─2024/12/14)：Image Filters and Their Applications
+第15週課程 (2024/12/15─2024/12/21)：Hands-on Experiences with Generative AI
+第16週課程 (2024/12/22─2024/12/28)：Final Project
+第17週課程 (2024/12/29─2025/01/04)：彈性補充教學(自主學習、探究與實作)
+第18週課程 (2025/01/05─2025/01/11)：彈性補充教學(自主學習、探究與實作)
+
+成績評定方式：
+1. Hws 30%, Midterm report 30%, Final project 40%
+
+課堂要求：
+無詳細課堂要求說明

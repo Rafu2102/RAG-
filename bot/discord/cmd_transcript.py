@@ -8,7 +8,7 @@ bot/cmd_transcript.py — 成績單匯入與查詢指令
 - /my_gpa (查詢歷年 GPA)
 - /my_failed (查詢不及格/未完成課程)
 
-OCR 引擎：Gemini 3.1 Pro Vision（structured output）
+OCR 引擎：Gemini 3.5 Flash（structured output）
 """
 
 import json
@@ -232,7 +232,7 @@ def _build_transcript_preview_embed(transcript_data: dict) -> discord.Embed:
             inline=False,
         )
 
-    embed.set_footer(text="🤖 由 Gemini 3.1 Pro Vision 辨識 | 若有錯誤請取消重傳或改用 JSON")
+    embed.set_footer(text="🤖 由 Gemini 3.5 Flash 辨識 | 若有錯誤請取消重傳或改用 JSON")
     return embed
 
 
@@ -296,7 +296,7 @@ async def slash_upload_transcript(
                 # 呼叫 OCR 引擎
                 from tools.ocr_engine import ocr_transcript
                 await interaction.followup.send(
-                    "⏳ **Gemini 3.1 Pro 正在辨識您的成績單...**\n"
+                    "⏳ **Gemini 3.5 Flash 正在辨識您的成績單...**\n"
                     "📄 PDF 辨識可能需要 15-30 秒，請稍候 🔍",
                     ephemeral=True,
                 )
@@ -351,9 +351,10 @@ async def slash_upload_transcript(
 
 @tree.command(name="my_credits_total", description="📊 查詢您的畢業學分進度（與畢業標準比對）")
 async def slash_my_credits_total(interaction: discord.Interaction):
+    await interaction.response.defer(ephemeral=True)
     discord_id = str(interaction.user.id)
     result = query_credit_progress(discord_id)
-    await interaction.response.send_message(result, ephemeral=True)
+    await interaction.followup.send(result, ephemeral=True)
 
 
 # =========================================================================
@@ -362,9 +363,10 @@ async def slash_my_credits_total(interaction: discord.Interaction):
 
 @tree.command(name="my_gpa", description="📈 查詢您的歷年成績平均")
 async def slash_my_gpa(interaction: discord.Interaction):
+    await interaction.response.defer(ephemeral=True)
     discord_id = str(interaction.user.id)
     result = query_gpa(discord_id)
-    await interaction.response.send_message(result, ephemeral=True)
+    await interaction.followup.send(result, ephemeral=True)
 
 
 # =========================================================================
@@ -373,6 +375,7 @@ async def slash_my_gpa(interaction: discord.Interaction):
 
 @tree.command(name="my_failed", description="❌ 查詢您的不及格或未完成課程")
 async def slash_my_failed(interaction: discord.Interaction):
+    await interaction.response.defer(ephemeral=True)
     discord_id = str(interaction.user.id)
     result = query_failed_courses(discord_id)
-    await interaction.response.send_message(result, ephemeral=True)
+    await interaction.followup.send(result, ephemeral=True)

@@ -3,7 +3,7 @@
 reranker.py — Reranker 模組
 ==============================
 負責：
-1. 使用 bge-reranker-large cross-encoder 進行精細重排序
+1. 使用 bge-reranker-base cross-encoder 進行精細重排序
 2. 輸入 Top-30 → 輸出 Top-5
 3. GPU batch 處理（適配 RTX 4060 8GB VRAM）
 4. 自動偵測 GPU/CPU 並調整 batch size
@@ -12,6 +12,8 @@ reranker.py — Reranker 模組
 import logging
 import math
 import gc
+import threading
+import asyncio
 from typing import Optional
 
 import torch
@@ -28,11 +30,12 @@ logger = logging.getLogger(__name__)
 # =============================================================================
 
 _reranker_model: Optional[CrossEncoder] = None
+_rerank_semaphore = threading.Semaphore(3)
 
 
 def get_reranker() -> CrossEncoder:
     """
-    取得 bge-reranker-large cross-encoder 模型（單例模式）。
+    取得 bge-reranker-base cross-encoder 模型（單例模式）。
 
     自動偵測 GPU，若有 CUDA 則使用 GPU，否則使用 CPU。
     RTX 4060 有 8GB VRAM，需要注意 batch size 控制。
@@ -72,7 +75,7 @@ def get_reranker() -> CrossEncoder:
 # 🔄 Rerank 主函式
 # =============================================================================
 
-def rerank(
+async def rerank(
     query: str,
     chunks: list[RetrievedChunk],
     top_n: int = None,
@@ -80,7 +83,7 @@ def rerank(
     route_result = None,
 ) -> list[RetrievedChunk]:
     """
-    使用 bge-reranker-large cross-encoder 對候選 chunks 進行精細重排序。
+    使用 bge-reranker-base cross-encoder 對候選 chunks 進行精細重排序。
 
     Cross-encoder 會計算 (query, passage) pair 的相關性分數，
     比 bi-encoder（embedding）更準確，但速度較慢。
@@ -112,13 +115,18 @@ def rerank(
     # ── 準備 (query, passage) pairs ──
     pairs = [(query, chunk.node.get_content()) for chunk in chunks]
 
-    # ── Batch 處理（CrossEncoder 內建 batch，直接傳入即可） ──
-    with torch.no_grad():
-        all_scores = model.predict(
-            pairs,
-            batch_size=batch_size,
-            show_progress_bar=False,
-        )
+    # ── Batch 處理（使用執行緒安全鎖限制並行數為 3） ──
+    # 使用 asyncio.to_thread 移至背景執行緒執行 model.predict，徹底消除對 asyncio 事件循環的阻塞，消滅 Heartbeat Blocked 警告
+    def _predict_in_thread():
+        with _rerank_semaphore:
+            with torch.no_grad():
+                return model.predict(
+                    pairs,
+                    batch_size=batch_size,
+                    show_progress_bar=False,
+                )
+                
+    all_scores = await asyncio.to_thread(_predict_in_thread)
     all_scores = all_scores.tolist() if hasattr(all_scores, 'tolist') else list(all_scores)
 
     # ── 更新分數並排序 ──
@@ -164,7 +172,13 @@ def rerank(
             deduped.append(chunk)
             continue
             
-        dedup_key = (meta.get("course_name", ""), meta.get("section", ""), meta.get("teacher", ""))
+        dedup_key = (
+            meta.get("course_name", ""),
+            meta.get("section", ""),
+            meta.get("teacher", ""),
+            meta.get("academic_year", ""),
+            meta.get("semester", "")
+        )
         source_file = meta.get("source_file", "")
         
         if dedup_key not in seen_files_for_key:
@@ -206,9 +220,9 @@ def rerank(
     needs_coverage = is_course_query or has_teacher_filter or has_req_filter or is_general_with_profile
     
     if is_career_planning and route_result and route_result.query_type == "course_info":
-        # 大範圍探索問題（僅限 course_info），直接放行所有去重後的結果
+        # 職涯探索模式：直接將全部 chunks 打包送入 LLM 分析，不做硬性截斷，依靠 LLM 進行全景交叉分析與推薦
         results = deduped
-        logger.info(f"  🌌 職涯探索模式：強制放行所有 {len(results)} 個不重複的 chunks 供 LLM 全景分析")
+        logger.info(f"  🌌 職涯探索模式：去重後有 {len(deduped)} 個 chunks，保留全部 chunks 送入 LLM 分析")
     elif needs_coverage:
         course_best = {}
         for chunk in deduped:

@@ -1,0 +1,22 @@
+{
+    "semester": "114-2",
+    "list_info": {
+        "部別": "日間部學士班",
+        "科系": "資訊工程學系",
+        "班級": "資工二",
+        "選課代碼": "0160",
+        "科目名稱": "單晶片原理應用",
+        "科目英文名": "Pinciples and Applications of Single Chip Microcomputer Lab",
+        "學分": "3.0",
+        "時數": "3.0",
+        "必/選": "選修",
+        "授課教師": "陳正德",
+        "教室": "E319數位系統應用實驗",
+        "修課人數": "36",
+        "上限人數": "60",
+        "上課時間": "(二)5-7",
+        "限修備註": "",
+        "備註": ""
+    },
+    "detail_raw_text": "回上一頁\t國立金門大學\t \n \t教學綱要\t \n\n部別 : 日間部學士班\t114學年度第2學期\t列印日期 : 2026/05/24\n科目名稱 : 單晶片原理應用 (Pinciples and Applications of Single Chip Microcomputer Lab)\t開課班級 : 資工二\t學　　分 : 3.0\t授課時數 : 3.0\n授課教師 : 陳正德\t必選修 : 選修\t \t \n\n\n1.教學目標\n認識電子電路基本零件與電路學原理以Raspberry Pi Pico W 開發板 | Pico Board | RP2040控制板結合各種感測器與致動器的IoT物聯網系統  \n\n\n2.教學綱要\n認識Raspberry Pi Pico W 開發板 | Pico Board | RP2040\n認識電子電路基本零件與工具\nRaspberry Pi Pico W 開發板程式設計入門\n開關與LED電路\n序列埠通訊\n8xled\nLED七段顯示器\n4511+7seg\n4511+7seg+keypad\n5x7matrix矩陣顯示器\nMAX7219\nmax7219+keypad\nmax7219+keypad+music\n溫溼度感測器\n超音波感測器\nRpi pico w 連接WiFi與Serial Monitor\n用戶端(client)\n\n\n\n\n\n\n\n \n\n\n3.教科書\n1\t書名 : 超圖解Arduino互動設計入門　\n出版日期 : 2017年 02月 \n作者 : 趙英傑　出版社 : 旗標出版股份有限公司　版本 : 3 \n\n\n無參考書資料。\n\n※請遵守智慧財產權觀念，依著作權法規定，教科書及教材不得非法影印與使用盜版軟體。\n\n5.教學進度表\n週次\t日期\t內容\t備註\n1\t\n2026/02/22─2026/02/28\n\t認識rpi pico w開發板\n安裝開發環境\n \t認識Raspberry Pi Pico W 開發板 | Pico Board | RP2040\n認識電子電路基本零件與工具\nRaspberry Pi Pico W 開發板程式設計入門\n開關與LED電路\n序列埠通訊\n8xled\nLED七段顯示器\n4511+7seg\n4511+7seg+keypad\n5x7matrix矩陣顯示器\nMAX7219\nmax7219+keypad\nmax7219+keypad+music\n溫溼度感測器\n超音波感測器\nRpi pico w 連接WiFi與Serial Monitor\n用戶端(client)\n\n\n\n\n\n\n\n認識Raspberry Pi Pico W 開發板 | Pico Board | RP2040\n認識電子電路基本零件與工具\nRaspberry Pi Pico W 開發板程式設計入門\n開關與LED電路\n序列埠通訊\n8xled\nLED七段顯示器\n4511+7seg\n4511+7seg+keypad\n5x7matrix矩陣顯示器\nMAX7219\nmax7219+keypad\nmax7219+keypad+music\n溫溼度感測器\n超音波感測器\nRpi pico w 連接WiFi與Serial Monitor\n用戶端(client)\n\n\n\n\n\n\n\n認識Raspberry Pi Pico W 開發板 | Pico Board | RP2040\n認識電子電路基本零件與工具\nRaspberry Pi Pico W 開發板程式設計入門\n開關與LED電路\n序列埠通訊\n8xled\nLED七段顯示器\n4511+7seg\n4511+7seg+keypad\n5x7matrix矩陣顯示器\nMAX7219\nmax7219+keypad\nmax7219+keypad+music\n溫溼度感測器\n超音波感測器\nRpi pico w 連接WiFi與Serial Monitor\n用戶端(client)\n\n\n\n\n\n\n\n認識Raspberry Pi Pico W 開發板 | Pico Board | RP2040\n認識電子電路基本零件與工具\nRaspberry Pi Pico W 開發板程式設計入門\n開關與LED電路\n序列埠通訊\n8xled\nLED七段顯示器\n4511+7seg\n4511+7seg+keypad\n5x7matrix矩陣顯示器\nMAX7219\nmax7219+keypad\nmax7219+keypad+music\n溫溼度感測器\n超音波感測器\nRpi pico w 連接WiFi與Serial Monitor\n用戶端(client)\n\n\n\n\n\n\n\n \n2\t\n2026/03/01─2026/03/07\n\t認識電子電路基本零件與工具\n電阻 電容 二極體 LED 萬用電表 麵包板\n \t \n3\t\n2026/03/08─2026/03/14\n\trpi pico w開發板程式設計入門\n宣告變數 各種運算子\n \t \n4\t\n2026/03/15─2026/03/21\n\t開關與LED電路\nIf 條件式 \t \n5\t\n2026/03/22─2026/03/28\n\t迴路程式 陣列\n \t \n6\t\n2026/03/29─2026/04/04\n\t序列埠通訊\n從rpi pico w 傳資料給電腦\n8xled\n \t \n7\t\n2026/04/05─2026/04/11\n\tLED七段顯示器 \t \n8\t\n2026/04/12─2026/04/18\n\t期中考\n \t \n9\t\n2026/04/19─2026/04/25\n\t4511+7seg \t \n10\t\n2026/04/26─2026/05/02\n\t4511+7seg+keypad \t \n11\t\n2026/05/03─2026/05/09\n\t5x7matrix矩陣顯示器 \t \n12\t\n2026/05/10─2026/05/16\n\tMAX7219\n \t \n13\t\n2026/05/17─2026/05/23\n\t器\nLCD顯示器max7219+keypad+music \t \n14\t\n2026/05/24─2026/05/30\n\t溫溼度感測器\n超音波感測器\n \t \n15\t\n2026/05/31─2026/06/06\n\tRpi pico w 連接WiFi與Serial Monitor\n用戶端(client) \t \n16\t\n2026/06/07─2026/06/13\n\t期末考 \t \n17\t\n2026/06/14─2026/06/20\n\t遠距教學 \t \n18\t\n2026/06/21─2026/06/27\n\t遠距教學 \t \n\n\n6.成績評定及課堂要求\n期中考 期末考 \n每週有作業上傳ecampus \n需準時上課 缺課會影響學期成績 第一次上課會說明成績給分標準 使用rpi pico w 做實習  \n\n\n8.永續發展目標(SDGs)：SDG11 永續城鄉\n\n\n9.大學社會責任(USR)關聯性：中"
+}

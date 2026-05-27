@@ -18,7 +18,7 @@ import bot as _bot
 from bot import (
     client, tree, logger,
     ADMIN_DISCORD_IDS,
-    bot_ready, gpu_semaphore, get_user_memory,
+    bot_ready, get_user_memory,
     user_memories,
 )
 from rag.index_manager import load_and_index, check_data_changes
@@ -26,8 +26,9 @@ from rag.query_router import init_known_registry
 from main import rag_pipeline
 from tools.auth import get_user_profile
 from utils import smart_split_message
+from bot.discord.ui_utils import safe_send_parts_message
 from bot.discord.audit import send_audit_dm, send_debug_log
-from bot.discord.cmd_groups import GroupInviteView
+from bot.discord.cmd_groups import GroupInviteView, handle_dynamic_group_invite
 from bot.discord.ipc_server import start_ipc_server
 
 
@@ -39,8 +40,7 @@ from bot.discord.ipc_server import start_ipc_server
 async def on_ready():
     logger.info(f"✅ 機器人 {client.user} 已成功登入 Discord！")
     
-    # 【持久化按鈕】讓群組邀請按鈕在重啟後依然有效
-    client.add_view(GroupInviteView(group_name="__placeholder__"))
+    # 持久化按鈕：不再需要 add_view placeholder，改由 on_interaction 事件統一調度
     
     # 啟動跨平台 IPC 通訊伺服器
     client.loop.create_task(start_ipc_server())
@@ -72,7 +72,7 @@ async def on_ready():
         else:
             logger.info("✅ 課程資料無變更，載入既有索引")
         
-        nodes, faiss_idx, bm25_idx = load_and_index(force_rebuild=force_rebuild)
+        nodes, faiss_idx, bm25_idx = await asyncio.to_thread(load_and_index, force_rebuild=force_rebuild)
         _bot.global_nodes = nodes
         _bot.global_faiss = faiss_idx
         _bot.global_bm25 = bm25_idx
@@ -84,7 +84,7 @@ async def on_ready():
         # 預先載入 Reranker 模型（非致命：失敗時會在首次查詢時 lazy-load）
         try:
             from rag.reranker import get_reranker
-            get_reranker()
+            await asyncio.to_thread(get_reranker)
             logger.info("✅ Reranker 模型預載完成")
         except Exception as e:
             logger.warning(f"⚠️ Reranker 預載失敗（首次查詢時會自動重試）：{e}")
@@ -92,7 +92,7 @@ async def on_ready():
         # 預先載入 CKIP 斷詞模型（消除首次查詢的 TensorFlow + CKIP 冷啟動延遲 ~9 秒）
         try:
             from nlp_utils import get_ws_model
-            get_ws_model()
+            await asyncio.to_thread(get_ws_model)
             logger.info("✅ CKIP 斷詞模型預載完成")
         except Exception as e:
             logger.warning(f"⚠️ CKIP 預載失敗（首次查詢時會自動重試）：{e}")
@@ -104,6 +104,24 @@ async def on_ready():
     except Exception as e:
         logger.error(f"❌ 索引載入失敗：{e}")
         await client.close()
+
+
+# =========================================================================
+# 🔘 on_interaction — 無狀態按鈕調度器
+# =========================================================================
+
+@client.event
+async def on_interaction(interaction: discord.Interaction):
+    """Discord Client 的全域 Interaction 攔截器，將動態按鈕事件分派到對應的 handler"""
+    # 先讓 CommandTree 處理斜線指令和 autocomplete
+    if interaction.type in (
+        discord.InteractionType.application_command,
+        discord.InteractionType.autocomplete,
+    ):
+        return  # 交給 tree 處理，不在這裡攝截
+
+    # 群組邀請按鈕（無狀態動態 custom_id）
+    await handle_dynamic_group_invite(interaction)
 
 
 # =========================================================================
@@ -172,43 +190,41 @@ async def on_message(message: discord.Message):
         profile_tag = f" | 身分：{user_profile.get('department', '?')} {user_profile.get('grade', '?')}年級"
     logger.info(f"🔍 處理問題：{question[:60]} | 使用者：{message.author.display_name} (ID: {discord_id}){profile_tag} | 來源：{audit_source}")
 
-    if not bot_ready.is_set():
-        await message.reply("⏳ 機器人正在啟動中，請稍後再試！")
-        return
+    # 🆕 雙進程無重啟熱重載監控 (Hot Reload Alignment)
+    from rag.index_manager import check_and_reload_index_if_needed
+    nodes, faiss_idx, bm25_idx, has_changed = check_and_reload_index_if_needed(
+        _bot.global_nodes, _bot.global_faiss, _bot.global_bm25
+    )
+    if has_changed:
+        _bot.global_nodes = nodes
+        _bot.global_faiss = faiss_idx
+        _bot.global_bm25 = bm25_idx
+        logger.info("⚡ [Discord] 偵測到索引已在磁碟更新，Discord 內存已同步完成熱更新！")
 
     async with message.channel.typing():
         try:
+            logger.info(f"🚀 開始處理問題：{str(question)[:40]} | 使用者：{message.author.display_name}")
+            
+            # 【Debug Log 捕獲】在 pipeline 執行期間捕獲所有 log
+            log_capture = io.StringIO()
+            log_handler = logging.StreamHandler(log_capture)
+            log_handler.setLevel(logging.INFO)
+            log_handler.setFormatter(logging.Formatter('%(name)s | %(message)s'))
+            
+            root_logger = logging.getLogger()
+            root_logger.addHandler(log_handler)
+            
+            pipeline_start = time.time()
             try:
-                _bot.active_gpu_requests += 1
-                if _bot.active_gpu_requests > 1:
-                    await message.reply(f"💬 前方還有 {_bot.active_gpu_requests - 1} 位同學在排隊，請稍等喔！")
-                
-                async with gpu_semaphore:
-                    logger.info(f"🚀 GPU 取得 | {message.author.display_name} 開始處理問題：{str(question)[:40]}")
-                    
-                    # 【Debug Log 捕獲】在 pipeline 執行期間捕獲所有 log
-                    log_capture = io.StringIO()
-                    log_handler = logging.StreamHandler(log_capture)
-                    log_handler.setLevel(logging.INFO)
-                    log_handler.setFormatter(logging.Formatter('%(name)s | %(message)s'))
-                    
-                    root_logger = logging.getLogger()
-                    root_logger.addHandler(log_handler)
-                    
-                    pipeline_start = time.time()
-                    try:
-                        answer = await asyncio.to_thread(
-                            rag_pipeline, question,
-                            _bot.global_nodes, _bot.global_faiss, _bot.global_bm25,
-                            memory, False, user_profile, discord_id
-                        )
-                    finally:
-                        root_logger.removeHandler(log_handler)
-                    pipeline_elapsed = time.time() - pipeline_start
-                    captured_log = log_capture.getvalue()
-                    
+                answer = await rag_pipeline(
+                    question,
+                    _bot.global_nodes, _bot.global_faiss, _bot.global_bm25,
+                    memory, False, user_profile, discord_id
+                )
             finally:
-                _bot.active_gpu_requests -= 1
+                root_logger.removeHandler(log_handler)
+            pipeline_elapsed = time.time() - pipeline_start
+            captured_log = log_capture.getvalue()
             
             # 智慧分段回傳
             nick = user_profile.get("nickname", "") if user_profile else ""
@@ -216,11 +232,7 @@ async def on_message(message: discord.Message):
                 answer = f"**{nick}**，{answer}"
             logger.info(f"✅ {audit_source} 回答完成 | 使用者：{message.author.display_name} | 問題：{str(question)[:50]} | 回答長度：{len(answer)} 字")
             parts = smart_split_message(answer)
-            for i, part in enumerate(parts):
-                if i == 0:
-                    await message.reply(part)
-                else:
-                    await message.channel.send(part)
+            await safe_send_parts_message(message, parts)
             
             # 【審計推播】（Bot 擁有者的問答會被 send_audit_dm 內部跳過）
             client.loop.create_task(

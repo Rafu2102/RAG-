@@ -9,6 +9,8 @@ import json
 import logging
 from pathlib import Path
 
+import utils
+
 logger = logging.getLogger(__name__)
 
 from googleapiclient.discovery import build  # type: ignore
@@ -96,32 +98,26 @@ def verify_and_save_token(discord_id: str, auth_response_url: str, department: s
     creds = flow.credentials
     creds_dict = json.loads(creds.to_json())
     
-    # 【保留 nickname 與 groups】若使用者重新註冊，保留舊的 nickname 與群組標籤
-    existing_nickname = ""
-    existing_groups = []
+    # 【安全合併：保留所有舊資料】若使用者重新註冊，必須保留舊的課表(schedule)、成績單(transcript)、暱稱與群組標籤
+    old_data = {}
     token_path = get_user_token_path(discord_id)
     if token_path.exists():
         try:
             with open(token_path, "r", encoding="utf-8") as f:
                 old_data = json.load(f)
-                existing_nickname = old_data.get("profile", {}).get("nickname", "")
-                existing_groups = old_data.get("profile", {}).get("groups", [])
         except Exception:
             pass
+            
+    existing_nickname = old_data.get("profile", {}).get("nickname", "")
+    existing_groups = old_data.get("profile", {}).get("groups", [])
     
-    # 科系簡稱 → 完整名稱映射
-    _DEPT_MAP = {
-        "資工系": "資訊工程學系", "電機系": "電機工程學系",
-        "土木系": "土木與工程管理學系", "食品系": "食品科學系",
-        "企管系": "企業管理學系", "觀光系": "觀光管理學系",
-        "運休系": "運動與休閒學系", "工管系": "工業工程與管理學系",
-        "國際系": "國際暨大陸事務學系", "建築系": "建築學系",
-        "海邊系": "海洋與邊境管理學系", "應英系": "應用英語學系",
-        "華語系": "華語文學系", "都景系": "都市計畫與景觀學系",
-        "護理系": "護理學系", "長照系": "長期照護學系",
-        "社工系": "社會工作學系", "通識中心": "通識教育中心",
-    }
-    dept_full = _DEPT_MAP.get(department, department)
+    # 從 config.DEPT_REGISTRY 中動態獲取科系官方全稱，確保 100% 一致性
+    import config
+    dept_full = department
+    for k, info in config.DEPT_REGISTRY.items():
+        if info.get("short_name") == department or k == department or department in info.get("aliases", []):
+            dept_full = info.get("full_name", department)
+            break
     
     profile = {
         "department": department,
@@ -133,13 +129,13 @@ def verify_and_save_token(discord_id: str, auth_response_url: str, department: s
     if existing_nickname:
         profile["nickname"] = existing_nickname
     
-    user_data = {
-        "profile": profile,
-        "credentials": creds_dict
-    }
+    # 繼承舊資料，將新的 profile 與 credentials 覆寫進去
+    # 這樣舊有的 "schedule" 與 "transcript" 節點就能被完美保留！
+    user_data = old_data.copy()
+    user_data["profile"] = profile
+    user_data["credentials"] = creds_dict
     
-    with open(token_path, "w", encoding="utf-8") as f:
-        json.dump(user_data, f, ensure_ascii=False, indent=4)
+    utils.atomic_write_json(token_path, user_data, indent=4)
     
     group_label = f" {class_group}班" if class_group else ""
     logger.info(f"✅ Token 儲存成功 | ID: {discord_id} | {department} {grade}年級{group_label}")
@@ -189,8 +185,7 @@ def get_service(discord_id: str):
             try:
                 creds.refresh(Request())
                 user_data["credentials"] = json.loads(creds.to_json())
-                with open(token_path, "w", encoding="utf-8") as f:
-                    json.dump(user_data, f, ensure_ascii=False, indent=4)
+                utils.atomic_write_json(token_path, user_data, indent=4)
                 logger.info(f"🔄 Token 已自動刷新 | ID: {discord_id}")
             except Exception as e:
                 logger.error(f"❌ Token 刷新失敗 | ID: {discord_id} | {e}")

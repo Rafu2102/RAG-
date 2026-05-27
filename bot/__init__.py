@@ -103,9 +103,7 @@ global_bm25 = None
 # 【伺服器就緒門欄】確保機器人完全載入完畢後才接受指令
 bot_ready = asyncio.Event()
 
-# 【GPU 佇列排程】限制同時只有 1 個 RAG Pipeline 接觸 GPU
-gpu_semaphore = asyncio.Semaphore(1)
-active_gpu_requests = 0
+# 【GPU 佇列排程】已移除舊有粗粒度鎖機制以支援多人同時發問，細粒度鎖移至 Reranker 處理
 
 
 def get_user_memory(user_id: int) -> ConversationMemory:

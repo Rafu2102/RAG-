@@ -12,8 +12,8 @@ dcard_search_tool.py — 校園資訊聚合搜尋引擎
    透過 OpenRouter (Perplexity Sonar Pro)
    搜尋 Dcard 金門大學板上的教授評價與課程推薦。
 
-🤖 總結引擎 — Gemini 3.1 Pro
-   將兩個來源的原始資料餵給 Gemini，由 AI 進行智慧交叉比對、
+🤖 總結引擎 — Gemini 3.5 Flash
+   將兩個來源的原始資料餵給 Gemini，由 AI 進行智慧智慧交叉比對、
    去蕪存菁，最終產出一份結構精美的統整報告。
 
 架構示意：
@@ -24,20 +24,21 @@ dcard_search_tool.py — 校園資訊聚合搜尋引擎
        │    並行抓取     │
        └──────┬──────────┘
               ▼
-     ┌────────────────┐
-     │  🤖 Gemini Pro  │
-     │   智慧總結引擎   │
-     └────────┬───────┘
+   ┌──────────────────────┐
+   │ 🤖 Gemini 3.5 Flash  │
+   │     智慧總結引擎     │
+   └──────────┬───────────┘
               ▼
-        📋 統整報告
+         📋 統整報告
 """
 
 import os
 import re
-import requests
 import logging
+import asyncio
+import requests
+import httpx
 from typing import Optional
-from concurrent.futures import ThreadPoolExecutor, as_completed
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -81,7 +82,7 @@ def _suppress_discord_embeds(text: str) -> str:
 
 
 # =============================================================================
-# 📰 來源 1：NQU 官方公告爬蟲
+# 📰 來源 1：NQU 官方公告爬蟲 (同步處理，藉由 ThreadPool 進行非同步執行)
 # =============================================================================
 
 def _scrape_nqu_page(url: str, max_items: int = 15) -> list[dict]:
@@ -175,16 +176,73 @@ def _fetch_nqu_news(query: str) -> list[dict]:
 
 
 # =============================================================================
-# 💬 來源 2：Dcard 金大版搜尋（透過 OpenRouter / Perplexity）
+# 💬 來源 2：Dcard 金大版搜尋（非同步透過 Perplexity / OpenRouter）
 # =============================================================================
 
-def _fetch_dcard_raw(query: str) -> str:
+async def a_fetch_dcard_raw(query: str) -> Optional[str]:
     """
-    內部函式：透過 Perplexity 搜尋 Dcard 金門大學版，回傳原始文字結果。
-    Prompt 架構保持原有邏輯，僅美化排版。
+    內部函式：非同步透過 Perplexity (OpenRouter) 搜尋 Dcard 金門大學版，回傳原始文字結果。
     """
+    import time
     if not OPENROUTER_API_KEY:
-        return ""
+        return None
+
+    # ── 🔍 口語化搜尋智慧擴充引擎 ──
+    # 由於學生的口語發問（如「英文教授」、「資工老師」）很難與 Dcard 版面上的實際用詞（如「應英系」、「大一英文老師」、「資工」）精確匹配，
+    # 透過此智慧重寫規則將關鍵字擴充，極致提升 Perplexity 的搜尋召回率與精度！
+    normalized_query = query.strip()
+    
+    # 處理特殊暱稱縮寫對照
+    if normalized_query.lower() in ["cj", "cj老師", "cj教授"]:
+        normalized_query = "李錫捷"
+        
+    expanded_query = normalized_query
+    
+    # 移除字尾的 教授 / 老師 / 課，並將主語提取出來進行同義詞與關聯系所擴充
+    match = re.match(r"^(.+?)(教授|老師|課)$", normalized_query)
+    if match:
+        subject = match.group(1).strip()
+        if subject in ["英文", "英語", "英"]:
+            expanded_query = "應英系 英文老師 大一英文 英文課 應用英語學系"
+        elif subject in ["體育", "運動"]:
+            expanded_query = "體育課 體育老師 體育室 推薦"
+        elif subject in ["通識"]:
+            expanded_query = "通識課 通識老師 通識中心 推薦"
+        elif subject in ["資工", "資訊工程", "csie"]:
+            expanded_query = "資工系 資工老師 資訊工程學系 資工"
+        elif subject in ["電機", "電機工程", "ee"]:
+            expanded_query = "電機系 電機老師 電機工程學系 電機"
+        elif subject in ["企管", "企業管理", "ba"]:
+            expanded_query = "企管系 企管老師 企業管理學系 企管"
+        elif subject in ["工管", "工業工程"]:
+            expanded_query = "工管系 工管老師 工業工程與管理學系 工管"
+        elif subject in ["觀光", "觀光管理"]:
+            expanded_query = "觀光系 觀光老師 觀光管理學系 觀光"
+        elif subject in ["護理", "長照", "社工"]:
+            expanded_query = f"{subject}系 {subject}老師 {subject}課"
+        else:
+            # 偵測是否為已知科系或領域，避免將人名強行拼接為科系
+            depts = ["資工", "電機", "電子", "土木", "食品", "企管", "觀光", "運休", "工管", "資管", "國際", "建築", "海邊", "應英", "華語", "都景", "護理", "長照", "社工", "機械", "化工", "網媒"]
+            is_dept = any(d in subject for d in depts)
+            if is_dept:
+                clean_dept = subject.replace("系", "")
+                expanded_query = f"{clean_dept}系 {clean_dept}老師 {clean_dept}課"
+            else:
+                if len(subject) <= 4:
+                    expanded_query = f"{subject} 老師 評價 {subject} 教授"
+                else:
+                    expanded_query = f"{subject} 老師 {subject} 課"
+    else:
+        # 如果是搜尋系名或領域，自動擴充
+        cleaned = normalized_query.lower()
+        if cleaned in ["英文", "英文系", "應英", "應英系", "應用英語學系"]:
+            expanded_query = "應英系 應用英語學系 英文課 英文老師"
+        elif cleaned in ["資工", "資工系", "資訊工程學系", "csie"]:
+            expanded_query = "資工系 資工老師 資訊工程學系 資工"
+        elif cleaned in ["電機", "電機系", "電機工程學系", "ee"]:
+            expanded_query = "電機系 電機老師 電機工程學系 電機"
+            
+    logger.info(f"🔍 Dcard 搜尋智慧重寫：將「{query}」擴充為「{expanded_query}」以極致提昇召回率")
 
     url = "https://openrouter.ai/api/v1/chat/completions"
     headers = {
@@ -194,68 +252,64 @@ def _fetch_dcard_raw(query: str) -> str:
         "X-Title": "NQU-Course-Bot-Dcard-Search"
     }
 
-    prompt = f"""
-請搜尋 site:dcard.tw/f/nqu
-找出金門大學版中與「{query}」相關的文章與留言，特別是關於推薦或評價的部分。
+    sys_prompt = f"""你是一個專業的資料整理助手，專門整理 Dcard 上的課程與教授評價。
+請根據搜尋到的 Dcard 金門大學板（site:dcard.tw/f/nqu）文章與留言，整理出與使用者查詢相關的評價。
 
-整理：
-1. 被討論/推薦的教授名字
-2. 推薦/評價原因
-3. 是否有負評或需注意的地方
-4. 文章連結
-
-過濾規則：
-1. 沒有建設性的留言不要列入，例如：
-   - 「推某某老師」
-   - 「+1」
-   - 「好過」
-
-2. 客觀統整出被推薦的教授與具體理由。
-
-輸出表格：
+請整理並輸出以下格式的表格：
 教授 | 評價/推薦原因 | 負評/注意事項 | 來源文章連結
 
 來源文章連結請輸出為 Markdown 超連結格式，例如：
 [文章標題](https://www.dcard.tw/f/nqu/p/123456)
 
-**重要規則**：
-- 不要使用 [1][2] 這種引用編號。
-- 每個來源都要附上完整 URL 且為有效的超連結。
-- 如果找不到與「{query}」相關的具體評價，請直接回答「目前在 Dcard 金門大學版上找不到與『{query}』相關的詳細評價或推薦。」，不要硬掰。
+重要規則：
+1. 不要使用 [1][2] 引用編號。
+2. 每個來源都要附上完整 URL 且為有效的超連結。
+3. 只能整理與使用者查詢相關的資訊，過濾掉無建設性的留言（例如「推某某老師」、「+1」、「好過」）。
+4. 如果真的找不到任何相關的教授評價或課程討論，請直接回答「目前在 Dcard 金門大學版上找不到與『{query}』相關的詳細評價或推薦。」，絕對不要捏造或硬掰。
+5. 回答請使用繁體中文。
+
+# 隨機快取防禦識別碼：{time.time()}
 """
+
+    user_prompt = f"site:dcard.tw/f/nqu {expanded_query}"
 
     data = {
         "model": "perplexity/sonar-pro",
         "messages": [
-            {"role": "system", "content": "回答請使用繁體中文。你是一個專業的資料整理助手，專門整理 Dcard 上的課程與教授評價。"},
-            {"role": "user", "content": prompt}
+            {"role": "system", "content": sys_prompt},
+            {"role": "user", "content": user_prompt}
         ],
         "temperature": 0.2
     }
 
     try:
-        response = requests.post(url, headers=headers, json=data, timeout=60)
-        if response.status_code == 200:
-            result = response.json()
-            if "choices" in result and len(result["choices"]) > 0:
-                return result["choices"][0]["message"]["content"]
-        logger.warning(f"⚠️ Dcard API 回應異常 (status={response.status_code})")
-        return ""
-    except requests.exceptions.Timeout:
+        async with httpx.AsyncClient() as client:
+            response = await client.post(url, headers=headers, json=data, timeout=60.0)
+            if response.status_code == 200:
+                result = response.json()
+                if "choices" in result and len(result["choices"]) > 0:
+                    content = result["choices"][0]["message"]["content"]
+                    citations = result.get("citations", [])
+                    key_prefix = (OPENROUTER_API_KEY[:8] + "...") if OPENROUTER_API_KEY else "None"
+                    logger.info(f"🔑 使用金鑰：{key_prefix} | Dcard API 成功回應（字數：{len(content)}，引用來源數：{len(citations)}）")
+                    return content
+            logger.warning(f"⚠️ Dcard API 回應異常 (status={response.status_code})")
+            return None
+    except httpx.TimeoutException:
         logger.warning("⚠️ Dcard 搜尋超時")
-        return ""
+        return None
     except Exception as e:
         logger.warning(f"⚠️ Dcard 搜尋錯誤: {e}")
-        return ""
+        return None
 
 
 # =============================================================================
-# 🤖 總結引擎：Gemini 3.1 Pro 智慧交叉比對
+# 🤖 總結引擎：Gemini 3.5 Flash 非同步智慧交叉比對
 # =============================================================================
 
-def _gemini_synthesize(query: str, nqu_items: list[dict], dcard_text: str) -> str:
+async def _gemini_synthesize(query: str, nqu_items: list[dict], dcard_text: Optional[str]) -> str:
     """
-    將兩個來源的原始資料餵給 Gemini 3.1 Pro，
+    將兩個來源的原始資料餵給 Gemini 3.5 Flash，
     由 AI 進行智慧統整、去蕪存菁，產出一份精美的統合報告。
     """
     import config
@@ -277,7 +331,12 @@ def _gemini_synthesize(query: str, nqu_items: list[dict], dcard_text: str) -> st
     else:
         nqu_section = "（無相關結果）"
 
-    dcard_section = dcard_text if dcard_text else "（無相關結果或搜尋失敗）"
+    if dcard_text is None:
+        dcard_section = "（Dcard 搜尋服務連線異常，暫時無法取得討論資料）"
+    elif not dcard_text.strip():
+        dcard_section = "（無相關結果）"
+    else:
+        dcard_section = dcard_text
 
     # ── Gemini 總結 Prompt ──
     synthesis_prompt = f"""你是國立金門大學的校園資訊整理專家。你剛剛收到了兩個來源的搜尋結果，請為學生做出一份精美、有用的統整報告。
@@ -308,21 +367,15 @@ def _gemini_synthesize(query: str, nqu_items: list[dict], dcard_text: str) -> st
 - 所有連結必須使用 Markdown 格式：[標題](<URL>)，注意 URL 外層要有尖括號 <>。
 - 絕對不要輸出裸露的 URL（沒有 Markdown 格式包裝的），否則會在 Discord 產生雜亂的預覽卡片。"""
 
-    payload = {
-        "contents": [{"parts": [{"text": synthesis_prompt}]}],
-        "generationConfig": {
-            "temperature": 1.0,
-            "maxOutputTokens": config.GEMINI_PRO_MAX_TOKENS,
-            "thinkingConfig": {
-                "thinkingLevel": "medium"
-            }
-        }
-    }
-
     try:
-        response = requests.post(config.GEMINI_API_URL, json=payload, timeout=config.GEMINI_PRO_TIMEOUT)
-        response.raise_for_status()
-        text = response.json().get("candidates", [{}])[0].get("content", {}).get("parts", [{}])[0].get("text", "").strip()
+        from llm.gemini_client import a_call_gemini
+        text = await a_call_gemini(
+            prompt=synthesis_prompt,
+            model="pro",
+            thinking="medium",
+            max_tokens=config.GEMINI_PRO_MAX_TOKENS,
+            timeout=config.GEMINI_PRO_TIMEOUT,
+        )
         if text:
             return _suppress_discord_embeds(text)
     except Exception as e:
@@ -343,13 +396,13 @@ def _gemini_synthesize(query: str, nqu_items: list[dict], dcard_text: str) -> st
 
 
 # =============================================================================
-# 🔗 公開 API：統一搜尋入口
+# 🔗 公開 API：統一搜尋入口 (完全非同步化)
 # =============================================================================
 
-def search_campus_info(query: str) -> str:
+async def search_campus_info(query: str) -> str:
     """
     🔗 統一校園資訊搜尋入口。
-    並行爬取 NQU 官網 + Dcard 金大版，再由 Gemini 3.1 Pro 智慧總結。
+    並行爬取 NQU 官網 + Dcard 金大版，再由 Gemini 3.5 Flash 智慧總結。
 
     Args:
         query: 使用者查詢關鍵字
@@ -362,37 +415,26 @@ def search_campus_info(query: str) -> str:
     nqu_items: list[dict] = []
     dcard_text: str = ""
 
-    # ── 並行抓取兩個來源（節省 5~10 秒等待時間）──
-    with ThreadPoolExecutor(max_workers=2) as executor:
-        future_nqu = executor.submit(_fetch_nqu_news, query)
-        future_dcard = executor.submit(_fetch_dcard_raw, query)
-
-        try:
-            nqu_items = future_nqu.result(timeout=20)
-            logger.info(f"📰 NQU 官網：取得 {len(nqu_items)} 筆結果")
-        except Exception as e:
-            logger.warning(f"⚠️ NQU 官網爬取失敗：{e}")
-
-        try:
-            dcard_text = future_dcard.result(timeout=65)
-            logger.info(f"💬 Dcard：取得 {len(dcard_text)} 字結果")
-        except Exception as e:
-            logger.warning(f"⚠️ Dcard 搜尋失敗：{e}")
+    # ── 並行抓取兩個來源 ──
+    try:
+        nqu_items, dcard_text = await asyncio.gather(
+            asyncio.to_thread(_fetch_nqu_news, query),
+            a_fetch_dcard_raw(query)
+        )
+        logger.info(f"📰 NQU 官網：取得 {len(nqu_items)} 筆結果 | 💬 Dcard：取得 {len(dcard_text)} 字結果")
+    except Exception as e:
+        logger.warning(f"⚠️ 並行抓取部分失敗，但繼續嘗試總結：{e}")
 
     # ── Gemini Pro 總結 ──
-    logger.info("🤖 啟動 Gemini 3.1 Pro 總結引擎...")
-    result = _gemini_synthesize(query, nqu_items, dcard_text)
+    logger.info("🤖 啟動 Gemini 3.5 Flash 總結引擎...")
+    result = await _gemini_synthesize(query, nqu_items, dcard_text)
     logger.info(f"✅ 校園資訊搜尋完成，回傳 {len(result)} 字")
     return result
 
 
-# =============================================================================
-# 🔁 向下相容：保留獨立呼叫的舊函式名稱
-# =============================================================================
-
-def search_nqu_news(query: str) -> str:
-    """獨立搜尋 NQU 官網公告（向下相容 /nqu_news 指令）。"""
-    items = _fetch_nqu_news(query)
+async def search_nqu_news(query: str) -> str:
+    """獨立搜尋 NQU 官網公告（向下相容 /nqu_news 指令，已非同步化）。"""
+    items = await asyncio.to_thread(_fetch_nqu_news, query)
     if not items:
         return "❌ 無法連線至金門大學官網或目前沒有任何公告，請稍後再試。"
 
@@ -411,13 +453,15 @@ def search_nqu_news(query: str) -> str:
     return _suppress_discord_embeds("\n".join(lines))
 
 
-def search_dcard_professor(query: str) -> str:
-    """獨立搜尋 Dcard 教授評價（向下相容 /dcard_search 指令）。"""
-    result = _fetch_dcard_raw(query)
-    if not result:
+async def search_dcard_professor(query: str) -> str:
+    """獨立搜尋 Dcard 教授評價（向下相容 /dcard_search 指令，已非同步化）。"""
+    result = await a_fetch_dcard_raw(query)
+    if result is None:
         if not OPENROUTER_API_KEY:
             return "❌ 系統錯誤：未設定 OPENROUTER_API_KEY，請聯繫管理員處理。"
-        return "❌ 搜尋 Dcard 時發生錯誤，請稍後再試。"
+        return "❌ 系統忙碌中，暫時無法連線至 Dcard 搜尋服務，請稍後再試。"
+    if not result.strip():
+        return f"目前在 Dcard 金門大學版上找不到與「{query}」相關的詳細評價或推薦。（系統保底）"
     return _suppress_discord_embeds(result)
 
 
@@ -428,7 +472,11 @@ if __name__ == "__main__":
     import config
     config.setup_logging()
 
-    print("=" * 60)
-    print("🔗 測試 統一校園搜尋（NQU + Dcard + Gemini 總結）")
-    print("=" * 60)
-    print(search_campus_info("招生"))
+    async def _test():
+        print("=" * 60)
+        print("🔗 測試 統一校園搜尋（NQU + Dcard + Gemini 總結）")
+        print("=" * 60)
+        res = await search_campus_info("招生")
+        print(res)
+
+    asyncio.run(_test())

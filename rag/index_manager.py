@@ -16,6 +16,7 @@ import pickle
 import hashlib
 import json
 import logging
+import time
 from typing import Optional
 
 import numpy as np
@@ -59,9 +60,18 @@ def build_faiss_index(nodes: list[TextNode]) -> faiss.IndexFlatIP:
 
 
 def save_faiss_index(index: faiss.IndexFlatIP, path: str):
-    """儲存 FAISS 索引到磁碟"""
-    faiss.write_index(index, path)
-    logger.info(f"FAISS 索引已儲存：{path}")
+    """儲存 FAISS 索引到磁碟（原子性寫入，防止多行程損毀）"""
+    tmp_path = f"{path}.{os.getpid()}.tmp"
+    try:
+        faiss.write_index(index, tmp_path)
+        os.replace(tmp_path, path)
+        logger.info(f"FAISS 索引已儲存：{path}")
+    finally:
+        if os.path.exists(tmp_path):
+            try:
+                os.remove(tmp_path)
+            except Exception:
+                pass
 
 
 def load_faiss_index(path: str) -> Optional[faiss.IndexFlatIP]:
@@ -118,9 +128,19 @@ def build_bm25_index(nodes: list[TextNode]) -> BM25Okapi:
 
 
 def save_bm25_index(bm25: BM25Okapi, path: str):
-    with open(path, "wb") as f:
-        pickle.dump(bm25, f)
-    logger.info(f"BM25 索引已儲存：{path}")
+    """儲存 BM25 索引到磁碟（原子性寫入）"""
+    tmp_path = f"{path}.{os.getpid()}.tmp"
+    try:
+        with open(tmp_path, "wb") as f:
+            pickle.dump(bm25, f)
+        os.replace(tmp_path, path)
+        logger.info(f"BM25 索引已儲存：{path}")
+    finally:
+        if os.path.exists(tmp_path):
+            try:
+                os.remove(tmp_path)
+            except Exception:
+                pass
 
 
 def load_bm25_index(path: str) -> Optional[BM25Okapi]:
@@ -137,9 +157,19 @@ def load_bm25_index(path: str) -> Optional[BM25Okapi]:
 # =============================================================================
 
 def save_nodes(nodes: list[TextNode], path: str):
-    with open(path, "wb") as f:
-        pickle.dump(nodes, f)
-    logger.info(f"Nodes 已儲存：{len(nodes)} 個")
+    """儲存 Nodes 到磁碟（原子性寫入）"""
+    tmp_path = f"{path}.{os.getpid()}.tmp"
+    try:
+        with open(tmp_path, "wb") as f:
+            pickle.dump(nodes, f)
+        os.replace(tmp_path, path)
+        logger.info(f"Nodes 已儲存：{len(nodes)} 個")
+    finally:
+        if os.path.exists(tmp_path):
+            try:
+                os.remove(tmp_path)
+            except Exception:
+                pass
 
 
 def load_nodes(path: str) -> Optional[list[TextNode]]:
@@ -234,30 +264,97 @@ def check_data_changes(data_dir: str = None) -> dict:
 
 
 def save_data_manifest(data_dir: str = None):
-    """儲存當前 data/ 目錄的 hash manifest（在索引重建後呼叫）"""
+    """儲存當前 data/ 目錄的 hash manifest（在索引重建後呼叫，原子性寫入）"""
     if data_dir is None:
         data_dir = config.DATA_DIR
     current_hashes = _scan_data_files(data_dir)
     os.makedirs(os.path.dirname(MANIFEST_PATH), exist_ok=True)
-    with open(MANIFEST_PATH, "w", encoding="utf-8") as f:
-        json.dump(current_hashes, f, ensure_ascii=False, indent=2)
-    logger.info(f"💾 已儲存 data_manifest.json（{len(current_hashes)} 個檔案）")
+    tmp_path = f"{MANIFEST_PATH}.{os.getpid()}.tmp"
+    try:
+        with open(tmp_path, "w", encoding="utf-8") as f:
+            json.dump(current_hashes, f, ensure_ascii=False, indent=2)
+        os.replace(tmp_path, MANIFEST_PATH)
+        logger.info(f"💾 已儲存 data_manifest.json（{len(current_hashes)} 個檔案）")
+    finally:
+        if os.path.exists(tmp_path):
+            try:
+                os.remove(tmp_path)
+            except Exception:
+                pass
 
 
 # =============================================================================
 # 🚀 主要入口：載入或建立索引
 # =============================================================================
 
+_last_nodes_mtime = 0.0
+LOCK_FILE = os.path.join(config.INDEX_DIR, "rebuild.lock")
+
+
+class IndexRebuildLock:
+    """跨行程重建索引排他鎖"""
+    def __init__(self, lock_file: str, timeout: int = 180):
+        self.lock_file = lock_file
+        self.timeout = timeout
+        self.fd = None
+
+    def __enter__(self):
+        start_time = time.time()
+        os.makedirs(os.path.dirname(self.lock_file), exist_ok=True)
+        while True:
+            try:
+                # 原子性建立鎖檔案，以防 Race Condition
+                self.fd = os.open(self.lock_file, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+                os.write(self.fd, str(os.getpid()).encode())
+                logger.info(f"🔒 行程 {os.getpid()} 成功獲取重建索引排他鎖。")
+                return self
+            except FileExistsError:
+                # 逾期鎖強制清除防護
+                if os.path.exists(self.lock_file):
+                    try:
+                        mtime = os.path.getmtime(self.lock_file)
+                        if time.time() - mtime > self.timeout:
+                            logger.warning(f"⚠️ 偵測到重建鎖已逾期 ({time.time() - mtime:.1f} 秒)，強制清除鎖檔案。")
+                            try:
+                                os.remove(self.lock_file)
+                            except Exception:
+                                pass
+                            continue
+                    except Exception:
+                        pass
+
+                elapsed = time.time() - start_time
+                if elapsed > self.timeout:
+                    raise TimeoutError(f"❌ 行程 {os.getpid()} 等待重建索引鎖超時（已等待 {elapsed:.1f} 秒）")
+
+                logger.info(f"⏳ 行程 {os.getpid()} 正在等待其他行程釋放重建鎖... (已等待 {elapsed:.1f} 秒)")
+                time.sleep(3)
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        if self.fd is not None:
+            try:
+                os.close(self.fd)
+            except Exception:
+                pass
+            try:
+                if os.path.exists(self.lock_file):
+                    os.remove(self.lock_file)
+                logger.info(f"🔓 行程 {os.getpid()} 已釋放重建索引排他鎖。")
+            except Exception as e:
+                logger.error(f"❌ 釋放重建鎖失敗：{e}")
+
+
 def load_and_index(force_rebuild: bool = False):
     """
-    載入既有索引或重新建立。
+    載入既有索引或重新建立（引進跨行程排他鎖與雙重檢查鎖）。
 
     Returns:
         tuple: (nodes, faiss_index, bm25_index)
     """
+    global _last_nodes_mtime
     config.ensure_dirs()
 
-    # ── 嘗試載入既有索引 ──
+    # ── 1. 嘗試載入既有索引（第一重檢查） ──
     if not force_rebuild:
         nodes = load_nodes(config.NODES_STORE_PATH)
         faiss_index = load_faiss_index(config.FAISS_INDEX_PATH)
@@ -265,22 +362,77 @@ def load_and_index(force_rebuild: bool = False):
 
         if nodes and faiss_index and bm25_index:
             logger.info("✅ 所有索引已從磁碟載入，無需重建")
+            if os.path.exists(config.NODES_STORE_PATH):
+                _last_nodes_mtime = os.path.getmtime(config.NODES_STORE_PATH)
             return nodes, faiss_index, bm25_index
 
-    # ── 重新建立索引 ──
-    logger.info("🔨 開始重新建立索引...")
-    course_nodes = build_nodes_from_courses(config.COURSES_DIR)
-    dept_nodes = build_nodes_from_dept_info(config.PROFESSORS_DIR, config.DEPT_INFO_DIR)
-    rules_nodes = build_nodes_from_rules(config.RULES_DIR)
-    nodes = course_nodes + dept_nodes + rules_nodes
-    logger.info(f"📊 合計 Nodes：{len(course_nodes)} 課程 + {len(dept_nodes)} 系所資訊 + {len(rules_nodes)} 規則 = {len(nodes)} 總計")
-    faiss_index = build_faiss_index(nodes)
-    bm25_index = build_bm25_index(nodes)
+    # ── 2. 獲取重建鎖 ──
+    with IndexRebuildLock(LOCK_FILE) as lock:
+        # ── 3. 雙重檢查鎖（進入鎖後再次確認是否已有其他行程重建好） ──
+        if not force_rebuild:
+            nodes = load_nodes(config.NODES_STORE_PATH)
+            faiss_index = load_faiss_index(config.FAISS_INDEX_PATH)
+            bm25_index = load_bm25_index(config.BM25_INDEX_PATH)
+            if nodes and faiss_index and bm25_index:
+                logger.info("✅ 偵測到其他行程已在此期間完成重建，直接載入最新索引！")
+                if os.path.exists(config.NODES_STORE_PATH):
+                    _last_nodes_mtime = os.path.getmtime(config.NODES_STORE_PATH)
+                return nodes, faiss_index, bm25_index
 
-    save_nodes(nodes, config.NODES_STORE_PATH)
-    save_faiss_index(faiss_index, config.FAISS_INDEX_PATH)
-    save_bm25_index(bm25_index, config.BM25_INDEX_PATH)
-    save_data_manifest()  # 儲存檔案 hash，下次啟動可偵測變更
+        # ── 4. 真正重新建立索引 ──
+        logger.info("🔨 開始重新建立索引...")
+        course_nodes = build_nodes_from_courses(config.COURSES_DIR)
+        dept_nodes = build_nodes_from_dept_info(config.PROFESSORS_DIR, config.DEPT_INFO_DIR)
+        rules_nodes = build_nodes_from_rules(config.RULES_DIR)
+        nodes = course_nodes + dept_nodes + rules_nodes
+        logger.info(f"📊 合計 Nodes：{len(course_nodes)} 課程 + {len(dept_nodes)} 系所資訊 + {len(rules_nodes)} 規則 = {len(nodes)} 總計")
+        faiss_index = build_faiss_index(nodes)
+        bm25_index = build_bm25_index(nodes)
 
-    logger.info("✅ 索引建立完成！")
-    return nodes, faiss_index, bm25_index
+        save_nodes(nodes, config.NODES_STORE_PATH)
+        save_faiss_index(faiss_index, config.FAISS_INDEX_PATH)
+        save_bm25_index(bm25_index, config.BM25_INDEX_PATH)
+        save_data_manifest()  # 儲存檔案 hash，下次啟動可偵測變更
+
+        if os.path.exists(config.NODES_STORE_PATH):
+            _last_nodes_mtime = os.path.getmtime(config.NODES_STORE_PATH)
+
+        logger.info("✅ 索引建立完成！")
+        return nodes, faiss_index, bm25_index
+
+
+def check_and_reload_index_if_needed(current_nodes, current_faiss, current_bm25):
+    """
+    檢查 nodes.pkl 的 mtime，若有變更則在內存中原子性地熱重載 nodes, faiss, bm25 索引。
+    此函數為多行程無重啟內存對齊提供核心基礎。
+    
+    Returns:
+        tuple: (nodes, faiss, bm25, has_changed: bool)
+    """
+    global _last_nodes_mtime
+    path = config.NODES_STORE_PATH
+    if not os.path.exists(path):
+        return current_nodes, current_faiss, current_bm25, False
+        
+    try:
+        current_mtime = os.path.getmtime(path)
+        if current_mtime > _last_nodes_mtime:
+            logger.info(f"🔄 偵測到索引檔案 {path} 已更新 (mtime: {current_mtime} > {_last_nodes_mtime})，正在執行內存熱重載...")
+            
+            nodes = load_nodes(config.NODES_STORE_PATH)
+            faiss_index = load_faiss_index(config.FAISS_INDEX_PATH)
+            bm25_index = load_bm25_index(config.BM25_INDEX_PATH)
+            
+            if nodes and faiss_index and bm25_index:
+                _last_nodes_mtime = current_mtime
+                
+                # 同步更新 query_router 中的教師與課程動態名冊
+                from .query_router import init_known_registry
+                init_known_registry(nodes)
+                
+                logger.info("✅ 索引熱重載且動態名冊對齊成功！")
+                return nodes, faiss_index, bm25_index, True
+        return current_nodes, current_faiss, current_bm25, False
+    except Exception as e:
+        logger.error(f"❌ 索引熱重載失敗：{e}")
+        return current_nodes, current_faiss, current_bm25, False

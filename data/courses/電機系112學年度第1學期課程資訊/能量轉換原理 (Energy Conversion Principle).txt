@@ -1,0 +1,66 @@
+國立金門大學112學年度第1學期電機系課程
+學年度：112學年度
+學期：第1學期
+課程名稱：能量轉換原理 (Energy Conversion Principle)
+部別：日間部研究所碩士班
+開課班級：電機碩一
+學分數：3.0學分
+授課時數：3.0小時
+授課教師：李金譚
+必選修：選修
+教室：E204教室(理工大樓)
+修課上限人數：30人
+上課時間：每周星期一下午第5節~第7節
+
+課程教學目標：
+1. 能量轉換原理為一門機電整合的課程，由同學熟知的電生磁、磁生電的觀念，來說明電動機的基本運作原理，並進由這門科目讓同學能有以下的認知：(1) 法拉第電磁感應原理、安培右手定則及佛萊銘左手定則...等電磁基本理論。(2) 電動機的種類、結構及原理。(3) 電動機的重要性。(4) 使用伺服電動機的種類、結構及原理。(5) 使用電動機的保養原則。授課內容將結合理論與實際應用，讓修畢本課程的學生對電磁及電動機有更深一層的認識。
+
+課程教學綱要：
+1. 磁的理論和磁路
+2. 電機能量轉換之基本原理
+3. 直流電動機與發電機
+4. 變壓器
+5. 三相感應馬達
+6. 三相同步發電機與電動機
+
+教科書資料：
+1. 書名：Electric Machinery Fundamentals
+2. 出版日期：未標註
+3. 作者：Chapman, Stephen J.
+4. 出版社：Mc-Graw Hill
+5. 版本：未標註
+
+參考書資料：
+1. 書名：Electric Machinery
+2. 出版日期：未標註
+3. 作者：Fitzgerald
+4. 出版社：新月
+5. 版本：未標註
+
+※請遵守智慧財產權觀念，依著作權法規定，教科書及教材不得非法影印與使用盜版軟體。
+
+教學進度表（2023年秋季學期）：
+第1週課程 (2023/09/10─2023/09/16)：Brief history and Professional Ethics
+第2週課程 (2023/09/17─2023/09/23)：Magnetic curcuits and magnetic materials
+第3週課程 (2023/09/24─2023/09/30)：Permanent magnet materials
+第4週課程 (2023/10/01─2023/10/07)：Introduction to transformers
+第5週課程 (2023/10/08─2023/10/14)：Transformer equivalent circuits
+第6週課程 (2023/10/15─2023/10/21)：The Per Unit (p.u.) system
+第7週課程 (2023/10/22─2023/10/28)：Electromechanical Energy Conversion
+第8週課程 (2023/10/29─2023/11/04)：Rotating Machines: Basic Concepts
+第9週課程 (2023/11/05─2023/11/11)：Midterm Examination
+第10週課程 (2023/11/12─2023/11/18)：Synchronous Machines: Steady-State
+第11週課程 (2023/11/19─2023/11/25)：Synchronous Machines equivalent circuits
+第12週課程 (2023/11/26─2023/12/02)：Synchronous Machines: Transient-State
+第13週課程 (2023/12/03─2023/12/09)：Polyphase Induction Machines
+第14週課程 (2023/12/10─2023/12/16)：Equivalent circuits of induction motors
+第15週課程 (2023/12/17─2023/12/23)：No-load and blocked-rotor tests of an induction motor
+第16週課程 (2023/12/24─2023/12/30)：Polyphase Induction Machine Dynamics and Control
+第17週課程 (2023/12/31─2024/01/06)：Fractional- and subfractional-horsepower motors
+第18週課程 (2024/01/07─2024/01/13)：Final Examination
+
+成績評定方式：
+1. 平時成績及作業40% + 期中考30% + 期末考30%
+
+課堂要求：
+無詳細課堂要求說明
